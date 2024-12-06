@@ -17,35 +17,48 @@
             </Code>
             <ParameterTypes>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" prefix="BASE" />
+              <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" prefix="LOG" />
             </ParameterTypes>
             <Parameters>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="parameter" prefix="BASE" />
+              <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="parameter" prefix="W90" />
+              <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="template" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="parameter" prefix="LOG" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="template" prefix="LOG" />
             </Parameters>
             <ParameterRefs>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" prefix="BASE" />
+              <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" prefix="W90" />
+              <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" type="template" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" prefix="LOG" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" type="template" prefix="LOG" />
             </ParameterRefs>
             <ParameterCalculations>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" prefix="BASE" />
+              <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" prefix="W90" />
+              <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" type="template" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" prefix="LOG" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" type="template" prefix="LOG" />
             </ParameterCalculations>
             <ParameterValidations>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" prefix="BASE" />
+              <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" prefix="W90" />
+              <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" type="template" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" prefix="LOG" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" type="template" prefix="LOG" />
             </ParameterValidations>
             <ComObjectTable>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" prefix="BASE" />
+              <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" prefix="W90" />
+              <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" type="template" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" prefix="LOG" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" type="template" prefix="LOG" />
             </ComObjectTable>
             <ComObjectRefs>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" prefix="BASE" />
+              <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" prefix="W90" />
+              <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" type="template" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" prefix="LOG" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" type="template" prefix="LOG" />
             </ComObjectRefs>
@@ -75,27 +88,33 @@
             <Messages>
               <Message Id="%AID%_M-1" Name="VersionMismatch" Text="Diese Applikation und die installierte Firmware passen nicht zusammen." />
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/Messages/*" prefix="BASE" />
+              <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/Messages/*" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/Messages/*" prefix="LOG" />
             </Messages>
             <Script>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/Script/text()" prefix="BASE" />
+              <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/Script/text()" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/Script/text()" prefix="LOG" />
             </Script>
             <Options />
           </Static>
           <ModuleDefs>
             <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/ModuleDefs/*" prefix="BASE" />
+            <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/ModuleDefs/*" prefix="W90" />
+            <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/ModuleDefs/*" type="template" prefix="W90" />
             <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/ModuleDefs/*" prefix="LOG" />
             <op:include href="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" xpath="//ApplicationProgram/ModuleDefs/*" type="template" prefix="LOG" />
           </ModuleDefs>
           <Dynamic>
             <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="BASE" />
+            <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="W90" />
             <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="LOG" />
           </Dynamic>
         </ApplicationProgram>
       </ApplicationPrograms>
       <Baggages>
         <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//Manufacturer/Baggages/*" prefix="BASE" />
+        <op:include href="WN90LPModule.share.xml" xpath="//Manufacturer/Baggages/*" prefix="W90" />
         <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//Manufacturer/Baggages/*" prefix="LOG" />
       </Baggages>
       <Hardware>

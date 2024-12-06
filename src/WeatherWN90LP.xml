@@ -16,11 +16,17 @@
     share="../lib/OGM-Common/src/Common.share.xml">
     <op:verify File="../lib/OGM-Common/library.json" ModuleVersion="1.3" />
   </op:define>
+
+  <op:define prefix="W90" ModuleType="20"
+    share="WN90LPModule.share.xml"
+    template="WN90LPModule.templ.xml"
+    NumChannels="1" KoOffset="20">
+  </op:define>
   
   <op:define prefix="LOG" ModuleType="10"
     share="../lib/OFM-LogicModule/src/Logikmodul.share.xml"
     template="../lib/OFM-LogicModule/src/Logikmodul.templ.xml"
-    NumChannels="30" KoOffset="280">
+    NumChannels="30" KoOffset="100">
     <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="3.4" /> 
   </op:define>
 
