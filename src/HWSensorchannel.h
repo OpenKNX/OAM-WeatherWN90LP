@@ -19,9 +19,20 @@ class HWSensorchannel: public OpenKNX::Channel
         float m_temperature = NAN;
         uint32_t m_temperature_last_poll_millis = 0;
         float m_humidity = NAN;
+        uint32_t m_humidity_last_poll_millis = 0;
         float m_pressure = NAN;
+        uint32_t m_pressure_last_poll_millis = 0;
 
         float ReadTemperature();
+        float ReadHumidity();
+        float ReadPressure();
+        float ReadLight();
+        uint8_t ReadUVI();
+        float ReadWind();
+        float ReadGust();
+        uint8_t ReadWindDir();
+        float ReadRain();
+
 
     public:
         HWSensorchannel();

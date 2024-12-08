@@ -30,11 +30,26 @@ void HWSensorchannel::Setup(uint8_t adr, uint8_t channel_number)
 
 bool HWSensorchannel::Loop()
 {
-
+    // ToDo Switch case
     if(delayCheckMillis(m_temperature_last_poll_millis, 20000))
     {
         SetTemperature(ReadTemperature());
         m_temperature_last_poll_millis = millis();
+        return true;
+    }
+
+    if(delayCheckMillis(m_humidity_last_poll_millis, 20000))
+    {
+        SetHumidity(ReadHumidity());
+        m_humidity_last_poll_millis = millis();
+        return true;
+    }
+
+    if(delayCheckMillis(m_pressure_last_poll_millis, 20000))
+    {
+        SetPressure(ReadPressure());
+        m_pressure_last_poll_millis = millis();
+        return true;
     }
     return true;
 }
@@ -59,10 +74,9 @@ If invalid fill with
     if (result == m_modbus.ku8MBSuccess)
     {
         data = m_modbus.getResponseBuffer(0);
-        //logDebugP("ReadTemperature: %d | %d | %d ms | %d ms", data, result, read-start, read3-read2);
         // convert and return
-        float rawdata = (data - 400) / 10;
-        logDebugP("Temp: %f", rawdata);
+        float rawdata = (data - 400) / 10.0;
+        logDebugP("Temp: %f °C", rawdata);
         return rawdata;
 
     }
@@ -71,6 +85,134 @@ If invalid fill with
         return NAN;
     }
 }
+
+float HWSensorchannel::ReadHumidity()
+{
+
+    /*
+data in hex
+(Range: 1% - 99%)
+If invalid fill with
+0xFFFF
+    */
+
+    int8_t result;
+    uint16_t data = 0xffff;
+    result = m_modbus.readHoldingRegisters(0x0168, 0x0001);
+    if (result == m_modbus.ku8MBSuccess)
+    {
+        data = m_modbus.getResponseBuffer(0);
+        // convert and return
+        float rawdata = data * 1.0;
+        logDebugP("Hum: %f %", rawdata);
+        return rawdata;
+
+    }
+    else
+    {
+        return NAN;
+    }
+}
+
+float HWSensorchannel::ReadPressure()
+{
+
+    /*
+Value in hex
+ABS = value*0.1hPa
+1002.6hPa=272AH
+If invalid fill with
+0xFFFF
+    */
+
+    int8_t result;
+    uint16_t data = 0xffff;
+    result = m_modbus.readHoldingRegisters(0x016D, 0x0001);
+    if (result == m_modbus.ku8MBSuccess)
+    {
+        data = m_modbus.getResponseBuffer(0);
+        // convert and return
+        float rawdata = data * 10.0;
+        logDebugP("Pressure: %f Pa", rawdata);
+        return rawdata;
+
+    }
+    else
+    {
+        return NAN;
+    }
+}
+
+float ReadLight()
+{
+/* 165
+Value in hex
+Light=value*10
+(Range: 0lux ->
+300,000lux)
+If invalid fill with
+0xFFFF
+*/
+    return NAN;
+}
+
+uint8_t ReadUVI()
+{
+/* 166
+Value in hex Uvi=UVI
+value/10
+(Range: 0 -> 150)
+If invalid fill with
+0xFFFF
+*/
+    return 0;
+}
+
+float ReadWind()
+{
+/* 169
+Value in hex
+If invalid fill with
+0xFFFF.Wind Speed =
+WIND
+value*0.1m/s(0~40m/s)
+*/
+    return NAN;
+}
+
+float ReadGust()
+{
+/* 16A
+Value in hex
+If invalid fill with
+0xFFFF.Gust Speed =
+GUST
+value*0.1m/s(0~40m/s)
+*/
+    return NAN;
+}
+
+uint8_t ReadWindDir()
+{
+/* 16B
+Value in hex
+(Range: 0°- 359°)
+If invalid fill with
+0xFFFF
+*/
+    return 0;
+}
+
+float ReadRain()
+{
+/* 016E
+data in hex
+Rain = value*0.01mm
+0.18mm=12H
+*/
+    return NAN;
+}
+
 
 
 

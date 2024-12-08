@@ -95,11 +95,11 @@ void Sensorchannel::loop()
 {
     float temperature = m_hwSensors->GetTemperature(_channelIndex);
     float humidity = m_hwSensors->GetHumidity(_channelIndex);
-    float abshumidity = CalcAbsHumidity(humidity, m_temperature);
-    float dewpoint = CalcDewPoint(humidity, m_temperature);
+    float abshumidity = CalcAbsHumidity(humidity, temperature);
+    float dewpoint = CalcDewPoint(humidity, temperature);
     float pressure = m_hwSensors->GetPressure(_channelIndex);
 
-    loop_temperature(m_temperature);
+    loop_temperature(temperature);
     loop_humidity(humidity);
     loop_abshumidity(abshumidity);
     loop_dewpoint(dewpoint);
@@ -377,8 +377,10 @@ void Sensorchannel::loop_pressure(float pressure)
     uint32_t send_cycle = ParamW90_SensorPressureSendCycle_;
     uint32_t send_millis = send_cycle * 60000;
     bool sendnow = false;
+    //logDebugP("loop_pressure");
     if(!isnan(pressure) )
     {
+        //logDebugP("loop_pressure 2");
         if(send_cycle)
         {
             sendnow = millis() - m_pressure_last_send_millis > send_millis || m_pressure_last_send_millis == 0;
@@ -395,6 +397,7 @@ void Sensorchannel::loop_pressure(float pressure)
         
         if(sendnow)
         {
+            logDebugP("loop_pressure %f ", pressure + ParamW90_SensorPressureAlign_);
             KoW90_SensorPress_.value(pressure + ParamW90_SensorPressureAlign_, PressKODPT);
             m_pressure_last_send_millis = millis();
             m_pressure_last_send_value = pressure;

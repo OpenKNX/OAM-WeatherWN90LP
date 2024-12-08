@@ -24,7 +24,6 @@ class Sensorchannel : public OpenKNX::Channel
     private:
         HWSensors *m_hwSensors;
 
-        float m_temperature = NAN;
         uint32_t m_temperature_last_send_millis = 0;
         uint32_t m_temperature_last_poll_millis = 0;
         float m_temperature_last_send_value = -1000;
