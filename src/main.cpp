@@ -18,10 +18,33 @@ void setup()
     openknx.setup();
 }
 
+uint32_t lastmillis_1 = 0;
 void loop()
 {
     openknx.loop();
+    if(delayCheckMillis(lastmillis_1, 5000))
+    {
+        //logDebug("", "Loop 5s");
+
+
+        lastmillis_1 = millis();
+    }
 }
+
+#ifdef OPENKNX_DUALCORE
+void setup1()
+{
+    openknx.setup1();
+}
+#endif
+
+
+#ifdef OPENKNX_DUALCORE
+void loop1()
+{
+    openknx.loop1();
+}
+#endif
 
 
 

@@ -68,7 +68,7 @@
             </ComObjectRefs>
           </Static>
           <Dynamic>
-            <Channel Name="MainChannel" Text="Wetterstation" Number="%TT%" Id="%AID%_CH-%TT%" Icon="thermometer" HelpContext="Empty">
+            <Channel Name="MainChannel" Text="Wetterstationen" Number="%TT%" Id="%AID%_CH-%TT%" Icon="thermometer" HelpContext="Empty">
               <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/Dynamic/ChannelIndependentBlock/*" type="template" prefix="W90" IsInner="true" />
             </Channel>
           </Dynamic>

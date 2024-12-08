@@ -26,15 +26,16 @@ void WN90LPModule::setup()
 {
     logTraceP("setup");
 
-    pinMode(RS485_UART_DIR_PIN, OUTPUT);
-    digitalWrite(RS485_UART_DIR_PIN, 0);
+    uint8_t addrs[W90_ChannelCount];
+    for(int i=0;i<W90_ChannelCount;i++)
+        addrs[i] = knx.paramByte(W90_ParamBlockOffset+W90_ParamBlockSize*i+W90_Address_);
 
-    RS485_SERIAL.begin(9600, SERIAL_8N1);
+    _HWSensors.Setup(addrs);
 
     for (uint8_t i = 0; i < W90_ChannelCount; i++)
     {
         _Sensorchannels[i] = new Sensorchannel();
-        _Sensorchannels[i]->Setup(i);
+        _Sensorchannels[i]->Setup(i, &_HWSensors);
     }
 }
 
@@ -51,15 +52,19 @@ void WN90LPModule::loop()
         return;
 
     uint8_t loopedChannels = 0;
-    /*
-    while(openknx.freeLoopTime() && loopedChannels < THP_ChannelCount)
+    
+    while(openknx.freeLoopTime() && loopedChannels < W90_ChannelCount)
     {
         _Sensorchannels[_curLoopChannel]->loop();
         loopedChannels++;
         _curLoopChannel++;
-        _curLoopChannel = _curLoopChannel % THP_ChannelCount;
+        _curLoopChannel = _curLoopChannel % W90_ChannelCount;
     }
-    */
+}
+
+void WN90LPModule::loop1()
+{
+    _HWSensors.Loop();
 }
 
 void WN90LPModule::processInputKo(GroupObject &ko)

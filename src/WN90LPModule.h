@@ -1,6 +1,7 @@
 #pragma once
 #include "OpenKNX.h"
 #include "Sensorchannel.h"
+#include "HWSensors.h"
 
 
 #ifndef OPENKNX_DUALCORE
@@ -34,6 +35,8 @@ class WN90LPModule : public OpenKNX::Module
     static WN90LPModule *_instance;
     void processInputKo(GroupObject &ko);
     uint8_t _curLoopChannel = 0;
-    Sensorchannel *_Sensorchannels[THP_ChannelCount];
-
+    Sensorchannel *_Sensorchannels[W90_ChannelCount];
+    HWSensors _HWSensors = HWSensors();
 };
+
+extern WN90LPModule openknxWN90LPModule;

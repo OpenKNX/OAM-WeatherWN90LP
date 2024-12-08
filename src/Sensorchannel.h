@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 #include "OpenKNX.h"
-#include "ModbusMaster.h"
+#include "HWSensors.h"
 
 
 // converts a relative (to the channel start) KO number to an absolute KO number of the device
@@ -22,10 +22,15 @@
 class Sensorchannel : public OpenKNX::Channel
 {
     private:
+        HWSensors *m_hwSensors;
+
+        float m_temperature = NAN;
         uint32_t m_temperature_last_send_millis = 0;
+        uint32_t m_temperature_last_poll_millis = 0;
         float m_temperature_last_send_value = -1000;
         uint32_t m_temperature_alarmH_last_send_millis = 0;
         uint32_t m_temperature_alarmL_last_send_millis = 0;
+        
 
         uint32_t m_humidity_last_send_millis = 0;
         float m_humidity_last_send_value = -1000;
@@ -47,8 +52,6 @@ class Sensorchannel : public OpenKNX::Channel
         uint32_t m_pressure_alarmH_last_send_millis = 0;
         uint32_t m_pressure_alarmL_last_send_millis = 0;
 
-        ModbusMaster m_modbus = nullptr;
-
         float CalcDewPoint(float relative_humidity, float temperature);
         float CalcAbsHumidity(float relative_humidity, float temperature);
 
@@ -59,12 +62,10 @@ class Sensorchannel : public OpenKNX::Channel
         void loop_abshumidity(float abshumidity);
         void loop_dewpoint(float dewpoint);
         void loop_pressure(float pressure);
-
-        float ReadTemperature();
     
     public:
         Sensorchannel();
-        void Setup(uint8_t channel_number);
+        void Setup(uint8_t channel_number, HWSensors *HWSensors);
 	    void loop();
         void processInputKo(GroupObject& ko);
         void save();

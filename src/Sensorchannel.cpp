@@ -1,15 +1,7 @@
 #include "Sensorchannel.h"
 #include <knx.h>
 
-void preTransmission()
-{
-    digitalWrite(RS485_UART_DIR_PIN, 1);
-}
 
-void postTransmission()
-{
-    digitalWrite(RS485_UART_DIR_PIN, 0);
-}
 
 
 Sensorchannel::Sensorchannel()
@@ -17,10 +9,10 @@ Sensorchannel::Sensorchannel()
   
 }
 
-void Sensorchannel::Setup(uint8_t channel_number)
+void Sensorchannel::Setup(uint8_t channel_number, HWSensors *HWSensors)
 {
     _channelIndex = channel_number;
-
+    m_hwSensors = HWSensors;
 
 
     // Initialize Min/Max Ko
@@ -97,24 +89,17 @@ void Sensorchannel::Setup(uint8_t channel_number)
     logDebugP("ParamW90_SensorTemperature2MinMax_         : %i", ParamW90_SensorTemperature2MinMax_          );
     */
     logDebugP("-------------------------------------------");
-
-ModbusMaster
-
-    m_modbus.preTransmission(preTransmission);
-    m_modbus.postTransmission(postTransmission);
-    m_modbus.begin(ParamW90_Address_, RS485_SERIAL);
 }
 
 void Sensorchannel::loop()
 {
+    float temperature = m_hwSensors->GetTemperature(_channelIndex);
+    float humidity = m_hwSensors->GetHumidity(_channelIndex);
+    float abshumidity = CalcAbsHumidity(humidity, m_temperature);
+    float dewpoint = CalcDewPoint(humidity, m_temperature);
+    float pressure = m_hwSensors->GetPressure(_channelIndex);
 
-    float temperature = 0; // m_hwSensors->GetTemperature(_channelIndex);
-    float humidity = 0; // m_hwSensors->GetHumidity(_channelIndex);
-    float abshumidity = CalcAbsHumidity(humidity, temperature);
-    float dewpoint = CalcDewPoint(humidity, temperature);
-    float pressure = 0; // m_hwSensors->GetPressure(_channelIndex);
-
-    loop_temperature(temperature);
+    loop_temperature(m_temperature);
     loop_humidity(humidity);
     loop_abshumidity(abshumidity);
     loop_dewpoint(dewpoint);
@@ -561,34 +546,3 @@ void Sensorchannel::restore()
     KoW90_SensorPressMinValue_.valueNoSend(openknx.flash.readFloat(), PressKODPT);
 }
 
-float Sensorchannel::ReadTemperature()
-{
-
-    /*
-    Value in hex
-10.5 C = 1F9h
--10.5 C = 127h
-with 400 offset added
-(Range: -40.0C ->
-60.0C)
-If invalid fill with
-0xFFFF
-    */
-
-    int8_t result;
-    uint16_t data 0xffff;
-    result = m_modbus.readHoldingRegisters(0x0167, 0x0001);
-
-    if (result == m_modbus.ku8MBSuccess)
-    {
-        data = m_modbus.getResponseBuffer(0);
-
-        // convert and return
-    }
-    else
-    {
-        return NAN;
-    }
-
-    return 0.0;
-}
