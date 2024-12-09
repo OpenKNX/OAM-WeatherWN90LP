@@ -78,6 +78,75 @@
                 <Parameter Id="%AID%_UP-%TT%%CC%056" Name="SensorPressureWarnH_%C%" Offset="14" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Überschreiten von" SuffixText="Pa" Value="30" />
                 <Parameter Id="%AID%_UP-%TT%%CC%057" Name="SensorPressureMinMax_%C%" Offset="0" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Min/Max Werte erfassen" Value="0" />
               </Union>
+
+              <!-- light parameters-->
+              <Union SizeInBit="144">
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="92" BitOffset="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%060" Name="SensorLightSendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%061" Name="SensorLightSendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="     von mehr als" SuffixText="lx" Value="5" />
+                <Parameter Id="%AID%_UP-%TT%%CC%062" Name="SensorLightSendCycle_%C%" Offset="5" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
+                <Parameter Id="%AID%_UP-%TT%%CC%063" Name="SensorLightAlign_%C%" Offset="6" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="Messwert kalibrieren" SuffixText="lx" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%064" Name="SensorLightWarn_%C%" Offset="0" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Alarme senden" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%065" Name="SensorLightWarnL_%C%" Offset="10" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Unterschreiten von" SuffixText="lx" Value="5" />
+                <Parameter Id="%AID%_UP-%TT%%CC%066" Name="SensorLightWarnH_%C%" Offset="14" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Überschreiten von" SuffixText="lx" Value="30" />
+                <Parameter Id="%AID%_UP-%TT%%CC%067" Name="SensorLightMinMax_%C%" Offset="0" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Min/Max Werte erfassen" Value="0" />
+              </Union>
+
+              <!-- uvi parameters-->
+              <Union SizeInBit="48">
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="110" BitOffset="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%070" Name="SensorUVISendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%071" Name="SensorUVISendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5" Text="     von mehr als" SuffixText="UVI" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%072" Name="SensorUVISendCycle_%C%" Offset="2" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
+                <Parameter Id="%AID%_UP-%TT%%CC%073" Name="SensorUVIAlign_%C%" Offset="3" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5" Text="Messwert kalibrieren" SuffixText="UVI" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%074" Name="SensorUVIWarn_%C%" Offset="0" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Alarme senden" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%075" Name="SensorUVIWarnL_%C%" Offset="4" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5" Text="   bei Unterschreiten von" SuffixText="UVI" Value="2" />
+                <Parameter Id="%AID%_UP-%TT%%CC%076" Name="SensorUVIWarnH_%C%" Offset="5" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5" Text="   bei Überschreiten von" SuffixText="UVI" Value="8" />
+                <Parameter Id="%AID%_UP-%TT%%CC%077" Name="SensorUVIMinMax_%C%" Offset="0" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Min/Max Werte erfassen" Value="0" />
+              </Union>
+
+              <!-- wind parameters -->
+              <Union SizeInBit="144">
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="158" BitOffset="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%080" Name="SensorWindSendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%081" Name="SensorWindSendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="     von mehr als" SuffixText="m/s" Value="1" />
+                <Parameter Id="%AID%_UP-%TT%%CC%082" Name="SensorWindSendCycle_%C%" Offset="5" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
+                <Parameter Id="%AID%_UP-%TT%%CC%083" Name="SensorWindAlign_%C%" Offset="6" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="Messwert kalibrieren" SuffixText="m/s" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%084" Name="SensorWindWarn_%C%" Offset="0" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Alarme senden" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%085" Name="SensorWindWarnL_%C%" Offset="10" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Unterschreiten von" SuffixText="m/s" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%086" Name="SensorWindWarnH_%C%" Offset="14" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Überschreiten von" SuffixText="m/s" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%087" Name="SensorWindMinMax_%C%" Offset="0" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Min/Max Werte erfassen" Value="0" />
+              </Union>
+
+              <!-- gust parameters-->
+              <Union SizeInBit="144">
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="176" BitOffset="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%090" Name="SensorGustSendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%091" Name="SensorGustSendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="     von mehr als" SuffixText="m/s" Value="1" />
+                <Parameter Id="%AID%_UP-%TT%%CC%092" Name="SensorGustSendCycle_%C%" Offset="5" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
+                <Parameter Id="%AID%_UP-%TT%%CC%093" Name="SensorGustAlign_%C%" Offset="6" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="Messwert kalibrieren" SuffixText="m/s" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%094" Name="SensorGustWarn_%C%" Offset="0" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Alarme senden" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%095" Name="SensorGustWarnL_%C%" Offset="10" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Unterschreiten von" SuffixText="m/s" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%096" Name="SensorGustWarnH_%C%" Offset="14" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Überschreiten von" SuffixText="m/s" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%097" Name="SensorGustMinMax_%C%" Offset="0" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Min/Max Werte erfassen" Value="0" />
+              </Union>
+
+              <!-- wind dir parameters-->
+              <Union SizeInBit="32">
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="194" BitOffset="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%100" Name="SensorWindDirSendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%101" Name="SensorWindDirSendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5" Text="     von mehr als" SuffixText="°" Value="5" />
+                <Parameter Id="%AID%_UP-%TT%%CC%102" Name="SensorWindDirSendCycle_%C%" Offset="2" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
+                <Parameter Id="%AID%_UP-%TT%%CC%103" Name="SensorWindDirAlign_%C%" Offset="3" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5" Text="Messwert kalibrieren" SuffixText="°" Value="0" />
+              </Union>
+
+              <!-- rain parameters -->
+              <Union SizeInBit="48">
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="198" BitOffset="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%110" Name="SensorRainSendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%111" Name="SensorRainSendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="     von mehr als" SuffixText="mm" Value="0.1" />
+                <Parameter Id="%AID%_UP-%TT%%CC%112" Name="SensorRainSendCycle_%C%" Offset="5" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
+              </Union>
             </Parameters>
 
             
@@ -132,6 +201,52 @@
               <ParameterRef Id="%AID%_UP-%TT%%CC%055_R-%TT%%CC%05501" RefId="%AID%_UP-%TT%%CC%055" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%056_R-%TT%%CC%05601" RefId="%AID%_UP-%TT%%CC%056" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%057_R-%TT%%CC%05701" RefId="%AID%_UP-%TT%%CC%057" />
+              <!-- light parameters-->
+              <ParameterRef Id="%AID%_UP-%TT%%CC%060_R-%TT%%CC%06001" RefId="%AID%_UP-%TT%%CC%060" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%061_R-%TT%%CC%06101" RefId="%AID%_UP-%TT%%CC%061" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%062_R-%TT%%CC%06201" RefId="%AID%_UP-%TT%%CC%062" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%063_R-%TT%%CC%06301" RefId="%AID%_UP-%TT%%CC%063" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%064_R-%TT%%CC%06401" RefId="%AID%_UP-%TT%%CC%064" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%065_R-%TT%%CC%06501" RefId="%AID%_UP-%TT%%CC%065" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%066_R-%TT%%CC%06601" RefId="%AID%_UP-%TT%%CC%066" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%067_R-%TT%%CC%06701" RefId="%AID%_UP-%TT%%CC%067" />
+              <!-- uvi parameters-->
+              <ParameterRef Id="%AID%_UP-%TT%%CC%070_R-%TT%%CC%07001" RefId="%AID%_UP-%TT%%CC%070" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%071_R-%TT%%CC%07101" RefId="%AID%_UP-%TT%%CC%071" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%072_R-%TT%%CC%07201" RefId="%AID%_UP-%TT%%CC%072" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%073_R-%TT%%CC%07301" RefId="%AID%_UP-%TT%%CC%073" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%074_R-%TT%%CC%07401" RefId="%AID%_UP-%TT%%CC%074" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%075_R-%TT%%CC%07501" RefId="%AID%_UP-%TT%%CC%075" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%076_R-%TT%%CC%07601" RefId="%AID%_UP-%TT%%CC%076" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%077_R-%TT%%CC%07701" RefId="%AID%_UP-%TT%%CC%077" />
+              <!-- wind parameters-->
+              <ParameterRef Id="%AID%_UP-%TT%%CC%080_R-%TT%%CC%08001" RefId="%AID%_UP-%TT%%CC%080" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%081_R-%TT%%CC%08101" RefId="%AID%_UP-%TT%%CC%081" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%082_R-%TT%%CC%08201" RefId="%AID%_UP-%TT%%CC%082" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%083_R-%TT%%CC%08301" RefId="%AID%_UP-%TT%%CC%083" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%084_R-%TT%%CC%08401" RefId="%AID%_UP-%TT%%CC%084" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%085_R-%TT%%CC%08501" RefId="%AID%_UP-%TT%%CC%085" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%086_R-%TT%%CC%08601" RefId="%AID%_UP-%TT%%CC%086" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%087_R-%TT%%CC%08701" RefId="%AID%_UP-%TT%%CC%087" />
+              <!-- gust parameters-->
+              <ParameterRef Id="%AID%_UP-%TT%%CC%090_R-%TT%%CC%09001" RefId="%AID%_UP-%TT%%CC%090" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%091_R-%TT%%CC%09101" RefId="%AID%_UP-%TT%%CC%091" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%092_R-%TT%%CC%09201" RefId="%AID%_UP-%TT%%CC%092" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%093_R-%TT%%CC%09301" RefId="%AID%_UP-%TT%%CC%093" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%094_R-%TT%%CC%09401" RefId="%AID%_UP-%TT%%CC%094" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%095_R-%TT%%CC%09501" RefId="%AID%_UP-%TT%%CC%095" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%096_R-%TT%%CC%09601" RefId="%AID%_UP-%TT%%CC%096" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%097_R-%TT%%CC%09701" RefId="%AID%_UP-%TT%%CC%097" />
+              <!-- wind dir parameters-->
+              <ParameterRef Id="%AID%_UP-%TT%%CC%100_R-%TT%%CC%10001" RefId="%AID%_UP-%TT%%CC%100" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%101_R-%TT%%CC%10101" RefId="%AID%_UP-%TT%%CC%101" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%102_R-%TT%%CC%10201" RefId="%AID%_UP-%TT%%CC%102" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%103_R-%TT%%CC%10301" RefId="%AID%_UP-%TT%%CC%103" />
+              <!-- rain parameters-->
+              <ParameterRef Id="%AID%_UP-%TT%%CC%110_R-%TT%%CC%11001" RefId="%AID%_UP-%TT%%CC%110" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%111_R-%TT%%CC%11101" RefId="%AID%_UP-%TT%%CC%111" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%112_R-%TT%%CC%11201" RefId="%AID%_UP-%TT%%CC%112" />
+
             </ParameterRefs>
 
             <ComObjectTable>
@@ -170,6 +285,42 @@
               <ComObject Id="%AID%_O-%TT%%CC%027" Name="SensorPressMinValue_%C%" Text="Min. Luftdruck lesen" Number="%K27%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-6" />
               <ComObject Id="%AID%_O-%TT%%CC%028" Name="SensorPressMaxValue_%C%" Text="Max. Luftdruck lesen" Number="%K28%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-6" />
               <ComObject Id="%AID%_O-%TT%%CC%029" Name="SensorPressMinMaxReset_%C%" Text="Min/Max Luftdruck Reset" Number="%K29%" FunctionText="Wetterstation %Z%" ObjectSize="1 Bit" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-3" />
+              <!-- light -->
+              <ComObject Id="%AID%_O-%TT%%CC%030" Name="SensorLight_%C%" Text="Helligkeit" Number="%K30%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
+              <ComObject Id="%AID%_O-%TT%%CC%031" Name="SensorLightAlarmL_%C%" Text="Alarm Helligkeitunterschreitung" Number="%K31%" FunctionText="Wetterstation %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-5" />
+              <ComObject Id="%AID%_O-%TT%%CC%032" Name="SensorLightAlarmH_%C%" Text="Alarm Helligkeitüberschreitung" Number="%K32%" FunctionText="Wetterstation %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-5" />
+              <ComObject Id="%AID%_O-%TT%%CC%033" Name="SensorLightMinValue_%C%" Text="Min. Helligkeit lesen" Number="%K33%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
+              <ComObject Id="%AID%_O-%TT%%CC%034" Name="SensorLightMaxValue_%C%" Text="Max. Helligkeit lesen" Number="%K34%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
+              <ComObject Id="%AID%_O-%TT%%CC%035" Name="SensorLightMinMaxReset_%C%" Text="Min/Max Helligkeit Reset" Number="%K35%" FunctionText="Wetterstation %Z%" ObjectSize="1 Bit" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-3" />
+              <!-- uvi -->
+              <ComObject Id="%AID%_O-%TT%%CC%036" Name="SensorUVI_%C%" Text="UV-Index" Number="%K36%" FunctionText="Wetterstation %Z%" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
+              <ComObject Id="%AID%_O-%TT%%CC%037" Name="SensorUVIAlarmL_%C%" Text="Alarm UV-Indexunterschreitung" Number="%K37%" FunctionText="Wetterstation %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-5" />
+              <ComObject Id="%AID%_O-%TT%%CC%038" Name="SensorUVIAlarmH_%C%" Text="Alarm UV-Indexüberschreitung" Number="%K38%" FunctionText="Wetterstation %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-5" />
+              <ComObject Id="%AID%_O-%TT%%CC%039" Name="SensorUVIMinValue_%C%" Text="Min. UV-Index lesen" Number="%K39%" FunctionText="Wetterstation %Z%" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
+              <ComObject Id="%AID%_O-%TT%%CC%040" Name="SensorUVIMaxValue_%C%" Text="Max. UV-Index lesen" Number="%K40%" FunctionText="Wetterstation %Z%" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
+              <ComObject Id="%AID%_O-%TT%%CC%041" Name="SensorUVIMinMaxReset_%C%" Text="Min/Max UV-Index Reset" Number="%K41%" FunctionText="Wetterstation %Z%" ObjectSize="1 Bit" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-3" />
+              <!-- wind -->
+              <ComObject Id="%AID%_O-%TT%%CC%042" Name="SensorWind_%C%" Text="Windgeschwindigkeit" Number="%K42%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-5" />
+              <ComObject Id="%AID%_O-%TT%%CC%043" Name="SensorWindAlarmL_%C%" Text="Alarm Windgeschwindigkeitunterschreitung" Number="%K43%" FunctionText="Wetterstation %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-5" />
+              <ComObject Id="%AID%_O-%TT%%CC%044" Name="SensorWindAlarmH_%C%" Text="Alarm Windgeschwindigkeitüberschreitung" Number="%K44%" FunctionText="Wetterstation %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-5" />
+              <ComObject Id="%AID%_O-%TT%%CC%045" Name="SensorWindMinValue_%C%" Text="Min. Windgeschwindigkeit lesen" Number="%K45%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-5" />
+              <ComObject Id="%AID%_O-%TT%%CC%046" Name="SensorWindMaxValue_%C%" Text="Max. Windgeschwindigkeit lesen" Number="%K46%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-5" />
+              <ComObject Id="%AID%_O-%TT%%CC%047" Name="SensorWindMinMaxReset_%C%" Text="Min/Max Windgeschwindigkeit Reset" Number="%K47%" FunctionText="Wetterstation %Z%" ObjectSize="1 Bit" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-3" />
+              <!-- gust -->
+              <ComObject Id="%AID%_O-%TT%%CC%048" Name="SensorGust_%C%" Text="Windböe" Number="%K48%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-5" />
+              <ComObject Id="%AID%_O-%TT%%CC%049" Name="SensorGustAlarmL_%C%" Text="Alarm Windböeunterschreitung" Number="%K49%" FunctionText="Wetterstation %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-5" />
+              <ComObject Id="%AID%_O-%TT%%CC%050" Name="SensorGustAlarmH_%C%" Text="Alarm Windböeüberschreitung" Number="%K50%" FunctionText="Wetterstation %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-5" />
+              <ComObject Id="%AID%_O-%TT%%CC%051" Name="SensorGustMinValue_%C%" Text="Min. Windböe lesen" Number="%K51%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-5" />
+              <ComObject Id="%AID%_O-%TT%%CC%052" Name="SensorGustMaxValue_%C%" Text="Max. Windböe lesen" Number="%K52%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-5" />
+              <ComObject Id="%AID%_O-%TT%%CC%053" Name="SensorGustMinMaxReset_%C%" Text="Min/Max Windböe Reset" Number="%K53%" FunctionText="Wetterstation %Z%" ObjectSize="1 Bit" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-3" />
+              <!-- wind dir -->
+              <ComObject Id="%AID%_O-%TT%%CC%054" Name="SensorWindDir_%C%" Text="Windrichtung" Number="%K54%" FunctionText="Wetterstation %Z%" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-3" />
+              <!-- rain -->
+              <ComObject Id="%AID%_O-%TT%%CC%055" Name="SensorRain_%C%" Text="Niederschlag" Number="%K55%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-26" />
+              <!-- rain flow-->
+              <ComObject Id="%AID%_O-%TT%%CC%056" Name="SensorRainFlow_%C%" Text="Niederschlag (pro h)" Number="%K56%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-25" />
+
+              
 
             </ComObjectTable>
             
@@ -214,107 +365,145 @@
               <ComObjectRef Id="%AID%_O-%TT%%CC%027_R-%TT%%CC%02701" RefId="%AID%_O-%TT%%CC%027" />
               <ComObjectRef Id="%AID%_O-%TT%%CC%028_R-%TT%%CC%02801" RefId="%AID%_O-%TT%%CC%028" />
               <ComObjectRef Id="%AID%_O-%TT%%CC%029_R-%TT%%CC%02901" RefId="%AID%_O-%TT%%CC%029" />
+              <!-- light -->
+              <ComObjectRef Id="%AID%_O-%TT%%CC%030_R-%TT%%CC%03001" RefId="%AID%_O-%TT%%CC%030" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%031_R-%TT%%CC%03101" RefId="%AID%_O-%TT%%CC%031" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%032_R-%TT%%CC%03201" RefId="%AID%_O-%TT%%CC%032" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%033_R-%TT%%CC%03301" RefId="%AID%_O-%TT%%CC%033" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%034_R-%TT%%CC%03401" RefId="%AID%_O-%TT%%CC%034" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%035_R-%TT%%CC%03501" RefId="%AID%_O-%TT%%CC%035" />
+              <!-- uvi -->
+              <ComObjectRef Id="%AID%_O-%TT%%CC%036_R-%TT%%CC%03601" RefId="%AID%_O-%TT%%CC%036" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%037_R-%TT%%CC%03701" RefId="%AID%_O-%TT%%CC%037" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%038_R-%TT%%CC%03801" RefId="%AID%_O-%TT%%CC%038" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%039_R-%TT%%CC%03901" RefId="%AID%_O-%TT%%CC%039" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%040_R-%TT%%CC%04001" RefId="%AID%_O-%TT%%CC%040" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%041_R-%TT%%CC%04101" RefId="%AID%_O-%TT%%CC%041" />
+              <!-- wind -->
+              <ComObjectRef Id="%AID%_O-%TT%%CC%042_R-%TT%%CC%04201" RefId="%AID%_O-%TT%%CC%042" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%043_R-%TT%%CC%04301" RefId="%AID%_O-%TT%%CC%043" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%044_R-%TT%%CC%04401" RefId="%AID%_O-%TT%%CC%044" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%045_R-%TT%%CC%04501" RefId="%AID%_O-%TT%%CC%045" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%046_R-%TT%%CC%04601" RefId="%AID%_O-%TT%%CC%046" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%047_R-%TT%%CC%04701" RefId="%AID%_O-%TT%%CC%047" />
+              <!-- gust -->
+              <ComObjectRef Id="%AID%_O-%TT%%CC%048_R-%TT%%CC%04801" RefId="%AID%_O-%TT%%CC%048" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%049_R-%TT%%CC%04901" RefId="%AID%_O-%TT%%CC%049" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%050_R-%TT%%CC%05001" RefId="%AID%_O-%TT%%CC%050" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%051_R-%TT%%CC%05101" RefId="%AID%_O-%TT%%CC%051" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%052_R-%TT%%CC%05201" RefId="%AID%_O-%TT%%CC%052" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%053_R-%TT%%CC%05301" RefId="%AID%_O-%TT%%CC%053" />
+              <!-- wind dir -->
+              <ComObjectRef Id="%AID%_O-%TT%%CC%054_R-%TT%%CC%05401" RefId="%AID%_O-%TT%%CC%054" />
+              <!-- rain -->
+              <ComObjectRef Id="%AID%_O-%TT%%CC%055_R-%TT%%CC%05501" RefId="%AID%_O-%TT%%CC%055" />
+              <!-- rain flow -->
+              <ComObjectRef Id="%AID%_O-%TT%%CC%056_R-%TT%%CC%05601" RefId="%AID%_O-%TT%%CC%056" />
             </ComObjectRefs>
           </Static>
           <Dynamic>
             <ChannelIndependentBlock>
-              <ParameterBlock Id="%AID%_PB-2" Name="Sensor_%ZZ%" Text="Sensor %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201">
+              <ParameterBlock Id="%AID%_PB-2" Name="Sensor_%ZZ%" Text="Wetterstation %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201">
                 <ParameterRefRef RefId="%AID%_P-%TT%%CC%001_R-%TT%%CC%00101" />
                 <ParameterRefRef RefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201" />
-                <!-- Temperatur -->
-                <ParameterSeparator Id="%AID%_PS-" Text=" " />
-                <ParameterSeparator Id="%AID%_PS-" Text="Temperatur" UIHint="Headline" />
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%010_R-%TT%%CC%01001" />
-                <choose ParamRefId="%AID%_UP-%TT%%CC%010_R-%TT%%CC%01001">
-                  <when test="1">
-                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%011_R-%TT%%CC%01101" />
-                  </when>
-                </choose>
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%012_R-%TT%%CC%01201" />
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%013_R-%TT%%CC%01301" />
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%014_R-%TT%%CC%01401" />
-                <choose ParamRefId="%AID%_UP-%TT%%CC%014_R-%TT%%CC%01401">
-                  <when test="1">
-                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%015_R-%TT%%CC%01501" />
-                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%016_R-%TT%%CC%01601" />
-                  </when>
-                </choose>
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%017_R-%TT%%CC%01701" />
-                <!-- Luftfeuchtigkeit -->
-                <ParameterSeparator Id="%AID%_PS-" Text=" " />
-                <ParameterSeparator Id="%AID%_PS-" Text="Luftfeuchtigkeit" UIHint="Headline" />
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%020_R-%TT%%CC%02001" />
-                <choose ParamRefId="%AID%_UP-%TT%%CC%020_R-%TT%%CC%02001">
-                  <when test="1">
-                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%021_R-%TT%%CC%02101" />
-                  </when>
-                </choose>
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%022_R-%TT%%CC%02201" />
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%023_R-%TT%%CC%02301" />
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%024_R-%TT%%CC%02401" />
-                <choose ParamRefId="%AID%_UP-%TT%%CC%024_R-%TT%%CC%02401">
-                  <when test="1">
-                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%025_R-%TT%%CC%02501" />
-                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%026_R-%TT%%CC%02601" />
-                  </when>
-                </choose>
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%027_R-%TT%%CC%02701" />
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%029_R-%TT%%CC%02901" />
-                <ParameterSeparator Id="%AID%_PS-" Text=" " />
-                <ParameterSeparator Id="%AID%_PS-" Text="Absolute Luftfeuchtigkeit" UIHint="Headline" />
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%030_R-%TT%%CC%03001" />
-                <choose ParamRefId="%AID%_UP-%TT%%CC%030_R-%TT%%CC%03001">
-                  <when test="1">
-                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%031_R-%TT%%CC%03101" />
-                  </when>
-                </choose>
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%032_R-%TT%%CC%03201" />
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%033_R-%TT%%CC%03301" />
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%034_R-%TT%%CC%03401" />
-                <choose ParamRefId="%AID%_UP-%TT%%CC%034_R-%TT%%CC%03401">
-                  <when test="1">
-                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%035_R-%TT%%CC%03501" />
-                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%036_R-%TT%%CC%03601" />
-                  </when>
-                </choose>
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%037_R-%TT%%CC%03701" />
-                <ParameterSeparator Id="%AID%_PS-" Text=" " />
-                <ParameterSeparator Id="%AID%_PS-" Text="Taupunkt" UIHint="Headline" />
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%040_R-%TT%%CC%04001" />
-                <choose ParamRefId="%AID%_UP-%TT%%CC%040_R-%TT%%CC%04001">
-                  <when test="1">
-                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%041_R-%TT%%CC%04101" />
-                  </when>
-                </choose>
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%042_R-%TT%%CC%04201" />
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%043_R-%TT%%CC%04301" />
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%044_R-%TT%%CC%04401" />
-                <choose ParamRefId="%AID%_UP-%TT%%CC%044_R-%TT%%CC%04401">
-                  <when test="1">
-                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%045_R-%TT%%CC%04501" />
-                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%046_R-%TT%%CC%04601" />
-                  </when>
-                </choose>
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%047_R-%TT%%CC%04701" />
-                <!-- Luftdruck -->
-                <ParameterSeparator Id="%AID%_PS-" Text=" " />
-                <ParameterSeparator Id="%AID%_PS-" Text="Luftdruck" UIHint="Headline" />
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%050_R-%TT%%CC%05001" />
-                <choose ParamRefId="%AID%_UP-%TT%%CC%050_R-%TT%%CC%05001">
-                  <when test="1">
-                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%051_R-%TT%%CC%05101" />
-                  </when>
-                </choose>
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%052_R-%TT%%CC%05201" />
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%053_R-%TT%%CC%05301" />
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%054_R-%TT%%CC%05401" />
-                <choose ParamRefId="%AID%_UP-%TT%%CC%054_R-%TT%%CC%05401">
-                  <when test="1">
-                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%055_R-%TT%%CC%05501" />
-                    <ParameterRefRef RefId="%AID%_UP-%TT%%CC%056_R-%TT%%CC%05601" />
-                  </when>
-                </choose>
-                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%057_R-%TT%%CC%05701" />
+
+                <ParameterBlock Id="%AID%_PB-3" Name="Sensor_%ZZ%_Temp" Text="Luft:" >
+                  <!-- Temperatur -->
+                  <ParameterSeparator Id="%AID%_PS-" Text=" " />
+                  <ParameterSeparator Id="%AID%_PS-" Text="Temperatur" UIHint="Headline" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%010_R-%TT%%CC%01001" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%010_R-%TT%%CC%01001">
+                    <when test="1">
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%011_R-%TT%%CC%01101" />
+                    </when>
+                  </choose>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%012_R-%TT%%CC%01201" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%013_R-%TT%%CC%01301" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%014_R-%TT%%CC%01401" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%014_R-%TT%%CC%01401">
+                    <when test="1">
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%015_R-%TT%%CC%01501" />
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%016_R-%TT%%CC%01601" />
+                    </when>
+                  </choose>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%017_R-%TT%%CC%01701" />
+                  <!-- Luftfeuchtigkeit -->
+                  <ParameterSeparator Id="%AID%_PS-" Text=" " />
+                  <ParameterSeparator Id="%AID%_PS-" Text="Luftfeuchtigkeit" UIHint="Headline" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%020_R-%TT%%CC%02001" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%020_R-%TT%%CC%02001">
+                    <when test="1">
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%021_R-%TT%%CC%02101" />
+                    </when>
+                  </choose>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%022_R-%TT%%CC%02201" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%023_R-%TT%%CC%02301" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%024_R-%TT%%CC%02401" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%024_R-%TT%%CC%02401">
+                    <when test="1">
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%025_R-%TT%%CC%02501" />
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%026_R-%TT%%CC%02601" />
+                    </when>
+                  </choose>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%027_R-%TT%%CC%02701" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%029_R-%TT%%CC%02901" />
+                  <ParameterSeparator Id="%AID%_PS-" Text=" " />
+                  <ParameterSeparator Id="%AID%_PS-" Text="Absolute Luftfeuchtigkeit" UIHint="Headline" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%030_R-%TT%%CC%03001" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%030_R-%TT%%CC%03001">
+                    <when test="1">
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%031_R-%TT%%CC%03101" />
+                    </when>
+                  </choose>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%032_R-%TT%%CC%03201" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%033_R-%TT%%CC%03301" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%034_R-%TT%%CC%03401" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%034_R-%TT%%CC%03401">
+                    <when test="1">
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%035_R-%TT%%CC%03501" />
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%036_R-%TT%%CC%03601" />
+                    </when>
+                  </choose>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%037_R-%TT%%CC%03701" />
+                  <ParameterSeparator Id="%AID%_PS-" Text=" " />
+                  <ParameterSeparator Id="%AID%_PS-" Text="Taupunkt" UIHint="Headline" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%040_R-%TT%%CC%04001" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%040_R-%TT%%CC%04001">
+                    <when test="1">
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%041_R-%TT%%CC%04101" />
+                    </when>
+                  </choose>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%042_R-%TT%%CC%04201" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%043_R-%TT%%CC%04301" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%044_R-%TT%%CC%04401" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%044_R-%TT%%CC%04401">
+                    <when test="1">
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%045_R-%TT%%CC%04501" />
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%046_R-%TT%%CC%04601" />
+                    </when>
+                  </choose>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%047_R-%TT%%CC%04701" />
+                  <!-- Luftdruck -->
+                  <ParameterSeparator Id="%AID%_PS-" Text=" " />
+                  <ParameterSeparator Id="%AID%_PS-" Text="Luftdruck" UIHint="Headline" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%050_R-%TT%%CC%05001" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%050_R-%TT%%CC%05001">
+                    <when test="1">
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%051_R-%TT%%CC%05101" />
+                    </when>
+                  </choose>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%052_R-%TT%%CC%05201" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%053_R-%TT%%CC%05301" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%054_R-%TT%%CC%05401" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%054_R-%TT%%CC%05401">
+                    <when test="1">
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%055_R-%TT%%CC%05501" />
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%056_R-%TT%%CC%05601" />
+                    </when>
+                  </choose>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%057_R-%TT%%CC%05701" />
+                </ParameterBlock>
+                
                 <Channel Id="%AID%_CH-10%CC%" Name="Sensor_%ZZ%" Number="10%CC%" Text="Sensor %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201">
                   <!-- Temperature -->
                   <choose ParamRefId="%AID%_UP-%TT%%CC%014_R-%TT%%CC%01401">
@@ -331,6 +520,7 @@
                     </when>
                   </choose>
                   <ComObjectRefRef RefId="%AID%_O-%TT%%CC%000_R-%TT%%CC%00001" />
+
                   <!-- Humidity -->
                   <choose ParamRefId="%AID%_UP-%TT%%CC%024_R-%TT%%CC%02401">
                     <when test="1">
@@ -389,6 +579,7 @@
                     </when>
                   </choose>
                   <ComObjectRefRef RefId="%AID%_O-%TT%%CC%018_R-%TT%%CC%01801" />
+
                   <!-- Pressure -->
                   <choose ParamRefId="%AID%_UP-%TT%%CC%054_R-%TT%%CC%05401">
                     <when test="1">
@@ -404,6 +595,80 @@
                     </when>
                   </choose>
                   <ComObjectRefRef RefId="%AID%_O-%TT%%CC%024_R-%TT%%CC%02401" />
+
+                  <!-- Light -->
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%064_R-%TT%%CC%06401">
+                    <when test="1">
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%031_R-%TT%%CC%03101" />
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%032_R-%TT%%CC%03201" />
+                    </when>
+                  </choose>
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%067_R-%TT%%CC%06701">
+                    <when test="1">
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%033_R-%TT%%CC%03301" />
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%034_R-%TT%%CC%03401" />
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%035_R-%TT%%CC%03501" />
+                    </when>
+                  </choose>
+                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%030_R-%TT%%CC%03001" />
+
+                  <!-- UVI -->
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%074_R-%TT%%CC%07401">
+                    <when test="1">
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%037_R-%TT%%CC%03701" />
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%038_R-%TT%%CC%03801" />
+                    </when>
+                  </choose>
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%077_R-%TT%%CC%07701">
+                    <when test="1">
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%039_R-%TT%%CC%03901" />
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%040_R-%TT%%CC%04001" />
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%041_R-%TT%%CC%04101" />
+                    </when>
+                  </choose>
+                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%036_R-%TT%%CC%03601" />
+
+                  <!-- Wind -->
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%084_R-%TT%%CC%08401">
+                    <when test="1">
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%043_R-%TT%%CC%04301" />
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%044_R-%TT%%CC%04401" />
+                    </when>
+                  </choose>
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%087_R-%TT%%CC%08701">
+                    <when test="1">
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%045_R-%TT%%CC%04501" />
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%046_R-%TT%%CC%04601" />
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%047_R-%TT%%CC%04701" />
+                    </when>
+                  </choose>
+                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%042_R-%TT%%CC%04201" />
+
+                  <!-- Gust -->
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%094_R-%TT%%CC%09401">
+                    <when test="1">
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%049_R-%TT%%CC%04901" />
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%050_R-%TT%%CC%05001" />
+                    </when>
+                  </choose>
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%097_R-%TT%%CC%09701">
+                    <when test="1">
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%051_R-%TT%%CC%05101" />
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%052_R-%TT%%CC%05201" />
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%053_R-%TT%%CC%05301" />
+                    </when>
+                  </choose>
+                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%048_R-%TT%%CC%04801" />
+
+                  <!-- Wind direction -->
+                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%054_R-%TT%%CC%05401" />
+
+                  <!-- Rain -->
+                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%055_R-%TT%%CC%05501" />
+
+                  <!-- Rain flow -->
+                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%056_R-%TT%%CC%05601" />
+
 
                 </Channel>
               </ParameterBlock>

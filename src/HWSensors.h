@@ -24,4 +24,10 @@ class HWSensors
     public: float GetTemperature(uint8_t channel);
     public: float GetHumidity(uint8_t channel);
     public: float GetPressure(uint8_t channel);
+    public: float GetLight(uint8_t channel);
+    public: uint8_t GetUVI(uint8_t channel);
+    public: float GetWind(uint8_t channel);
+    public: float GetGust(uint8_t channel);
+    public: uint8_t GetWindDir(uint8_t channel);
+    public: float GetRain(uint8_t channel);
 };

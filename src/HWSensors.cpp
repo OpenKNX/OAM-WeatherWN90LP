@@ -68,3 +68,63 @@ float HWSensors::GetPressure(uint8_t channel)
     else
         return NAN;
 }
+
+float HWSensors::GetLight(uint8_t channel)
+{
+    if(m_HWSensorchannels[channel] != nullptr)
+    {
+        return m_HWSensorchannels[channel]->GetLight();
+    }
+    else
+        return NAN;
+}
+
+uint8_t HWSensors::GetUVI(uint8_t channel)
+{
+    if(m_HWSensorchannels[channel] != nullptr)
+    {
+        return m_HWSensorchannels[channel]->GetUVI();
+    }
+    else
+        return NAN;
+}
+
+float HWSensors::GetWind(uint8_t channel)
+{
+    if(m_HWSensorchannels[channel] != nullptr)
+    {
+        return m_HWSensorchannels[channel]->GetWind();
+    }
+    else
+        return NAN;
+}
+
+float HWSensors::GetGust(uint8_t channel)
+{
+    if(m_HWSensorchannels[channel] != nullptr)
+    {
+        return m_HWSensorchannels[channel]->GetGust();
+    }
+    else
+        return NAN;
+}
+
+uint8_t HWSensors::GetWindDir(uint8_t channel)
+{
+    if(m_HWSensorchannels[channel] != nullptr)
+    {
+        return m_HWSensorchannels[channel]->GetWindDir();
+    }
+    else
+        return NAN;
+}
+
+float HWSensors::GetRain(uint8_t channel)
+{
+    if(m_HWSensorchannels[channel] != nullptr)
+    {
+        return m_HWSensorchannels[channel]->GetRain();
+    }
+    else
+        return NAN;
+}

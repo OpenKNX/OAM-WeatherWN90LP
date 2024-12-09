@@ -11,7 +11,7 @@
 #define MAIN_OpenKnxId 0xA1
 #define MAIN_ApplicationNumber 21
 #define MAIN_ApplicationVersion 1
-#define MAIN_ParameterSize 5702
+#define MAIN_ParameterSize 5814
 #define MAIN_MaxKoNumber 189
 #define MAIN_OrderNumber "0xA115"
 #define BASE_ModuleVersion 19
@@ -154,7 +154,7 @@
 
 // Parameter per channel
 #define W90_ParamBlockOffset 46
-#define W90_ParamBlockSize 92
+#define W90_ParamBlockSize 204
 #define W90_ParamCalcIndex(index) (index + W90_ParamBlockOffset + _channelIndex * W90_ParamBlockSize)
 
 #define W90_Address_                             0      // uint8_t
@@ -229,8 +229,75 @@
 #define W90_SensorPressureMinMax_               74      // 1 Bit, Bit 5
 #define     W90_SensorPressureMinMax_Mask 0x20
 #define     W90_SensorPressureMinMax_Shift 5
+#define W90_SensorLightSendChange_              92      // 1 Bit, Bit 7
+#define     W90_SensorLightSendChange_Mask 0x80
+#define     W90_SensorLightSendChange_Shift 7
+#define W90_SensorLightSendChangeAmount_        93      // float
+#define W90_SensorLightSendCycle_               97      // 8 Bits, Bit 7-0
+#define W90_SensorLightAlign_                   98      // float
+#define W90_SensorLightWarn_                    92      // 1 Bit, Bit 6
+#define     W90_SensorLightWarn_Mask 0x40
+#define     W90_SensorLightWarn_Shift 6
+#define W90_SensorLightWarnL_                   102      // float
+#define W90_SensorLightWarnH_                   106      // float
+#define W90_SensorLightMinMax_                  92      // 1 Bit, Bit 5
+#define     W90_SensorLightMinMax_Mask 0x20
+#define     W90_SensorLightMinMax_Shift 5
+#define W90_SensorUVISendChange_                110      // 1 Bit, Bit 7
+#define     W90_SensorUVISendChange_Mask 0x80
+#define     W90_SensorUVISendChange_Shift 7
+#define W90_SensorUVISendChangeAmount_          111      // uint8_t
+#define W90_SensorUVISendCycle_                 112      // 8 Bits, Bit 7-0
+#define W90_SensorUVIAlign_                     113      // uint8_t
+#define W90_SensorUVIWarn_                      110      // 1 Bit, Bit 6
+#define     W90_SensorUVIWarn_Mask 0x40
+#define     W90_SensorUVIWarn_Shift 6
+#define W90_SensorUVIWarnL_                     114      // uint8_t
+#define W90_SensorUVIWarnH_                     115      // uint8_t
+#define W90_SensorUVIMinMax_                    110      // 1 Bit, Bit 5
+#define     W90_SensorUVIMinMax_Mask 0x20
+#define     W90_SensorUVIMinMax_Shift 5
+#define W90_SensorWindSendChange_               158      // 1 Bit, Bit 7
+#define     W90_SensorWindSendChange_Mask 0x80
+#define     W90_SensorWindSendChange_Shift 7
+#define W90_SensorWindSendChangeAmount_         159      // float
+#define W90_SensorWindSendCycle_                163      // 8 Bits, Bit 7-0
+#define W90_SensorWindAlign_                    164      // float
+#define W90_SensorWindWarn_                     158      // 1 Bit, Bit 6
+#define     W90_SensorWindWarn_Mask 0x40
+#define     W90_SensorWindWarn_Shift 6
+#define W90_SensorWindWarnL_                    168      // float
+#define W90_SensorWindWarnH_                    172      // float
+#define W90_SensorWindMinMax_                   158      // 1 Bit, Bit 5
+#define     W90_SensorWindMinMax_Mask 0x20
+#define     W90_SensorWindMinMax_Shift 5
+#define W90_SensorGustSendChange_               176      // 1 Bit, Bit 7
+#define     W90_SensorGustSendChange_Mask 0x80
+#define     W90_SensorGustSendChange_Shift 7
+#define W90_SensorGustSendChangeAmount_         177      // float
+#define W90_SensorGustSendCycle_                181      // 8 Bits, Bit 7-0
+#define W90_SensorGustAlign_                    182      // float
+#define W90_SensorGustWarn_                     176      // 1 Bit, Bit 6
+#define     W90_SensorGustWarn_Mask 0x40
+#define     W90_SensorGustWarn_Shift 6
+#define W90_SensorGustWarnL_                    186      // float
+#define W90_SensorGustWarnH_                    190      // float
+#define W90_SensorGustMinMax_                   176      // 1 Bit, Bit 5
+#define     W90_SensorGustMinMax_Mask 0x20
+#define     W90_SensorGustMinMax_Shift 5
+#define W90_SensorWindDirSendChange_            194      // 1 Bit, Bit 7
+#define     W90_SensorWindDirSendChange_Mask 0x80
+#define     W90_SensorWindDirSendChange_Shift 7
+#define W90_SensorWindDirSendChangeAmount_      195      // uint8_t
+#define W90_SensorWindDirSendCycle_             196      // 8 Bits, Bit 7-0
+#define W90_SensorWindDirAlign_                 197      // uint8_t
+#define W90_SensorRainSendChange_               198      // 1 Bit, Bit 7
+#define     W90_SensorRainSendChange_Mask 0x80
+#define     W90_SensorRainSendChange_Shift 7
+#define W90_SensorRainSendChangeAmount_         199      // float
+#define W90_SensorRainSendCycle_                203      // 8 Bits, Bit 7-0
 
-// Adresse %Z%
+// I2C-Adresse
 #define ParamW90_Address_                            (knx.paramByte(W90_ParamCalcIndex(W90_Address_)))
 // Senden bei Änderung
 #define ParamW90_SensorTemperatureSendChange_        ((bool)(knx.paramByte(W90_ParamCalcIndex(W90_SensorTemperatureSendChange_)) & W90_SensorTemperatureSendChange_Mask))
@@ -314,13 +381,91 @@
 #define ParamW90_SensorPressureWarnH_                (knx.paramFloat(W90_ParamCalcIndex(W90_SensorPressureWarnH_), Float_Enc_IEEE754Single))
 // Min/Max Werte erfassen
 #define ParamW90_SensorPressureMinMax_               ((bool)(knx.paramByte(W90_ParamCalcIndex(W90_SensorPressureMinMax_)) & W90_SensorPressureMinMax_Mask))
+// Senden bei Änderung
+#define ParamW90_SensorLightSendChange_              ((bool)(knx.paramByte(W90_ParamCalcIndex(W90_SensorLightSendChange_)) & W90_SensorLightSendChange_Mask))
+//      von mehr als
+#define ParamW90_SensorLightSendChangeAmount_        (knx.paramFloat(W90_ParamCalcIndex(W90_SensorLightSendChangeAmount_), Float_Enc_IEEE754Single))
+// Zyklisch senden alle
+#define ParamW90_SensorLightSendCycle_               (knx.paramByte(W90_ParamCalcIndex(W90_SensorLightSendCycle_)))
+// Messwert kalibrieren
+#define ParamW90_SensorLightAlign_                   (knx.paramFloat(W90_ParamCalcIndex(W90_SensorLightAlign_), Float_Enc_IEEE754Single))
+// Alarme senden
+#define ParamW90_SensorLightWarn_                    ((bool)(knx.paramByte(W90_ParamCalcIndex(W90_SensorLightWarn_)) & W90_SensorLightWarn_Mask))
+//    bei Unterschreiten von
+#define ParamW90_SensorLightWarnL_                   (knx.paramFloat(W90_ParamCalcIndex(W90_SensorLightWarnL_), Float_Enc_IEEE754Single))
+//    bei Überschreiten von
+#define ParamW90_SensorLightWarnH_                   (knx.paramFloat(W90_ParamCalcIndex(W90_SensorLightWarnH_), Float_Enc_IEEE754Single))
+// Min/Max Werte erfassen
+#define ParamW90_SensorLightMinMax_                  ((bool)(knx.paramByte(W90_ParamCalcIndex(W90_SensorLightMinMax_)) & W90_SensorLightMinMax_Mask))
+// Senden bei Änderung
+#define ParamW90_SensorUVISendChange_                ((bool)(knx.paramByte(W90_ParamCalcIndex(W90_SensorUVISendChange_)) & W90_SensorUVISendChange_Mask))
+//      von mehr als
+#define ParamW90_SensorUVISendChangeAmount_          (knx.paramByte(W90_ParamCalcIndex(W90_SensorUVISendChangeAmount_)))
+// Zyklisch senden alle
+#define ParamW90_SensorUVISendCycle_                 (knx.paramByte(W90_ParamCalcIndex(W90_SensorUVISendCycle_)))
+// Messwert kalibrieren
+#define ParamW90_SensorUVIAlign_                     (knx.paramByte(W90_ParamCalcIndex(W90_SensorUVIAlign_)))
+// Alarme senden
+#define ParamW90_SensorUVIWarn_                      ((bool)(knx.paramByte(W90_ParamCalcIndex(W90_SensorUVIWarn_)) & W90_SensorUVIWarn_Mask))
+//    bei Unterschreiten von
+#define ParamW90_SensorUVIWarnL_                     (knx.paramByte(W90_ParamCalcIndex(W90_SensorUVIWarnL_)))
+//    bei Überschreiten von
+#define ParamW90_SensorUVIWarnH_                     (knx.paramByte(W90_ParamCalcIndex(W90_SensorUVIWarnH_)))
+// Min/Max Werte erfassen
+#define ParamW90_SensorUVIMinMax_                    ((bool)(knx.paramByte(W90_ParamCalcIndex(W90_SensorUVIMinMax_)) & W90_SensorUVIMinMax_Mask))
+// Senden bei Änderung
+#define ParamW90_SensorWindSendChange_               ((bool)(knx.paramByte(W90_ParamCalcIndex(W90_SensorWindSendChange_)) & W90_SensorWindSendChange_Mask))
+//      von mehr als
+#define ParamW90_SensorWindSendChangeAmount_         (knx.paramFloat(W90_ParamCalcIndex(W90_SensorWindSendChangeAmount_), Float_Enc_IEEE754Single))
+// Zyklisch senden alle
+#define ParamW90_SensorWindSendCycle_                (knx.paramByte(W90_ParamCalcIndex(W90_SensorWindSendCycle_)))
+// Messwert kalibrieren
+#define ParamW90_SensorWindAlign_                    (knx.paramFloat(W90_ParamCalcIndex(W90_SensorWindAlign_), Float_Enc_IEEE754Single))
+// Alarme senden
+#define ParamW90_SensorWindWarn_                     ((bool)(knx.paramByte(W90_ParamCalcIndex(W90_SensorWindWarn_)) & W90_SensorWindWarn_Mask))
+//    bei Unterschreiten von
+#define ParamW90_SensorWindWarnL_                    (knx.paramFloat(W90_ParamCalcIndex(W90_SensorWindWarnL_), Float_Enc_IEEE754Single))
+//    bei Überschreiten von
+#define ParamW90_SensorWindWarnH_                    (knx.paramFloat(W90_ParamCalcIndex(W90_SensorWindWarnH_), Float_Enc_IEEE754Single))
+// Min/Max Werte erfassen
+#define ParamW90_SensorWindMinMax_                   ((bool)(knx.paramByte(W90_ParamCalcIndex(W90_SensorWindMinMax_)) & W90_SensorWindMinMax_Mask))
+// Senden bei Änderung
+#define ParamW90_SensorGustSendChange_               ((bool)(knx.paramByte(W90_ParamCalcIndex(W90_SensorGustSendChange_)) & W90_SensorGustSendChange_Mask))
+//      von mehr als
+#define ParamW90_SensorGustSendChangeAmount_         (knx.paramFloat(W90_ParamCalcIndex(W90_SensorGustSendChangeAmount_), Float_Enc_IEEE754Single))
+// Zyklisch senden alle
+#define ParamW90_SensorGustSendCycle_                (knx.paramByte(W90_ParamCalcIndex(W90_SensorGustSendCycle_)))
+// Messwert kalibrieren
+#define ParamW90_SensorGustAlign_                    (knx.paramFloat(W90_ParamCalcIndex(W90_SensorGustAlign_), Float_Enc_IEEE754Single))
+// Alarme senden
+#define ParamW90_SensorGustWarn_                     ((bool)(knx.paramByte(W90_ParamCalcIndex(W90_SensorGustWarn_)) & W90_SensorGustWarn_Mask))
+//    bei Unterschreiten von
+#define ParamW90_SensorGustWarnL_                    (knx.paramFloat(W90_ParamCalcIndex(W90_SensorGustWarnL_), Float_Enc_IEEE754Single))
+//    bei Überschreiten von
+#define ParamW90_SensorGustWarnH_                    (knx.paramFloat(W90_ParamCalcIndex(W90_SensorGustWarnH_), Float_Enc_IEEE754Single))
+// Min/Max Werte erfassen
+#define ParamW90_SensorGustMinMax_                   ((bool)(knx.paramByte(W90_ParamCalcIndex(W90_SensorGustMinMax_)) & W90_SensorGustMinMax_Mask))
+// Senden bei Änderung
+#define ParamW90_SensorWindDirSendChange_            ((bool)(knx.paramByte(W90_ParamCalcIndex(W90_SensorWindDirSendChange_)) & W90_SensorWindDirSendChange_Mask))
+//      von mehr als
+#define ParamW90_SensorWindDirSendChangeAmount_      (knx.paramByte(W90_ParamCalcIndex(W90_SensorWindDirSendChangeAmount_)))
+// Zyklisch senden alle
+#define ParamW90_SensorWindDirSendCycle_             (knx.paramByte(W90_ParamCalcIndex(W90_SensorWindDirSendCycle_)))
+// Messwert kalibrieren
+#define ParamW90_SensorWindDirAlign_                 (knx.paramByte(W90_ParamCalcIndex(W90_SensorWindDirAlign_)))
+// Senden bei Änderung
+#define ParamW90_SensorRainSendChange_               ((bool)(knx.paramByte(W90_ParamCalcIndex(W90_SensorRainSendChange_)) & W90_SensorRainSendChange_Mask))
+//      von mehr als
+#define ParamW90_SensorRainSendChangeAmount_         (knx.paramFloat(W90_ParamCalcIndex(W90_SensorRainSendChangeAmount_), Float_Enc_IEEE754Single))
+// Zyklisch senden alle
+#define ParamW90_SensorRainSendCycle_                (knx.paramByte(W90_ParamCalcIndex(W90_SensorRainSendCycle_)))
 
 // deprecated
 #define W90_KoOffset 20
 
 // Communication objects per channel (multiple occurrence)
 #define W90_KoBlockOffset 20
-#define W90_KoBlockSize 30
+#define W90_KoBlockSize 57
 
 #define W90_KoCalcNumber(index) (index + W90_KoBlockOffset + _channelIndex * W90_KoBlockSize)
 #define W90_KoCalcIndex(number) ((number >= W90_KoCalcNumber(0) && number < W90_KoCalcNumber(W90_KoBlockSize)) ? (number - W90_KoBlockOffset) % W90_KoBlockSize : -1)
@@ -356,6 +501,33 @@
 #define W90_KoSensorPressMinValue_ 27
 #define W90_KoSensorPressMaxValue_ 28
 #define W90_KoSensorPressMinMaxReset_ 29
+#define W90_KoSensorLight_ 30
+#define W90_KoSensorLightAlarmL_ 31
+#define W90_KoSensorLightAlarmH_ 32
+#define W90_KoSensorLightMinValue_ 33
+#define W90_KoSensorLightMaxValue_ 34
+#define W90_KoSensorLightMinMaxReset_ 35
+#define W90_KoSensorUVI_ 36
+#define W90_KoSensorUVIAlarmL_ 37
+#define W90_KoSensorUVIAlarmH_ 38
+#define W90_KoSensorUVIMinValue_ 39
+#define W90_KoSensorUVIMaxValue_ 40
+#define W90_KoSensorUVIMinMaxReset_ 41
+#define W90_KoSensorWind_ 42
+#define W90_KoSensorWindAlarmL_ 43
+#define W90_KoSensorWindAlarmH_ 44
+#define W90_KoSensorWindMinValue_ 45
+#define W90_KoSensorWindMaxValue_ 46
+#define W90_KoSensorWindMinMaxReset_ 47
+#define W90_KoSensorGust_ 48
+#define W90_KoSensorGustAlarmL_ 49
+#define W90_KoSensorGustAlarmH_ 50
+#define W90_KoSensorGustMinValue_ 51
+#define W90_KoSensorGustMaxValue_ 52
+#define W90_KoSensorGustMinMaxReset_ 53
+#define W90_KoSensorWindDir_ 54
+#define W90_KoSensorRain_ 55
+#define W90_KoSensorRainFlow_ 56
 
 // Temperatur
 #define KoW90_SensorTemp_                         (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorTemp_)))
@@ -417,252 +589,306 @@
 #define KoW90_SensorPressMaxValue_                (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorPressMaxValue_)))
 // Min/Max Luftdruck Reset
 #define KoW90_SensorPressMinMaxReset_             (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorPressMinMaxReset_)))
+// Helligkeit
+#define KoW90_SensorLight_                        (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorLight_)))
+// Alarm Helligkeitunterschreitung
+#define KoW90_SensorLightAlarmL_                  (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorLightAlarmL_)))
+// Alarm Helligkeitüberschreitung
+#define KoW90_SensorLightAlarmH_                  (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorLightAlarmH_)))
+// Min. Helligkeit lesen
+#define KoW90_SensorLightMinValue_                (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorLightMinValue_)))
+// Max. Helligkeit lesen
+#define KoW90_SensorLightMaxValue_                (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorLightMaxValue_)))
+// Min/Max Helligkeit Reset
+#define KoW90_SensorLightMinMaxReset_             (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorLightMinMaxReset_)))
+// UV-Index
+#define KoW90_SensorUVI_                          (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorUVI_)))
+// Alarm UV-Indexunterschreitung
+#define KoW90_SensorUVIAlarmL_                    (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorUVIAlarmL_)))
+// Alarm UV-Indexüberschreitung
+#define KoW90_SensorUVIAlarmH_                    (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorUVIAlarmH_)))
+// Min. UV-Index lesen
+#define KoW90_SensorUVIMinValue_                  (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorUVIMinValue_)))
+// Max. UV-Index lesen
+#define KoW90_SensorUVIMaxValue_                  (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorUVIMaxValue_)))
+// Min/Max UV-Index Reset
+#define KoW90_SensorUVIMinMaxReset_               (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorUVIMinMaxReset_)))
+// Windgeschwindigkeit
+#define KoW90_SensorWind_                         (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorWind_)))
+// Alarm Windgeschwindigkeitunterschreitung
+#define KoW90_SensorWindAlarmL_                   (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorWindAlarmL_)))
+// Alarm Windgeschwindigkeitüberschreitung
+#define KoW90_SensorWindAlarmH_                   (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorWindAlarmH_)))
+// Min. Windgeschwindigkeit lesen
+#define KoW90_SensorWindMinValue_                 (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorWindMinValue_)))
+// Max. Windgeschwindigkeit lesen
+#define KoW90_SensorWindMaxValue_                 (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorWindMaxValue_)))
+// Min/Max Windgeschwindigkeit Reset
+#define KoW90_SensorWindMinMaxReset_              (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorWindMinMaxReset_)))
+// Windböe
+#define KoW90_SensorGust_                         (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorGust_)))
+// Alarm Windböeunterschreitung
+#define KoW90_SensorGustAlarmL_                   (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorGustAlarmL_)))
+// Alarm Windböeüberschreitung
+#define KoW90_SensorGustAlarmH_                   (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorGustAlarmH_)))
+// Min. Windböe lesen
+#define KoW90_SensorGustMinValue_                 (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorGustMinValue_)))
+// Max. Windböe lesen
+#define KoW90_SensorGustMaxValue_                 (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorGustMaxValue_)))
+// Min/Max Windböe Reset
+#define KoW90_SensorGustMinMaxReset_              (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorGustMinMaxReset_)))
+// Windrichtung
+#define KoW90_SensorWindDir_                      (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorWindDir_)))
+// Niederschlag
+#define KoW90_SensorRain_                         (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorRain_)))
+// Niederschlag (pro h)
+#define KoW90_SensorRainFlow_                     (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorRainFlow_)))
 
-#define LOG_BuzzerInstalled                     138      // 1 Bit, Bit 7
+#define LOG_BuzzerInstalled                     250      // 1 Bit, Bit 7
 #define     LOG_BuzzerInstalledMask 0x80
 #define     LOG_BuzzerInstalledShift 7
-#define LOG_LedInstalled                        138      // 1 Bit, Bit 6
+#define LOG_LedInstalled                        250      // 1 Bit, Bit 6
 #define     LOG_LedInstalledMask 0x40
 #define     LOG_LedInstalledShift 6
-#define LOG_VacationKo                          138      // 1 Bit, Bit 5
+#define LOG_VacationKo                          250      // 1 Bit, Bit 5
 #define     LOG_VacationKoMask 0x20
 #define     LOG_VacationKoShift 5
-#define LOG_HolidayKo                           138      // 1 Bit, Bit 4
+#define LOG_HolidayKo                           250      // 1 Bit, Bit 4
 #define     LOG_HolidayKoMask 0x10
 #define     LOG_HolidayKoShift 4
-#define LOG_VacationRead                        138      // 1 Bit, Bit 3
+#define LOG_VacationRead                        250      // 1 Bit, Bit 3
 #define     LOG_VacationReadMask 0x08
 #define     LOG_VacationReadShift 3
-#define LOG_HolidaySend                         138      // 1 Bit, Bit 2
+#define LOG_HolidaySend                         250      // 1 Bit, Bit 2
 #define     LOG_HolidaySendMask 0x04
 #define     LOG_HolidaySendShift 2
-#define LOG_Neujahr                             139      // 1 Bit, Bit 7
+#define LOG_Neujahr                             251      // 1 Bit, Bit 7
 #define     LOG_NeujahrMask 0x80
 #define     LOG_NeujahrShift 7
-#define LOG_DreiKoenige                         139      // 1 Bit, Bit 6
+#define LOG_DreiKoenige                         251      // 1 Bit, Bit 6
 #define     LOG_DreiKoenigeMask 0x40
 #define     LOG_DreiKoenigeShift 6
-#define LOG_Weiberfastnacht                     139      // 1 Bit, Bit 5
+#define LOG_Weiberfastnacht                     251      // 1 Bit, Bit 5
 #define     LOG_WeiberfastnachtMask 0x20
 #define     LOG_WeiberfastnachtShift 5
-#define LOG_Rosenmontag                         139      // 1 Bit, Bit 4
+#define LOG_Rosenmontag                         251      // 1 Bit, Bit 4
 #define     LOG_RosenmontagMask 0x10
 #define     LOG_RosenmontagShift 4
-#define LOG_Fastnachtsdienstag                  139      // 1 Bit, Bit 3
+#define LOG_Fastnachtsdienstag                  251      // 1 Bit, Bit 3
 #define     LOG_FastnachtsdienstagMask 0x08
 #define     LOG_FastnachtsdienstagShift 3
-#define LOG_Aschermittwoch                      139      // 1 Bit, Bit 2
+#define LOG_Aschermittwoch                      251      // 1 Bit, Bit 2
 #define     LOG_AschermittwochMask 0x04
 #define     LOG_AschermittwochShift 2
-#define LOG_Frauentag                           139      // 1 Bit, Bit 1
+#define LOG_Frauentag                           251      // 1 Bit, Bit 1
 #define     LOG_FrauentagMask 0x02
 #define     LOG_FrauentagShift 1
-#define LOG_Gruendonnerstag                     139      // 1 Bit, Bit 0
+#define LOG_Gruendonnerstag                     251      // 1 Bit, Bit 0
 #define     LOG_GruendonnerstagMask 0x01
 #define     LOG_GruendonnerstagShift 0
-#define LOG_Karfreitag                          140      // 1 Bit, Bit 7
+#define LOG_Karfreitag                          252      // 1 Bit, Bit 7
 #define     LOG_KarfreitagMask 0x80
 #define     LOG_KarfreitagShift 7
-#define LOG_Ostersonntag                        140      // 1 Bit, Bit 6
+#define LOG_Ostersonntag                        252      // 1 Bit, Bit 6
 #define     LOG_OstersonntagMask 0x40
 #define     LOG_OstersonntagShift 6
-#define LOG_Ostermontag                         140      // 1 Bit, Bit 5
+#define LOG_Ostermontag                         252      // 1 Bit, Bit 5
 #define     LOG_OstermontagMask 0x20
 #define     LOG_OstermontagShift 5
-#define LOG_TagDerArbeit                        140      // 1 Bit, Bit 4
+#define LOG_TagDerArbeit                        252      // 1 Bit, Bit 4
 #define     LOG_TagDerArbeitMask 0x10
 #define     LOG_TagDerArbeitShift 4
-#define LOG_Himmelfahrt                         140      // 1 Bit, Bit 3
+#define LOG_Himmelfahrt                         252      // 1 Bit, Bit 3
 #define     LOG_HimmelfahrtMask 0x08
 #define     LOG_HimmelfahrtShift 3
-#define LOG_Pfingstsonntag                      140      // 1 Bit, Bit 2
+#define LOG_Pfingstsonntag                      252      // 1 Bit, Bit 2
 #define     LOG_PfingstsonntagMask 0x04
 #define     LOG_PfingstsonntagShift 2
-#define LOG_Pfingstmontag                       140      // 1 Bit, Bit 1
+#define LOG_Pfingstmontag                       252      // 1 Bit, Bit 1
 #define     LOG_PfingstmontagMask 0x02
 #define     LOG_PfingstmontagShift 1
-#define LOG_Fronleichnam                        140      // 1 Bit, Bit 0
+#define LOG_Fronleichnam                        252      // 1 Bit, Bit 0
 #define     LOG_FronleichnamMask 0x01
 #define     LOG_FronleichnamShift 0
-#define LOG_Friedensfest                        141      // 1 Bit, Bit 7
+#define LOG_Friedensfest                        253      // 1 Bit, Bit 7
 #define     LOG_FriedensfestMask 0x80
 #define     LOG_FriedensfestShift 7
-#define LOG_MariaHimmelfahrt                    141      // 1 Bit, Bit 6
+#define LOG_MariaHimmelfahrt                    253      // 1 Bit, Bit 6
 #define     LOG_MariaHimmelfahrtMask 0x40
 #define     LOG_MariaHimmelfahrtShift 6
-#define LOG_DeutscheEinheit                     141      // 1 Bit, Bit 5
+#define LOG_DeutscheEinheit                     253      // 1 Bit, Bit 5
 #define     LOG_DeutscheEinheitMask 0x20
 #define     LOG_DeutscheEinheitShift 5
-#define LOG_Reformationstag                     141      // 1 Bit, Bit 4
+#define LOG_Reformationstag                     253      // 1 Bit, Bit 4
 #define     LOG_ReformationstagMask 0x10
 #define     LOG_ReformationstagShift 4
-#define LOG_Allerheiligen                       141      // 1 Bit, Bit 3
+#define LOG_Allerheiligen                       253      // 1 Bit, Bit 3
 #define     LOG_AllerheiligenMask 0x08
 #define     LOG_AllerheiligenShift 3
-#define LOG_BussBettag                          141      // 1 Bit, Bit 2
+#define LOG_BussBettag                          253      // 1 Bit, Bit 2
 #define     LOG_BussBettagMask 0x04
 #define     LOG_BussBettagShift 2
-#define LOG_Advent1                             141      // 1 Bit, Bit 1
+#define LOG_Advent1                             253      // 1 Bit, Bit 1
 #define     LOG_Advent1Mask 0x02
 #define     LOG_Advent1Shift 1
-#define LOG_Advent2                             141      // 1 Bit, Bit 0
+#define LOG_Advent2                             253      // 1 Bit, Bit 0
 #define     LOG_Advent2Mask 0x01
 #define     LOG_Advent2Shift 0
-#define LOG_Advent3                             142      // 1 Bit, Bit 7
+#define LOG_Advent3                             254      // 1 Bit, Bit 7
 #define     LOG_Advent3Mask 0x80
 #define     LOG_Advent3Shift 7
-#define LOG_Advent4                             142      // 1 Bit, Bit 6
+#define LOG_Advent4                             254      // 1 Bit, Bit 6
 #define     LOG_Advent4Mask 0x40
 #define     LOG_Advent4Shift 6
-#define LOG_Heiligabend                         142      // 1 Bit, Bit 5
+#define LOG_Heiligabend                         254      // 1 Bit, Bit 5
 #define     LOG_HeiligabendMask 0x20
 #define     LOG_HeiligabendShift 5
-#define LOG_Weihnachtstag1                      142      // 1 Bit, Bit 4
+#define LOG_Weihnachtstag1                      254      // 1 Bit, Bit 4
 #define     LOG_Weihnachtstag1Mask 0x10
 #define     LOG_Weihnachtstag1Shift 4
-#define LOG_Weihnachtstag2                      142      // 1 Bit, Bit 3
+#define LOG_Weihnachtstag2                      254      // 1 Bit, Bit 3
 #define     LOG_Weihnachtstag2Mask 0x08
 #define     LOG_Weihnachtstag2Shift 3
-#define LOG_Silvester                           142      // 1 Bit, Bit 2
+#define LOG_Silvester                           254      // 1 Bit, Bit 2
 #define     LOG_SilvesterMask 0x04
 #define     LOG_SilvesterShift 2
-#define LOG_Nationalfeiertag                    142      // 1 Bit, Bit 1
+#define LOG_Nationalfeiertag                    254      // 1 Bit, Bit 1
 #define     LOG_NationalfeiertagMask 0x02
 #define     LOG_NationalfeiertagShift 1
-#define LOG_MariaEmpfaengnis                    142      // 1 Bit, Bit 0
+#define LOG_MariaEmpfaengnis                    254      // 1 Bit, Bit 0
 #define     LOG_MariaEmpfaengnisMask 0x01
 #define     LOG_MariaEmpfaengnisShift 0
-#define LOG_NationalfeiertagSchweiz             143      // 1 Bit, Bit 7
+#define LOG_NationalfeiertagSchweiz             255      // 1 Bit, Bit 7
 #define     LOG_NationalfeiertagSchweizMask 0x80
 #define     LOG_NationalfeiertagSchweizShift 7
-#define LOG_Totensonntag                        143      // 1 Bit, Bit 6
+#define LOG_Totensonntag                        255      // 1 Bit, Bit 6
 #define     LOG_TotensonntagMask 0x40
 #define     LOG_TotensonntagShift 6
-#define LOG_BuzzerSilent                        144      // uint16_t
-#define LOG_BuzzerNormal                        146      // uint16_t
-#define LOG_BuzzerLoud                          148      // uint16_t
-#define LOG_VisibleChannels                     150      // uint8_t
-#define LOG_LedMapping                          151      // 3 Bits, Bit 7-5
+#define LOG_BuzzerSilent                        256      // uint16_t
+#define LOG_BuzzerNormal                        258      // uint16_t
+#define LOG_BuzzerLoud                          260      // uint16_t
+#define LOG_VisibleChannels                     262      // uint8_t
+#define LOG_LedMapping                          263      // 3 Bits, Bit 7-5
 #define     LOG_LedMappingMask 0xE0
 #define     LOG_LedMappingShift 5
-#define LOG_UserFormula1                        152      // char*, 99 Byte
-#define LOG_UserFormula1Active                  251      // 1 Bit, Bit 7
+#define LOG_UserFormula1                        264      // char*, 99 Byte
+#define LOG_UserFormula1Active                  363      // 1 Bit, Bit 7
 #define     LOG_UserFormula1ActiveMask 0x80
 #define     LOG_UserFormula1ActiveShift 7
-#define LOG_UserFormula2                        252      // char*, 99 Byte
-#define LOG_UserFormula2Active                  351      // 1 Bit, Bit 7
+#define LOG_UserFormula2                        364      // char*, 99 Byte
+#define LOG_UserFormula2Active                  463      // 1 Bit, Bit 7
 #define     LOG_UserFormula2ActiveMask 0x80
 #define     LOG_UserFormula2ActiveShift 7
-#define LOG_UserFormula3                        352      // char*, 99 Byte
-#define LOG_UserFormula3Active                  451      // 1 Bit, Bit 7
+#define LOG_UserFormula3                        464      // char*, 99 Byte
+#define LOG_UserFormula3Active                  563      // 1 Bit, Bit 7
 #define     LOG_UserFormula3ActiveMask 0x80
 #define     LOG_UserFormula3ActiveShift 7
-#define LOG_UserFormula4                        452      // char*, 99 Byte
-#define LOG_UserFormula4Active                  551      // 1 Bit, Bit 7
+#define LOG_UserFormula4                        564      // char*, 99 Byte
+#define LOG_UserFormula4Active                  663      // 1 Bit, Bit 7
 #define     LOG_UserFormula4ActiveMask 0x80
 #define     LOG_UserFormula4ActiveShift 7
-#define LOG_UserFormula5                        552      // char*, 99 Byte
-#define LOG_UserFormula5Active                  651      // 1 Bit, Bit 7
+#define LOG_UserFormula5                        664      // char*, 99 Byte
+#define LOG_UserFormula5Active                  763      // 1 Bit, Bit 7
 #define     LOG_UserFormula5ActiveMask 0x80
 #define     LOG_UserFormula5ActiveShift 7
-#define LOG_UserFormula6                        652      // char*, 99 Byte
-#define LOG_UserFormula6Active                  751      // 1 Bit, Bit 7
+#define LOG_UserFormula6                        764      // char*, 99 Byte
+#define LOG_UserFormula6Active                  863      // 1 Bit, Bit 7
 #define     LOG_UserFormula6ActiveMask 0x80
 #define     LOG_UserFormula6ActiveShift 7
-#define LOG_UserFormula7                        752      // char*, 99 Byte
-#define LOG_UserFormula7Active                  851      // 1 Bit, Bit 7
+#define LOG_UserFormula7                        864      // char*, 99 Byte
+#define LOG_UserFormula7Active                  963      // 1 Bit, Bit 7
 #define     LOG_UserFormula7ActiveMask 0x80
 #define     LOG_UserFormula7ActiveShift 7
-#define LOG_UserFormula8                        852      // char*, 99 Byte
-#define LOG_UserFormula8Active                  951      // 1 Bit, Bit 7
+#define LOG_UserFormula8                        964      // char*, 99 Byte
+#define LOG_UserFormula8Active                  1063      // 1 Bit, Bit 7
 #define     LOG_UserFormula8ActiveMask 0x80
 #define     LOG_UserFormula8ActiveShift 7
-#define LOG_UserFormula9                        952      // char*, 99 Byte
-#define LOG_UserFormula9Active                  1051      // 1 Bit, Bit 7
+#define LOG_UserFormula9                        1064      // char*, 99 Byte
+#define LOG_UserFormula9Active                  1163      // 1 Bit, Bit 7
 #define     LOG_UserFormula9ActiveMask 0x80
 #define     LOG_UserFormula9ActiveShift 7
-#define LOG_UserFormula10                       1052      // char*, 99 Byte
-#define LOG_UserFormula10Active                 1151      // 1 Bit, Bit 7
+#define LOG_UserFormula10                       1164      // char*, 99 Byte
+#define LOG_UserFormula10Active                 1263      // 1 Bit, Bit 7
 #define     LOG_UserFormula10ActiveMask 0x80
 #define     LOG_UserFormula10ActiveShift 7
-#define LOG_UserFormula11                       1152      // char*, 99 Byte
-#define LOG_UserFormula11Active                 1251      // 1 Bit, Bit 7
+#define LOG_UserFormula11                       1264      // char*, 99 Byte
+#define LOG_UserFormula11Active                 1363      // 1 Bit, Bit 7
 #define     LOG_UserFormula11ActiveMask 0x80
 #define     LOG_UserFormula11ActiveShift 7
-#define LOG_UserFormula12                       1252      // char*, 99 Byte
-#define LOG_UserFormula12Active                 1351      // 1 Bit, Bit 7
+#define LOG_UserFormula12                       1364      // char*, 99 Byte
+#define LOG_UserFormula12Active                 1463      // 1 Bit, Bit 7
 #define     LOG_UserFormula12ActiveMask 0x80
 #define     LOG_UserFormula12ActiveShift 7
-#define LOG_UserFormula13                       1352      // char*, 99 Byte
-#define LOG_UserFormula13Active                 1451      // 1 Bit, Bit 7
+#define LOG_UserFormula13                       1464      // char*, 99 Byte
+#define LOG_UserFormula13Active                 1563      // 1 Bit, Bit 7
 #define     LOG_UserFormula13ActiveMask 0x80
 #define     LOG_UserFormula13ActiveShift 7
-#define LOG_UserFormula14                       1452      // char*, 99 Byte
-#define LOG_UserFormula14Active                 1551      // 1 Bit, Bit 7
+#define LOG_UserFormula14                       1564      // char*, 99 Byte
+#define LOG_UserFormula14Active                 1663      // 1 Bit, Bit 7
 #define     LOG_UserFormula14ActiveMask 0x80
 #define     LOG_UserFormula14ActiveShift 7
-#define LOG_UserFormula15                       1552      // char*, 99 Byte
-#define LOG_UserFormula15Active                 1651      // 1 Bit, Bit 7
+#define LOG_UserFormula15                       1664      // char*, 99 Byte
+#define LOG_UserFormula15Active                 1763      // 1 Bit, Bit 7
 #define     LOG_UserFormula15ActiveMask 0x80
 #define     LOG_UserFormula15ActiveShift 7
-#define LOG_UserFormula16                       1652      // char*, 99 Byte
-#define LOG_UserFormula16Active                 1751      // 1 Bit, Bit 7
+#define LOG_UserFormula16                       1764      // char*, 99 Byte
+#define LOG_UserFormula16Active                 1863      // 1 Bit, Bit 7
 #define     LOG_UserFormula16ActiveMask 0x80
 #define     LOG_UserFormula16ActiveShift 7
-#define LOG_UserFormula17                       1752      // char*, 99 Byte
-#define LOG_UserFormula17Active                 1851      // 1 Bit, Bit 7
+#define LOG_UserFormula17                       1864      // char*, 99 Byte
+#define LOG_UserFormula17Active                 1963      // 1 Bit, Bit 7
 #define     LOG_UserFormula17ActiveMask 0x80
 #define     LOG_UserFormula17ActiveShift 7
-#define LOG_UserFormula18                       1852      // char*, 99 Byte
-#define LOG_UserFormula18Active                 1951      // 1 Bit, Bit 7
+#define LOG_UserFormula18                       1964      // char*, 99 Byte
+#define LOG_UserFormula18Active                 2063      // 1 Bit, Bit 7
 #define     LOG_UserFormula18ActiveMask 0x80
 #define     LOG_UserFormula18ActiveShift 7
-#define LOG_UserFormula19                       1952      // char*, 99 Byte
-#define LOG_UserFormula19Active                 2051      // 1 Bit, Bit 7
+#define LOG_UserFormula19                       2064      // char*, 99 Byte
+#define LOG_UserFormula19Active                 2163      // 1 Bit, Bit 7
 #define     LOG_UserFormula19ActiveMask 0x80
 #define     LOG_UserFormula19ActiveShift 7
-#define LOG_UserFormula20                       2052      // char*, 99 Byte
-#define LOG_UserFormula20Active                 2151      // 1 Bit, Bit 7
+#define LOG_UserFormula20                       2164      // char*, 99 Byte
+#define LOG_UserFormula20Active                 2263      // 1 Bit, Bit 7
 #define     LOG_UserFormula20ActiveMask 0x80
 #define     LOG_UserFormula20ActiveShift 7
-#define LOG_UserFormula21                       2152      // char*, 99 Byte
-#define LOG_UserFormula21Active                 2251      // 1 Bit, Bit 7
+#define LOG_UserFormula21                       2264      // char*, 99 Byte
+#define LOG_UserFormula21Active                 2363      // 1 Bit, Bit 7
 #define     LOG_UserFormula21ActiveMask 0x80
 #define     LOG_UserFormula21ActiveShift 7
-#define LOG_UserFormula22                       2252      // char*, 99 Byte
-#define LOG_UserFormula22Active                 2351      // 1 Bit, Bit 7
+#define LOG_UserFormula22                       2364      // char*, 99 Byte
+#define LOG_UserFormula22Active                 2463      // 1 Bit, Bit 7
 #define     LOG_UserFormula22ActiveMask 0x80
 #define     LOG_UserFormula22ActiveShift 7
-#define LOG_UserFormula23                       2352      // char*, 99 Byte
-#define LOG_UserFormula23Active                 2451      // 1 Bit, Bit 7
+#define LOG_UserFormula23                       2464      // char*, 99 Byte
+#define LOG_UserFormula23Active                 2563      // 1 Bit, Bit 7
 #define     LOG_UserFormula23ActiveMask 0x80
 #define     LOG_UserFormula23ActiveShift 7
-#define LOG_UserFormula24                       2452      // char*, 99 Byte
-#define LOG_UserFormula24Active                 2551      // 1 Bit, Bit 7
+#define LOG_UserFormula24                       2564      // char*, 99 Byte
+#define LOG_UserFormula24Active                 2663      // 1 Bit, Bit 7
 #define     LOG_UserFormula24ActiveMask 0x80
 #define     LOG_UserFormula24ActiveShift 7
-#define LOG_UserFormula25                       2552      // char*, 99 Byte
-#define LOG_UserFormula25Active                 2651      // 1 Bit, Bit 7
+#define LOG_UserFormula25                       2664      // char*, 99 Byte
+#define LOG_UserFormula25Active                 2763      // 1 Bit, Bit 7
 #define     LOG_UserFormula25ActiveMask 0x80
 #define     LOG_UserFormula25ActiveShift 7
-#define LOG_UserFormula26                       2652      // char*, 99 Byte
-#define LOG_UserFormula26Active                 2751      // 1 Bit, Bit 7
+#define LOG_UserFormula26                       2764      // char*, 99 Byte
+#define LOG_UserFormula26Active                 2863      // 1 Bit, Bit 7
 #define     LOG_UserFormula26ActiveMask 0x80
 #define     LOG_UserFormula26ActiveShift 7
-#define LOG_UserFormula27                       2752      // char*, 99 Byte
-#define LOG_UserFormula27Active                 2851      // 1 Bit, Bit 7
+#define LOG_UserFormula27                       2864      // char*, 99 Byte
+#define LOG_UserFormula27Active                 2963      // 1 Bit, Bit 7
 #define     LOG_UserFormula27ActiveMask 0x80
 #define     LOG_UserFormula27ActiveShift 7
-#define LOG_UserFormula28                       2852      // char*, 99 Byte
-#define LOG_UserFormula28Active                 2951      // 1 Bit, Bit 7
+#define LOG_UserFormula28                       2964      // char*, 99 Byte
+#define LOG_UserFormula28Active                 3063      // 1 Bit, Bit 7
 #define     LOG_UserFormula28ActiveMask 0x80
 #define     LOG_UserFormula28ActiveShift 7
-#define LOG_UserFormula29                       2952      // char*, 99 Byte
-#define LOG_UserFormula29Active                 3051      // 1 Bit, Bit 7
+#define LOG_UserFormula29                       3064      // char*, 99 Byte
+#define LOG_UserFormula29Active                 3163      // 1 Bit, Bit 7
 #define     LOG_UserFormula29ActiveMask 0x80
 #define     LOG_UserFormula29ActiveShift 7
-#define LOG_UserFormula30                       3052      // char*, 99 Byte
-#define LOG_UserFormula30Active                 3151      // 1 Bit, Bit 7
+#define LOG_UserFormula30                       3164      // char*, 99 Byte
+#define LOG_UserFormula30Active                 3263      // 1 Bit, Bit 7
 #define     LOG_UserFormula30ActiveMask 0x80
 #define     LOG_UserFormula30ActiveShift 7
 
@@ -897,7 +1123,7 @@
 #define LOG_ChannelCount 30
 
 // Parameter per channel
-#define LOG_ParamBlockOffset 3152
+#define LOG_ParamBlockOffset 3264
 #define LOG_ParamBlockSize 85
 #define LOG_ParamCalcIndex(index) (index + LOG_ParamBlockOffset + _channelIndex * LOG_ParamBlockSize)
 
@@ -2642,7 +2868,7 @@
 #define BASE_KommentarModuleModuleParamSize 0
 #define BASE_KommentarModuleSubmodulesParamSize 0
 #define BASE_KommentarModuleParamSize 0
-#define BASE_KommentarModuleParamOffset 5702
+#define BASE_KommentarModuleParamOffset 5814
 #define BASE_KommentarModuleCalcIndex(index, m1) (index + BASE_KommentarModuleParamOffset + _channelIndex * BASE_KommentarModuleCount * BASE_KommentarModuleParamSize + m1 * BASE_KommentarModuleParamSize)
 
 
