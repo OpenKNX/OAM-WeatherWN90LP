@@ -116,7 +116,6 @@ If invalid fill with
 
 float HWSensorchannel::ReadPressure()
 {
-
     /*
 Value in hex
 ABS = value*0.1hPa
@@ -143,7 +142,7 @@ If invalid fill with
     }
 }
 
-float ReadLight()
+float HWSensorchannel::ReadLight()
 {
 /* 165
 Value in hex
@@ -153,10 +152,24 @@ Light=value*10
 If invalid fill with
 0xFFFF
 */
-    return NAN;
+    int8_t result;
+    uint16_t data = 0xffff;
+    result = m_modbus.readHoldingRegisters(0x0165, 0x0001);
+    if (result != m_modbus.ku8MBSuccess)
+        return NAN;
+    
+
+    data = m_modbus.getResponseBuffer(0);
+
+    if(data == 0xFFFF)
+        return NAN;
+
+    float rawdata = data * 10.0;
+    logDebugP("Light: %f Lux", rawdata);
+    return rawdata;
 }
 
-uint8_t ReadUVI()
+uint8_t HWSensorchannel::ReadUVI()
 {
 /* 166
 Value in hex Uvi=UVI
@@ -165,10 +178,24 @@ value/10
 If invalid fill with
 0xFFFF
 */
-    return 0;
+    int8_t result;
+    uint16_t data = 0xffff;
+    result = m_modbus.readHoldingRegisters(0x0166, 0x0001);
+    if (result != m_modbus.ku8MBSuccess)
+        return NAN;
+    
+
+    data = m_modbus.getResponseBuffer(0);
+
+    if(data == 0xFFFF)
+        return NAN;
+
+    uint8_t rawdata = data;
+    logDebugP("UV-Index: %d", rawdata);
+    return rawdata;
 }
 
-float ReadWind()
+float HWSensorchannel::ReadWind()
 {
 /* 169
 Value in hex
@@ -177,10 +204,24 @@ If invalid fill with
 WIND
 value*0.1m/s(0~40m/s)
 */
-    return NAN;
+    int8_t result;
+    uint16_t data = 0xffff;
+    result = m_modbus.readHoldingRegisters(0x0169, 0x0001);
+    if (result != m_modbus.ku8MBSuccess)
+        return NAN;
+    
+
+    data = m_modbus.getResponseBuffer(0);
+
+    if(data == 0xFFFF)
+        return NAN;
+
+    float rawdata = data * 0.1;
+    logDebugP("Wind: %f m/s", rawdata);
+    return rawdata;
 }
 
-float ReadGust()
+float HWSensorchannel::ReadGust()
 {
 /* 16A
 Value in hex
@@ -189,10 +230,24 @@ If invalid fill with
 GUST
 value*0.1m/s(0~40m/s)
 */
-    return NAN;
+    int8_t result;
+    uint16_t data = 0xffff;
+    result = m_modbus.readHoldingRegisters(0x016A, 0x0001);
+    if (result != m_modbus.ku8MBSuccess)
+        return NAN;
+    
+
+    data = m_modbus.getResponseBuffer(0);
+
+    if(data == 0xFFFF)
+        return NAN;
+
+    float rawdata = data * 0.1;
+    logDebugP("Wind Gust: %f m/s", rawdata);
+    return rawdata;
 }
 
-uint8_t ReadWindDir()
+uint8_t HWSensorchannel::ReadWindDir()
 {
 /* 16B
 Value in hex
@@ -200,17 +255,45 @@ Value in hex
 If invalid fill with
 0xFFFF
 */
-    return 0;
+    int8_t result;
+    uint16_t data = 0xffff;
+    result = m_modbus.readHoldingRegisters(0x016B, 0x0001);
+    if (result != m_modbus.ku8MBSuccess)
+        return NAN;
+    
+
+    data = m_modbus.getResponseBuffer(0);
+
+    if(data > 359)
+        return NAN;
+
+    uint8_t rawdata = data;
+    logDebugP("Wind Dir: %d °", rawdata);
+    return rawdata;
 }
 
-float ReadRain()
+float HWSensorchannel::ReadRain()
 {
 /* 016E
 data in hex
 Rain = value*0.01mm
 0.18mm=12H
 */
-    return NAN;
+    int8_t result;
+    uint16_t data = 0xffff;
+    result = m_modbus.readHoldingRegisters(0x016E, 0x0001);
+    if (result != m_modbus.ku8MBSuccess)
+        return NAN;
+    
+
+    data = m_modbus.getResponseBuffer(0);
+
+    if(data == 0xFFFF)
+        return NAN;
+
+    float rawdata = data * 0.1;
+    logDebugP("Wind: %f m/s", rawdata);
+    return rawdata;
 }
 
 
