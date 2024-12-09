@@ -70,13 +70,13 @@ void WN90LPModule::loop1()
 void WN90LPModule::processInputKo(GroupObject &ko)
 {
     // there are no global KO, so all ko belong to a channel
-/*
+
     uint16_t asap = ko.asap();
-    int16_t channelnumber = (asap - THP_KoOffset ) / THP_KoBlockSize;
-    if(channelnumber < THP_ChannelCount)
+    int16_t channelnumber = (asap - W90_KoOffset ) / W90_KoBlockSize;
+    if(channelnumber < W90_ChannelCount)
         if(_Sensorchannels[channelnumber] != nullptr)
             _Sensorchannels[channelnumber]->processInputKo(ko);
-*/
+
 }
 
 void WN90LPModule::processBeforeRestart()
@@ -102,37 +102,35 @@ bool WN90LPModule::restorePower()
 uint16_t WN90LPModule::flashSize()
 {
     // Version + Data (Channel * Inputs * (Dpt + Value))
-    return 0; //1 + (THP_ChannelCount * 2 * 5 * 4);
+    return 1 + (W90_ChannelCount * 2 * (8 * 4 + 1));
 }
 
 void WN90LPModule::readFlash(const uint8_t *iBuffer, const uint16_t iSize)
-{/*
+{
     if (iSize == 0) // first call - without data
         return;
 
     uint8_t lVersion = openknx.flash.readByte();
-    if (lVersion != 1) // version unknown
+    if (lVersion != W90_FLASH_VERSION) // version unknown
     {
         logDebugP("Wrong version of flash data (%i)", lVersion);
         return;
     }
 
-    logDebugP("Reading channel data from flash (%i)", THP_ChannelCount);
-    for (uint8_t lIndex = 0; lIndex < THP_ChannelCount; lIndex++)
+    logDebugP("Reading channel data from flash (%i)", W90_ChannelCount);
+    for (uint8_t lIndex = 0; lIndex < W90_ChannelCount; lIndex++)
     {
         _Sensorchannels[lIndex]->restore();
-    }*/
+    }
 }
 
 void WN90LPModule::writeFlash()
 {
-    /*
-    openknx.flash.writeByte(1); // Version
+    openknx.flash.writeByte(W90_FLASH_VERSION); // Version
     for (uint8_t lIndex = 0; lIndex < W90_ChannelCount; lIndex++)
     {
         _Sensorchannels[lIndex]->save();
     }
-    */
 }
 
 bool WN90LPModule::processCommand(const std::string cmd, bool diagnoseKo)
@@ -152,65 +150,3 @@ bool WN90LPModule::processCommand(const std::string cmd, bool diagnoseKo)
 }
 
 WN90LPModule openknxWN90LPModule;
-
-
-/*
-
-#include <ModbusMaster.h>
-
-
-// instantiate ModbusMaster object
-ModbusMaster node;
-
-
-void preTransmission()
-{
-    digitalWrite(DIR_PIN, 1);
-}
-
-void postTransmission()
-{
-    digitalWrite(DIR_PIN, 0);
-}
-
-
-void setup()
-{
-  while(!Serial); // ait for USB serial
-
-  pinMode(DIR_PIN, OUTPUT);
-  digitalWrite(DIR_PIN, 0);
-  Serial.println("Set Pin 3 to Output and LOW");
-
-  Serial1.begin(9600, SERIAL_8N1);
-  Serial.println("Set Serial1 9600 8N1");
-
-  node.preTransmission(preTransmission);
-  node.postTransmission(postTransmission);
-  node.begin(0x90, Serial1);
-  Serial.println("Modbus Slave ID 0x90");
-
-  Serial.println("Setup end");
-}
-
-
-void loop()
-{
-  uint8_t result;
-  uint16_t data[6];  
-
-  Serial.println("readHoldingRegisters(cmd 0x03) 0x0160, Length 0x0001");
-  result = node.readHoldingRegisters(0x0160, 0x0001);
-
-  Serial.print("Result: 0x");
-  Serial.println(result, HEX);
-
-  data[0] = node.getResponseBuffer(0);
-  Serial.print("ResponseBuffer: ");
-  Serial.println(data[0], HEX);
-
-  Serial.println("Pause 2s");
-  delay(2000);
-}
-
-*/

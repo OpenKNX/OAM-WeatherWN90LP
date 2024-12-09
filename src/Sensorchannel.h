@@ -17,6 +17,12 @@
 #define AbsHumKODPT     Dpt(9,29)
 #define DewPointKODPT   Dpt(9,1)
 #define PressKODPT      Dpt(9,6)
+#define LightKODPT      Dpt(9,4)
+#define UviKODPT        Dpt(5,5)
+#define WindKODPT       Dpt(9,5)
+#define GustKODPT       Dpt(9,5)
+#define WindDirKODPT    Dpt(5,3)
+#define RainKODPT       Dpt(9,26)
 
 
 class Sensorchannel : public OpenKNX::Channel
@@ -50,6 +56,37 @@ class Sensorchannel : public OpenKNX::Channel
         uint32_t m_pressure_alarmH_last_send_millis = 0;
         uint32_t m_pressure_alarmL_last_send_millis = 0;
 
+        uint32_t m_light_last_send_millis = 0;
+        float m_light_last_send_value = -1000;
+        uint32_t m_light_alarmH_last_send_millis = 0;
+        uint32_t m_light_alarmL_last_send_millis = 0;
+
+        uint32_t m_uvi_last_send_millis = 0;
+        uint8_t m_uvi_last_send_value = 0;
+        uint32_t m_uvi_alarmH_last_send_millis = 0;
+        uint32_t m_uvi_alarmL_last_send_millis = 0;
+
+        uint32_t m_wind_last_send_millis = 0;
+        float m_wind_last_send_value = -1000;
+        uint32_t m_wind_alarmH_last_send_millis = 0;
+        uint32_t m_wind_alarmL_last_send_millis = 0;
+
+        uint32_t m_gust_last_send_millis = 0;
+        float m_gust_last_send_value = -1000;
+        uint32_t m_gust_alarmH_last_send_millis = 0;
+        uint32_t m_gust_alarmL_last_send_millis = 0;
+
+        uint32_t m_winddir_last_send_millis = 0;
+        uint8_t m_winddir_last_send_value = 0;
+        uint32_t m_winddir_alarmH_last_send_millis = 0;
+        uint32_t m_winddir_alarmL_last_send_millis = 0;
+
+        uint32_t m_rain_last_send_millis = 0;
+        float m_rain_last_send_value = -1000;
+        uint32_t m_rain_alarmH_last_send_millis = 0;
+        uint32_t m_rain_alarmL_last_send_millis = 0;
+
+
         float CalcDewPoint(float relative_humidity, float temperature);
         float CalcAbsHumidity(float relative_humidity, float temperature);
 
@@ -60,6 +97,12 @@ class Sensorchannel : public OpenKNX::Channel
         void loop_abshumidity(float abshumidity);
         void loop_dewpoint(float dewpoint);
         void loop_pressure(float pressure);
+        void loop_light(float light);
+        void loop_uvi(uint8_t uvi);
+        void loop_wind(float wind);
+        void loop_gust(float gust);
+        void loop_winddir(uint8_t winddir);
+        void loop_rain(float rain);
     
     public:
         Sensorchannel();

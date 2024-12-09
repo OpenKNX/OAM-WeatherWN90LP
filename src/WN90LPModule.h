@@ -8,6 +8,8 @@
 #pragma message "THPSensorModule needs OPENKNX_DUALCORE"
 #endif
 
+#define W90_FLASH_VERSION 1
+
 
 class WN90LPModule : public OpenKNX::Module
 {

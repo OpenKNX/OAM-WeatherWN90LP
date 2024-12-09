@@ -25,10 +25,18 @@ void Sensorchannel::Setup(uint8_t channel_number, HWSensors *HWSensors)
     KoW90_SensorAbsHumMaxValue_.valueNoSend((float)-1000, AbsHumKODPT);
     KoW90_SensorDewPointMinValue_.valueNoSend((float)1000, DewPointKODPT);
     KoW90_SensorDewPointMaxValue_.valueNoSend((float)-1000, DewPointKODPT);
-    KoW90_SensorPressMinValue_.valueNoSend((float)1000, PressKODPT);
-    KoW90_SensorPressMaxValue_.valueNoSend((float)-1000, PressKODPT);
+    KoW90_SensorPressMinValue_.valueNoSend((float)500000, PressKODPT);
+    KoW90_SensorPressMaxValue_.valueNoSend((float)-500000, PressKODPT);
+    KoW90_SensorLightMinValue_.valueNoSend((float)500000, LightKODPT);
+    KoW90_SensorLightMaxValue_.valueNoSend((float)-500000, LightKODPT);
+    KoW90_SensorUVIMinValue_.valueNoSend((uint8_t)255, UviKODPT);
+    KoW90_SensorUVIMaxValue_.valueNoSend((uint8_t)0, UviKODPT);
+    KoW90_SensorWindMinValue_.valueNoSend((float)500000, WindKODPT);
+    KoW90_SensorWindMaxValue_.valueNoSend((float)-500000, WindKODPT);
+    KoW90_SensorGustMinValue_.valueNoSend((float)500000, GustKODPT);
+    KoW90_SensorGustMaxValue_.valueNoSend((float)-500000, GustKODPT);
 
-    
+    /*
     // Debug
 
     logDebugP("Setup");
@@ -41,7 +49,7 @@ void Sensorchannel::Setup(uint8_t channel_number, HWSensors *HWSensors)
     logDebugP("ParamW90_SensorTemperatureWarnL_           : %f", ParamW90_SensorTemperatureWarnL_           );
     logDebugP("ParamW90_SensorTemperatureWarnH_           : %f", ParamW90_SensorTemperatureWarnH_           );
     logDebugP("ParamW90_SensorTemperatureMinMax_          : %i", ParamW90_SensorTemperatureMinMax_          );
-	/*logDebugP("Humidity Parameters:");
+	logDebugP("Humidity Parameters:");
     logDebugP("ParamW90_SensorHumiditySendChangeAmount_   : %f", ParamW90_SensorHumiditySendChangeAmount_   );
     logDebugP("ParamW90_SensorHumiditySendCycle_          : %i", ParamW90_SensorHumiditySendCycle_          );
     logDebugP("ParamW90_SensorHumidityAlign_              : %f", ParamW90_SensorHumidityAlign_              );
@@ -87,8 +95,9 @@ void Sensorchannel::Setup(uint8_t channel_number, HWSensors *HWSensors)
     logDebugP("ParamW90_SensorTemperature2WarnL_          : %f", ParamW90_SensorTemperature2WarnL_           );
     logDebugP("ParamW90_SensorTemperature2WarnH_          : %f", ParamW90_SensorTemperature2WarnH_           );
     logDebugP("ParamW90_SensorTemperature2MinMax_         : %i", ParamW90_SensorTemperature2MinMax_          );
-    */
+
     logDebugP("-------------------------------------------");
+    */
 }
 
 void Sensorchannel::loop()
@@ -98,12 +107,24 @@ void Sensorchannel::loop()
     float abshumidity = CalcAbsHumidity(humidity, temperature);
     float dewpoint = CalcDewPoint(humidity, temperature);
     float pressure = m_hwSensors->GetPressure(_channelIndex);
+    float light = m_hwSensors->GetLight(_channelIndex);
+    uint8_t uvi = m_hwSensors->GetUVI(_channelIndex);
+    float wind = m_hwSensors->GetWind(_channelIndex);
+    float gust = m_hwSensors->GetGust(_channelIndex);
+    uint8_t winddir = m_hwSensors->GetWindDir(_channelIndex);
+    float rain = m_hwSensors->GetRain(_channelIndex);
 
     loop_temperature(temperature);
     loop_humidity(humidity);
     loop_abshumidity(abshumidity);
     loop_dewpoint(dewpoint);
     loop_pressure(pressure);
+    loop_light(light);
+    loop_uvi(uvi);
+    loop_wind(wind);
+    loop_gust(gust);
+    loop_winddir(winddir);
+    loop_rain(rain);
 }
 
 
@@ -440,6 +461,368 @@ void Sensorchannel::loop_pressure(float pressure)
     }
 }
 
+void Sensorchannel::loop_light(float light)
+{
+    if(!isnan(light))
+    {
+        uint8_t send_cycle = ParamW90_SensorLightSendCycle_;
+        uint32_t send_millis = send_cycle * 60000;
+        bool sendnow = false;
+        if(send_cycle)
+        {
+            sendnow = millis() - m_light_last_send_millis > send_millis || m_light_last_send_millis == 0;
+        }
+        if(!sendnow)
+        {
+            float SendTresh = ParamW90_SensorLightSendChangeAmount_;
+            if(SendTresh != 0)
+            {
+                float current_light_diff = light - m_light_last_send_value;
+                sendnow = current_light_diff >= SendTresh || 0 - current_light_diff >= SendTresh;
+                if(sendnow)
+                {
+                    logDebugP("Send LightKO Diff: %f", current_light_diff);
+                }
+            }
+        }
+        
+        if(sendnow)
+        {
+            KoW90_SensorLight_.value(light + ParamW90_SensorLightAlign_, LightKODPT);
+            logDebugP("Send LightKO: %f", light + ParamW90_SensorLightAlign_);
+            m_light_last_send_millis = millis();
+            m_light_last_send_value = light;
+        }
+        else
+        {
+            KoW90_SensorLight_.valueNoSend(light + ParamW90_SensorLightAlign_, LightKODPT);
+        }
+
+        if(ParamW90_SensorLightMinMax_)   // Min Max values enabled
+        {
+            if(light + ParamW90_SensorLightAlign_ > (float)KoW90_SensorLightMaxValue_.value(LightKODPT))
+            {
+                KoW90_SensorLightMaxValue_.valueNoSend(light, LightKODPT);
+            }
+            if(light + ParamW90_SensorLightAlign_ < (float)KoW90_SensorLightMinValue_.value(LightKODPT))
+            {
+                KoW90_SensorLightMinValue_.valueNoSend(light, LightKODPT);
+            }
+        }
+
+        if(!(ParamW90_SensorLightWarnL_ == 0 && ParamW90_SensorLightWarnH_ == 0))   // not both are 0 (=> feature disabled)
+        {
+            bool AlarmH = light + ParamW90_SensorLightAlign_ > ParamW90_SensorLightWarnH_;
+            if( (bool)KoW90_SensorLightAlarmH_.value(Dpt(1,5)) != AlarmH ||                                          // alarm value has changed
+                (AlarmH && millis() - m_light_alarmH_last_send_millis > send_millis))     // alarm is true and has not been sent for send_millis
+            {
+                KoW90_SensorLightAlarmH_.value(AlarmH, Dpt(1,5));
+                m_light_alarmH_last_send_millis = millis();
+            }
+
+            bool AlarmL = light + ParamW90_SensorLightAlign_ < ParamW90_SensorLightWarnL_;
+            if( (bool)KoW90_SensorLightAlarmL_.value(Dpt(1,5)) != AlarmL ||                                          // alarm value has changed
+                (AlarmL && millis() - m_light_alarmL_last_send_millis > send_millis))     // alarm is true and has not been sent for send_millis
+            {
+                KoW90_SensorLightAlarmL_.value(AlarmL, Dpt(1,5));
+                m_light_alarmL_last_send_millis = millis();
+            }
+        }
+    }
+}
+
+void Sensorchannel::loop_uvi(uint8_t uvi)
+{
+  if(!isnan(uvi))
+    {
+        uint8_t send_cycle = ParamW90_SensorUVISendCycle_;
+        uint32_t send_millis = send_cycle * 60000;
+        bool sendnow = false;
+        if(send_cycle)
+        {
+            sendnow = millis() - m_uvi_last_send_millis > send_millis || m_uvi_last_send_millis == 0;
+        }
+        if(!sendnow)
+        {
+            float SendTresh = ParamW90_SensorUVISendChangeAmount_;
+            if(SendTresh != 0)
+            {
+                float current_UVI_diff = uvi - m_uvi_last_send_value;
+                sendnow = current_UVI_diff >= SendTresh || 0 - current_UVI_diff >= SendTresh;
+                if(sendnow)
+                {
+                    logDebugP("Send UVIKO Diff: %d", current_UVI_diff);
+                }
+            }
+        }
+        
+        if(sendnow)
+        {
+            //KoW90_SensorUVI_.value(, UviKODPT);
+            KoW90_SensorUVI_.value((uint8_t)(uvi + ParamW90_SensorUVIAlign_), UviKODPT);
+            logDebugP("Send UVIKO: %d", uvi + ParamW90_SensorUVIAlign_);
+            m_uvi_last_send_millis = millis();
+            m_uvi_last_send_value = uvi;
+        }
+        else
+        {
+            KoW90_SensorUVI_.valueNoSend((uint8_t)(uvi + ParamW90_SensorUVIAlign_), UviKODPT);
+        }
+
+        if(ParamW90_SensorUVIMinMax_)   // Min Max values enabled
+        {
+            if(uvi + ParamW90_SensorUVIAlign_ > (float)KoW90_SensorUVIMaxValue_.value(UviKODPT))
+            {
+                KoW90_SensorUVIMaxValue_.valueNoSend(uvi, UviKODPT);
+            }
+            if(uvi + ParamW90_SensorUVIAlign_ < (float)KoW90_SensorUVIMinValue_.value(UviKODPT))
+            {
+                KoW90_SensorUVIMinValue_.valueNoSend(uvi, UviKODPT);
+            }
+        }
+
+        if(!(ParamW90_SensorUVIWarnL_ == 0 && ParamW90_SensorUVIWarnH_ == 0))   // not both are 0 (=> feature disabled)
+        {
+            bool AlarmH = uvi + ParamW90_SensorUVIAlign_ > ParamW90_SensorUVIWarnH_;
+            if( (bool)KoW90_SensorUVIAlarmH_.value(Dpt(1,5)) != AlarmH ||                                          // alarm value has changed
+                (AlarmH && millis() - m_uvi_alarmH_last_send_millis > send_millis))     // alarm is true and has not been sent for send_millis
+            {
+                KoW90_SensorUVIAlarmH_.value(AlarmH, Dpt(1,5));
+                m_uvi_alarmH_last_send_millis = millis();
+            }
+
+            bool AlarmL = uvi + ParamW90_SensorUVIAlign_ < ParamW90_SensorUVIWarnL_;
+            if( (bool)KoW90_SensorUVIAlarmL_.value(Dpt(1,5)) != AlarmL ||                                          // alarm value has changed
+                (AlarmL && millis() - m_uvi_alarmL_last_send_millis > send_millis))     // alarm is true and has not been sent for send_millis
+            {
+                KoW90_SensorUVIAlarmL_.value(AlarmL, Dpt(1,5));
+                m_uvi_alarmL_last_send_millis = millis();
+            }
+        }
+    }
+}
+
+void Sensorchannel::loop_wind(float wind)
+{
+  if(!isnan(wind))
+    {
+        uint8_t send_cycle = ParamW90_SensorWindSendCycle_;
+        uint32_t send_millis = send_cycle * 60000;
+        bool sendnow = false;
+        if(send_cycle)
+        {
+            sendnow = millis() - m_wind_last_send_millis > send_millis || m_wind_last_send_millis == 0;
+        }
+        if(!sendnow)
+        {
+            float SendTresh = ParamW90_SensorWindSendChangeAmount_;
+            if(SendTresh != 0)
+            {
+                float current_wind_diff = wind - m_wind_last_send_value;
+                sendnow = current_wind_diff >= SendTresh || 0 - current_wind_diff >= SendTresh;
+                if(sendnow)
+                {
+                    logDebugP("Send WindKO Diff: %f", current_wind_diff);
+                }
+            }
+        }
+        
+        if(sendnow)
+        {
+            KoW90_SensorWind_.value(wind + ParamW90_SensorWindAlign_, WindKODPT);
+            logDebugP("Send WindKO: %f", wind + ParamW90_SensorWindAlign_);
+            m_wind_last_send_millis = millis();
+            m_wind_last_send_value = wind;
+        }
+        else
+        {
+            KoW90_SensorWind_.valueNoSend(wind + ParamW90_SensorWindAlign_, WindKODPT);
+        }
+
+        if(ParamW90_SensorWindMinMax_)   // Min Max values enabled
+        {
+            if(wind + ParamW90_SensorWindAlign_ > (float)KoW90_SensorWindMaxValue_.value(WindKODPT))
+            {
+                KoW90_SensorWindMaxValue_.valueNoSend(wind, WindKODPT);
+            }
+            if(wind + ParamW90_SensorWindAlign_ < (float)KoW90_SensorWindMinValue_.value(WindKODPT))
+            {
+                KoW90_SensorWindMinValue_.valueNoSend(wind, WindKODPT);
+            }
+        }
+
+        if(!(ParamW90_SensorWindWarnL_ == 0 && ParamW90_SensorWindWarnH_ == 0))   // not both are 0 (=> feature disabled)
+        {
+            bool AlarmH = wind + ParamW90_SensorWindAlign_ > ParamW90_SensorWindWarnH_;
+            if( (bool)KoW90_SensorWindAlarmH_.value(Dpt(1,5)) != AlarmH ||                                          // alarm value has changed
+                (AlarmH && millis() - m_wind_alarmH_last_send_millis > send_millis))     // alarm is true and has not been sent for send_millis
+            {
+                KoW90_SensorWindAlarmH_.value(AlarmH, Dpt(1,5));
+                m_wind_alarmH_last_send_millis = millis();
+            }
+
+            bool AlarmL = wind + ParamW90_SensorWindAlign_ < ParamW90_SensorWindWarnL_;
+            if( (bool)KoW90_SensorWindAlarmL_.value(Dpt(1,5)) != AlarmL ||                                          // alarm value has changed
+                (AlarmL && millis() - m_wind_alarmL_last_send_millis > send_millis))     // alarm is true and has not been sent for send_millis
+            {
+                KoW90_SensorWindAlarmL_.value(AlarmL, Dpt(1,5));
+                m_wind_alarmL_last_send_millis = millis();
+            }
+        }
+    }
+}
+
+void Sensorchannel::loop_gust(float gust)
+{
+  if(!isnan(gust))
+    {
+        uint8_t send_cycle = ParamW90_SensorGustSendCycle_;
+        uint32_t send_millis = send_cycle * 60000;
+        bool sendnow = false;
+        if(send_cycle)
+        {
+            sendnow = millis() - m_gust_last_send_millis > send_millis || m_gust_last_send_millis == 0;
+        }
+        if(!sendnow)
+        {
+            float SendTresh = ParamW90_SensorGustSendChangeAmount_;
+            if(SendTresh != 0)
+            {
+                float current_gust_diff = gust - m_gust_last_send_value;
+                sendnow = current_gust_diff >= SendTresh || 0 - current_gust_diff >= SendTresh;
+                if(sendnow)
+                {
+                    logDebugP("Send GustKO Diff: %f", current_gust_diff);
+                }
+            }
+        }
+        
+        if(sendnow)
+        {
+            KoW90_SensorGust_.value(gust + ParamW90_SensorGustAlign_, GustKODPT);
+            logDebugP("Send GustKO: %f", gust + ParamW90_SensorGustAlign_);
+            m_gust_last_send_millis = millis();
+            m_gust_last_send_value = gust;
+        }
+        else
+        {
+            KoW90_SensorGust_.valueNoSend(gust + ParamW90_SensorGustAlign_, GustKODPT);
+        }
+
+        if(ParamW90_SensorGustMinMax_)   // Min Max values enabled
+        {
+            if(gust + ParamW90_SensorGustAlign_ > (float)KoW90_SensorGustMaxValue_.value(GustKODPT))
+            {
+                KoW90_SensorGustMaxValue_.valueNoSend(gust, GustKODPT);
+            }
+            if(gust + ParamW90_SensorGustAlign_ < (float)KoW90_SensorGustMinValue_.value(GustKODPT))
+            {
+                KoW90_SensorGustMinValue_.valueNoSend(gust, GustKODPT);
+            }
+        }
+
+        if(!(ParamW90_SensorGustWarnL_ == 0 && ParamW90_SensorGustWarnH_ == 0))   // not both are 0 (=> feature disabled)
+        {
+            bool AlarmH = gust + ParamW90_SensorGustAlign_ > ParamW90_SensorGustWarnH_;
+            if( (bool)KoW90_SensorGustAlarmH_.value(Dpt(1,5)) != AlarmH ||                                          // alarm value has changed
+                (AlarmH && millis() - m_gust_alarmH_last_send_millis > send_millis))     // alarm is true and has not been sent for send_millis
+            {
+                KoW90_SensorGustAlarmH_.value(AlarmH, Dpt(1,5));
+                m_gust_alarmH_last_send_millis = millis();
+            }
+
+            bool AlarmL = gust + ParamW90_SensorGustAlign_ < ParamW90_SensorGustWarnL_;
+            if( (bool)KoW90_SensorGustAlarmL_.value(Dpt(1,5)) != AlarmL ||                                          // alarm value has changed
+                (AlarmL && millis() - m_gust_alarmL_last_send_millis > send_millis))     // alarm is true and has not been sent for send_millis
+            {
+                KoW90_SensorGustAlarmL_.value(AlarmL, Dpt(1,5));
+                m_gust_alarmL_last_send_millis = millis();
+            }
+        }
+    }
+}
+
+void Sensorchannel::loop_winddir(uint8_t winddir)
+{
+    if(!isnan(winddir))
+    {
+        uint8_t send_cycle = ParamW90_SensorWindDirSendCycle_;
+        uint32_t send_millis = send_cycle * 60000;
+        bool sendnow = false;
+        if(send_cycle)
+        {
+            sendnow = millis() - m_winddir_last_send_millis > send_millis || m_winddir_last_send_millis == 0;
+        }
+        if(!sendnow)
+        {
+            float SendTresh = ParamW90_SensorWindDirSendChangeAmount_;
+            if(SendTresh != 0)
+            {
+                float current_winddir_diff = winddir - m_winddir_last_send_value;
+                sendnow = current_winddir_diff >= SendTresh || 0 - current_winddir_diff >= SendTresh;
+                if(sendnow)
+                {
+                    logDebugP("Send winddirKO Diff: %d", current_winddir_diff);
+                }
+            }
+        }
+        
+        if(sendnow)
+        {
+            //KoW90_Sensorwinddir_.value(, winddirKODPT);
+            KoW90_SensorWindDir_.value((uint8_t)(winddir + ParamW90_SensorWindDirAlign_), WindDirKODPT);
+            logDebugP("Send winddirKO: %d", winddir + ParamW90_SensorWindDirAlign_);
+            m_winddir_last_send_millis = millis();
+            m_winddir_last_send_value = winddir;
+        }
+        else
+        {
+            KoW90_SensorWindDir_.valueNoSend((uint8_t)(winddir + ParamW90_SensorWindDirAlign_), WindDirKODPT);
+        }
+
+
+    }
+}
+
+void Sensorchannel::loop_rain(float rain)
+{
+  if(!isnan(rain))
+    {
+        uint8_t send_cycle = ParamW90_SensorRainSendCycle_;
+        uint32_t send_millis = send_cycle * 60000;
+        bool sendnow = false;
+        if(send_cycle)
+        {
+            sendnow = millis() - m_rain_last_send_millis > send_millis || m_rain_last_send_millis == 0;
+        }
+        if(!sendnow)
+        {
+            float SendTresh = ParamW90_SensorRainSendChangeAmount_;
+            if(SendTresh != 0)
+            {
+                float current_rain_diff = rain - m_rain_last_send_value;
+                sendnow = current_rain_diff >= SendTresh || 0 - current_rain_diff >= SendTresh;
+                if(sendnow)
+                {
+                    logDebugP("Send RainKO Diff: %f", current_rain_diff);
+                }
+            }
+        }
+        
+        if(sendnow)
+        {
+            KoW90_SensorRain_.value(rain, RainKODPT);
+            logDebugP("Send RainKO: %f", rain);
+            m_rain_last_send_millis = millis();
+            m_rain_last_send_value = rain;
+        }
+        else
+        {
+            KoW90_SensorRain_.valueNoSend(rain, RainKODPT);
+        }
+    }
+}
+
 void Sensorchannel::processInputKo(GroupObject& ko)
 {
     logTraceP("processInputKo");
@@ -529,6 +912,18 @@ void Sensorchannel::save()
 
     openknx.flash.writeFloat((float)KoW90_SensorPressMaxValue_.value(PressKODPT));
     openknx.flash.writeFloat((float)KoW90_SensorPressMinValue_.value(PressKODPT));
+
+    openknx.flash.writeFloat((float)KoW90_SensorLightMaxValue_.value(LightKODPT));
+    openknx.flash.writeFloat((float)KoW90_SensorLightMinValue_.value(LightKODPT));
+
+    openknx.flash.writeByte((uint8_t)KoW90_SensorUVIMaxValue_.value(UviKODPT));
+    openknx.flash.writeByte((uint8_t)KoW90_SensorUVIMinValue_.value(UviKODPT));
+
+    openknx.flash.writeFloat((float)KoW90_SensorWindMaxValue_.value(WindKODPT));
+    openknx.flash.writeFloat((float)KoW90_SensorWindMinValue_.value(WindKODPT));
+
+    openknx.flash.writeFloat((float)KoW90_SensorGustMaxValue_.value(GustKODPT));
+    openknx.flash.writeFloat((float)KoW90_SensorGustMinValue_.value(GustKODPT));
 }
 
 void Sensorchannel::restore()
@@ -547,5 +942,17 @@ void Sensorchannel::restore()
 
     KoW90_SensorPressMaxValue_.valueNoSend(openknx.flash.readFloat(), PressKODPT);
     KoW90_SensorPressMinValue_.valueNoSend(openknx.flash.readFloat(), PressKODPT);
+
+    KoW90_SensorLightMaxValue_.valueNoSend(openknx.flash.readFloat(), LightKODPT);
+    KoW90_SensorLightMinValue_.valueNoSend(openknx.flash.readFloat(), LightKODPT);
+
+    KoW90_SensorUVIMaxValue_.valueNoSend(openknx.flash.readByte(), UviKODPT);
+    KoW90_SensorUVIMinValue_.valueNoSend(openknx.flash.readByte(), UviKODPT);
+
+    KoW90_SensorWindMaxValue_.valueNoSend(openknx.flash.readFloat(), WindKODPT);
+    KoW90_SensorWindMinValue_.valueNoSend(openknx.flash.readFloat(), WindKODPT);
+
+    KoW90_SensorGustMaxValue_.valueNoSend(openknx.flash.readFloat(), GustKODPT);
+    KoW90_SensorGustMinValue_.valueNoSend(openknx.flash.readFloat(), GustKODPT);
 }
 
