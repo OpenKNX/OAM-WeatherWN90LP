@@ -29,7 +29,6 @@ class Sensorchannel : public OpenKNX::Channel
         float m_temperature_last_send_value = -1000;
         uint32_t m_temperature_alarmH_last_send_millis = 0;
         uint32_t m_temperature_alarmL_last_send_millis = 0;
-        
 
         uint32_t m_humidity_last_send_millis = 0;
         float m_humidity_last_send_value = -1000;

@@ -403,13 +403,12 @@
           </Static>
           <Dynamic>
             <ChannelIndependentBlock>
-              <ParameterBlock Id="%AID%_PB-2" Name="Sensor_%ZZ%" Text="Wetterstation %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201">
+              <ParameterBlock Id="%AID%_PB-" Name="Sensor_%ZZ%" Text="Wetterstation %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201">
                 <ParameterRefRef RefId="%AID%_P-%TT%%CC%001_R-%TT%%CC%00101" />
                 <ParameterRefRef RefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201" />
 
-                <ParameterBlock Id="%AID%_PB-3" Name="Sensor_%ZZ%_Temp" Text="Luft:" >
+                <ParameterBlock Id="%AID%_PB-" Name="Sensor_%ZZ%_Temp" Text="Temperatur/Feuchtigkeit" Icon="thermometer">
                   <!-- Temperatur -->
-                  <ParameterSeparator Id="%AID%_PS-" Text=" " />
                   <ParameterSeparator Id="%AID%_PS-" Text="Temperatur" UIHint="Headline" />
                   <ParameterRefRef RefId="%AID%_UP-%TT%%CC%010_R-%TT%%CC%01001" />
                   <choose ParamRefId="%AID%_UP-%TT%%CC%010_R-%TT%%CC%01001">
@@ -483,8 +482,9 @@
                     </when>
                   </choose>
                   <ParameterRefRef RefId="%AID%_UP-%TT%%CC%047_R-%TT%%CC%04701" />
+                </ParameterBlock>
+                <ParameterBlock Id="%AID%_PB-4" Name="Sensor_%ZZ%_Press" Text="Luftdruck" Icon="gauge">
                   <!-- Luftdruck -->
-                  <ParameterSeparator Id="%AID%_PS-" Text=" " />
                   <ParameterSeparator Id="%AID%_PS-" Text="Luftdruck" UIHint="Headline" />
                   <ParameterRefRef RefId="%AID%_UP-%TT%%CC%050_R-%TT%%CC%05001" />
                   <choose ParamRefId="%AID%_UP-%TT%%CC%050_R-%TT%%CC%05001">
@@ -503,8 +503,107 @@
                   </choose>
                   <ParameterRefRef RefId="%AID%_UP-%TT%%CC%057_R-%TT%%CC%05701" />
                 </ParameterBlock>
+                <ParameterBlock Id="%AID%_PB-5" Name="Sensor_%ZZ%_Light" Text="Helligkeit" Icon="white-balance-sunny">
+                  <!-- Light -->
+                  <ParameterSeparator Id="%AID%_PS-" Text="Helligkeit" UIHint="Headline" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%060_R-%TT%%CC%06001" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%060_R-%TT%%CC%06001">
+                    <when test="1">
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%061_R-%TT%%CC%06101" />
+                    </when>
+                  </choose>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%062_R-%TT%%CC%06201" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%063_R-%TT%%CC%06301" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%064_R-%TT%%CC%06401" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%064_R-%TT%%CC%06401">
+                    <when test="1">
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%065_R-%TT%%CC%06501" />
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%066_R-%TT%%CC%06601" />
+                    </when>
+                  </choose>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%067_R-%TT%%CC%06701" />
+                  <!-- UVI -->
+                  <ParameterSeparator Id="%AID%_PS-" Text=" " />
+                  <ParameterSeparator Id="%AID%_PS-" Text="UV-Index" UIHint="Headline" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%070_R-%TT%%CC%07001">
+                    <when test="1">
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%071_R-%TT%%CC%07101" />
+                    </when>
+                  </choose>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%072_R-%TT%%CC%07201" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%073_R-%TT%%CC%07301" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%074_R-%TT%%CC%07401" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%074_R-%TT%%CC%07401">
+                    <when test="1">
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%075_R-%TT%%CC%07501" />
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%076_R-%TT%%CC%07601" />
+                    </when>
+                  </choose>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%077_R-%TT%%CC%07701" />
+                </ParameterBlock>
+                <ParameterBlock Id="%AID%_PB-6" Name="Sensor_%ZZ%_Wind" Text="Wind" Icon="windsock">
+                  <!-- Wind -->
+                  <ParameterSeparator Id="%AID%_PS-" Text="Windgeschwindigkeit" UIHint="Headline" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%080_R-%TT%%CC%08001" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%080_R-%TT%%CC%08001">
+                    <when test="1">
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%081_R-%TT%%CC%08101" />
+                    </when>
+                  </choose>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%082_R-%TT%%CC%08201" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%083_R-%TT%%CC%08301" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%084_R-%TT%%CC%08401" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%084_R-%TT%%CC%08401">
+                    <when test="1">
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%085_R-%TT%%CC%08501" />
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%086_R-%TT%%CC%08601" />
+                    </when>
+                  </choose>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%087_R-%TT%%CC%08701" />
+                  <!-- Gust -->
+                  <ParameterSeparator Id="%AID%_PS-" Text=" " />
+                  <ParameterSeparator Id="%AID%_PS-" Text="Windgeschwindigkeit (Böen)" UIHint="Headline" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%090_R-%TT%%CC%09001" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%090_R-%TT%%CC%09001">
+                    <when test="1">
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%091_R-%TT%%CC%09101" />
+                    </when>
+                  </choose>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%092_R-%TT%%CC%09201" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%093_R-%TT%%CC%09301" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%094_R-%TT%%CC%09401" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%094_R-%TT%%CC%09401">
+                    <when test="1">
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%095_R-%TT%%CC%09501" />
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%096_R-%TT%%CC%09601" />
+                    </when>
+                  </choose>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%097_R-%TT%%CC%09701" />
+                  <!-- wind dir -->
+                  <ParameterSeparator Id="%AID%_PS-" Text=" " />
+                  <ParameterSeparator Id="%AID%_PS-" Text="Windrichtung" UIHint="Headline" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%100_R-%TT%%CC%10001" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%100_R-%TT%%CC%10001">
+                    <when test="1">
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%101_R-%TT%%CC%10101" />
+                    </when>
+                  </choose>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%102_R-%TT%%CC%10201" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%103_R-%TT%%CC%10301" />
+                </ParameterBlock>
+                <ParameterBlock Id="%AID%_PB-7" Name="Sensor_%ZZ%_Rain" Text="Regen" Icon="weather-pouring">
+                  <!-- Regen -->
+                  <ParameterSeparator Id="%AID%_PS-" Text="Regenmenge" UIHint="Headline" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%110_R-%TT%%CC%11001" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%110_R-%TT%%CC%11001">
+                    <when test="1">
+                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%111_R-%TT%%CC%11101" />
+                    </when>
+                  </choose>
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%112_R-%TT%%CC%11201" />
+                </ParameterBlock>
                 
-                <Channel Id="%AID%_CH-10%CC%" Name="Sensor_%ZZ%" Number="10%CC%" Text="Sensor %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201">
+                <Channel Id="%AID%_CH-10%CC%" Name="Sensor_%ZZ%" Number="10%CC%" Text="Wetterstation %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201">
                   <!-- Temperature -->
                   <choose ParamRefId="%AID%_UP-%TT%%CC%014_R-%TT%%CC%01401">
                     <when test="1">

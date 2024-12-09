@@ -9,7 +9,7 @@
         </CatalogSection>
       </Catalog>
       <ApplicationPrograms>
-        <op:version OpenKnxId="0xA1" ApplicationNumber="21" ApplicationVersion="1" ReplacesVersions="0" ApplicationRevision="0" />
+        <op:version OpenKnxId="0xA1" ApplicationNumber="41" ApplicationVersion="3" ReplacesVersions="2 1 0" ApplicationRevision="0" />
         <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="Wetterstation WN90LP-Beta" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de-DE" DynamicTableManagement="false" Linkable="true" MinEtsVersion="5.0" ContextHelpFile="%FILE-HELP-de%" IconFile="%FILE-ICONS%" IPConfig="Custom" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
           <Static>
             <Code>
@@ -17,11 +17,13 @@
             </Code>
             <ParameterTypes>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" prefix="BASE" />
+              <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" prefix="UCT" />
               <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" prefix="LOG" />
             </ParameterTypes>
             <Parameters>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="parameter" prefix="BASE" />
+              <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="parameter" prefix="UCT" />
               <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="parameter" prefix="W90" />
               <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="template" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="parameter" prefix="LOG" />
@@ -29,6 +31,7 @@
             </Parameters>
             <ParameterRefs>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" prefix="BASE" />
+              <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" prefix="UCT" />
               <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" prefix="W90" />
               <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" type="template" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" prefix="LOG" />
@@ -36,6 +39,7 @@
             </ParameterRefs>
             <ParameterCalculations>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" prefix="BASE" />
+              <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" prefix="UCT" />
               <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" prefix="W90" />
               <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" type="template" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" prefix="LOG" />
@@ -43,6 +47,7 @@
             </ParameterCalculations>
             <ParameterValidations>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" prefix="BASE" />
+              <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" prefix="UCT" />
               <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" prefix="W90" />
               <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" type="template" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" prefix="LOG" />
@@ -50,6 +55,7 @@
             </ParameterValidations>
             <ComObjectTable>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" prefix="BASE" />
+              <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" prefix="UCT" />
               <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" prefix="W90" />
               <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" type="template" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" prefix="LOG" />
@@ -57,6 +63,7 @@
             </ComObjectTable>
             <ComObjectRefs>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" prefix="BASE" />
+              <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" prefix="UCT" />
               <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" prefix="W90" />
               <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" type="template" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" prefix="LOG" />
@@ -88,11 +95,13 @@
             <Messages>
               <Message Id="%AID%_M-1" Name="VersionMismatch" Text="Diese Applikation und die installierte Firmware passen nicht zusammen." />
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/Messages/*" prefix="BASE" />
+              <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Static/Messages/*" prefix="UCT" />
               <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/Messages/*" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/Messages/*" prefix="LOG" />
             </Messages>
             <Script>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/Script/text()" prefix="BASE" />
+              <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Static/Script/text()" prefix="UCT" />
               <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/Script/text()" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/Script/text()" prefix="LOG" />
             </Script>
@@ -100,6 +109,7 @@
           </Static>
           <ModuleDefs>
             <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/ModuleDefs/*" prefix="BASE" />
+            <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/ModuleDefs/*" prefix="UCT" />
             <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/ModuleDefs/*" prefix="W90" />
             <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/ModuleDefs/*" type="template" prefix="W90" />
             <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/ModuleDefs/*" prefix="LOG" />
@@ -107,6 +117,7 @@
           </ModuleDefs>
           <Dynamic>
             <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="BASE" />
+            <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="UCT" />
             <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="W90" />
             <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="LOG" />
           </Dynamic>
@@ -114,13 +125,14 @@
       </ApplicationPrograms>
       <Baggages>
         <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//Manufacturer/Baggages/*" prefix="BASE" />
+        <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//Manufacturer/Baggages/*" prefix="UCT" />
         <op:include href="WN90LPModule.share.xml" xpath="//Manufacturer/Baggages/*" prefix="W90" />
         <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//Manufacturer/Baggages/*" prefix="LOG" />
       </Baggages>
       <Hardware>
-        <Hardware Id="%HardwareId%" Name="OpenKNX-Wetterstation WN90LP-Beta" SerialNumber="0xA115" VersionNumber="1" BusCurrent="10" HasIndividualAddress="true" HasApplicationProgram="true">
+        <Hardware Id="%HardwareId%" Name="OpenKNX-Wetterstation WN90LP-Beta" SerialNumber="0xA129" VersionNumber="1" BusCurrent="10" HasIndividualAddress="true" HasApplicationProgram="true">
           <Products>
-            <Product Id="%ProductId%" Text="OpenKNX: Wetterstation WN90LP (Beta)" OrderNumber="0xA115" IsRailMounted="false" DefaultLanguage="de-DE">
+            <Product Id="%ProductId%" Text="OpenKNX: Wetterstation WN90LP (Beta)" OrderNumber="0xA129" IsRailMounted="false" DefaultLanguage="de-DE">
               <RegistrationInfo RegistrationStatus="Registered" />
             </Product>
           </Products>
