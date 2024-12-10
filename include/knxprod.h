@@ -10,7 +10,7 @@
                                              
 #define MAIN_OpenKnxId 0xA1
 #define MAIN_ApplicationNumber 41
-#define MAIN_ApplicationVersion 3
+#define MAIN_ApplicationVersion 4
 #define MAIN_ParameterSize 5814
 #define MAIN_MaxKoNumber 189
 #define MAIN_OrderNumber "0xA129"
@@ -628,17 +628,17 @@
 #define KoW90_SensorWindMaxValue_                 (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorWindMaxValue_)))
 // Min/Max Windgeschwindigkeit Reset
 #define KoW90_SensorWindMinMaxReset_              (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorWindMinMaxReset_)))
-// Windböe
+// Windgeschwindigkeit (Böen)
 #define KoW90_SensorGust_                         (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorGust_)))
-// Alarm Windböeunterschreitung
+// Alarm Unterschreitung Windgeschwindigkeit (Böen)
 #define KoW90_SensorGustAlarmL_                   (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorGustAlarmL_)))
-// Alarm Windböeüberschreitung
+// Alarm Überschreitung Windgeschwindigkeit (Böen)
 #define KoW90_SensorGustAlarmH_                   (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorGustAlarmH_)))
-// Min. Windböe lesen
+// Min. Windgeschwindigkeit (Böen) lesen
 #define KoW90_SensorGustMinValue_                 (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorGustMinValue_)))
-// Max. Windböe lesen
+// Max. Windgeschwindigkeit (Böen) lesen
 #define KoW90_SensorGustMaxValue_                 (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorGustMaxValue_)))
-// Min/Max Windböe Reset
+// Min/Max Windgeschwindigkeit (Böen) Reset
 #define KoW90_SensorGustMinMaxReset_              (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorGustMinMaxReset_)))
 // Windrichtung
 #define KoW90_SensorWindDir_                      (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorWindDir_)))
