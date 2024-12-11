@@ -24,31 +24,31 @@ class HWSensorchannel: public OpenKNX::Channel
         ModbusMaster m_modbus;
 
         float m_temperature = NAN;
-        uint32_t m_temperature_last_poll_millis = 0;
+        uint32_t m_temperature_last_poll_millis = 10000;
 
         float m_humidity = NAN;
-        uint32_t m_humidity_last_poll_millis = 0;
+        uint32_t m_humidity_last_poll_millis = 10000;
 
         float m_pressure = NAN;
-        uint32_t m_pressure_last_poll_millis = 0;
+        uint32_t m_pressure_last_poll_millis = 12000;
 
         float m_light = NAN;
-        uint32_t m_light_last_poll_millis = 0;
+        uint32_t m_light_last_poll_millis = 14000;
 
         uint8_t m_uvi = NAN;
-        uint32_t m_uvi_last_poll_millis = 0;
+        uint32_t m_uvi_last_poll_millis = 14000;
 
         float m_wind = NAN;
-        uint32_t m_wind_last_poll_millis = 0;
+        uint32_t m_wind_last_poll_millis = 16000;
 
         float m_gust = NAN;
-        uint32_t m_gust_last_poll_millis = 0;
+        uint32_t m_gust_last_poll_millis = 16000;
 
         uint8_t m_winddir = NAN;
-        uint32_t m_winddir_last_poll_millis = 0;
+        uint32_t m_winddir_last_poll_millis = 16000;
 
         float m_rain = NAN;
-        uint32_t m_rain_last_poll_millis = 0;
+        uint32_t m_rain_last_poll_millis = 18000;
 
         float ReadTemperature();
         float ReadHumidity();

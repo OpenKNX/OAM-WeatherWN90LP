@@ -3,7 +3,13 @@
 #include "FileTransferModule.h"
 #include "WN90LPModule.h"
 
+/* ToDo
+- Status für Station erreichbar, Timeout Parameter
+- Was tun mit den Werten wenn Station nicht erreichbar (0xffff oder letzter Wert oder 0)
+- höhenkorrektur luftdruck
 
+
+*/
 
 
 void setup()

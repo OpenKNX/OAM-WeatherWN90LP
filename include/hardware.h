@@ -1,6 +1,10 @@
 #ifdef DEVICE_UP1_GW_RS485
 
-    //#include "HardwareConfig/OpenKNX/UP1.h"
+    #include "HardwareConfig/OpenKNX/UP1.h"
+
+#endif
+
+#ifdef TESTDEVICE_PIPICO_GW_RS485
 
     // Debug PiPico
 
@@ -19,5 +23,4 @@
 
 
 #endif
-
 

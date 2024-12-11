@@ -4,13 +4,14 @@
   <op:ETS
     OpenKnxId="0xA1"
     ApplicationNumber="41"
-    ApplicationVersion="0.4"
-    ReplacesVersions="0.3 0.2 0.1 0.0"
+    ApplicationVersion="0.5"
+    ReplacesVersions="0.4 0.3 0.2 0.1 0.0"
     ApplicationRevision="0"
     ProductName="Wetterstation WN90LP"
-    BusCurrent="10"
     BuildSuffix="-Beta"
-    BuildSuffixText=" (Beta)" />
+    BuildSuffixText=" (Beta)"
+    ApplicationName="WeatherWN90LP"
+    BusCurrent="10"/>
 
   <op:define prefix="BASE" ModuleType="10"
     share="../lib/OGM-Common/src/Common.share.xml">

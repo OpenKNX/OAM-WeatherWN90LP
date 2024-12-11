@@ -10,7 +10,7 @@
                                              
 #define MAIN_OpenKnxId 0xA1
 #define MAIN_ApplicationNumber 41
-#define MAIN_ApplicationVersion 4
+#define MAIN_ApplicationVersion 5
 #define MAIN_ParameterSize 5814
 #define MAIN_MaxKoNumber 189
 #define MAIN_OrderNumber "0xA129"
