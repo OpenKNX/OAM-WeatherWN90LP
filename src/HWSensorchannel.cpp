@@ -340,7 +340,7 @@ Rain = value*0.01mm
     if(data == 0xFFFF)
         return NAN;
 
-    float rawdata = data * 0.1;
+    float rawdata = data * 0.01;
     logDebugP("Wind: %f m/s", rawdata);
     return rawdata;
 }
