@@ -13,6 +13,7 @@
     BuildSuffix="-Dev"
     BuildSuffixText=" (Dev)" />
 
+  <!-- KO 1 - 19 -->
   <op:define prefix="BASE" ModuleType="10"
     share="../lib/OGM-Common/src/Common.share.xml">
     <op:verify File="../lib/OGM-Common/library.json" ModuleVersion="1.5" />
@@ -25,12 +26,14 @@
     <op:verify File="../../OFM-ConfigTransfer/library.json" ModuleVersion="0.4" />
   </op:define>
 
+  <!-- KO 20 - 76 -->
   <op:define prefix="W90" ModuleType="20"
     share="WN90LPModule.share.xml"
     template="WN90LPModule.templ.xml"
     NumChannels="1" KoOffset="20">
   </op:define>
   
+  <!-- KO 100 - 189 -->
   <op:define prefix="LOG" ModuleType="10"
     share="../lib/OFM-LogicModule/src/Logikmodul.share.xml"
     template="../lib/OFM-LogicModule/src/Logikmodul.templ.xml"
@@ -38,7 +41,7 @@
     <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="3.7" /> 
   </op:define>
 
-    <!-- KO 130 - 131 -->
+    <!-- KO 200 - 200 -->
     <op:define prefix="BI" ModuleType="30"
     share="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml"
     template="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml"
@@ -46,11 +49,11 @@
     <op:verify File="../lib/OFM-BinaryInput/library.json" ModuleVersion="0.2" />
   </op:define>
 
-  <!-- KO 140 - 283 -->
+  <!-- KO 205 - 217 -->
   <op:define prefix="BTN" ModuleType="40"
     share="../lib/OFM-VirtualButton/src/VirtualButton.share.xml"
     template="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml"
-    NumChannels="1" KoOffset="210">
+    NumChannels="1" KoOffset="205">
     <op:verify File="../lib/OFM-VirtualButton/library.json" ModuleVersion="0.5" />
   </op:define>
 

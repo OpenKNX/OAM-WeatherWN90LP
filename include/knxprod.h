@@ -21,7 +21,7 @@
 #define MAIN_ApplicationVersion 6
 #define MAIN_ApplicationEncoding iso-8859-15
 #define MAIN_ParameterSize 5943
-#define MAIN_MaxKoNumber 221
+#define MAIN_MaxKoNumber 216
 #define MAIN_OrderNumber "0xA129"
 #define BASE_ModuleVersion 21
 #define UCT_ModuleVersion 4
@@ -3564,10 +3564,10 @@
 #define ParamBTN_bStatusThresholdLow                 (knx.paramByte(BTN_ParamCalcIndex(BTN_bStatusThresholdLow)))
 
 // deprecated
-#define BTN_KoOffset 210
+#define BTN_KoOffset 205
 
 // Communication objects per channel (multiple occurrence)
-#define BTN_KoBlockOffset 210
+#define BTN_KoBlockOffset 205
 #define BTN_KoBlockSize 12
 
 #define BTN_KoCalcNumber(index) (index + BTN_KoBlockOffset + _channelIndex * BTN_KoBlockSize)
