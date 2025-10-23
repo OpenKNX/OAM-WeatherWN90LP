@@ -38,5 +38,21 @@
     <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="3.7" /> 
   </op:define>
 
+    <!-- KO 130 - 131 -->
+    <op:define prefix="BI" ModuleType="30"
+    share="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml"
+    template="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml"
+    NumChannels="1" KoOffset="200">
+    <op:verify File="../lib/OFM-BinaryInput/library.json" ModuleVersion="0.2" />
+  </op:define>
+
+  <!-- KO 140 - 283 -->
+  <op:define prefix="BTN" ModuleType="40"
+    share="../lib/OFM-VirtualButton/src/VirtualButton.share.xml"
+    template="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml"
+    NumChannels="1" KoOffset="210">
+    <op:verify File="../lib/OFM-VirtualButton/library.json" ModuleVersion="0.5" />
+  </op:define>
+
   <generate />
 </KNX>
