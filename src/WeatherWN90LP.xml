@@ -57,5 +57,12 @@
     <op:verify File="../lib/OFM-VirtualButton/library.json" ModuleVersion="0.5" />
   </op:define>
 
+  <!-- KO 220 - 2 -->
+  <op:define prefix="SENS" ModuleType="50"
+          share="../lib/OFM-SensorModule/src/Sensormodul.share.xml"
+          KoSingleOffset="220">
+  <op:verify File="../lib/OFM-SensorModule/library.json" ModuleVersion="4.10" />
+  </op:define>
+
   <generate />
 </KNX>

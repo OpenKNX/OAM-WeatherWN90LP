@@ -15,19 +15,21 @@
 #define ETS_ModuleId_LOG 4
 #define ETS_ModuleId_BI 5
 #define ETS_ModuleId_BTN 6
+#define ETS_ModuleId_SENS 7
 #define MAIN_FirmwareName "Wetterstation WN90LP (Dev)"
 #define MAIN_OpenKnxId 0xA1
 #define MAIN_ApplicationNumber 41
 #define MAIN_ApplicationVersion 6
 #define MAIN_ApplicationEncoding iso-8859-15
-#define MAIN_ParameterSize 5943
-#define MAIN_MaxKoNumber 216
+#define MAIN_ParameterSize 6036
+#define MAIN_MaxKoNumber 265
 #define MAIN_OrderNumber "0xA129"
 #define BASE_ModuleVersion 21
 #define UCT_ModuleVersion 4
 #define LOG_ModuleVersion 55
 #define BI_ModuleVersion 2
 #define BTN_ModuleVersion 5
+#define SENS_ModuleVersion 74
 // Parameter with single occurrence
 
 
@@ -99,6 +101,9 @@
 #define BASE_ModuleEnabled_BTN                   110      // 1 Bit, Bit 2
 #define     BASE_ModuleEnabled_BTNMask 0x04
 #define     BASE_ModuleEnabled_BTNShift 2
+#define BASE_ModuleEnabled_SENS                  110      // 1 Bit, Bit 1
+#define     BASE_ModuleEnabled_SENSMask 0x02
+#define     BASE_ModuleEnabled_SENSShift 1
 
 // Zeitbasis
 #define ParamBASE_StartupDelayBase                    ((knx.paramByte(BASE_StartupDelayBase) & BASE_StartupDelayBaseMask) >> BASE_StartupDelayBaseShift)
@@ -156,6 +161,8 @@
 #define ParamBASE_ModuleEnabled_BI                    ((bool)(knx.paramByte(BASE_ModuleEnabled_BI) & BASE_ModuleEnabled_BIMask))
 // BTN
 #define ParamBASE_ModuleEnabled_BTN                   ((bool)(knx.paramByte(BASE_ModuleEnabled_BTN) & BASE_ModuleEnabled_BTNMask))
+// SENS
+#define ParamBASE_ModuleEnabled_SENS                  ((bool)(knx.paramByte(BASE_ModuleEnabled_SENS) & BASE_ModuleEnabled_SENSMask))
 
 #define BASE_KoHeartbeat 1
 #define BASE_KoTime 2
@@ -3612,6 +3619,506 @@
 // 
 #define KoBTN_Out6                                (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoOut6)))
 
+#define SENS_Error                               5943      // 1 Bit, Bit 7
+#define     SENS_ErrorMask 0x80
+#define     SENS_ErrorShift 7
+#define SENS_Dewpoint                            5943      // 1 Bit, Bit 6
+#define     SENS_DewpointMask 0x40
+#define     SENS_DewpointShift 6
+#define SENS_Comfort                             5943      // 1 Bit, Bit 5
+#define     SENS_ComfortMask 0x20
+#define     SENS_ComfortShift 5
+#define SENS_Airquality                          5943      // 1 Bit, Bit 4
+#define     SENS_AirqualityMask 0x10
+#define     SENS_AirqualityShift 4
+#define SENS_Accuracy                            5943      // 1 Bit, Bit 3
+#define     SENS_AccuracyMask 0x08
+#define     SENS_AccuracyShift 3
+#define SENS_DeleteData                          5943      // 1 Bit, Bit 2
+#define     SENS_DeleteDataMask 0x04
+#define     SENS_DeleteDataShift 2
+#define SENS_TempOffset                          5944      // int8_t
+#define SENS_TempCycleBase                       5945      // 2 Bits, Bit 7-6
+#define     SENS_TempCycleBaseMask 0xC0
+#define     SENS_TempCycleBaseShift 6
+#define SENS_TempCycleTime                       5945      // 14 Bits, Bit 13-0
+#define     SENS_TempCycleTimeMask 0x3FFF
+#define     SENS_TempCycleTimeShift 0
+#define SENS_TempDeltaAbs                        5947      // uint16_t
+#define SENS_TempDeltaPercent                    5949      // uint8_t
+#define SENS_TempSmooth                          5950      // uint8_t
+#define SENS_TempExtCount                        5951      // 2 Bits, Bit 1-0
+#define     SENS_TempExtCountMask 0x03
+#define     SENS_TempExtCountShift 0
+#define SENS_TempExtRead                         5951      // 1 Bit, Bit 2
+#define     SENS_TempExtReadMask 0x04
+#define     SENS_TempExtReadShift 2
+#define SENS_TempIntPercent                      5952      // uint8_t
+#define SENS_TempExt1Percent                     5953      // uint8_t
+#define SENS_TempExt2Percent                     5954      // uint8_t
+#define SENS_HumOffset                           5955      // int8_t
+#define SENS_HumCycleBase                        5956      // 2 Bits, Bit 7-6
+#define     SENS_HumCycleBaseMask 0xC0
+#define     SENS_HumCycleBaseShift 6
+#define SENS_HumCycleTime                        5956      // 14 Bits, Bit 13-0
+#define     SENS_HumCycleTimeMask 0x3FFF
+#define     SENS_HumCycleTimeShift 0
+#define SENS_HumDeltaAbs                         5958      // uint16_t
+#define SENS_HumDeltaPercent                     5960      // uint8_t
+#define SENS_HumSmooth                           5961      // uint8_t
+#define SENS_HumExtCount                         5962      // 2 Bits, Bit 1-0
+#define     SENS_HumExtCountMask 0x03
+#define     SENS_HumExtCountShift 0
+#define SENS_HumExtRead                          5962      // 1 Bit, Bit 2
+#define     SENS_HumExtReadMask 0x04
+#define     SENS_HumExtReadShift 2
+#define SENS_HumIntPercent                       5963      // uint8_t
+#define SENS_HumExt1Percent                      5964      // uint8_t
+#define SENS_HumExt2Percent                      5965      // uint8_t
+#define SENS_PreOffset                           5966      // int8_t
+#define SENS_PreCycleBase                        5967      // 2 Bits, Bit 7-6
+#define     SENS_PreCycleBaseMask 0xC0
+#define     SENS_PreCycleBaseShift 6
+#define SENS_PreCycleTime                        5967      // 14 Bits, Bit 13-0
+#define     SENS_PreCycleTimeMask 0x3FFF
+#define     SENS_PreCycleTimeShift 0
+#define SENS_PreDeltaAbs                         5969      // uint16_t
+#define SENS_PreDeltaPercent                     5971      // uint8_t
+#define SENS_PreSmooth                           5972      // uint8_t
+#define SENS_PreExtCount                         5973      // 2 Bits, Bit 1-0
+#define     SENS_PreExtCountMask 0x03
+#define     SENS_PreExtCountShift 0
+#define SENS_PreExtRead                          5973      // 1 Bit, Bit 2
+#define     SENS_PreExtReadMask 0x04
+#define     SENS_PreExtReadShift 2
+#define SENS_PreIntPercent                       5974      // uint8_t
+#define SENS_PreExt1Percent                      5975      // uint8_t
+#define SENS_PreExt2Percent                      5976      // uint8_t
+#define SENS_VocOffset                           5977      // int8_t
+#define SENS_VocCycleBase                        5978      // 2 Bits, Bit 7-6
+#define     SENS_VocCycleBaseMask 0xC0
+#define     SENS_VocCycleBaseShift 6
+#define SENS_VocCycleTime                        5978      // 14 Bits, Bit 13-0
+#define     SENS_VocCycleTimeMask 0x3FFF
+#define     SENS_VocCycleTimeShift 0
+#define SENS_VocDeltaAbs                         5980      // uint16_t
+#define SENS_VocDeltaPercent                     5982      // uint8_t
+#define SENS_VocSmooth                           5983      // uint8_t
+#define SENS_VocExtCount                         5984      // 2 Bits, Bit 1-0
+#define     SENS_VocExtCountMask 0x03
+#define     SENS_VocExtCountShift 0
+#define SENS_VocExtRead                          5984      // 1 Bit, Bit 2
+#define     SENS_VocExtReadMask 0x04
+#define     SENS_VocExtReadShift 2
+#define SENS_VocIntPercent                       5985      // uint8_t
+#define SENS_VocExt1Percent                      5986      // uint8_t
+#define SENS_VocExt2Percent                      5987      // uint8_t
+#define SENS_Co2Offset                           5988      // int8_t
+#define SENS_Co2CycleBase                        5989      // 2 Bits, Bit 7-6
+#define     SENS_Co2CycleBaseMask 0xC0
+#define     SENS_Co2CycleBaseShift 6
+#define SENS_Co2CycleTime                        5989      // 14 Bits, Bit 13-0
+#define     SENS_Co2CycleTimeMask 0x3FFF
+#define     SENS_Co2CycleTimeShift 0
+#define SENS_Co2DeltaAbs                         5991      // uint16_t
+#define SENS_Co2DeltaPercent                     5993      // uint8_t
+#define SENS_Co2Smooth                           5994      // uint8_t
+#define SENS_Co2ExtCount                         5995      // 2 Bits, Bit 1-0
+#define     SENS_Co2ExtCountMask 0x03
+#define     SENS_Co2ExtCountShift 0
+#define SENS_Co2ExtRead                          5995      // 1 Bit, Bit 2
+#define     SENS_Co2ExtReadMask 0x04
+#define     SENS_Co2ExtReadShift 2
+#define SENS_Co2IntPercent                       5996      // uint8_t
+#define SENS_Co2Ext1Percent                      5997      // uint8_t
+#define SENS_Co2Ext2Percent                      5998      // uint8_t
+#define SENS_DewOffset                           6000      // int8_t
+#define SENS_DewCycleBase                        6001      // 2 Bits, Bit 7-6
+#define     SENS_DewCycleBaseMask 0xC0
+#define     SENS_DewCycleBaseShift 6
+#define SENS_DewCycleTime                        6001      // 14 Bits, Bit 13-0
+#define     SENS_DewCycleTimeMask 0x3FFF
+#define     SENS_DewCycleTimeShift 0
+#define SENS_DewDeltaAbs                         6003      // uint16_t
+#define SENS_DewDeltaPercent                     6005      // uint8_t
+#define SENS_DewSmooth                           6006      // uint8_t
+#define SENS_LuxOffset                           6007      // int8_t
+#define SENS_LuxCycleBase                        6008      // 2 Bits, Bit 7-6
+#define     SENS_LuxCycleBaseMask 0xC0
+#define     SENS_LuxCycleBaseShift 6
+#define SENS_LuxCycleTime                        6008      // 14 Bits, Bit 13-0
+#define     SENS_LuxCycleTimeMask 0x3FFF
+#define     SENS_LuxCycleTimeShift 0
+#define SENS_LuxDeltaAbs                         6010      // uint16_t
+#define SENS_LuxDeltaPercent                     6012      // uint8_t
+#define SENS_LuxSmooth                           6013      // uint8_t
+#define SENS_LuxExtCount                         6014      // 2 Bits, Bit 1-0
+#define     SENS_LuxExtCountMask 0x03
+#define     SENS_LuxExtCountShift 0
+#define SENS_LuxExtRead                          6014      // 1 Bit, Bit 2
+#define     SENS_LuxExtReadMask 0x04
+#define     SENS_LuxExtReadShift 2
+#define SENS_LuxIntPercent                       6015      // uint8_t
+#define SENS_LuxExt1Percent                      6016      // uint8_t
+#define SENS_LuxExt2Percent                      6017      // uint8_t
+#define SENS_TofOffset                           6018      // int8_t
+#define SENS_TofCycleBase                        6019      // 2 Bits, Bit 7-6
+#define     SENS_TofCycleBaseMask 0xC0
+#define     SENS_TofCycleBaseShift 6
+#define SENS_TofCycleTime                        6019      // 14 Bits, Bit 13-0
+#define     SENS_TofCycleTimeMask 0x3FFF
+#define     SENS_TofCycleTimeShift 0
+#define SENS_TofDeltaAbs                         6021      // uint16_t
+#define SENS_TofDeltaPercent                     6023      // uint8_t
+#define SENS_TofSmooth                           6024      // uint8_t
+#define SENS_TofExtCount                         6025      // 2 Bits, Bit 1-0
+#define     SENS_TofExtCountMask 0x03
+#define     SENS_TofExtCountShift 0
+#define SENS_TofExtRead                          6025      // 1 Bit, Bit 2
+#define     SENS_TofExtReadMask 0x04
+#define     SENS_TofExtReadShift 2
+#define SENS_TofIntPercent                       6026      // uint8_t
+#define SENS_TofExt1Percent                      6027      // uint8_t
+#define SENS_TofExt2Percent                      6028      // uint8_t
+#define SENS_TempSensor                          6029      // 4 Bits, Bit 7-4
+#define     SENS_TempSensorMask 0xF0
+#define     SENS_TempSensorShift 4
+#define SENS_HumSensor                           6029      // 4 Bits, Bit 3-0
+#define     SENS_HumSensorMask 0x0F
+#define     SENS_HumSensorShift 0
+#define SENS_PreSensor                           6030      // 4 Bits, Bit 7-4
+#define     SENS_PreSensorMask 0xF0
+#define     SENS_PreSensorShift 4
+#define SENS_VocSensor                           6030      // 4 Bits, Bit 3-0
+#define     SENS_VocSensorMask 0x0F
+#define     SENS_VocSensorShift 0
+#define SENS_Co2Sensor                           6031      // 4 Bits, Bit 7-4
+#define     SENS_Co2SensorMask 0xF0
+#define     SENS_Co2SensorShift 4
+#define SENS_LuxSensor                           6031      // 4 Bits, Bit 3-0
+#define     SENS_LuxSensorMask 0x0F
+#define     SENS_LuxSensorShift 0
+#define SENS_TofSensor                           6032      // 4 Bits, Bit 7-4
+#define     SENS_TofSensorMask 0xF0
+#define     SENS_TofSensorShift 4
+#define SENS_SCD41MeasureIntervalDelayBase       6033      // 2 Bits, Bit 7-6
+#define     SENS_SCD41MeasureIntervalDelayBaseMask 0xC0
+#define     SENS_SCD41MeasureIntervalDelayBaseShift 6
+#define SENS_SCD41MeasureIntervalDelayTime       6033      // 14 Bits, Bit 13-0
+#define     SENS_SCD41MeasureIntervalDelayTimeMask 0x3FFF
+#define     SENS_SCD41MeasureIntervalDelayTimeShift 0
+#define SENS_PT1000NumWires                      6035      // 2 Bits, Bit 7-6
+#define     SENS_PT1000NumWiresMask 0xC0
+#define     SENS_PT1000NumWiresShift 6
+#define SENS_PT100PT1000                         6035      // 1 Bit, Bit 5
+#define     SENS_PT100PT1000Mask 0x20
+#define     SENS_PT100PT1000Shift 5
+
+// Fehlerobjekt für Standardmesswerte anzeigen
+#define ParamSENS_Error                               ((bool)(knx.paramByte(SENS_Error) & SENS_ErrorMask))
+// Taupunkt berechnen
+#define ParamSENS_Dewpoint                            ((bool)(knx.paramByte(SENS_Dewpoint) & SENS_DewpointMask))
+// Behaglichkeitszone ausgeben
+#define ParamSENS_Comfort                             ((bool)(knx.paramByte(SENS_Comfort) & SENS_ComfortMask))
+// Luftqualitätsampel ausgeben
+#define ParamSENS_Airquality                          ((bool)(knx.paramByte(SENS_Airquality) & SENS_AirqualityMask))
+// Kalibrierungsfortschritt ausgeben
+#define ParamSENS_Accuracy                            ((bool)(knx.paramByte(SENS_Accuracy) & SENS_AccuracyMask))
+// Kalibrierungsdaten löschen
+#define ParamSENS_DeleteData                          ((bool)(knx.paramByte(SENS_DeleteData) & SENS_DeleteDataMask))
+// Temperatur anpassen (interner Messwert)
+#define ParamSENS_TempOffset                          ((int8_t)knx.paramByte(SENS_TempOffset))
+// Zeitbasis
+#define ParamSENS_TempCycleBase                       ((knx.paramByte(SENS_TempCycleBase) & SENS_TempCycleBaseMask) >> SENS_TempCycleBaseShift)
+// Zeit
+#define ParamSENS_TempCycleTime                       (knx.paramWord(SENS_TempCycleTime) & SENS_TempCycleTimeMask)
+// Zeit (in Millisekunden)
+#define ParamSENS_TempCycleTimeMS                     (paramDelay(knx.paramWord(SENS_TempCycleTime)))
+// Temperatur bei absoluter Abweichung senden(0=nicht senden)
+#define ParamSENS_TempDeltaAbs                        (knx.paramWord(SENS_TempDeltaAbs))
+// Temperatur bei Abweichung vom vorherigen Wert senden(0=nicht senden)
+#define ParamSENS_TempDeltaPercent                    (knx.paramByte(SENS_TempDeltaPercent))
+// Temperatur glätten: P =
+#define ParamSENS_TempSmooth                          (knx.paramByte(SENS_TempSmooth))
+// Externe Messwerte berücksichtigen
+#define ParamSENS_TempExtCount                        (knx.paramByte(SENS_TempExtCount) & SENS_TempExtCountMask)
+//     Externe Messwerte beim Start lesen
+#define ParamSENS_TempExtRead                         ((bool)(knx.paramByte(SENS_TempExtRead) & SENS_TempExtReadMask))
+//     Anteil interner Messwert
+#define ParamSENS_TempIntPercent                      (knx.paramByte(SENS_TempIntPercent))
+//     Anteil externer Messwert 1
+#define ParamSENS_TempExt1Percent                     (knx.paramByte(SENS_TempExt1Percent))
+//     Anteil externer Messwert 2
+#define ParamSENS_TempExt2Percent                     (knx.paramByte(SENS_TempExt2Percent))
+// Luftfeuchte anpassen (interner Messwert)
+#define ParamSENS_HumOffset                           ((int8_t)knx.paramByte(SENS_HumOffset))
+// Zeitbasis
+#define ParamSENS_HumCycleBase                        ((knx.paramByte(SENS_HumCycleBase) & SENS_HumCycleBaseMask) >> SENS_HumCycleBaseShift)
+// Zeit
+#define ParamSENS_HumCycleTime                        (knx.paramWord(SENS_HumCycleTime) & SENS_HumCycleTimeMask)
+// Zeit (in Millisekunden)
+#define ParamSENS_HumCycleTimeMS                      (paramDelay(knx.paramWord(SENS_HumCycleTime)))
+// Luftfeuchte bei absoluter Abweichung senden(0=nicht senden)
+#define ParamSENS_HumDeltaAbs                         (knx.paramWord(SENS_HumDeltaAbs))
+// Luftfeuchte bei Abweichung vom vorherigen Wert senden(0=nicht senden)
+#define ParamSENS_HumDeltaPercent                     (knx.paramByte(SENS_HumDeltaPercent))
+// Luftfeuchte glätten: P =
+#define ParamSENS_HumSmooth                           (knx.paramByte(SENS_HumSmooth))
+// Externe Messwerte berücksichtigen
+#define ParamSENS_HumExtCount                         (knx.paramByte(SENS_HumExtCount) & SENS_HumExtCountMask)
+//     Externe Messwerte beim Start lesen
+#define ParamSENS_HumExtRead                          ((bool)(knx.paramByte(SENS_HumExtRead) & SENS_HumExtReadMask))
+//     Anteil interner Messwert
+#define ParamSENS_HumIntPercent                       (knx.paramByte(SENS_HumIntPercent))
+//     Anteil externer Messwert 1
+#define ParamSENS_HumExt1Percent                      (knx.paramByte(SENS_HumExt1Percent))
+//     Anteil externer Messwert 2
+#define ParamSENS_HumExt2Percent                      (knx.paramByte(SENS_HumExt2Percent))
+// Luftdruck anpassen (interner Messwert)
+#define ParamSENS_PreOffset                           ((int8_t)knx.paramByte(SENS_PreOffset))
+// Zeitbasis
+#define ParamSENS_PreCycleBase                        ((knx.paramByte(SENS_PreCycleBase) & SENS_PreCycleBaseMask) >> SENS_PreCycleBaseShift)
+// Zeit
+#define ParamSENS_PreCycleTime                        (knx.paramWord(SENS_PreCycleTime) & SENS_PreCycleTimeMask)
+// Zeit (in Millisekunden)
+#define ParamSENS_PreCycleTimeMS                      (paramDelay(knx.paramWord(SENS_PreCycleTime)))
+// Luftdruck bei absoluter Abweichung senden(0=nicht senden)
+#define ParamSENS_PreDeltaAbs                         (knx.paramWord(SENS_PreDeltaAbs))
+// Luftdruck bei Abweichung vom vorherigen Wert senden(0=nicht senden)
+#define ParamSENS_PreDeltaPercent                     (knx.paramByte(SENS_PreDeltaPercent))
+// Luftdruck glätten: P =
+#define ParamSENS_PreSmooth                           (knx.paramByte(SENS_PreSmooth))
+// Externe Messwerte berücksichtigen
+#define ParamSENS_PreExtCount                         (knx.paramByte(SENS_PreExtCount) & SENS_PreExtCountMask)
+//     Externe Messwerte beim Start lesen
+#define ParamSENS_PreExtRead                          ((bool)(knx.paramByte(SENS_PreExtRead) & SENS_PreExtReadMask))
+//     Anteil interner Messwert
+#define ParamSENS_PreIntPercent                       (knx.paramByte(SENS_PreIntPercent))
+//     Anteil externer Messwert 1
+#define ParamSENS_PreExt1Percent                      (knx.paramByte(SENS_PreExt1Percent))
+//     Anteil externer Messwert 2
+#define ParamSENS_PreExt2Percent                      (knx.paramByte(SENS_PreExt2Percent))
+// VOC anpassen (interner Messwert)
+#define ParamSENS_VocOffset                           ((int8_t)knx.paramByte(SENS_VocOffset))
+// Zeitbasis
+#define ParamSENS_VocCycleBase                        ((knx.paramByte(SENS_VocCycleBase) & SENS_VocCycleBaseMask) >> SENS_VocCycleBaseShift)
+// Zeit
+#define ParamSENS_VocCycleTime                        (knx.paramWord(SENS_VocCycleTime) & SENS_VocCycleTimeMask)
+// Zeit (in Millisekunden)
+#define ParamSENS_VocCycleTimeMS                      (paramDelay(knx.paramWord(SENS_VocCycleTime)))
+// VOC bei absoluter Abweichung senden(0=nicht senden)
+#define ParamSENS_VocDeltaAbs                         (knx.paramWord(SENS_VocDeltaAbs))
+// VOC bei Abweichung vom vorherigen Wert senden(0=nicht senden)
+#define ParamSENS_VocDeltaPercent                     (knx.paramByte(SENS_VocDeltaPercent))
+// VOC glätten: P =
+#define ParamSENS_VocSmooth                           (knx.paramByte(SENS_VocSmooth))
+// Externe Messwerte berücksichtigen
+#define ParamSENS_VocExtCount                         (knx.paramByte(SENS_VocExtCount) & SENS_VocExtCountMask)
+//     Externe Messwerte beim Start lesen
+#define ParamSENS_VocExtRead                          ((bool)(knx.paramByte(SENS_VocExtRead) & SENS_VocExtReadMask))
+//     Anteil interner Messwert
+#define ParamSENS_VocIntPercent                       (knx.paramByte(SENS_VocIntPercent))
+//     Anteil externer Messwert 1
+#define ParamSENS_VocExt1Percent                      (knx.paramByte(SENS_VocExt1Percent))
+//     Anteil externer Messwert 2
+#define ParamSENS_VocExt2Percent                      (knx.paramByte(SENS_VocExt2Percent))
+// CO2 anpassen (interner Messwert)
+#define ParamSENS_Co2Offset                           ((int8_t)knx.paramByte(SENS_Co2Offset))
+// Zeitbasis
+#define ParamSENS_Co2CycleBase                        ((knx.paramByte(SENS_Co2CycleBase) & SENS_Co2CycleBaseMask) >> SENS_Co2CycleBaseShift)
+// Zeit
+#define ParamSENS_Co2CycleTime                        (knx.paramWord(SENS_Co2CycleTime) & SENS_Co2CycleTimeMask)
+// Zeit (in Millisekunden)
+#define ParamSENS_Co2CycleTimeMS                      (paramDelay(knx.paramWord(SENS_Co2CycleTime)))
+// CO2 bei absoluter Abweichung senden(0=nicht senden)
+#define ParamSENS_Co2DeltaAbs                         (knx.paramWord(SENS_Co2DeltaAbs))
+// CO2 bei Abweichung vom vorherigen Wert senden(0=nicht senden)
+#define ParamSENS_Co2DeltaPercent                     (knx.paramByte(SENS_Co2DeltaPercent))
+// CO2 glätten: P =
+#define ParamSENS_Co2Smooth                           (knx.paramByte(SENS_Co2Smooth))
+// Externe Messwerte berücksichtigen
+#define ParamSENS_Co2ExtCount                         (knx.paramByte(SENS_Co2ExtCount) & SENS_Co2ExtCountMask)
+//     Externe Messwerte beim Start lesen
+#define ParamSENS_Co2ExtRead                          ((bool)(knx.paramByte(SENS_Co2ExtRead) & SENS_Co2ExtReadMask))
+//     Anteil interner Messwert
+#define ParamSENS_Co2IntPercent                       (knx.paramByte(SENS_Co2IntPercent))
+//     Anteil externer Messwert 1
+#define ParamSENS_Co2Ext1Percent                      (knx.paramByte(SENS_Co2Ext1Percent))
+//     Anteil externer Messwert 2
+#define ParamSENS_Co2Ext2Percent                      (knx.paramByte(SENS_Co2Ext2Percent))
+// Taupunkt anpassen
+#define ParamSENS_DewOffset                           ((int8_t)knx.paramByte(SENS_DewOffset))
+// Zeitbasis
+#define ParamSENS_DewCycleBase                        ((knx.paramByte(SENS_DewCycleBase) & SENS_DewCycleBaseMask) >> SENS_DewCycleBaseShift)
+// Zeit
+#define ParamSENS_DewCycleTime                        (knx.paramWord(SENS_DewCycleTime) & SENS_DewCycleTimeMask)
+// Zeit (in Millisekunden)
+#define ParamSENS_DewCycleTimeMS                      (paramDelay(knx.paramWord(SENS_DewCycleTime)))
+// Taupunkt bei absoluter Abweichung senden(0=nicht senden)
+#define ParamSENS_DewDeltaAbs                         (knx.paramWord(SENS_DewDeltaAbs))
+// Taupunkt bei Abweichung vom vorherigen Wert senden(0=nicht senden)
+#define ParamSENS_DewDeltaPercent                     (knx.paramByte(SENS_DewDeltaPercent))
+// Taupunkt glätten: P =
+#define ParamSENS_DewSmooth                           (knx.paramByte(SENS_DewSmooth))
+// Helligkeit anpassen (interner Messwert)
+#define ParamSENS_LuxOffset                           ((int8_t)knx.paramByte(SENS_LuxOffset))
+// Zeitbasis
+#define ParamSENS_LuxCycleBase                        ((knx.paramByte(SENS_LuxCycleBase) & SENS_LuxCycleBaseMask) >> SENS_LuxCycleBaseShift)
+// Zeit
+#define ParamSENS_LuxCycleTime                        (knx.paramWord(SENS_LuxCycleTime) & SENS_LuxCycleTimeMask)
+// Zeit (in Millisekunden)
+#define ParamSENS_LuxCycleTimeMS                      (paramDelay(knx.paramWord(SENS_LuxCycleTime)))
+// Helligkeit bei absoluter Abweichung senden(0=nicht senden)
+#define ParamSENS_LuxDeltaAbs                         (knx.paramWord(SENS_LuxDeltaAbs))
+// Helligkeit bei Abweichung vom vorherigen Wert senden(0=nicht senden)
+#define ParamSENS_LuxDeltaPercent                     (knx.paramByte(SENS_LuxDeltaPercent))
+// Helligkeit glätten: P =
+#define ParamSENS_LuxSmooth                           (knx.paramByte(SENS_LuxSmooth))
+// Externe Messwerte berücksichtigen
+#define ParamSENS_LuxExtCount                         (knx.paramByte(SENS_LuxExtCount) & SENS_LuxExtCountMask)
+//     Externe Messwerte beim Start lesen
+#define ParamSENS_LuxExtRead                          ((bool)(knx.paramByte(SENS_LuxExtRead) & SENS_LuxExtReadMask))
+//     Anteil interner Messwert
+#define ParamSENS_LuxIntPercent                       (knx.paramByte(SENS_LuxIntPercent))
+//     Anteil externer Messwert 1
+#define ParamSENS_LuxExt1Percent                      (knx.paramByte(SENS_LuxExt1Percent))
+//     Anteil externer Messwert 2
+#define ParamSENS_LuxExt2Percent                      (knx.paramByte(SENS_LuxExt2Percent))
+// Entfernung anpassen (interner Messwert)
+#define ParamSENS_TofOffset                           ((int8_t)knx.paramByte(SENS_TofOffset))
+// Zeitbasis
+#define ParamSENS_TofCycleBase                        ((knx.paramByte(SENS_TofCycleBase) & SENS_TofCycleBaseMask) >> SENS_TofCycleBaseShift)
+// Zeit
+#define ParamSENS_TofCycleTime                        (knx.paramWord(SENS_TofCycleTime) & SENS_TofCycleTimeMask)
+// Zeit (in Millisekunden)
+#define ParamSENS_TofCycleTimeMS                      (paramDelay(knx.paramWord(SENS_TofCycleTime)))
+// Entfernung bei absoluter Abweichung senden(0=nicht senden)
+#define ParamSENS_TofDeltaAbs                         (knx.paramWord(SENS_TofDeltaAbs))
+// Entfernung bei Abweichung vom vorherigen Wert senden(0=nicht senden)
+#define ParamSENS_TofDeltaPercent                     (knx.paramByte(SENS_TofDeltaPercent))
+// Entfernung glätten: P =
+#define ParamSENS_TofSmooth                           (knx.paramByte(SENS_TofSmooth))
+// Externe Messwerte berücksichtigen
+#define ParamSENS_TofExtCount                         (knx.paramByte(SENS_TofExtCount) & SENS_TofExtCountMask)
+//     Externe Messwerte beim Start lesen
+#define ParamSENS_TofExtRead                          ((bool)(knx.paramByte(SENS_TofExtRead) & SENS_TofExtReadMask))
+//     Anteil interner Messwert
+#define ParamSENS_TofIntPercent                       (knx.paramByte(SENS_TofIntPercent))
+//     Anteil externer Messwert 1
+#define ParamSENS_TofExt1Percent                      (knx.paramByte(SENS_TofExt1Percent))
+//     Anteil externer Messwert 2
+#define ParamSENS_TofExt2Percent                      (knx.paramByte(SENS_TofExt2Percent))
+// Temperatursensor
+#define ParamSENS_TempSensor                          ((knx.paramByte(SENS_TempSensor) & SENS_TempSensorMask) >> SENS_TempSensorShift)
+// Luftfeuchtesensor
+#define ParamSENS_HumSensor                           (knx.paramByte(SENS_HumSensor) & SENS_HumSensorMask)
+// Luftdrucksensor
+#define ParamSENS_PreSensor                           ((knx.paramByte(SENS_PreSensor) & SENS_PreSensorMask) >> SENS_PreSensorShift)
+// Voc-Sensor
+#define ParamSENS_VocSensor                           (knx.paramByte(SENS_VocSensor) & SENS_VocSensorMask)
+// Co2-Sensor
+#define ParamSENS_Co2Sensor                           ((knx.paramByte(SENS_Co2Sensor) & SENS_Co2SensorMask) >> SENS_Co2SensorShift)
+// Helligkeitssensor
+#define ParamSENS_LuxSensor                           (knx.paramByte(SENS_LuxSensor) & SENS_LuxSensorMask)
+// Füllstands- und Näherungssensor
+#define ParamSENS_TofSensor                           ((knx.paramByte(SENS_TofSensor) & SENS_TofSensorMask) >> SENS_TofSensorShift)
+// Zeitbasis
+#define ParamSENS_SCD41MeasureIntervalDelayBase       ((knx.paramByte(SENS_SCD41MeasureIntervalDelayBase) & SENS_SCD41MeasureIntervalDelayBaseMask) >> SENS_SCD41MeasureIntervalDelayBaseShift)
+// Zeit
+#define ParamSENS_SCD41MeasureIntervalDelayTime       (knx.paramWord(SENS_SCD41MeasureIntervalDelayTime) & SENS_SCD41MeasureIntervalDelayTimeMask)
+// Zeit (in Millisekunden)
+#define ParamSENS_SCD41MeasureIntervalDelayTimeMS     (paramDelay(knx.paramWord(SENS_SCD41MeasureIntervalDelayTime)))
+// Anzahl Anschlussadern
+#define ParamSENS_PT1000NumWires                      ((knx.paramByte(SENS_PT1000NumWires) & SENS_PT1000NumWiresMask) >> SENS_PT1000NumWiresShift)
+// Art des Analogsensors
+#define ParamSENS_PT100PT1000                         ((bool)(knx.paramByte(SENS_PT100PT1000) & SENS_PT100PT1000Mask))
+
+#define SENS_KoRequestValues 220
+#define SENS_KoError 221
+#define SENS_KoTemp 222
+#define SENS_KoExt1Temp 223
+#define SENS_KoExt2Temp 224
+#define SENS_KoHum 225
+#define SENS_KoExt1Hum 226
+#define SENS_KoExt2Hum 227
+#define SENS_KoPre 228
+#define SENS_KoExt1Pre 229
+#define SENS_KoExt2Pre 230
+#define SENS_KoVoc 231
+#define SENS_KoExt1Voc 232
+#define SENS_KoExt2Voc 233
+#define SENS_KoCo2 234
+#define SENS_KoExt1Co2 236
+#define SENS_KoExt2Co2 237
+#define SENS_KoLux 238
+#define SENS_KoExt1Lux 239
+#define SENS_KoExt2Lux 240
+#define SENS_KoTof 241
+#define SENS_KoExt1Tof 242
+#define SENS_KoExt2Tof 243
+#define SENS_KoCo2b 235
+#define SENS_KoDewpoint 262
+#define SENS_KoComfort 263
+#define SENS_KoAirquality 264
+#define SENS_KoSensorAccuracy 265
+
+// Sensorwerte anfordern
+#define KoSENS_RequestValues                       (knx.getGroupObject(SENS_KoRequestValues))
+// Sensorfehler
+#define KoSENS_Error                               (knx.getGroupObject(SENS_KoError))
+// Temperatur
+#define KoSENS_Temp                                (knx.getGroupObject(SENS_KoTemp))
+// Extern: Temperatur 1
+#define KoSENS_Ext1Temp                            (knx.getGroupObject(SENS_KoExt1Temp))
+// Extern: Temperatur 2
+#define KoSENS_Ext2Temp                            (knx.getGroupObject(SENS_KoExt2Temp))
+// Luftfeuchte
+#define KoSENS_Hum                                 (knx.getGroupObject(SENS_KoHum))
+// Extern: Luftfeuchte 1
+#define KoSENS_Ext1Hum                             (knx.getGroupObject(SENS_KoExt1Hum))
+// Extern: Luftfeuchte 2
+#define KoSENS_Ext2Hum                             (knx.getGroupObject(SENS_KoExt2Hum))
+// Luftdruck
+#define KoSENS_Pre                                 (knx.getGroupObject(SENS_KoPre))
+// Extern: Luftdruck 1
+#define KoSENS_Ext1Pre                             (knx.getGroupObject(SENS_KoExt1Pre))
+// Extern: Luftdruck 2
+#define KoSENS_Ext2Pre                             (knx.getGroupObject(SENS_KoExt2Pre))
+// VOC
+#define KoSENS_Voc                                 (knx.getGroupObject(SENS_KoVoc))
+// Extern: VOC 1
+#define KoSENS_Ext1Voc                             (knx.getGroupObject(SENS_KoExt1Voc))
+// Extern: VOC 2
+#define KoSENS_Ext2Voc                             (knx.getGroupObject(SENS_KoExt2Voc))
+// CO2
+#define KoSENS_Co2                                 (knx.getGroupObject(SENS_KoCo2))
+// Extern: CO2 1
+#define KoSENS_Ext1Co2                             (knx.getGroupObject(SENS_KoExt1Co2))
+// Extern: CO2 2
+#define KoSENS_Ext2Co2                             (knx.getGroupObject(SENS_KoExt2Co2))
+// Helligkeit
+#define KoSENS_Lux                                 (knx.getGroupObject(SENS_KoLux))
+// Extern: Helligkeit 1
+#define KoSENS_Ext1Lux                             (knx.getGroupObject(SENS_KoExt1Lux))
+// Extern: Helligkeit 2
+#define KoSENS_Ext2Lux                             (knx.getGroupObject(SENS_KoExt2Lux))
+// Entfernung
+#define KoSENS_Tof                                 (knx.getGroupObject(SENS_KoTof))
+// Extern: Entfernung 1
+#define KoSENS_Ext1Tof                             (knx.getGroupObject(SENS_KoExt1Tof))
+// Extern: Entfernung 2
+#define KoSENS_Ext2Tof                             (knx.getGroupObject(SENS_KoExt2Tof))
+// CO2-VOC
+#define KoSENS_Co2b                                (knx.getGroupObject(SENS_KoCo2b))
+// Taupunkt
+#define KoSENS_Dewpoint                            (knx.getGroupObject(SENS_KoDewpoint))
+// Behaglichkeit
+#define KoSENS_Comfort                             (knx.getGroupObject(SENS_KoComfort))
+// Luftqualitätsampel (1-6)
+#define KoSENS_Airquality                          (knx.getGroupObject(SENS_KoAirquality))
+// Kalibrierungfortschritt
+#define KoSENS_SensorAccuracy                      (knx.getGroupObject(SENS_KoSensorAccuracy))
+
 
 
 // Header generation for Module 'BASE_KommentarModule'
@@ -3620,7 +4127,7 @@
 #define BASE_KommentarModuleModuleParamSize 0
 #define BASE_KommentarModuleSubmodulesParamSize 0
 #define BASE_KommentarModuleParamSize 0
-#define BASE_KommentarModuleParamOffset 5943
+#define BASE_KommentarModuleParamOffset 6036
 #define BASE_KommentarModuleCalcIndex(index, m1) (index + BASE_KommentarModuleParamOffset + _channelIndex * BASE_KommentarModuleCount * BASE_KommentarModuleParamSize + m1 * BASE_KommentarModuleParamSize)
 
 

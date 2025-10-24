@@ -5,8 +5,8 @@
 
 #include "VirtualButtonModule.h"
 #include "GpioBinaryInputModule.h"
-//#include "SensorDevices.h"
-//#include "SensorModule.h"
+#include "SensorDevices.h"
+#include "SensorModule.h"
 
 /* ToDo
 - Status für Station erreichbar, Timeout Parameter
@@ -27,7 +27,8 @@ void setup()
     openknx.addModule(2, openknxWN90LPModule);
     openknx.addModule(3, openknxGpioBinaryInputModule);
     openknx.addModule(4, openknxVirtualButtonModule);
-    //openknx.addModule(5, openknxSensorModule);
+    openknx.addModule(5, openknxSensorDevicesModule);
+    openknx.addModule(6, openknxSensorModule);
     openknx.addModule(9, openknxFileTransferModule);
     openknx.setup();
 }

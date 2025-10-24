@@ -3,8 +3,8 @@ ee3c00e v1 lib/knx https://github.com/OpenKNX/knx.git
 7b628ef v1 lib/OFM-BinaryInput https://github.com/OpenKNX/OFM-BinaryInput.git
 e003477 v1 lib/OFM-ConfigTransfer https://github.com/OpenKNX/OFM-ConfigTransfer
 ad9b0da v1 lib/OFM-FileTransferModule https://github.com/OpenKNX/OFM-FileTransferModule.git
-5e30d8d v1 lib/OFM-LogicModule https://github.com/OpenKNX/OFM-LogicModule
-370b67d v1dev lib/OFM-SensorModule https://github.com/OpenKNX/OFM-SensorModule
+ea7c433 v1 lib/OFM-LogicModule https://github.com/OpenKNX/OFM-LogicModule
+603d0db v1dev lib/OFM-SensorModule https://github.com/OpenKNX/OFM-SensorModule
 06ebdcb v1 lib/OFM-VirtualButton https://github.com/OpenKNX/OFM-VirtualButton.git
 a0cb944 v1dev lib/OGM-Common https://github.com/OpenKNX/OGM-Common.git
 6a4c306 v1 lib/OGM-HardwareConfig https://github.com/OpenKNX/OGM-HardwareConfig.git

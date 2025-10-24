@@ -26,6 +26,7 @@
               <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" type="template" prefix="BI" />
               <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" prefix="BTN" />
               <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" type="template" prefix="BTN" />
+              <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" prefix="SENS" />
             </ParameterTypes>
             <Parameters>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="parameter" prefix="BASE" />
@@ -38,6 +39,7 @@
               <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="template" prefix="BI" />
               <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="parameter" prefix="BTN" />
               <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="template" prefix="BTN" />
+              <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="parameter" prefix="SENS" />
             </Parameters>
             <ParameterRefs>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" prefix="BASE" />
@@ -50,6 +52,7 @@
               <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" type="template" prefix="BI" />
               <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" prefix="BTN" />
               <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" type="template" prefix="BTN" />
+              <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" prefix="SENS" />
             </ParameterRefs>
             <ParameterCalculations>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" prefix="BASE" />
@@ -62,6 +65,7 @@
               <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" type="template" prefix="BI" />
               <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" prefix="BTN" />
               <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" type="template" prefix="BTN" />
+              <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" prefix="SENS" />
             </ParameterCalculations>
             <ParameterValidations>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" prefix="BASE" />
@@ -74,6 +78,7 @@
               <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" type="template" prefix="BI" />
               <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" prefix="BTN" />
               <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" type="template" prefix="BTN" />
+              <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" prefix="SENS" />
             </ParameterValidations>
             <ComObjectTable>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" prefix="BASE" />
@@ -86,6 +91,7 @@
               <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" type="template" prefix="BI" />
               <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" prefix="BTN" />
               <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" type="template" prefix="BTN" />
+              <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" prefix="SENS" />
             </ComObjectTable>
             <ComObjectRefs>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" prefix="BASE" />
@@ -98,6 +104,7 @@
               <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" type="template" prefix="BI" />
               <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" prefix="BTN" />
               <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" type="template" prefix="BTN" />
+              <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" prefix="SENS" />
             </ComObjectRefs>
             <AddressTable MaxEntries="2047" />
             <AssociationTable MaxEntries="2047" />
@@ -127,6 +134,7 @@
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/Messages/*" prefix="LOG" />
               <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//ApplicationProgram/Static/Messages/*" prefix="BI" />
               <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Static/Messages/*" prefix="BTN" />
+              <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Static/Messages/*" prefix="SENS" />
             </Messages>
             <Script>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/Script/text()" prefix="BASE" />
@@ -135,6 +143,7 @@
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/Script/text()" prefix="LOG" />
               <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//ApplicationProgram/Static/Script/text()" prefix="BI" />
               <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Static/Script/text()" prefix="BTN" />
+              <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Static/Script/text()" prefix="SENS" />
             </Script>
             <Options TextParameterEncoding="iso-8859-15" />
           </Static>
@@ -149,6 +158,7 @@
             <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//ApplicationProgram/ModuleDefs/*" type="template" prefix="BI" />
             <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/ModuleDefs/*" prefix="BTN" />
             <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//ApplicationProgram/ModuleDefs/*" type="template" prefix="BTN" />
+            <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/ModuleDefs/*" prefix="SENS" />
           </ModuleDefs>
           <Dynamic>
             <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="BASE" />
@@ -157,6 +167,7 @@
             <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="LOG" />
             <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="BI" />
             <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="BTN" />
+            <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="SENS" />
           </Dynamic>
         </ApplicationProgram>
       </ApplicationPrograms>
@@ -167,6 +178,7 @@
         <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//Manufacturer/Baggages/*" prefix="LOG" />
         <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//Manufacturer/Baggages/*" prefix="BI" />
         <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//Manufacturer/Baggages/*" prefix="BTN" />
+        <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//Manufacturer/Baggages/*" prefix="SENS" />
       </Baggages>
       <Hardware>
         <Hardware Id="%HardwareId%" Name="OpenKNX-Wetterstation WN90LP-Dev" SerialNumber="0xA129" VersionNumber="1" BusCurrent="20" HasIndividualAddress="true" HasApplicationProgram="true">
