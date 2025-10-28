@@ -12,7 +12,7 @@
                 "--Debug",
                 "-h",
                 "include/knxprod.h",
-                "src/WeatherWN90LP.xml"
+                "src/WeatherWN90LP-Dev.xml"
             ],
             "problemMatcher": [],
             "group": "test",
@@ -71,7 +71,7 @@
         },
         // Build a release package for distribution
         {
-            "label": "Build-Release",
+            "label": "Build-Release-Release",
             "type": "shell",
             "command": "scripts/Build-Release.ps1",
             "args": [
@@ -81,10 +81,11 @@
             "group": "test"
         },
         {
-            "label": "Build-Release-Beta",
+            "label": "Build-Release-Dev",
             "type": "shell",
             "command": "scripts/Build-Release.ps1",
             "args": [
+                "Dev"
             ],
             "problemMatcher": [],
             "group": "test"

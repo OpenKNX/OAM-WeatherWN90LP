@@ -9,45 +9,102 @@
         </CatalogSection>
       </Catalog>
       <ApplicationPrograms>
-        <op:version OpenKnxId="0xA1" ApplicationNumber="11" ApplicationVersion="1" ReplacesVersions="0" ApplicationRevision="0" />
-        <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="Wetterstation WN90LP" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de-DE" DynamicTableManagement="false" Linkable="true" MinEtsVersion="5.0" ContextHelpFile="%FILE-HELP-de%" IconFile="%FILE-ICONS%" IPConfig="Custom" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
+        <op:version OpenKnxId="0xA1" ApplicationNumber="40" ApplicationVersion="1" ReplacesVersions="0" ApplicationRevision="0" FirmwareRevision="-1" />
+        <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="WeatherWN90LP-Beta" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de-DE" DynamicTableManagement="false" Linkable="true" MinEtsVersion="5.0" ContextHelpFile="%FILE-HELP-de%" IconFile="%FILE-ICONS%" IPConfig="Custom" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
           <Static>
             <Code>
               <RelativeSegment Id="%AID%_RS-04-00000" Name="Parameters" Offset="0" Size="%MemorySize%" LoadStateMachine="4" />
             </Code>
             <ParameterTypes>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" prefix="BASE" />
+              <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" prefix="UCT" />
+              <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" prefix="W90" />
+              <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" type="template" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" prefix="LOG" />
+              <op:include href="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" type="template" prefix="LOG" />
+              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" prefix="BI" />
+              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" type="template" prefix="BI" />
+              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" prefix="BTN" />
+              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" type="template" prefix="BTN" />
+              <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Static/ParameterTypes/ParameterType" prefix="SENS" />
             </ParameterTypes>
             <Parameters>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="parameter" prefix="BASE" />
+              <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="parameter" prefix="UCT" />
+              <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="parameter" prefix="W90" />
+              <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="template" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="parameter" prefix="LOG" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="template" prefix="LOG" />
+              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="parameter" prefix="BI" />
+              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="template" prefix="BI" />
+              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="parameter" prefix="BTN" />
+              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="template" prefix="BTN" />
+              <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Static/Parameters/Parameter|//ApplicationProgram/Static/Parameters/Union" type="parameter" prefix="SENS" />
             </Parameters>
             <ParameterRefs>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" prefix="BASE" />
+              <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" prefix="UCT" />
+              <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" prefix="W90" />
+              <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" type="template" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" prefix="LOG" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" type="template" prefix="LOG" />
+              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" prefix="BI" />
+              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" type="template" prefix="BI" />
+              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" prefix="BTN" />
+              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" type="template" prefix="BTN" />
+              <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Static/ParameterRefs/ParameterRef" prefix="SENS" />
             </ParameterRefs>
             <ParameterCalculations>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" prefix="BASE" />
+              <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" prefix="UCT" />
+              <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" prefix="W90" />
+              <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" type="template" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" prefix="LOG" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" type="template" prefix="LOG" />
+              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" prefix="BI" />
+              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" type="template" prefix="BI" />
+              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" prefix="BTN" />
+              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" type="template" prefix="BTN" />
+              <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Static/ParameterCalculations/ParameterCalculation" prefix="SENS" />
             </ParameterCalculations>
             <ParameterValidations>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" prefix="BASE" />
+              <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" prefix="UCT" />
+              <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" prefix="W90" />
+              <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" type="template" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" prefix="LOG" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" type="template" prefix="LOG" />
+              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" prefix="BI" />
+              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" type="template" prefix="BI" />
+              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" prefix="BTN" />
+              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" type="template" prefix="BTN" />
+              <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Static/ParameterValidations/ParameterValidation" prefix="SENS" />
             </ParameterValidations>
             <ComObjectTable>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" prefix="BASE" />
+              <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" prefix="UCT" />
+              <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" prefix="W90" />
+              <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" type="template" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" prefix="LOG" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" type="template" prefix="LOG" />
+              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" prefix="BI" />
+              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" type="template" prefix="BI" />
+              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" prefix="BTN" />
+              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" type="template" prefix="BTN" />
+              <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Static/ComObjectTable/ComObject" prefix="SENS" />
             </ComObjectTable>
             <ComObjectRefs>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" prefix="BASE" />
+              <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" prefix="UCT" />
+              <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" prefix="W90" />
+              <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" type="template" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" prefix="LOG" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" type="template" prefix="LOG" />
+              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" prefix="BI" />
+              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" type="template" prefix="BI" />
+              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" prefix="BTN" />
+              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" type="template" prefix="BTN" />
+              <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Static/ComObjectRefs/ComObjectRef" prefix="SENS" />
             </ComObjectRefs>
             <AddressTable MaxEntries="2047" />
             <AssociationTable MaxEntries="2047" />
@@ -65,9 +122,6 @@
                 <LdCtrlWriteRelMem ObjIdx="4" Offset="0" Size="%MemorySize%" Verify="true" AppliesTo="full,par" />
               </LoadProcedure>
               <LoadProcedure MergeId="7">
-                <LdCtrlLoadImageProp ObjIdx="1" PropId="27" />
-                <LdCtrlLoadImageProp ObjIdx="2" PropId="27" />
-                <LdCtrlLoadImageProp ObjIdx="3" PropId="27" />
                 <LdCtrlLoadImageProp ObjIdx="4" PropId="27" />
               </LoadProcedure>
             </LoadProcedures>
@@ -75,33 +129,61 @@
             <Messages>
               <Message Id="%AID%_M-1" Name="VersionMismatch" Text="Diese Applikation und die installierte Firmware passen nicht zusammen." />
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/Messages/*" prefix="BASE" />
+              <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Static/Messages/*" prefix="UCT" />
+              <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/Messages/*" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/Messages/*" prefix="LOG" />
+              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//ApplicationProgram/Static/Messages/*" prefix="BI" />
+              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Static/Messages/*" prefix="BTN" />
+              <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Static/Messages/*" prefix="SENS" />
             </Messages>
             <Script>
               <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Static/Script/text()" prefix="BASE" />
+              <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Static/Script/text()" prefix="UCT" />
+              <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Static/Script/text()" prefix="W90" />
               <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Static/Script/text()" prefix="LOG" />
+              <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//ApplicationProgram/Static/Script/text()" prefix="BI" />
+              <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Static/Script/text()" prefix="BTN" />
+              <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Static/Script/text()" prefix="SENS" />
             </Script>
-            <Options />
+            <Options TextParameterEncoding="iso-8859-15" />
           </Static>
           <ModuleDefs>
             <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/ModuleDefs/*" prefix="BASE" />
+            <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/ModuleDefs/*" prefix="UCT" />
+            <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/ModuleDefs/*" prefix="W90" />
+            <op:include href="WN90LPModule.templ.xml" xpath="//ApplicationProgram/ModuleDefs/*" type="template" prefix="W90" />
             <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/ModuleDefs/*" prefix="LOG" />
             <op:include href="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" xpath="//ApplicationProgram/ModuleDefs/*" type="template" prefix="LOG" />
+            <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//ApplicationProgram/ModuleDefs/*" prefix="BI" />
+            <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml" xpath="//ApplicationProgram/ModuleDefs/*" type="template" prefix="BI" />
+            <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/ModuleDefs/*" prefix="BTN" />
+            <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml" xpath="//ApplicationProgram/ModuleDefs/*" type="template" prefix="BTN" />
+            <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/ModuleDefs/*" prefix="SENS" />
           </ModuleDefs>
           <Dynamic>
             <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="BASE" />
+            <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="UCT" />
+            <op:include href="WN90LPModule.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="W90" />
             <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="LOG" />
+            <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="BI" />
+            <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="BTN" />
+            <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="SENS" />
           </Dynamic>
         </ApplicationProgram>
       </ApplicationPrograms>
       <Baggages>
         <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//Manufacturer/Baggages/*" prefix="BASE" />
+        <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//Manufacturer/Baggages/*" prefix="UCT" />
+        <op:include href="WN90LPModule.share.xml" xpath="//Manufacturer/Baggages/*" prefix="W90" />
         <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//Manufacturer/Baggages/*" prefix="LOG" />
+        <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//Manufacturer/Baggages/*" prefix="BI" />
+        <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//Manufacturer/Baggages/*" prefix="BTN" />
+        <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//Manufacturer/Baggages/*" prefix="SENS" />
       </Baggages>
       <Hardware>
-        <Hardware Id="%HardwareId%" Name="OpenKNX-Wetterstation WN90LP" SerialNumber="0xA10B" VersionNumber="1" BusCurrent="10" HasIndividualAddress="true" HasApplicationProgram="true">
+        <Hardware Id="%HardwareId%" Name="OpenKNX-Wetterstation WN90LP" SerialNumber="0xA128" VersionNumber="1" BusCurrent="20" HasIndividualAddress="true" HasApplicationProgram="true">
           <Products>
-            <Product Id="%ProductId%" Text="OpenKNX: Wetterstation WN90LP" OrderNumber="0xA10B" IsRailMounted="false" DefaultLanguage="de-DE">
+            <Product Id="%ProductId%" Text="OpenKNX: Wetterstation WN90LP" OrderNumber="0xA128" IsRailMounted="false" DefaultLanguage="de-DE">
               <RegistrationInfo RegistrationStatus="Registered" />
             </Product>
           </Products>

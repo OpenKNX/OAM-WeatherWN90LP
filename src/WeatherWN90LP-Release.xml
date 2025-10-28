@@ -62,7 +62,6 @@
           share="../lib/OFM-SensorModule/src/Sensormodul.share.xml"
           KoSingleOffset="220">
   <op:verify File="../lib/OFM-SensorModule/library.json" ModuleVersion="4.10" />
-  </op:define>e="../lib/OFM-LogicModule/library.json" ModuleVersion="3.7" /> 
   </op:define>
 
   <generate />
