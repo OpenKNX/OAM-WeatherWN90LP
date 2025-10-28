@@ -19,7 +19,7 @@
 #define MAIN_FirmwareName "Wetterstation WN90LP (Dev)"
 #define MAIN_OpenKnxId 0xA1
 #define MAIN_ApplicationNumber 41
-#define MAIN_ApplicationVersion 6
+#define MAIN_ApplicationVersion 7
 #define MAIN_ApplicationEncoding iso-8859-15
 #define MAIN_ParameterSize 6036
 #define MAIN_MaxKoNumber 265
