@@ -1,6 +1,12 @@
 #include "HWSensors.h"
 
 
+#ifdef RS485_SERIAL_PIO
+#define RS485_SERIAL SerialPio
+#include <SerialPIO.h>
+SerialPIO SerialPio(RS485_UART_TX_PIN, RS485_UART_RX_PIN);
+#endif
+
 HWSensors::HWSensors()
 {
   
@@ -11,15 +17,17 @@ void HWSensors::Setup(const uint8_t addrs[])
     pinMode(RS485_UART_DIR_PIN, OUTPUT);
     digitalWrite(RS485_UART_DIR_PIN, 0);
 
+#if RS485_SERIAL != SerialPio
     RS485_SERIAL.setRX(RS485_UART_RX_PIN);
     RS485_SERIAL.setTX(RS485_UART_TX_PIN);
+#endif
     RS485_SERIAL.begin(9600, SERIAL_8N1);
 
     for(int i = 0;i<W90_ChannelCount;i++)
     {
         m_HWSensorchannels[i] = new HWSensorchannel();
         if(m_HWSensorchannels[i] != nullptr)
-            m_HWSensorchannels[i]->Setup(addrs[i], i);
+            m_HWSensorchannels[i]->Setup(addrs[i], i, RS485_SERIAL);
     }
 }
 

@@ -63,7 +63,7 @@ class HWSensorchannel: public OpenKNX::Channel
 
     public:
         HWSensorchannel();
-        virtual void Setup(uint8_t adr, uint8_t channel_number);
+        virtual void Setup(uint8_t adr, uint8_t channel_number, Stream &serial);
 	    virtual bool Loop();
 
         float GetTemperature();

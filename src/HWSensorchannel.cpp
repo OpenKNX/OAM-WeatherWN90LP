@@ -24,14 +24,14 @@ HWSensorchannel::HWSensorchannel()
     mutex_init(&mx9);
 }
 
-void HWSensorchannel::Setup(uint8_t adr, uint8_t channel_number)
+void HWSensorchannel::Setup(uint8_t adr, uint8_t channel_number, Stream &serial)
 {
     m_adr = adr;
     _channelIndex = channel_number;
 
     m_modbus.preTransmission(preTransmission);
     m_modbus.postTransmission(postTransmission);
-    m_modbus.begin(ParamW90_Address_, RS485_SERIAL);
+    m_modbus.begin(ParamW90_Address_, serial);
 }
 
 bool HWSensorchannel::Loop()
