@@ -1,7 +1,8 @@
 #ifdef DEVICE_UP1_GW_RS485
 
     #include "HardwareConfig/OpenKNX/UP1.h"
-
+    #define RS485_SERIAL_PIO
+    #undef RS485_SERIAL
 #endif
 
 #ifdef TESTDEVICE_PIPICO_GW_RS485
