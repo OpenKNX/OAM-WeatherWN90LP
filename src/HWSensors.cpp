@@ -1,8 +1,7 @@
 #include "HWSensors.h"
 
 
-#ifdef RS485_SERIAL_PIO
-#define RS485_SERIAL SerialPio
+#if RS485_SERIAL == SerialPio
 #include <SerialPIO.h>
 SerialPIO SerialPio(RS485_UART_TX_PIN, RS485_UART_RX_PIN);
 #endif
