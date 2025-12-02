@@ -49,18 +49,18 @@
     <op:verify File="../lib/OFM-BinaryInput/library.json" ModuleVersion="0.2" />
   </op:define>
 
-  <!-- KO 205 - 217 -->
+  <!-- KO 205 - 252 -->
   <op:define prefix="BTN" ModuleType="40"
     share="../lib/OFM-VirtualButton/src/VirtualButton.share.xml"
     template="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml"
-    NumChannels="1" KoOffset="205">
+    NumChannels="4" KoOffset="205">
     <op:verify File="../lib/OFM-VirtualButton/library.json" ModuleVersion="0.5" />
   </op:define>
 
-  <!-- KO 220 - 265 -->
+  <!-- KO 260 - 305 -->
   <op:define prefix="SENS" ModuleType="50"
           share="../lib/OFM-SensorModule/src/Sensormodul.share.xml"
-          KoSingleOffset="220">
+          KoSingleOffset="260">
   <op:verify File="../lib/OFM-SensorModule/library.json" ModuleVersion="4.10" />
   </op:define>
 

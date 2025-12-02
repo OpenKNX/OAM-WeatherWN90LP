@@ -38,6 +38,9 @@ if (!$?) { exit 1 }
  ../OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_UP1-GW-RS485 firmware_UP1-GW-RS485 uf2
  if (!$?) { exit 1 }
 
+ ../OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_REG1-GW-RS485 firmware_REG1-GW-RS485 uf2
+ if (!$?) { exit 1 }
+
 
 # execute generic post-build steps
 lib/OGM-Common/scripts/setup/reusable/Build-Release-Postprocess.ps1 $args[0]

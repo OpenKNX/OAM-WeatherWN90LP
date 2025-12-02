@@ -72,14 +72,14 @@ bool HWSensorchannel::Loop()
         return true;
     }
 
-    if(delayCheckMillis(m_wind_last_poll_millis, 20000))
+    if(delayCheckMillis(m_wind_last_poll_millis, 5000))
     {
         SetWind(ReadWind());
         m_wind_last_poll_millis = millis();
         return true;
     }
 
-    if(delayCheckMillis(m_gust_last_poll_millis, 20000))
+    if(delayCheckMillis(m_gust_last_poll_millis, 5000))
     {
         SetGust(ReadGust());
         m_gust_last_poll_millis = millis();
