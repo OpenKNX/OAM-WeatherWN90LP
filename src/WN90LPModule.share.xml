@@ -54,6 +54,11 @@
                   <Enumeration Text="60 Minuten" Value="60" Id="%AID%_PT-SendCycleSelection_EN-60" />
                 </TypeRestriction>
               </ParameterType>
+              <ParameterType Id="%AID%_PT-SLEDFunc" Name="SLEDFunc">
+                <TypeRestriction Base="Value" SizeInBit="16" UIHint="DropDown">
+                    <Enumeration Text="300" Value="Status Wetterstation A" Id="%ENID%" />
+                </TypeRestriction>
+              </ParameterType>
             </ParameterTypes>
             <Parameters>
             </Parameters>

@@ -37,69 +37,69 @@ void HWSensorchannel::Setup(uint8_t adr, uint8_t channel_number, Stream &serial)
 bool HWSensorchannel::Loop()
 {
     // ToDo Switch case
-    if(delayCheckMillis(m_temperature_last_poll_millis, 20000))
+    if (delayCheckMillis(m_temperature_last_poll_millis, 20000))
     {
         SetTemperature(ReadTemperature());
         m_temperature_last_poll_millis = millis();
         return true;
     }
 
-    if(delayCheckMillis(m_humidity_last_poll_millis, 20000))
+    if (delayCheckMillis(m_humidity_last_poll_millis, 20000))
     {
         SetHumidity(ReadHumidity());
         m_humidity_last_poll_millis = millis();
         return true;
     }
 
-    if(delayCheckMillis(m_pressure_last_poll_millis, 20000))
+    if (delayCheckMillis(m_pressure_last_poll_millis, 20000))
     {
         SetPressure(ReadPressure());
         m_pressure_last_poll_millis = millis();
         return true;
     }
 
-    if(delayCheckMillis(m_light_last_poll_millis, 20000))
+    if (delayCheckMillis(m_light_last_poll_millis, 20000))
     {
         SetLight(ReadLight());
         m_light_last_poll_millis = millis();
         return true;
     }
 
-    if(delayCheckMillis(m_uvi_last_poll_millis, 20000))
+    if (delayCheckMillis(m_uvi_last_poll_millis, 20000))
     {
         SetUVI(ReadUVI());
         m_uvi_last_poll_millis = millis();
         return true;
     }
 
-    if(delayCheckMillis(m_wind_last_poll_millis, 5000))
+    if (delayCheckMillis(m_wind_last_poll_millis, 5000))
     {
         SetWind(ReadWind());
         m_wind_last_poll_millis = millis();
         return true;
     }
 
-    if(delayCheckMillis(m_gust_last_poll_millis, 5000))
+    if (delayCheckMillis(m_gust_last_poll_millis, 5000))
     {
         SetGust(ReadGust());
         m_gust_last_poll_millis = millis();
         return true;
     }
 
-    if(delayCheckMillis(m_winddir_last_poll_millis, 20000))
+    if (delayCheckMillis(m_winddir_last_poll_millis, 20000))
     {
         SetWindDir(ReadWindDir());
         m_winddir_last_poll_millis = millis();
         return true;
     }
 
-    if(delayCheckMillis(m_rain_last_poll_millis, 20000))
+    if (delayCheckMillis(m_rain_last_poll_millis, 20000))
     {
         SetRain(ReadRain());
         m_rain_last_poll_millis = millis();
         return true;
     }
-    
+
     return true;
 }
 
@@ -126,8 +126,9 @@ If invalid fill with
         // convert and return
         float rawdata = (data - 400) / 10.0;
         logDebugP("Temp: %f °C", rawdata);
+        m_activity = true;
+        m_temperature_last_success_millis = millis();
         return rawdata;
-
     }
     else
     {
@@ -154,8 +155,9 @@ If invalid fill with
         // convert and return
         float rawdata = data * 1.0;
         logDebugP("Hum: %f %", rawdata);
+        m_activity = true;
+        m_humidity_last_success_millis = millis();
         return rawdata;
-
     }
     else
     {
@@ -182,8 +184,9 @@ If invalid fill with
         // convert and return
         float rawdata = data * 10.0;
         logDebugP("Pressure: %f Pa", rawdata);
+        m_activity = true;
+        m_pressure_last_success_millis = millis();
         return rawdata;
-
     }
     else
     {
@@ -193,166 +196,168 @@ If invalid fill with
 
 float HWSensorchannel::ReadLight()
 {
-/* 165
-Value in hex
-Light=value*10
-(Range: 0lux ->
-300,000lux)
-If invalid fill with
-0xFFFF
-*/
+    /* 165
+    Value in hex
+    Light=value*10
+    (Range: 0lux ->
+    300,000lux)
+    If invalid fill with
+    0xFFFF
+    */
     int8_t result;
     uint16_t data = 0xffff;
     result = m_modbus.readHoldingRegisters(0x0165, 0x0001);
     if (result != m_modbus.ku8MBSuccess)
         return NAN;
-    
 
     data = m_modbus.getResponseBuffer(0);
 
-    if(data == 0xFFFF)
+    if (data == 0xFFFF)
         return NAN;
 
     float rawdata = data * 10.0;
     logDebugP("Light: %f Lux", rawdata);
+    m_activity = true;
+    m_light_last_success_millis = millis();
     return rawdata;
 }
 
 uint8_t HWSensorchannel::ReadUVI()
 {
-/* 166
-Value in hex Uvi=UVI
-value/10
-(Range: 0 -> 150)
-If invalid fill with
-0xFFFF
-*/
+    /* 166
+    Value in hex Uvi=UVI
+    value/10
+    (Range: 0 -> 150)
+    If invalid fill with
+    0xFFFF
+    */
     int8_t result;
     uint16_t data = 0xffff;
     result = m_modbus.readHoldingRegisters(0x0166, 0x0001);
     if (result != m_modbus.ku8MBSuccess)
-        return NAN;
-    
+        return 0xff;
 
     data = m_modbus.getResponseBuffer(0);
 
-    if(data == 0xFFFF)
-        return NAN;
+    if (data == 0xFFFF)
+        return 0xff;
 
     uint8_t rawdata = data;
     logDebugP("UV-Index: %d", rawdata);
+    m_activity = true;
+    m_uvi_last_success_millis = millis();
     return rawdata;
 }
 
 float HWSensorchannel::ReadWind()
 {
-/* 169
-Value in hex
-If invalid fill with
-0xFFFF.Wind Speed =
-WIND
-value*0.1m/s(0~40m/s)
-*/
+    /* 169
+    Value in hex
+    If invalid fill with
+    0xFFFF.Wind Speed =
+    WIND
+    value*0.1m/s(0~40m/s)
+    */
     int8_t result;
     uint16_t data = 0xffff;
     result = m_modbus.readHoldingRegisters(0x0169, 0x0001);
     if (result != m_modbus.ku8MBSuccess)
         return NAN;
-    
 
     data = m_modbus.getResponseBuffer(0);
 
-    if(data == 0xFFFF)
+    if (data == 0xFFFF)
         return NAN;
 
     float rawdata = data * 0.1;
     logDebugP("Wind: %f m/s", rawdata);
+    m_activity = true;
+    m_wind_last_success_millis = millis();
     return rawdata;
 }
 
 float HWSensorchannel::ReadGust()
 {
-/* 16A
-Value in hex
-If invalid fill with
-0xFFFF.Gust Speed =
-GUST
-value*0.1m/s(0~40m/s)
-*/
+    /* 16A
+    Value in hex
+    If invalid fill with
+    0xFFFF.Gust Speed =
+    GUST
+    value*0.1m/s(0~40m/s)
+    */
     int8_t result;
     uint16_t data = 0xffff;
     result = m_modbus.readHoldingRegisters(0x016A, 0x0001);
     if (result != m_modbus.ku8MBSuccess)
         return NAN;
-    
 
     data = m_modbus.getResponseBuffer(0);
 
-    if(data == 0xFFFF)
+    if (data == 0xFFFF)
         return NAN;
 
     float rawdata = data * 0.1;
     logDebugP("Wind Gust: %f m/s", rawdata);
+    m_activity = true;
+    m_gust_last_success_millis = millis();
     return rawdata;
 }
 
 uint8_t HWSensorchannel::ReadWindDir()
 {
-/* 16B
-Value in hex
-(Range: 0°- 359°)
-If invalid fill with
-0xFFFF
-*/
+    /* 16B
+    Value in hex
+    (Range: 0°- 359°)
+    If invalid fill with
+    0xFFFF
+    */
     int8_t result;
     uint16_t data = 0xffff;
     result = m_modbus.readHoldingRegisters(0x016B, 0x0001);
     if (result != m_modbus.ku8MBSuccess)
-        return NAN;
-    
+        return 0xff;
 
     data = m_modbus.getResponseBuffer(0);
 
-    if(data > 359)
-        return NAN;
+    if (data > 359)
+        return 0xff;
 
     uint8_t rawdata = data;
     logDebugP("Wind Dir: %d °", rawdata);
+    m_activity = true;
+    m_winddir_last_success_millis = millis();
     return rawdata;
 }
 
 float HWSensorchannel::ReadRain()
 {
-/* 016E
-data in hex
-Rain = value*0.01mm
-0.18mm=12H
-*/
+    /* 016E
+    data in hex
+    Rain = value*0.01mm
+    0.18mm=12H
+    */
     int8_t result;
     uint16_t data = 0xffff;
     result = m_modbus.readHoldingRegisters(0x016E, 0x0001);
     if (result != m_modbus.ku8MBSuccess)
         return NAN;
-    
 
     data = m_modbus.getResponseBuffer(0);
 
-    if(data == 0xFFFF)
+    if (data == 0xFFFF)
         return NAN;
 
     float rawdata = data * 0.01;
     logDebugP("Wind: %f m/s", rawdata);
+    m_activity = true;
+    m_rain_last_success_millis = millis();
     return rawdata;
 }
-
-
-
-
 
 float HWSensorchannel::GetTemperature()
 {
     float retval;
-    if(mutex_try_enter(&mx1, nullptr))
+    if (mutex_try_enter(&mx1, nullptr))
     {
         retval = m_temperature;
         mutex_exit(&mx1);
@@ -367,7 +372,7 @@ float HWSensorchannel::GetTemperature()
 float HWSensorchannel::GetHumidity()
 {
     float retval;
-    if(mutex_try_enter(&mx2, nullptr))
+    if (mutex_try_enter(&mx2, nullptr))
     {
         retval = m_humidity;
         mutex_exit(&mx2);
@@ -382,7 +387,7 @@ float HWSensorchannel::GetHumidity()
 float HWSensorchannel::GetPressure()
 {
     float retval;
-    if(mutex_try_enter(&mx3, nullptr))
+    if (mutex_try_enter(&mx3, nullptr))
     {
         retval = m_pressure;
         mutex_exit(&mx3);
@@ -397,7 +402,7 @@ float HWSensorchannel::GetPressure()
 float HWSensorchannel::GetLight()
 {
     float retval;
-    if(mutex_try_enter(&mx4, nullptr))
+    if (mutex_try_enter(&mx4, nullptr))
     {
         retval = m_light;
         mutex_exit(&mx4);
@@ -412,7 +417,7 @@ float HWSensorchannel::GetLight()
 uint8_t HWSensorchannel::GetUVI()
 {
     uint8_t retval;
-    if(mutex_try_enter(&mx5, nullptr))
+    if (mutex_try_enter(&mx5, nullptr))
     {
         retval = m_uvi;
         mutex_exit(&mx5);
@@ -427,7 +432,7 @@ uint8_t HWSensorchannel::GetUVI()
 float HWSensorchannel::GetWind()
 {
     float retval;
-    if(mutex_try_enter(&mx6, nullptr))
+    if (mutex_try_enter(&mx6, nullptr))
     {
         retval = m_wind;
         mutex_exit(&mx6);
@@ -442,7 +447,7 @@ float HWSensorchannel::GetWind()
 float HWSensorchannel::GetGust()
 {
     float retval;
-    if(mutex_try_enter(&mx7, nullptr))
+    if (mutex_try_enter(&mx7, nullptr))
     {
         retval = m_gust;
         mutex_exit(&mx7);
@@ -457,7 +462,7 @@ float HWSensorchannel::GetGust()
 uint8_t HWSensorchannel::GetWindDir()
 {
     uint8_t retval;
-    if(mutex_try_enter(&mx8, nullptr))
+    if (mutex_try_enter(&mx8, nullptr))
     {
         retval = m_winddir;
         mutex_exit(&mx8);
@@ -472,7 +477,7 @@ uint8_t HWSensorchannel::GetWindDir()
 float HWSensorchannel::GetRain()
 {
     float retval;
-    if(mutex_try_enter(&mx9, nullptr))
+    if (mutex_try_enter(&mx9, nullptr))
     {
         retval = m_rain;
         mutex_exit(&mx9);
@@ -483,8 +488,6 @@ float HWSensorchannel::GetRain()
         return NAN;
     }
 }
-
-
 
 void HWSensorchannel::SetTemperature(float temperature)
 {
@@ -527,7 +530,7 @@ void HWSensorchannel::SetWind(float wind)
     mutex_enter_blocking(&mx6);
     m_wind = wind;
     mutex_exit(&mx6);
-}   
+}
 
 void HWSensorchannel::SetGust(float gust)
 {
@@ -548,6 +551,34 @@ void HWSensorchannel::SetRain(float rain)
     mutex_enter_blocking(&mx9);
     m_rain = rain;
     mutex_exit(&mx9);
+}
+
+HWSensorchannel::SensorState HWSensorchannel::GetState()
+{
+    if (delayCheckMillis(m_temperature_last_success_millis, 60000) ||
+        delayCheckMillis(m_humidity_last_success_millis, 60000) ||
+        delayCheckMillis(m_pressure_last_success_millis, 60000) ||
+        delayCheckMillis(m_light_last_success_millis, 60000) ||
+        delayCheckMillis(m_uvi_last_success_millis, 60000) ||
+        delayCheckMillis(m_wind_last_success_millis, 60000) ||
+        delayCheckMillis(m_gust_last_success_millis, 60000) ||
+        delayCheckMillis(m_winddir_last_success_millis, 60000) ||
+        delayCheckMillis(m_rain_last_success_millis, 60000))
+    {
+        return SensorState::ERROR;
+    }
+    else
+    {
+        if (m_activity)
+        {
+            m_activity = false;
+            return SensorState::ACTIVITY;
+        }
+        else
+        {
+            return SensorState::OK;
+        }
+    }
 }
 
 const std::string HWSensorchannel::name()

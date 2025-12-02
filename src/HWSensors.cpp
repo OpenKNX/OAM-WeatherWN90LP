@@ -1,6 +1,5 @@
 #include "HWSensors.h"
 
-
 #if RS485_SERIAL == SerialPio
 #include <SerialPIO.h>
 SerialPIO SerialPio(RS485_UART_TX_PIN, RS485_UART_RX_PIN);
@@ -8,7 +7,6 @@ SerialPIO SerialPio(RS485_UART_TX_PIN, RS485_UART_RX_PIN);
 
 HWSensors::HWSensors()
 {
-  
 }
 
 void HWSensors::Setup(const uint8_t addrs[])
@@ -22,33 +20,33 @@ void HWSensors::Setup(const uint8_t addrs[])
 #endif
     RS485_SERIAL.begin(9600, SERIAL_8N1);
 
-    for(int i = 0;i<W90_ChannelCount;i++)
+    for (int i = 0; i < W90_ChannelCount; i++)
     {
         m_HWSensorchannels[i] = new HWSensorchannel();
-        if(m_HWSensorchannels[i] != nullptr)
+        if (m_HWSensorchannels[i] != nullptr)
             m_HWSensorchannels[i]->Setup(addrs[i], i, RS485_SERIAL);
     }
 }
 
 void HWSensors::Loop()
 {
-    //query one sensor at a time
+    // query one sensor at a time
     bool nextsensor = true;
-    if(m_HWSensorchannels[m_Loop_i] != nullptr)
+    if (m_HWSensorchannels[m_Loop_i] != nullptr)
     {
         nextsensor = m_HWSensorchannels[m_Loop_i]->Loop();
     }
-    if(nextsensor)
+    if (nextsensor)
     {
         m_Loop_i++;
-        if(m_Loop_i >= W90_ChannelCount)
+        if (m_Loop_i >= W90_ChannelCount)
             m_Loop_i = 0;
     }
 }
 
 float HWSensors::GetTemperature(uint8_t channel)
 {
-    if(m_HWSensorchannels[channel] != nullptr)
+    if (m_HWSensorchannels[channel] != nullptr)
     {
         return m_HWSensorchannels[channel]->GetTemperature();
     }
@@ -58,7 +56,7 @@ float HWSensors::GetTemperature(uint8_t channel)
 
 float HWSensors::GetHumidity(uint8_t channel)
 {
-    if(m_HWSensorchannels[channel] != nullptr)
+    if (m_HWSensorchannels[channel] != nullptr)
     {
         return m_HWSensorchannels[channel]->GetHumidity();
     }
@@ -68,7 +66,7 @@ float HWSensors::GetHumidity(uint8_t channel)
 
 float HWSensors::GetPressure(uint8_t channel)
 {
-    if(m_HWSensorchannels[channel] != nullptr)
+    if (m_HWSensorchannels[channel] != nullptr)
     {
         return m_HWSensorchannels[channel]->GetPressure();
     }
@@ -78,7 +76,7 @@ float HWSensors::GetPressure(uint8_t channel)
 
 float HWSensors::GetLight(uint8_t channel)
 {
-    if(m_HWSensorchannels[channel] != nullptr)
+    if (m_HWSensorchannels[channel] != nullptr)
     {
         return m_HWSensorchannels[channel]->GetLight();
     }
@@ -88,7 +86,7 @@ float HWSensors::GetLight(uint8_t channel)
 
 uint8_t HWSensors::GetUVI(uint8_t channel)
 {
-    if(m_HWSensorchannels[channel] != nullptr)
+    if (m_HWSensorchannels[channel] != nullptr)
     {
         return m_HWSensorchannels[channel]->GetUVI();
     }
@@ -98,7 +96,7 @@ uint8_t HWSensors::GetUVI(uint8_t channel)
 
 float HWSensors::GetWind(uint8_t channel)
 {
-    if(m_HWSensorchannels[channel] != nullptr)
+    if (m_HWSensorchannels[channel] != nullptr)
     {
         return m_HWSensorchannels[channel]->GetWind();
     }
@@ -108,7 +106,7 @@ float HWSensors::GetWind(uint8_t channel)
 
 float HWSensors::GetGust(uint8_t channel)
 {
-    if(m_HWSensorchannels[channel] != nullptr)
+    if (m_HWSensorchannels[channel] != nullptr)
     {
         return m_HWSensorchannels[channel]->GetGust();
     }
@@ -118,7 +116,7 @@ float HWSensors::GetGust(uint8_t channel)
 
 uint8_t HWSensors::GetWindDir(uint8_t channel)
 {
-    if(m_HWSensorchannels[channel] != nullptr)
+    if (m_HWSensorchannels[channel] != nullptr)
     {
         return m_HWSensorchannels[channel]->GetWindDir();
     }
@@ -128,10 +126,20 @@ uint8_t HWSensors::GetWindDir(uint8_t channel)
 
 float HWSensors::GetRain(uint8_t channel)
 {
-    if(m_HWSensorchannels[channel] != nullptr)
+    if (m_HWSensorchannels[channel] != nullptr)
     {
         return m_HWSensorchannels[channel]->GetRain();
     }
     else
         return NAN;
+}
+
+HWSensorchannel::SensorState HWSensors::GetState(uint8_t channel)
+{
+    if (m_HWSensorchannels[channel] != nullptr)
+    {
+        return m_HWSensorchannels[channel]->GetState();
+    }
+    else
+        return HWSensorchannel::SensorState::UNKNOWN;
 }

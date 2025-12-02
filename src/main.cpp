@@ -1,12 +1,12 @@
-#include "OpenKNX.h"
-#include "Logic.h"
 #include "FileTransferModule.h"
+#include "Logic.h"
+#include "OpenKNX.h"
 #include "WN90LPModule.h"
 
-#include "VirtualButtonModule.h"
 #include "GpioBinaryInputModule.h"
 #include "SensorDevices.h"
 #include "SensorModule.h"
+#include "VirtualButtonModule.h"
 
 /* ToDo
 - Status für Station erreichbar, Timeout Parameter
@@ -16,12 +16,10 @@
 
 */
 
-
 void setup()
 {
     const uint8_t firmwareRevision = 0;
     openknx.init(firmwareRevision);
-
 
     openknx.addModule(1, openknxLogic);
     openknx.addModule(2, openknxWN90LPModule);
@@ -37,10 +35,9 @@ uint32_t lastmillis_1 = 0;
 void loop()
 {
     openknx.loop();
-    if(delayCheckMillis(lastmillis_1, 5000))
+    if (delayCheckMillis(lastmillis_1, 5000))
     {
-        //logDebug("", "Loop 5s");
-
+        // logDebug("", "Loop 5s");
 
         lastmillis_1 = millis();
     }
@@ -53,17 +50,9 @@ void setup1()
 }
 #endif
 
-
 #ifdef OPENKNX_DUALCORE
 void loop1()
 {
     openknx.loop1();
 }
 #endif
-
-
-
-
-
-
-

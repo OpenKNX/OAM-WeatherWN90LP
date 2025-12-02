@@ -27,8 +27,8 @@ void WN90LPModule::setup()
     logTraceP("setup");
 
     uint8_t addrs[W90_ChannelCount];
-    for(int i=0;i<W90_ChannelCount;i++)
-        addrs[i] = knx.paramByte(W90_ParamBlockOffset+W90_ParamBlockSize*i+W90_Address_);
+    for (int i = 0; i < W90_ChannelCount; i++)
+        addrs[i] = knx.paramByte(W90_ParamBlockOffset + W90_ParamBlockSize * i + W90_Address_);
 
     _HWSensors.Setup(addrs);
 
@@ -39,12 +39,10 @@ void WN90LPModule::setup()
     }
 }
 
-
-
 void WN90LPModule::loop()
-{   
+{
     // do nothing while StartupDelay
-    if(!openknx.afterStartupDelay())
+    if (!openknx.afterStartupDelay())
         return;
 
     // do nothing when not parameterized
@@ -52,8 +50,8 @@ void WN90LPModule::loop()
         return;
 
     uint8_t loopedChannels = 0;
-    
-    while(openknx.freeLoopTime() && loopedChannels < W90_ChannelCount)
+
+    while (openknx.freeLoopTime() && loopedChannels < W90_ChannelCount)
     {
         _Sensorchannels[_curLoopChannel]->loop();
         loopedChannels++;
@@ -72,26 +70,22 @@ void WN90LPModule::processInputKo(GroupObject &ko)
     // there are no global KO, so all ko belong to a channel
 
     uint16_t asap = ko.asap();
-    int16_t channelnumber = (asap - W90_KoOffset ) / W90_KoBlockSize;
-    if(channelnumber < W90_ChannelCount)
-        if(_Sensorchannels[channelnumber] != nullptr)
+    int16_t channelnumber = (asap - W90_KoOffset) / W90_KoBlockSize;
+    if (channelnumber < W90_ChannelCount)
+        if (_Sensorchannels[channelnumber] != nullptr)
             _Sensorchannels[channelnumber]->processInputKo(ko);
-
 }
 
 void WN90LPModule::processBeforeRestart()
 {
-    
 }
 
 void WN90LPModule::processBeforeTablesUnload()
 {
-    
 }
 
 void WN90LPModule::savePower()
 {
-    
 }
 
 bool WN90LPModule::restorePower()
@@ -135,14 +129,14 @@ void WN90LPModule::writeFlash()
 
 bool WN90LPModule::processCommand(const std::string cmd, bool diagnoseKo)
 {
-    if(diagnoseKo)
+    if (diagnoseKo)
         return false;
-    
-    if(cmd == "wn90lp")
+
+    if (cmd == "wn90lp")
     {
         for (uint8_t lIndex = 0; lIndex < W90_ChannelCount; lIndex++)
         {
-            //openknx.logger.log(_Sensorchannels[lIndex]->getValueString());            
+            // openknx.logger.log(_Sensorchannels[lIndex]->getValueString());
         }
         return true;
     }
