@@ -91,7 +91,7 @@ uint8_t HWSensors::GetUVI(uint8_t channel)
         return m_HWSensorchannels[channel]->GetUVI();
     }
     else
-        return NAN;
+        return 0xff;
 }
 
 float HWSensors::GetWind(uint8_t channel)
@@ -121,7 +121,7 @@ uint8_t HWSensors::GetWindDir(uint8_t channel)
         return m_HWSensorchannels[channel]->GetWindDir();
     }
     else
-        return NAN;
+        return 0xff;
 }
 
 float HWSensors::GetRain(uint8_t channel)

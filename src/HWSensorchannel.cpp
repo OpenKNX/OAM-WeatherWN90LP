@@ -425,7 +425,7 @@ uint8_t HWSensorchannel::GetUVI()
     }
     else
     {
-        return NAN;
+        return 0xff;
     }
 }
 
@@ -470,7 +470,7 @@ uint8_t HWSensorchannel::GetWindDir()
     }
     else
     {
-        return NAN;
+        return 0xff;
     }
 }
 

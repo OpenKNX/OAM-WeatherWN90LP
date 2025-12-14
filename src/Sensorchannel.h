@@ -86,6 +86,7 @@ class Sensorchannel : public OpenKNX::Channel
     uint32_t m_rain_alarmL_last_send_millis = 0;
 
     uint32_t _lastActivity = 0;
+    uint8_t _ledState = 0;
 
     float CalcDewPoint(float relative_humidity, float temperature);
     float CalcAbsHumidity(float relative_humidity, float temperature);

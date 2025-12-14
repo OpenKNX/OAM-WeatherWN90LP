@@ -9,11 +9,8 @@
 #include "VirtualButtonModule.h"
 
 /* ToDo
-- Status für Station erreichbar, Timeout Parameter
-- Was tun mit den Werten wenn Station nicht erreichbar (0xffff oder letzter Wert oder 0)
+- Status für Station erreichbar
 - höhenkorrektur luftdruck
-
-
 */
 
 void setup()

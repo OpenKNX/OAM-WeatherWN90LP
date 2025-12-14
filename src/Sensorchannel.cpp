@@ -130,16 +130,25 @@ void Sensorchannel::loop()
             case HWSensorchannel::SensorState::ACTIVITY:
                 _lastActivity = millis();
             case HWSensorchannel::SensorState::OK:
-                led->setColor(OpenKNX::Led::Color::Green);
-                led->activity(_lastActivity, true);
+                if(_ledState != 1)
+                {
+                    led->color(OpenKNX::Led::Color::Green);
+                    led->activity(_lastActivity, true);
+                    _ledState = 1;
+                }
                 break;
             case HWSensorchannel::SensorState::ERROR:
-                led->setColor(OpenKNX::Led::Color::Red);
-                led->on(OpenKNX::Led::Capability::COLOR);
-                led->off(OpenKNX::Led::Capability::MONOCHROME);
+                if(_ledState != 2)
+                {
+                    led->color(OpenKNX::Led::Color::Red);
+                    led->on(OpenKNX::Led::Capability::COLOR);
+                    led->off(OpenKNX::Led::Capability::MONOCHROME);
+                    _ledState = 2;
+                }
                 break;
             default:
                 led->off();
+                _ledState = 0;
                 break;
         }
     }
