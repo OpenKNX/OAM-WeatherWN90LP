@@ -844,6 +844,9 @@ void Sensorchannel::loop_rain(float rain)
         {
             KoW90_SensorRain_.valueNoSend(rain, RainKODPT);
         }
+
+
+        //SensorRainFlow_.value(rain - m_rain_last_flow_value, RainFlowKODPT);
     }
 }
 

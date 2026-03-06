@@ -242,7 +242,7 @@ uint8_t HWSensorchannel::ReadUVI()
     if (data == 0xFFFF)
         return 0xff;
 
-    uint8_t rawdata = data;
+    uint8_t rawdata = data / 10;
     logDebugP("UV-Index: %d", rawdata);
     m_activity = true;
     m_uvi_last_success_millis = millis();
@@ -348,7 +348,7 @@ float HWSensorchannel::ReadRain()
         return NAN;
 
     float rawdata = data * 0.01;
-    logDebugP("Wind: %f m/s", rawdata);
+    logDebugP("Rain: %f l/m²", rawdata);
     m_activity = true;
     m_rain_last_success_millis = millis();
     return rawdata;

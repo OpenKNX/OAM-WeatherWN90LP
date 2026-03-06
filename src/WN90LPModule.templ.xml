@@ -27,7 +27,7 @@
               </Union>
 
               <!-- humidity parameters-->
-              <Union SizeInBit="152">
+              <Union SizeInBit="160">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="19" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%020" Name="SensorHumiditySendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%021" Name="SensorHumiditySendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-HumOnChange" Text="     von mehr als" SuffixText="%" Value="0.5" />
@@ -42,7 +42,7 @@
 
               <!-- absolute humidity parameters-->
               <Union SizeInBit="144">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="38" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="39" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%030" Name="SensorAbsHumiditySendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%031" Name="SensorAbsHumiditySendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-AbsHumOnChange" Text="     von mehr als" SuffixText="g/m³" Value="0.5" />
                 <Parameter Id="%AID%_UP-%TT%%CC%032" Name="SensorAbsHumiditySendCycle_%C%" Offset="5" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
@@ -55,7 +55,7 @@
 
               <!-- dewpoint parameters-->
               <Union SizeInBit="144">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="56" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="57" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%040" Name="SensorDewPointSendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%041" Name="SensorDewPointSendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-TempOnChange" Text="     von mehr als" SuffixText="K" Value="0.1" />
                 <Parameter Id="%AID%_UP-%TT%%CC%042" Name="SensorDewPointSendCycle_%C%" Offset="5" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
@@ -68,7 +68,7 @@
 
               <!-- pressure parameters-->
               <Union SizeInBit="144">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="74" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="75" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%050" Name="SensorPressureSendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%051" Name="SensorPressureSendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-PressOnChange" Text="     von mehr als" SuffixText="Pa" Value="5" />
                 <Parameter Id="%AID%_UP-%TT%%CC%052" Name="SensorPressureSendCycle_%C%" Offset="5" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
@@ -81,7 +81,7 @@
 
               <!-- light parameters-->
               <Union SizeInBit="144">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="92" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="93" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%060" Name="SensorLightSendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%061" Name="SensorLightSendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="     von mehr als" SuffixText="lx" Value="5" />
                 <Parameter Id="%AID%_UP-%TT%%CC%062" Name="SensorLightSendCycle_%C%" Offset="5" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
@@ -94,7 +94,7 @@
 
               <!-- uvi parameters-->
               <Union SizeInBit="48">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="110" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="111" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%070" Name="SensorUVISendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%071" Name="SensorUVISendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5" Text="     von mehr als" SuffixText="UVI" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%072" Name="SensorUVISendCycle_%C%" Offset="2" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
@@ -107,7 +107,7 @@
 
               <!-- wind parameters -->
               <Union SizeInBit="144">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="158" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="117" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%080" Name="SensorWindSendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%081" Name="SensorWindSendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="     von mehr als" SuffixText="m/s" Value="1" />
                 <Parameter Id="%AID%_UP-%TT%%CC%082" Name="SensorWindSendCycle_%C%" Offset="5" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
@@ -120,7 +120,7 @@
 
               <!-- gust parameters-->
               <Union SizeInBit="144">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="176" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="135" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%090" Name="SensorGustSendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%091" Name="SensorGustSendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="     von mehr als" SuffixText="m/s" Value="1" />
                 <Parameter Id="%AID%_UP-%TT%%CC%092" Name="SensorGustSendCycle_%C%" Offset="5" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
@@ -133,7 +133,7 @@
 
               <!-- wind dir parameters-->
               <Union SizeInBit="32">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="194" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="153" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%100" Name="SensorWindDirSendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%101" Name="SensorWindDirSendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5" Text="     von mehr als" SuffixText="°" Value="5" />
                 <Parameter Id="%AID%_UP-%TT%%CC%102" Name="SensorWindDirSendCycle_%C%" Offset="2" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
@@ -142,7 +142,7 @@
 
               <!-- rain parameters -->
               <Union SizeInBit="48">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="198" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="157" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%110" Name="SensorRainSendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%111" Name="SensorRainSendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="     von mehr als" SuffixText="mm" Value="0.1" />
                 <Parameter Id="%AID%_UP-%TT%%CC%112" Name="SensorRainSendCycle_%C%" Offset="5" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />

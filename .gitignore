@@ -12,3 +12,4 @@ release/*
 /.vscode/settings.json
 SEN-UP1-8xTH-cache.lib
 /src/WeatherWN90LP.baggages
+/src/WeatherWN90LP-Dev.baggages
