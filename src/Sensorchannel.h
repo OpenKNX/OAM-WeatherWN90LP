@@ -90,7 +90,9 @@ class Sensorchannel : public OpenKNX::Channel
     uint32_t m_rain_alarmH_last_send_millis = 0;
     uint32_t m_rain_alarmL_last_send_millis = 0;
     float m_rain_offset_value = 0;
-    uint32_t m_rainbool_send_millis = 0;
+
+    uint32_t m_rainbool_last_send_millis = 0;
+    uint32_t m_state_last_send_millis = 0;
 
     uint32_t _lastActivity = 0;
     uint8_t _ledState = 0;

@@ -124,8 +124,8 @@ void Sensorchannel::loop()
 
     OpenKNX::Led::FunctionGroup *led = openknx.ledFunctions.get(OPENKNX_LEDFUNC_W90_A + _channelIndex);
     HWSensorchannel::SensorState state = m_hwSensors->GetState(_channelIndex);
-    bool stateb = state == HWSensorchannel::SensorState::ACTIVITY || state == HWSensorchannel::SensorState::OK;
-    KoW90_SensorState_.valueCompare(stateb, Dpt(1,2));
+    bool stateb = (state == HWSensorchannel::SensorState::ACTIVITY || state == HWSensorchannel::SensorState::OK);
+    KoW90_SensorState_.valueCompareTime(stateb, Dpt(1,2),m_state_last_send_millis,5*60*1000);
 
 
     if (led->active())
@@ -149,6 +149,15 @@ void Sensorchannel::loop()
                     led->on(OpenKNX::Led::Capability::COLOR);
                     led->off(OpenKNX::Led::Capability::MONOCHROME);
                     _ledState = 2;
+                }
+                break;
+            case HWSensorchannel::SensorState::UNKNOWN:
+                if(_ledState != 3)
+                {
+                    led->color(OpenKNX::Led::Color::Yellow);
+                    led->on(OpenKNX::Led::Capability::COLOR);
+                    led->off(OpenKNX::Led::Capability::MONOCHROME);
+                    _ledState = 3;
                 }
                 break;
             default:
@@ -871,7 +880,7 @@ void Sensorchannel::loop_rain(float rain)
                         m_rainbool_send_millis = millis();
                 }
                 */
-               KoW90_SensorRain_.valueCompareTime(true, RainBoolKODPT, m_rainbool_send_millis, 5 * 60 * 1000);
+               KoW90_SensorRain_.valueCompareTime(true, RainBoolKODPT, m_rainbool_last_send_millis, 5 * 60 * 1000);
             }
 
             m_rain_last_recv_value = rain;
@@ -879,7 +888,7 @@ void Sensorchannel::loop_rain(float rain)
         }
         else if(delayCheckMillis(m_rain_last_recv_millis, 5 * 60 * 1000)) // if there has bee no change in rain value since 5 min
         {
-            KoW90_SensorRain_.valueCompareTime(false, RainBoolKODPT, m_rainbool_send_millis, 5 * 60 * 1000); // signal inactive rain
+            KoW90_SensorRain_.valueCompareTime(false, RainBoolKODPT, m_rainbool_last_send_millis, 5 * 60 * 1000); // signal inactive rain
         }
 
 
@@ -920,7 +929,7 @@ void Sensorchannel::loop_rain(float rain)
             KoW90_SensorRainGauge_.valueNoSend(rain, RainKODPT);
         }
 
-        KoW90_SensorRainFlow_.value(0.0, RainFlowKODPT);
+        //KoW90_SensorRainFlow_.value(0.0, RainFlowKODPT);
         
     }
 }

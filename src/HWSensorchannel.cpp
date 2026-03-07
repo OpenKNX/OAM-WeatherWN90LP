@@ -563,7 +563,9 @@ HWSensorchannel::SensorState HWSensorchannel::GetState()
         delayCheckMillis(m_wind_last_success_millis, 60000) ||
         delayCheckMillis(m_gust_last_success_millis, 60000) ||
         delayCheckMillis(m_winddir_last_success_millis, 60000) ||
-        delayCheckMillis(m_rain_last_success_millis, 60000))
+        delayCheckMillis(m_rain_last_success_millis, 60000) ||
+        (!m_temperature_last_success_millis && !m_humidity_last_success_millis && !m_pressure_last_success_millis && !m_light_last_success_millis && !m_uvi_last_success_millis && !m_wind_last_success_millis && !m_gust_last_success_millis && !m_winddir_last_success_millis && !m_rain_last_success_millis)
+        )
     {
         return SensorState::ERROR;
     }
