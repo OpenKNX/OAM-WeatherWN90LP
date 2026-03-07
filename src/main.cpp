@@ -9,8 +9,15 @@
 #include "VirtualButtonModule.h"
 
 /* ToDo
-- Status für Station erreichbar
-- höhenkorrektur luftdruck
+- IMPL - Status für Station erreichbar
+- IMPL - höhenkorrektur luftdruck
+- RainFlow
+- IMPL - Rain
+- IMPL - RainGauge Overflow
+- DONE - StatusLED
+- DONE - fix UVI
+- DONE - 2MB Flashlayout
+- DONE - Common 1.7.2
 */
 
 void setup()

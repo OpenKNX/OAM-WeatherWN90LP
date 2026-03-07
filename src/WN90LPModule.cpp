@@ -96,7 +96,7 @@ bool WN90LPModule::restorePower()
 uint16_t WN90LPModule::flashSize()
 {
     // Version + Data (Channel * Inputs * (Dpt + Value))
-    return 1 + (W90_ChannelCount * 2 * (8 * 4 + 1));
+    return 1 + (W90_ChannelCount * ((2 * 9 * 4) + 4 + 4) );
 }
 
 void WN90LPModule::readFlash(const uint8_t *iBuffer, const uint16_t iSize)

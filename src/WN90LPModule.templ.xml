@@ -67,7 +67,7 @@
               </Union>
 
               <!-- pressure parameters-->
-              <Union SizeInBit="144">
+              <Union SizeInBit="160">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="75" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%050" Name="SensorPressureSendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%051" Name="SensorPressureSendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-PressOnChange" Text="     von mehr als" SuffixText="Pa" Value="5" />
@@ -77,11 +77,12 @@
                 <Parameter Id="%AID%_UP-%TT%%CC%055" Name="SensorPressureWarnL_%C%" Offset="10" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Unterschreiten von" SuffixText="Pa" Value="5" />
                 <Parameter Id="%AID%_UP-%TT%%CC%056" Name="SensorPressureWarnH_%C%" Offset="14" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Überschreiten von" SuffixText="Pa" Value="30" />
                 <Parameter Id="%AID%_UP-%TT%%CC%057" Name="SensorPressureMinMax_%C%" Offset="0" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Min/Max Werte erfassen" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%058" Name="SensorPressureHeightASL_%C%" Offset="18" BitOffset="0" ParameterType="%AID%_PT-ValueDpt8" Text="Höhenkorrektur [m über NN]" Value="0" />
               </Union>
 
               <!-- light parameters-->
               <Union SizeInBit="144">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="93" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="95" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%060" Name="SensorLightSendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%061" Name="SensorLightSendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="     von mehr als" SuffixText="lx" Value="5" />
                 <Parameter Id="%AID%_UP-%TT%%CC%062" Name="SensorLightSendCycle_%C%" Offset="5" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
@@ -94,7 +95,7 @@
 
               <!-- uvi parameters-->
               <Union SizeInBit="48">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="111" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="113" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%070" Name="SensorUVISendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%071" Name="SensorUVISendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5" Text="     von mehr als" SuffixText="UVI" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%072" Name="SensorUVISendCycle_%C%" Offset="2" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
@@ -107,7 +108,7 @@
 
               <!-- wind parameters -->
               <Union SizeInBit="144">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="117" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="119" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%080" Name="SensorWindSendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%081" Name="SensorWindSendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="     von mehr als" SuffixText="m/s" Value="1" />
                 <Parameter Id="%AID%_UP-%TT%%CC%082" Name="SensorWindSendCycle_%C%" Offset="5" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
@@ -120,7 +121,7 @@
 
               <!-- gust parameters-->
               <Union SizeInBit="144">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="135" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="137" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%090" Name="SensorGustSendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%091" Name="SensorGustSendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="     von mehr als" SuffixText="m/s" Value="1" />
                 <Parameter Id="%AID%_UP-%TT%%CC%092" Name="SensorGustSendCycle_%C%" Offset="5" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
@@ -133,7 +134,7 @@
 
               <!-- wind dir parameters-->
               <Union SizeInBit="32">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="153" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="155" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%100" Name="SensorWindDirSendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%101" Name="SensorWindDirSendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt5" Text="     von mehr als" SuffixText="°" Value="5" />
                 <Parameter Id="%AID%_UP-%TT%%CC%102" Name="SensorWindDirSendCycle_%C%" Offset="2" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
@@ -142,7 +143,7 @@
 
               <!-- rain parameters -->
               <Union SizeInBit="48">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="157" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="159" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%110" Name="SensorRainSendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%111" Name="SensorRainSendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="     von mehr als" SuffixText="mm" Value="0.1" />
                 <Parameter Id="%AID%_UP-%TT%%CC%112" Name="SensorRainSendCycle_%C%" Offset="5" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
@@ -201,6 +202,7 @@
               <ParameterRef Id="%AID%_UP-%TT%%CC%055_R-%TT%%CC%05501" RefId="%AID%_UP-%TT%%CC%055" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%056_R-%TT%%CC%05601" RefId="%AID%_UP-%TT%%CC%056" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%057_R-%TT%%CC%05701" RefId="%AID%_UP-%TT%%CC%057" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%058_R-%TT%%CC%05801" RefId="%AID%_UP-%TT%%CC%058" />
               <!-- light parameters-->
               <ParameterRef Id="%AID%_UP-%TT%%CC%060_R-%TT%%CC%06001" RefId="%AID%_UP-%TT%%CC%060" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%061_R-%TT%%CC%06101" RefId="%AID%_UP-%TT%%CC%061" />
@@ -316,9 +318,12 @@
               <!-- wind dir -->
               <ComObject Id="%AID%_O-%TT%%CC%054" Name="SensorWindDir_%C%" Text="Windrichtung" Number="%K54%" FunctionText="Wetterstation %Z%" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-3" />
               <!-- rain -->
-              <ComObject Id="%AID%_O-%TT%%CC%055" Name="SensorRain_%C%" Text="Niederschlag" Number="%K55%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-26" />
-              <!-- rain flow-->
-              <ComObject Id="%AID%_O-%TT%%CC%056" Name="SensorRainFlow_%C%" Text="Niederschlag (pro h)" Number="%K56%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-25" />
+              <ComObject Id="%AID%_O-%TT%%CC%055" Name="SensorRainGauge_%C%" Text="Regenmenge" Number="%K55%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-26" />
+              <ComObject Id="%AID%_O-%TT%%CC%056" Name="SensorRainFlow_%C%" Text="Regenmenge (pro h)" Number="%K56%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-25" />
+              <ComObject Id="%AID%_O-%TT%%CC%057" Name="SensorRain_%C%" Text="Regen" Number="%K57%" FunctionText="Wetterstation %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-2" />
+              <ComObject Id="%AID%_O-%TT%%CC%058" Name="SensorRainGaugeRaw_%C%" Text="Regenmenge (Rohwert)" Number="%K58%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-26" />
+              <!-- status-->
+              <ComObject Id="%AID%_O-%TT%%CC%059" Name="SensorState_%C%" Text="Station aktiv" Number="%K59%" FunctionText="Wetterstation %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-11" />
 
               
 
@@ -397,13 +402,16 @@
               <ComObjectRef Id="%AID%_O-%TT%%CC%054_R-%TT%%CC%05401" RefId="%AID%_O-%TT%%CC%054" />
               <!-- rain -->
               <ComObjectRef Id="%AID%_O-%TT%%CC%055_R-%TT%%CC%05501" RefId="%AID%_O-%TT%%CC%055" />
-              <!-- rain flow -->
               <ComObjectRef Id="%AID%_O-%TT%%CC%056_R-%TT%%CC%05601" RefId="%AID%_O-%TT%%CC%056" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%057_R-%TT%%CC%05701" RefId="%AID%_O-%TT%%CC%057" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%058_R-%TT%%CC%05801" RefId="%AID%_O-%TT%%CC%058" />
+              <!--status -->
+              <ComObjectRef Id="%AID%_O-%TT%%CC%059_R-%TT%%CC%05901" RefId="%AID%_O-%TT%%CC%059" />
             </ComObjectRefs>
           </Static>
           <Dynamic>
             <ChannelIndependentBlock>
-              <ParameterBlock Id="%AID%_PB-" Name="Sensor_%ZZ%" Text="Wetterstation %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201">
+              <ParameterBlock Id="%AID%_PB-" Name="Sensor_%ZZ%" Text="Wetterstation %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201" ShowInComObjectTree="true">
                 <ParameterRefRef RefId="%AID%_P-%TT%%CC%001_R-%TT%%CC%00101" />
                 <ParameterRefRef RefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201" />
 
@@ -502,6 +510,7 @@
                     </when>
                   </choose>
                   <ParameterRefRef RefId="%AID%_UP-%TT%%CC%057_R-%TT%%CC%05701" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%058_R-%TT%%CC%05801" />
                 </ParameterBlock>
                 <ParameterBlock Id="%AID%_PB-5" Name="Sensor_%ZZ%_Light" Text="Helligkeit" Icon="white-balance-sunny">
                   <!-- Light -->
@@ -603,7 +612,7 @@
                   <ParameterRefRef RefId="%AID%_UP-%TT%%CC%112_R-%TT%%CC%11201" />
                 </ParameterBlock>
                 
-                <Channel Id="%AID%_CH-10%CC%" Name="Sensor_%ZZ%" Number="%PREFIX%" Text="Wetterstation %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201">
+                <!-- <Channel Id="%AID%_CH-10%CC%" Name="Sensor_%ZZ%" Number="%PREFIX%" Text="Wetterstation %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201"> -->
                   <!-- Temperature -->
                   <choose ParamRefId="%AID%_UP-%TT%%CC%014_R-%TT%%CC%01401">
                     <when test="1">
@@ -764,12 +773,15 @@
 
                   <!-- Rain -->
                   <ComObjectRefRef RefId="%AID%_O-%TT%%CC%055_R-%TT%%CC%05501" />
-
-                  <!-- Rain flow -->
                   <ComObjectRefRef RefId="%AID%_O-%TT%%CC%056_R-%TT%%CC%05601" />
+                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%057_R-%TT%%CC%05701" />
+                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%058_R-%TT%%CC%05801" />
+
+                  <!-- Status -->
+                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%059_R-%TT%%CC%05901" />
 
 
-                </Channel>
+                <!-- </Channel> -->
               </ParameterBlock>
             </ChannelIndependentBlock>
           </Dynamic>

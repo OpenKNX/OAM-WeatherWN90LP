@@ -23,6 +23,8 @@
 #define GustKODPT Dpt(9, 5)
 #define WindDirKODPT Dpt(5, 3)
 #define RainKODPT Dpt(9, 26)
+#define RainFlowKODPT Dpt(9, 25)
+#define RainBoolKODPT Dpt(1, 2)
 
 class Sensorchannel : public OpenKNX::Channel
 {
@@ -82,14 +84,20 @@ class Sensorchannel : public OpenKNX::Channel
 
     uint32_t m_rain_last_send_millis = 0;
     float m_rain_last_send_value = -1000;
+    float m_rain_last_recv_value = -1000;
+    float m_rain_last_recv_value_restored = -1000;
+    uint32_t m_rain_last_recv_millis = 0;
     uint32_t m_rain_alarmH_last_send_millis = 0;
     uint32_t m_rain_alarmL_last_send_millis = 0;
+    float m_rain_offset_value = 0;
+    uint32_t m_rainbool_send_millis = 0;
 
     uint32_t _lastActivity = 0;
     uint8_t _ledState = 0;
 
     float CalcDewPoint(float relative_humidity, float temperature);
     float CalcAbsHumidity(float relative_humidity, float temperature);
+    float pressureToSeaLevel(float pressure, int16_t sensor_height);
 
     const std::string name() override;
 

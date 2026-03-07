@@ -123,9 +123,14 @@ void Sensorchannel::loop()
     loop_rain(rain);
 
     OpenKNX::Led::FunctionGroup *led = openknx.ledFunctions.get(OPENKNX_LEDFUNC_W90_A + _channelIndex);
+    HWSensorchannel::SensorState state = m_hwSensors->GetState(_channelIndex);
+    bool stateb = state == HWSensorchannel::SensorState::ACTIVITY || state == HWSensorchannel::SensorState::OK;
+    KoW90_SensorState_.valueCompare(stateb, Dpt(1,2));
+
+
     if (led->active())
     {
-        switch (m_hwSensors->GetState(_channelIndex))
+        switch (state)
         {
             case HWSensorchannel::SensorState::ACTIVITY:
                 _lastActivity = millis();
@@ -152,6 +157,7 @@ void Sensorchannel::loop()
                 break;
         }
     }
+
 }
 
 void Sensorchannel::loop_temperature(float temperature)
@@ -427,6 +433,12 @@ void Sensorchannel::loop_pressure(float pressure)
     // logDebugP("loop_pressure");
     if (!isnan(pressure))
     {
+        if(ParamW90_SensorPressureHeightASL_ != 0) // under / above sea level height correction enabled
+        {
+            logDebugP("height correction old %f %dm", pressure, ParamW90_SensorPressureHeightASL_);
+            pressure = pressureToSeaLevel(pressure, ParamW90_SensorPressureHeightASL_);
+            logDebugP("height correction new %f", pressure);
+        }
         // logDebugP("loop_pressure 2");
         if (send_cycle)
         {
@@ -812,6 +824,69 @@ void Sensorchannel::loop_rain(float rain)
 {
     if (!isnan(rain))
     {
+        // detect overflow and other special cases
+        if(rain < 1)
+        {
+            if(m_rain_last_recv_value > 654)
+            {
+                // value overflow detected. Value Range 0xffff * 0.01 = 655.35 maximum
+                m_rain_offset_value += 655.35;
+            }
+            else if(m_rain_last_recv_value > 1)
+            {
+                // rain gauge of station was reset (powercycle of station only)
+                m_rain_offset_value += m_rain_last_recv_value;
+            }
+            else if(m_rain_last_recv_value < -100)
+            {
+                // here we detect the first received value when it below 1 => likly powercycle of station and knx device
+                // use the restored last recv value to add to the offset
+                m_rain_offset_value += m_rain_last_recv_value_restored;
+            }
+        }
+
+        // send the raw value and save the raw value
+        KoW90_SensorRainGaugeRaw_.valueCompare(rain, RainKODPT);
+
+
+        if(m_rain_last_recv_value != rain ) // the vaue changed THIS loop run
+        {
+            uint32_t delta = millis() - m_rain_last_recv_millis; // overflow of millis tbd !!
+        }
+
+
+        if(m_rain_last_recv_value != rain ) // the vaue changed THIS loop run
+        {
+            if(m_rain_last_recv_value >= 0) // to see if it is really a new rain value, not the initalization from m_rain_last_recv_value
+            {
+                /*
+                if(delayCheckMillis(m_rainbool_send_millis, 5 * 60 * 1000))
+                {
+                    KoW90_SensorRain_.value(true, RainBoolKODPT); // signal active rain
+                    m_rainbool_send_millis = millis();
+                }
+                else
+                {
+                    if(KoW90_SensorRain_.valueCompare(true, RainBoolKODPT)) // signal active rain
+                        m_rainbool_send_millis = millis();
+                }
+                */
+               KoW90_SensorRain_.valueCompareTime(true, RainBoolKODPT, m_rainbool_send_millis, 5 * 60 * 1000);
+            }
+
+            m_rain_last_recv_value = rain;
+            m_rain_last_recv_millis = millis();
+        }
+        else if(delayCheckMillis(m_rain_last_recv_millis, 5 * 60 * 1000)) // if there has bee no change in rain value since 5 min
+        {
+            KoW90_SensorRain_.valueCompareTime(false, RainBoolKODPT, m_rainbool_send_millis, 5 * 60 * 1000); // signal inactive rain
+        }
+
+
+        // apply offset
+        rain += m_rain_offset_value;
+
+
         uint8_t send_cycle = ParamW90_SensorRainSendCycle_;
         uint32_t send_millis = send_cycle * 60000;
         bool sendnow = false;
@@ -835,18 +910,18 @@ void Sensorchannel::loop_rain(float rain)
 
         if (sendnow)
         {
-            KoW90_SensorRain_.value(rain, RainKODPT);
+            KoW90_SensorRainGauge_.value(rain, RainKODPT);
             logDebugP("Send RainKO: %f", rain);
             m_rain_last_send_millis = millis();
             m_rain_last_send_value = rain;
         }
         else
         {
-            KoW90_SensorRain_.valueNoSend(rain, RainKODPT);
+            KoW90_SensorRainGauge_.valueNoSend(rain, RainKODPT);
         }
 
-
-        //SensorRainFlow_.value(rain - m_rain_last_flow_value, RainFlowKODPT);
+        KoW90_SensorRainFlow_.value(0.0, RainFlowKODPT);
+        
     }
 }
 
@@ -918,6 +993,20 @@ float Sensorchannel::CalcAbsHumidity(float relative_humidity, float temperature)
     return value;
 }
 
+float Sensorchannel::pressureToSeaLevel(float pressure, int16_t sensor_height)
+{
+    const float k = 2.25577e-5f;
+
+    float x = k * sensor_height;
+
+    // Approximation von (1 - x)^-5.255
+    float factor = 1.0f
+                 + 5.255f * x
+                 + 16.42f * x * x;
+
+    return pressure * factor;
+}
+
 const std::string Sensorchannel::name()
 {
     return "Sensor";
@@ -951,6 +1040,9 @@ void Sensorchannel::save()
 
     openknx.flash.writeFloat((float)KoW90_SensorGustMaxValue_.value(GustKODPT));
     openknx.flash.writeFloat((float)KoW90_SensorGustMinValue_.value(GustKODPT));
+
+    openknx.flash.writeFloat(m_rain_offset_value);
+    openknx.flash.writeFloat(m_rain_last_recv_value);
 }
 
 void Sensorchannel::restore()
@@ -981,4 +1073,7 @@ void Sensorchannel::restore()
 
     KoW90_SensorGustMaxValue_.valueNoSend(openknx.flash.readFloat(), GustKODPT);
     KoW90_SensorGustMinValue_.valueNoSend(openknx.flash.readFloat(), GustKODPT);
+
+    m_rain_offset_value = openknx.flash.readFloat();
+    m_rain_last_recv_value_restored = openknx.flash.readFloat();
 }

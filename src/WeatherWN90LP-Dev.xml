@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-model href="../../Organization/knxprod-support/knx_project_20/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <KNX xmlns="http://knx.org/xml/project/20" xmlns:op="http://github.com/OpenKNX/OpenKNXproducer">
+
+  <op:config name="%BASE_ShowSyncModulesButton%" value="1" />
+  <op:config name="%BASE_Info2LedLabel%" value=" (Input)"></op:config>
+  <op:config name="%BASE_Info3LedLabel%" value=" (RS485)"></op:config>
+  <op:config name="%BASE_Info1LedFunc%" value="2"></op:config> <!-- OPENKNX_LEDFUNC_BASE_STATE : Gerätestatus -->
+  <op:config name="%BASE_Info3LedFunc%" value="300"></op:config> <!-- Status Wetterstation A -->
+
   <op:ETS
     OpenKnxId="0xA1"
     ApplicationNumber="41"
-    ApplicationVersion="0.10"
-    ReplacesVersions="0.9 0.8 0.7 0.6 0.5 0.4 0.3 0.2 0.1 0.0"
+    ApplicationVersion="0.11"
+    ReplacesVersions="0.10 0.9 0.8 0.7 0.6 0.5 0.4 0.3 0.2 0.1 0.0"
     ApplicationRevision="0"
     ProductName="Wetterstation WN90LP"
     ApplicationName="WeatherWN90LP"
