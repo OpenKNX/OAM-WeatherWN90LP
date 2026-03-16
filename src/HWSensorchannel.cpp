@@ -474,7 +474,7 @@ uint8_t HWSensorchannel::GetWindDir()
     }
 }
 
-float HWSensorchannel::GetRain()
+int32_t HWSensorchannel::GetRain()
 {
     float retval;
     if (mutex_try_enter(&mx9, nullptr))
@@ -485,7 +485,7 @@ float HWSensorchannel::GetRain()
     }
     else
     {
-        return NAN;
+        return -1;
     }
 }
 
@@ -546,7 +546,7 @@ void HWSensorchannel::SetWindDir(uint8_t winddir)
     mutex_exit(&mx8);
 }
 
-void HWSensorchannel::SetRain(float rain)
+void HWSensorchannel::SetRain(int32_t rain)
 {
     mutex_enter_blocking(&mx9);
     m_rain = rain;

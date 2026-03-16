@@ -124,14 +124,14 @@ uint8_t HWSensors::GetWindDir(uint8_t channel)
         return 0xff;
 }
 
-float HWSensors::GetRain(uint8_t channel)
+int32_t HWSensors::GetRain(uint8_t channel)
 {
     if (m_HWSensorchannels[channel] != nullptr)
     {
         return m_HWSensorchannels[channel]->GetRain();
     }
     else
-        return NAN;
+        return -1;
 }
 
 HWSensorchannel::SensorState HWSensors::GetState(uint8_t channel)

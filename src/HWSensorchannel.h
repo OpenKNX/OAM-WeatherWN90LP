@@ -64,7 +64,7 @@ class HWSensorchannel : public OpenKNX::Channel
     uint32_t m_winddir_last_poll_millis = 16000;
     uint32_t m_winddir_last_success_millis = 0;
 
-    float m_rain = NAN;
+    int32_t m_rain = -1;
     uint32_t m_rain_last_poll_millis = 18000;
     uint32_t m_rain_last_success_millis = 0;
 
@@ -91,7 +91,7 @@ class HWSensorchannel : public OpenKNX::Channel
     float GetWind();
     float GetGust();
     uint8_t GetWindDir();
-    float GetRain();
+    int32_t GetRain();
 
     void SetTemperature(float temperature);
     void SetHumidity(float humidity);
@@ -102,7 +102,7 @@ class HWSensorchannel : public OpenKNX::Channel
     void SetWind(float wind);
     void SetGust(float gust);
     void SetWindDir(uint8_t winddir);
-    void SetRain(float rain);
+    void SetRain(int32_t rain);
     SensorState GetState();
 
     const std::string name() override;

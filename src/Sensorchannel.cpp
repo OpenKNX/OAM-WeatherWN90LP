@@ -108,7 +108,7 @@ void Sensorchannel::loop()
     float wind = m_hwSensors->GetWind(_channelIndex);
     float gust = m_hwSensors->GetGust(_channelIndex);
     uint8_t winddir = m_hwSensors->GetWindDir(_channelIndex);
-    float rain = m_hwSensors->GetRain(_channelIndex);
+    int32_t rain = m_hwSensors->GetRain(_channelIndex);
 
     loop_temperature(temperature);
     loop_humidity(humidity);
@@ -888,6 +888,7 @@ void Sensorchannel::loop_rain(float rain)
 
                 float rainflow = (raindelta * 1000 * 60 * 60) / delta;
                 KoW90_SensorRainFlow_.value(rainflow, RainFlowKODPT);
+                logDebugP("rainflow debug: rain %f m_rainflow_lastvalue %f, raindelta %f, delta %d, rainflow %f", rain, m_rainflow_lastvalue, raindelta, delta, rainflow);
                 m_rainflow_lastvalue = rain;
                 m_rainflow_lastvalue_millis = millis();
         }

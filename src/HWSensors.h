@@ -45,7 +45,7 @@ class HWSensors
     uint8_t GetWindDir(uint8_t channel);
 
   public:
-    float GetRain(uint8_t channel);
+    int32_t GetRain(uint8_t channel);
 
   public:
     HWSensorchannel::SensorState GetState(uint8_t channel);
