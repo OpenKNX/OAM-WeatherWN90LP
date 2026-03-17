@@ -76,7 +76,7 @@ class HWSensorchannel : public OpenKNX::Channel
     float ReadWind();
     float ReadGust();
     uint8_t ReadWindDir();
-    float ReadRain();
+    int32_t ReadRain();
 
   public:
     HWSensorchannel();

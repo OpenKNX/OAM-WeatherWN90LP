@@ -858,9 +858,9 @@ void Sensorchannel::loop_rain(int32_t rain)
             }
         }
 
-        // send the raw value
-        // ToDo conversion
-        KoW90_SensorRainGaugeRaw_.valueCompare(rain, RainKODPT);
+        // send the raw value (on change only)
+        KoW90_SensorRainGaugeRaw_.valueCompare(rain * 0.01, RainKODPT);
+        KoW90_SensorRainGaugeRaw2_.valueCompare(rain, Dpt(12,1));
 
         if(m_rainflow_lastvalue < 0)
         {
@@ -928,7 +928,8 @@ void Sensorchannel::loop_rain(int32_t rain)
             if (SendTresh != 0)
             {
                 float current_rain_diff = rain - m_rain_last_send_value;
-                sendnow = current_rain_diff >= SendTresh || 0 - current_rain_diff >= SendTresh;
+                current_rain_diff = current_rain_diff * 0.01; // convert to mm
+                sendnow = current_rain_diff >= SendTresh;
                 if (sendnow)
                 {
                     logDebugP("Send RainKO Diff: %f", current_rain_diff);
@@ -936,20 +937,19 @@ void Sensorchannel::loop_rain(int32_t rain)
             }
         }
 
+        double rain_f = rain * 0.01;
         if (sendnow)
         {
-            KoW90_SensorRainGauge_.value(rain, RainKODPT);
-            logDebugP("Send RainKO: %f", rain);
+            KoW90_SensorRainGauge_.value(rain_f, RainKODPT);
+            KoW90_SensorRainGauge4_.value(rain_f, RainKODPT);
+            logDebugP("Send RainKO: %f", rain_f);
             m_rain_last_send_millis = millis();
             m_rain_last_send_value = rain;
         }
         else
         {
-            KoW90_SensorRainGauge_.valueNoSend(rain, RainKODPT);
+            KoW90_SensorRainGauge_.valueNoSend(rain_f, RainKODPT);
         }
-
-        //KoW90_SensorRainFlow_.value(0.0, RainFlowKODPT);
-        
     }
 }
 

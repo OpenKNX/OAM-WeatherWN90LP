@@ -340,7 +340,7 @@ int32_t HWSensorchannel::ReadRain()
     uint16_t data = 0xffff;
     result = m_modbus.readHoldingRegisters(0x016E, 0x0001);
     if (result != m_modbus.ku8MBSuccess)
-        return NAN;
+        return -1;
 
     data = m_modbus.getResponseBuffer(0);
 

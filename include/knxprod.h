@@ -19,7 +19,7 @@
 #define MAIN_FirmwareName "Wetterstation WN90LP (Dev)"
 #define MAIN_OpenKnxId 0xA1
 #define MAIN_ApplicationNumber 41
-#define MAIN_ApplicationVersion 11
+#define MAIN_ApplicationVersion 12
 #define MAIN_ApplicationEncoding iso-8859-15
 #define MAIN_ParameterSize 6221
 #define MAIN_MaxKoNumber 305
@@ -523,7 +523,7 @@
 
 // Communication objects per channel (multiple occurrence)
 #define W90_KoBlockOffset 20
-#define W90_KoBlockSize 60
+#define W90_KoBlockSize 66
 
 #define W90_KoCalcNumber(index) (index + W90_KoBlockOffset + _channelIndex * W90_KoBlockSize)
 #define W90_KoCalcIndex(number) ((number >= W90_KoCalcNumber(0) && number < W90_KoCalcNumber(W90_KoBlockSize)) ? (number - W90_KoBlockOffset) % W90_KoBlockSize : -1)
@@ -584,11 +584,13 @@
 #define W90_KoSensorGustMaxValue_ 52
 #define W90_KoSensorGustMinMaxReset_ 53
 #define W90_KoSensorWindDir_ 54
-#define W90_KoSensorRainGauge_ 55
-#define W90_KoSensorRainFlow_ 56
-#define W90_KoSensorRain_ 57
-#define W90_KoSensorRainGaugeRaw_ 58
-#define W90_KoSensorState_ 59
+#define W90_KoSensorRain_ 55
+#define W90_KoSensorRainGauge_ 56
+#define W90_KoSensorRainGauge4_ 57
+#define W90_KoSensorRainFlow_ 58
+#define W90_KoSensorRainGaugeRaw_ 59
+#define W90_KoSensorRainGaugeRaw2_ 60
+#define W90_KoSensorState_ 65
 
 // Temperatur
 #define KoW90_SensorTemp_                         (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorTemp_)))
@@ -700,14 +702,18 @@
 #define KoW90_SensorGustMinMaxReset_              (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorGustMinMaxReset_)))
 // Windrichtung
 #define KoW90_SensorWindDir_                      (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorWindDir_)))
-// Regenmenge
-#define KoW90_SensorRainGauge_                    (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorRainGauge_)))
-// Regenmenge (pro h)
-#define KoW90_SensorRainFlow_                     (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorRainFlow_)))
 // Regen
 #define KoW90_SensorRain_                         (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorRain_)))
+// Regenmenge
+#define KoW90_SensorRainGauge_                    (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorRainGauge_)))
+// Regenmenge (DPT14)
+#define KoW90_SensorRainGauge4_                   (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorRainGauge4_)))
+// Regenmenge (pro h)
+#define KoW90_SensorRainFlow_                     (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorRainFlow_)))
 // Regenmenge (Rohwert)
 #define KoW90_SensorRainGaugeRaw_                 (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorRainGaugeRaw_)))
+// Regenmenge (Rohwert2)
+#define KoW90_SensorRainGaugeRaw2_                (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorRainGaugeRaw2_)))
 // Station aktiv
 #define KoW90_SensorState_                        (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorState_)))
 

@@ -9,6 +9,11 @@
 #include "VirtualButtonModule.h"
 
 /* ToDo
+- Reset Rain Counter
+- Set Rain Counter to value
+- pause Rain Counter
+- 2byte float raingauge ?
+
 - IMPL - Status für Station erreichbar
 - IMPL - höhenkorrektur luftdruck
 - RainFlow
@@ -22,7 +27,7 @@
 
 void setup()
 {
-    const uint8_t firmwareRevision = 1;
+    const uint8_t firmwareRevision = 0;
     openknx.init(firmwareRevision);
 
     openknx.addModule(1, openknxLogic);

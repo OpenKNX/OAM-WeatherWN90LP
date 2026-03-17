@@ -116,7 +116,7 @@ class Sensorchannel : public OpenKNX::Channel
     void loop_wind(float wind);
     void loop_gust(float gust);
     void loop_winddir(uint8_t winddir);
-    void loop_rain(float rain);
+    void loop_rain(int32_t rain);
 
   public:
     Sensorchannel();

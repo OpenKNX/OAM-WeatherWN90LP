@@ -318,15 +318,15 @@
               <!-- wind dir -->
               <ComObject Id="%AID%_O-%TT%%CC%054" Name="SensorWindDir_%C%" Text="Windrichtung" Number="%K54%" FunctionText="Wetterstation %Z%" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-3" />
               <!-- rain -->
-              <ComObject Id="%AID%_O-%TT%%CC%055" Name="SensorRainGauge_%C%" Text="Regenmenge" Number="%K55%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-26" />
-              <ComObject Id="%AID%_O-%TT%%CC%056" Name="SensorRainFlow_%C%" Text="Regenmenge (pro h)" Number="%K56%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-25" />
-              <ComObject Id="%AID%_O-%TT%%CC%057" Name="SensorRain_%C%" Text="Regen" Number="%K57%" FunctionText="Wetterstation %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-2" />
-              <ComObject Id="%AID%_O-%TT%%CC%058" Name="SensorRainGaugeRaw_%C%" Text="Regenmenge (Rohwert)" Number="%K58%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-26" />
-              <!-- status-->
-              <ComObject Id="%AID%_O-%TT%%CC%059" Name="SensorState_%C%" Text="Station aktiv" Number="%K59%" FunctionText="Wetterstation %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-11" />
-
+              <ComObject Id="%AID%_O-%TT%%CC%055" Name="SensorRain_%C%" Text="Regen" Number="%K55%" FunctionText="Wetterstation %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-2" />
+              <ComObject Id="%AID%_O-%TT%%CC%056" Name="SensorRainGauge_%C%" Text="Regenmenge" Number="%K56%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-26" />
+              <ComObject Id="%AID%_O-%TT%%CC%057" Name="SensorRainGauge4_%C%" Text="Regenmenge (DPT14)" Number="%K57%" FunctionText="Wetterstation %Z%" ObjectSize="4 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPT-14" />
+              <ComObject Id="%AID%_O-%TT%%CC%058" Name="SensorRainFlow_%C%" Text="Regenmenge (pro h)" Number="%K58%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-25" />
               
-
+              <ComObject Id="%AID%_O-%TT%%CC%059" Name="SensorRainGaugeRaw_%C%" Text="Regenmenge (Rohwert)" Number="%K59%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-26" />
+              <ComObject Id="%AID%_O-%TT%%CC%060" Name="SensorRainGaugeRaw2_%C%" Text="Regenmenge (Rohwert2)" Number="%K60%" FunctionText="Wetterstation %Z%" ObjectSize="4 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-12-1" />
+              <!-- status-->
+              <ComObject Id="%AID%_O-%TT%%CC%065" Name="SensorState_%C%" Text="Station aktiv" Number="%K65%" FunctionText="Wetterstation %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-11" />
             </ComObjectTable>
             
             <ComObjectRefs>
@@ -405,8 +405,9 @@
               <ComObjectRef Id="%AID%_O-%TT%%CC%056_R-%TT%%CC%05601" RefId="%AID%_O-%TT%%CC%056" />
               <ComObjectRef Id="%AID%_O-%TT%%CC%057_R-%TT%%CC%05701" RefId="%AID%_O-%TT%%CC%057" />
               <ComObjectRef Id="%AID%_O-%TT%%CC%058_R-%TT%%CC%05801" RefId="%AID%_O-%TT%%CC%058" />
-              <!--status -->
               <ComObjectRef Id="%AID%_O-%TT%%CC%059_R-%TT%%CC%05901" RefId="%AID%_O-%TT%%CC%059" />
+              <!--status -->
+              <ComObjectRef Id="%AID%_O-%TT%%CC%060_R-%TT%%CC%06001" RefId="%AID%_O-%TT%%CC%060" />
             </ComObjectRefs>
           </Static>
           <Dynamic>
@@ -776,9 +777,10 @@
                   <ComObjectRefRef RefId="%AID%_O-%TT%%CC%056_R-%TT%%CC%05601" />
                   <ComObjectRefRef RefId="%AID%_O-%TT%%CC%057_R-%TT%%CC%05701" />
                   <ComObjectRefRef RefId="%AID%_O-%TT%%CC%058_R-%TT%%CC%05801" />
+                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%059_R-%TT%%CC%05901" />
 
                   <!-- Status -->
-                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%059_R-%TT%%CC%05901" />
+                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%060_R-%TT%%CC%06001" />
 
 
                 <!-- </Channel> -->
