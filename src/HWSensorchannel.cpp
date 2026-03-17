@@ -329,7 +329,7 @@ uint8_t HWSensorchannel::ReadWindDir()
     return rawdata;
 }
 
-float HWSensorchannel::ReadRain()
+int32_t HWSensorchannel::ReadRain()
 {
     /* 016E
     data in hex
@@ -345,13 +345,12 @@ float HWSensorchannel::ReadRain()
     data = m_modbus.getResponseBuffer(0);
 
     if (data == 0xFFFF)
-        return NAN;
+        return -1;
 
-    float rawdata = data * 0.01;
-    logDebugP("Rain: %f l/m²", rawdata);
+    logDebugP("Rain: %d x 0.01 l/m²", data);
     m_activity = true;
     m_rain_last_success_millis = millis();
-    return rawdata;
+    return data;
 }
 
 float HWSensorchannel::GetTemperature()

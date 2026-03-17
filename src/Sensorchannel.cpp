@@ -827,38 +827,39 @@ void Sensorchannel::loop_winddir(uint8_t winddir)
     }
 }
 
-void Sensorchannel::loop_rain(float rain)
+void Sensorchannel::loop_rain(int32_t rain)
 {
-    if (!isnan(rain))
+    if (rain >= 0)
     {
         // detect overflow and other special cases
         if(rain < 1)
         {
-            if(m_rain_last_recv_value > 654)
+            if(m_rain_last_recv_value > 65400)
             {
-                // value overflow detected. Value Range 0xffff * 0.01 = 655.35 maximum
-                m_rain_offset_value += 655.35;
-                logDebugP("rain value overflow m_rain_offset_value += 655.35");
+                // value overflow detected. Value Range 0xffff 
+                m_rain_offset_value += 0x10000;
+                logDebugP("rain value overflow m_rain_offset_value += 0x10000");
             }
-            else if(m_rain_last_recv_value > 1)
+            else if(m_rain_last_recv_value > 100)
             {
                 // rain gauge of station was reset (powercycle of station only)
                 m_rain_offset_value += m_rain_last_recv_value;
-                logDebugP("rain gauge of station was reset m_rain_offset_value += m_rain_last_recv_value %f", m_rain_last_recv_value);
+                logDebugP("rain gauge of station was reset m_rain_offset_value += m_rain_last_recv_value %d", m_rain_last_recv_value);
             }
-            else if(m_rain_last_recv_value < -100)
+            else if(m_rain_last_recv_value < 0)
             {
                 // here we detect the first received value when it below 1 => likly powercycle of station and knx device
                 // use the restored last recv value to add to the offset
                 if(m_rain_last_recv_value_restored > 0)
                 {
                     m_rain_offset_value += m_rain_last_recv_value_restored;
-                    logDebugP("power outage m_rain_offset_value += m_rain_last_recv_value_restored; %f", m_rain_last_recv_value_restored);
+                    logDebugP("power outage m_rain_offset_value += m_rain_last_recv_value_restored; %d", m_rain_last_recv_value_restored);
                 }
             }
         }
 
         // send the raw value
+        // ToDo conversion
         KoW90_SensorRainGaugeRaw_.valueCompare(rain, RainKODPT);
 
         if(m_rainflow_lastvalue < 0)
@@ -870,11 +871,11 @@ void Sensorchannel::loop_rain(float rain)
         {
             if(m_rainflow_lastvalue >= 0)
             {
-                double raindelta = rain - m_rainflow_lastvalue;
+                int32_t raindelta = rain - m_rainflow_lastvalue;
                 uint32_t delta = millis() - m_rain_last_recv_millis; // overflow of millis tbd !!
                 if(delta > 30000)   // wait at least 30s
                 {
-                    float rainflow = (raindelta * 1000 * 60 * 60) / delta;
+                    float rainflow = (raindelta * 1000.0 * 60 * 60) / delta;
                     KoW90_SensorRainFlow_.value(rainflow, RainFlowKODPT);
                     m_rainflow_lastvalue = rain;
                     m_rainflow_lastvalue_millis = millis();
@@ -883,12 +884,12 @@ void Sensorchannel::loop_rain(float rain)
         }
         if(delayCheckMillis(m_rainflow_lastvalue_millis, 1000*60*5)) // if last value was stored over 5 min ago
         {
-                double raindelta = rain - m_rainflow_lastvalue;
+                int32_t raindelta = rain - m_rainflow_lastvalue;
                 uint32_t delta = millis() - m_rain_last_recv_millis; // overflow of millis tbd !!
 
-                float rainflow = (raindelta * 1000 * 60 * 60) / delta;
+                float rainflow = (raindelta * 1000.0 * 60 * 60) / delta;
                 KoW90_SensorRainFlow_.value(rainflow, RainFlowKODPT);
-                logDebugP("rainflow debug: rain %f m_rainflow_lastvalue %f, raindelta %f, delta %d, rainflow %f", rain, m_rainflow_lastvalue, raindelta, delta, rainflow);
+                logDebugP("rainflow debug: rain %d m_rainflow_lastvalue %d, raindelta %d, delta %d, rainflow %f", rain, m_rainflow_lastvalue, raindelta, delta, rainflow);
                 m_rainflow_lastvalue = rain;
                 m_rainflow_lastvalue_millis = millis();
         }
@@ -898,18 +899,6 @@ void Sensorchannel::loop_rain(float rain)
         {
             if(m_rain_last_recv_value >= 0) // to see if it is really a new rain value, not the initalization from m_rain_last_recv_value
             {
-                /*
-                if(delayCheckMillis(m_rainbool_send_millis, 5 * 60 * 1000))
-                {
-                    KoW90_SensorRain_.value(true, RainBoolKODPT); // signal active rain
-                    m_rainbool_send_millis = millis();
-                }
-                else
-                {
-                    if(KoW90_SensorRain_.valueCompare(true, RainBoolKODPT)) // signal active rain
-                        m_rainbool_send_millis = millis();
-                }
-                */
                KoW90_SensorRain_.valueCompareTime(true, RainBoolKODPT, m_rainbool_last_send_millis, 5 * 60 * 1000);
             }
 
