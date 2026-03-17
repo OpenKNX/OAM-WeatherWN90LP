@@ -351,6 +351,12 @@ int32_t HWSensorchannel::ReadRain()
     m_activity = true;
     m_rain_last_success_millis = millis();
     return data;
+    /*
+    if(millis() < 1000*60)
+        return ((data + 0x0000 + (millis() / 1000)) % 0x10000);
+    else
+        return ((data + 0 + (millis() / 1000)) % 0x10000);
+    */
 }
 
 float HWSensorchannel::GetTemperature()

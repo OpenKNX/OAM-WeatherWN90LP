@@ -832,7 +832,7 @@ void Sensorchannel::loop_rain(int32_t rain)
     if (rain >= 0)
     {
         // detect overflow and other special cases
-        if(rain < 1)
+        if(rain < 100)
         {
             if(m_rain_last_recv_value > 65400)
             {
@@ -866,19 +866,24 @@ void Sensorchannel::loop_rain(int32_t rain)
         {
             m_rainflow_lastvalue = rain;
             m_rainflow_lastvalue_millis = millis();
+            logDebugP("rainflow debug: init %d %d", m_rainflow_lastvalue, m_rainflow_lastvalue_millis);
         }
         if(m_rain_last_recv_value != rain ) // the vaue changed THIS loop run
         {
+            logDebugP("rainflow debug !=");
             if(m_rainflow_lastvalue >= 0)
             {
+                logDebugP("rainflow debug >= 0");
                 int32_t raindelta = rain - m_rainflow_lastvalue;
-                uint32_t delta = millis() - m_rain_last_recv_millis; // overflow of millis tbd !!
+                uint32_t delta = millis() - m_rainflow_lastvalue_millis; // overflow of millis tbd !!
                 if(delta > 30000)   // wait at least 30s
                 {
                     float rainflow = (raindelta * 1000.0 * 60 * 60) / delta;
                     KoW90_SensorRainFlow_.value(rainflow, RainFlowKODPT);
+                    logDebugP("rainflow send >30s: %f", rainflow);
                     m_rainflow_lastvalue = rain;
                     m_rainflow_lastvalue_millis = millis();
+                    logDebugP("rainflow send set %d %d", m_rainflow_lastvalue, m_rainflow_lastvalue_millis);
                 }
             }
         }
@@ -892,6 +897,7 @@ void Sensorchannel::loop_rain(int32_t rain)
                 logDebugP("rainflow debug: rain %d m_rainflow_lastvalue %d, raindelta %d, delta %d, rainflow %f", rain, m_rainflow_lastvalue, raindelta, delta, rainflow);
                 m_rainflow_lastvalue = rain;
                 m_rainflow_lastvalue_millis = millis();
+                logDebugP("rainflow idle send set %d %d", m_rainflow_lastvalue, m_rainflow_lastvalue_millis);
         }
 
 
@@ -941,7 +947,7 @@ void Sensorchannel::loop_rain(int32_t rain)
         if (sendnow)
         {
             KoW90_SensorRainGauge_.value(rain_f, RainKODPT);
-            KoW90_SensorRainGauge4_.value(rain_f, RainKODPT);
+            KoW90_SensorRainGauge4_.value(rain_f, Dpt(14,0));
             logDebugP("Send RainKO: %f", rain_f);
             m_rain_last_send_millis = millis();
             m_rain_last_send_value = rain;
@@ -1069,8 +1075,8 @@ void Sensorchannel::save()
     openknx.flash.writeFloat((float)KoW90_SensorGustMaxValue_.value(GustKODPT));
     openknx.flash.writeFloat((float)KoW90_SensorGustMinValue_.value(GustKODPT));
 
-    openknx.flash.writeFloat(m_rain_offset_value);
-    openknx.flash.writeFloat(m_rain_last_recv_value);
+    openknx.flash.writeInt(m_rain_offset_value);
+    openknx.flash.writeInt(m_rain_last_recv_value);
 }
 
 void Sensorchannel::restore()
@@ -1102,6 +1108,6 @@ void Sensorchannel::restore()
     KoW90_SensorGustMaxValue_.valueNoSend(openknx.flash.readFloat(), GustKODPT);
     KoW90_SensorGustMinValue_.valueNoSend(openknx.flash.readFloat(), GustKODPT);
 
-    m_rain_offset_value = openknx.flash.readFloat();
-    m_rain_last_recv_value_restored = openknx.flash.readFloat();
+    m_rain_offset_value = openknx.flash.readInt();
+    m_rain_last_recv_value_restored = openknx.flash.readInt();
 }
