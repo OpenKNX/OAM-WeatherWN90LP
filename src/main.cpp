@@ -10,10 +10,11 @@
 
 /* ToDo
 - Reset Rain Counter
-- Set Rain Counter to value
-- pause Rain Counter
-- 2byte float raingauge ?
 
+- pause Rain Counter
+
+- IMPL - Set Rain Counter to value
+- IMPL - 4byte float raingauge ?
 - IMPL - Status für Station erreichbar
 - IMPL - höhenkorrektur luftdruck
 - RainFlow

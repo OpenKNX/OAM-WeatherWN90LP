@@ -325,6 +325,7 @@
               
               <ComObject Id="%AID%_O-%TT%%CC%059" Name="SensorRainGaugeRaw_%C%" Text="Regenmenge (Rohwert)" Number="%K59%" FunctionText="Wetterstation %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-26" />
               <ComObject Id="%AID%_O-%TT%%CC%060" Name="SensorRainGaugeRaw2_%C%" Text="Regenmenge (Rohwert2)" Number="%K60%" FunctionText="Wetterstation %Z%" ObjectSize="4 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-12-1" />
+              <ComObject Id="%AID%_O-%TT%%CC%061" Name="SensorSetRainGauge4_%C%" Text="Regenmenge setzen" Number="%K61%" FunctionText="Wetterstation %Z%" ObjectSize="4 Bytes" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPT-14" />
               <!-- status-->
               <ComObject Id="%AID%_O-%TT%%CC%065" Name="SensorState_%C%" Text="Station aktiv" Number="%K65%" FunctionText="Wetterstation %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-11" />
             </ComObjectTable>
@@ -408,6 +409,8 @@
               <ComObjectRef Id="%AID%_O-%TT%%CC%059_R-%TT%%CC%05901" RefId="%AID%_O-%TT%%CC%059" />
               <!--status -->
               <ComObjectRef Id="%AID%_O-%TT%%CC%060_R-%TT%%CC%06001" RefId="%AID%_O-%TT%%CC%060" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%061_R-%TT%%CC%06101" RefId="%AID%_O-%TT%%CC%061" />
+              <ComObjectRef Id="%AID%_O-%TT%%CC%065_R-%TT%%CC%06501" RefId="%AID%_O-%TT%%CC%065" />
             </ComObjectRefs>
           </Static>
           <Dynamic>
@@ -778,9 +781,11 @@
                   <ComObjectRefRef RefId="%AID%_O-%TT%%CC%057_R-%TT%%CC%05701" />
                   <ComObjectRefRef RefId="%AID%_O-%TT%%CC%058_R-%TT%%CC%05801" />
                   <ComObjectRefRef RefId="%AID%_O-%TT%%CC%059_R-%TT%%CC%05901" />
+                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%060_R-%TT%%CC%06001" />
+                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%061_R-%TT%%CC%06101" />
 
                   <!-- Status -->
-                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%060_R-%TT%%CC%06001" />
+                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%065_R-%TT%%CC%06501" />
 
 
                 <!-- </Channel> -->

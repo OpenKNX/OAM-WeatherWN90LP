@@ -955,7 +955,21 @@ void Sensorchannel::loop_rain(int32_t rain)
         else
         {
             KoW90_SensorRainGauge_.valueNoSend(rain_f, RainKODPT);
+            KoW90_SensorRainGauge4_.valueNoSend(rain_f, Dpt(14,0));
         }
+    }
+}
+
+void Sensorchannel::setRain(double setvalue)
+{
+    if(setvalue >= 0)
+    {
+        logDebugP("set RainGauge to %f , old offset %d", setvalue, m_rain_offset_value);
+        m_rain_offset_value = m_rain_offset_value - (((double)KoW90_SensorRainGauge4_.value(Dpt(14,0)) - setvalue )*100);
+        logDebugP("set RainGauge new offset %d", m_rain_offset_value);
+        loop_rain(m_hwSensors->GetRain(_channelIndex));
+        KoW90_SensorRainGauge_.objectWritten();
+        KoW90_SensorRainGauge4_.objectWritten();
     }
 }
 
@@ -991,6 +1005,9 @@ void Sensorchannel::processInputKo(GroupObject &ko)
             setvalue = knx.getGroupObject(AbsKO(W90_KoSensorPress_)).value(PressKODPT);
             knx.getGroupObject(AbsKO(W90_KoSensorPressMinValue_)).valueNoSend(setvalue, PressKODPT);
             knx.getGroupObject(AbsKO(W90_KoSensorPressMaxValue_)).valueNoSend(setvalue, PressKODPT);
+            break;
+        case W90_KoSensorSetRainGauge4_:
+            setRain(ko.value(Dpt(14,0)));
             break;
     }
 }
