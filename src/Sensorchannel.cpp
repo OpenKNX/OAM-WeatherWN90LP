@@ -892,7 +892,7 @@ void Sensorchannel::loop_rain(int32_t rain)
                 int32_t raindelta = rain - m_rainflow_lastvalue;
                 uint32_t delta = millis() - m_rain_last_recv_millis; // overflow of millis tbd !!
 
-                float rainflow = (raindelta * 1000.0 * 60 * 60) / delta;
+                float rainflow = (raindelta * 1000.0 * 60 * 60) / 100 / delta;
                 KoW90_SensorRainFlow_.value(rainflow, RainFlowKODPT);
                 logDebugP("rainflow debug: rain %d m_rainflow_lastvalue %d, raindelta %d, delta %d, rainflow %f", rain, m_rainflow_lastvalue, raindelta, delta, rainflow);
                 m_rainflow_lastvalue = rain;
@@ -1008,6 +1008,10 @@ void Sensorchannel::processInputKo(GroupObject &ko)
             break;
         case W90_KoSensorSetRainGauge4_:
             setRain(ko.value(Dpt(14,0)));
+            break;
+        case W90_KoSensorResetRainGauge_:
+            if(ko.value(DPT_Enable))
+                setRain(0);
             break;
     }
 }

@@ -9,7 +9,7 @@
         </CatalogSection>
       </Catalog>
       <ApplicationPrograms>
-        <op:version OpenKnxId="0xA1" ApplicationNumber="41" ApplicationVersion="13" ReplacesVersions="12 11 10 9 8 7 6 5 4 3 2 1 0" ApplicationRevision="0" FirmwareRevision="-1" />
+        <op:version OpenKnxId="0xA1" ApplicationNumber="41" ApplicationVersion="14" ReplacesVersions="13 12 11 10 9 8 7 6 5 4 3 2 1 0" ApplicationRevision="0" FirmwareRevision="-1" />
         <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="WeatherWN90LP-Dev" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de-DE" DynamicTableManagement="false" Linkable="true" MinEtsVersion="5.0" ContextHelpFile="%FILE-HELP-de%" IconFile="%FILE-ICONS%" IPConfig="Custom" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
           <Static>
             <Code>

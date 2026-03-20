@@ -8,11 +8,14 @@
   <op:config name="%BASE_Info1LedFunc%" value="2"></op:config> <!-- OPENKNX_LEDFUNC_BASE_STATE : Gerätestatus -->
   <op:config name="%BASE_Info3LedFunc%" value="300"></op:config> <!-- Status Wetterstation A -->
 
+  <op:config name="%BASE_ExtendedSave%" value="1"></op:config>
+  <op:config name="%BASE_PeriodicSave%" value="1"></op:config>
+
   <op:ETS
     OpenKnxId="0xA1"
     ApplicationNumber="41"
-    ApplicationVersion="0.13"
-    ReplacesVersions="0.12 0.11 0.10 0.9 0.8 0.7 0.6 0.5 0.4 0.3 0.2 0.1 0.0"
+    ApplicationVersion="0.14"
+    ReplacesVersions="0.13 0.12 0.11 0.10 0.9 0.8 0.7 0.6 0.5 0.4 0.3 0.2 0.1 0.0"
     ApplicationRevision="0"
     ProductName="Wetterstation WN90LP"
     ApplicationName="WeatherWN90LP"

@@ -1,5 +1,5 @@
 ﻿------- Built with -------
-346f57a valueCompareTime lib/knx https://github.com/OpenKNX/knx.git
+95ba5fc valueCompareTime lib/knx https://github.com/OpenKNX/knx.git
 7b628ef v1 lib/OFM-BinaryInput https://github.com/OpenKNX/OFM-BinaryInput.git
 eca6977 v1 lib/OFM-ConfigTransfer https://github.com/OpenKNX/OFM-ConfigTransfer
 178f186 v1 lib/OFM-FileTransferModule https://github.com/OpenKNX/OFM-FileTransferModule.git

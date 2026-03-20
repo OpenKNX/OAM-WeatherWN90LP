@@ -19,7 +19,7 @@
 #define MAIN_FirmwareName "Wetterstation WN90LP (Dev)"
 #define MAIN_OpenKnxId 0xA1
 #define MAIN_ApplicationNumber 41
-#define MAIN_ApplicationVersion 13
+#define MAIN_ApplicationVersion 14
 #define MAIN_ApplicationEncoding iso-8859-15
 #define MAIN_ParameterSize 6221
 #define MAIN_MaxKoNumber 305
@@ -591,6 +591,7 @@
 #define W90_KoSensorRainGaugeRaw_ 59
 #define W90_KoSensorRainGaugeRaw2_ 60
 #define W90_KoSensorSetRainGauge4_ 61
+#define W90_KoSensorResetRainGauge_ 62
 #define W90_KoSensorState_ 65
 
 // Temperatur
@@ -717,6 +718,8 @@
 #define KoW90_SensorRainGaugeRaw2_                (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorRainGaugeRaw2_)))
 // Regenmenge setzen
 #define KoW90_SensorSetRainGauge4_                (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorSetRainGauge4_)))
+// Regenmenge zurücksetzen
+#define KoW90_SensorResetRainGauge_               (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorResetRainGauge_)))
 // Station aktiv
 #define KoW90_SensorState_                        (knx.getGroupObject(W90_KoCalcNumber(W90_KoSensorState_)))
 
