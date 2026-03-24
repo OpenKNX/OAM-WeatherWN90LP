@@ -144,9 +144,11 @@
               <!-- rain parameters -->
               <Union SizeInBit="48">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="159" BitOffset="0" />
-                <Parameter Id="%AID%_UP-%TT%%CC%110" Name="SensorRainSendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%%CC%111" Name="SensorRainSendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="     von mehr als" SuffixText="mm" Value="0.1" />
+                <Parameter Id="%AID%_UP-%TT%%CC%110" Name="SensorRainSendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="1" Access="Read" />
                 <Parameter Id="%AID%_UP-%TT%%CC%112" Name="SensorRainSendCycle_%C%" Offset="5" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
+                <Parameter Id="%AID%_UP-%TT%%CC%113" Name="SensorRainDPT14Ko_%C%" Offset="0" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Zusätzliche DPT14 KOs für Regenmenge" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%114" Name="SensorRainSendRaw_%C%" Offset="0" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Rohwert Regenmenge senden" Value="0" />
+                <Parameter Id="%AID%_UP-%TT%%CC%115" Name="SensorRainTime_%C%" Offset="4" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Timeout Regenerkennung" Value="10" />
               </Union>
             </Parameters>
 
@@ -246,8 +248,10 @@
               <ParameterRef Id="%AID%_UP-%TT%%CC%103_R-%TT%%CC%10301" RefId="%AID%_UP-%TT%%CC%103" />
               <!-- rain parameters-->
               <ParameterRef Id="%AID%_UP-%TT%%CC%110_R-%TT%%CC%11001" RefId="%AID%_UP-%TT%%CC%110" />
-              <ParameterRef Id="%AID%_UP-%TT%%CC%111_R-%TT%%CC%11101" RefId="%AID%_UP-%TT%%CC%111" />
               <ParameterRef Id="%AID%_UP-%TT%%CC%112_R-%TT%%CC%11201" RefId="%AID%_UP-%TT%%CC%112" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%113_R-%TT%%CC%11301" RefId="%AID%_UP-%TT%%CC%113" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%114_R-%TT%%CC%11401" RefId="%AID%_UP-%TT%%CC%114" />
+              <ParameterRef Id="%AID%_UP-%TT%%CC%115_R-%TT%%CC%11501" RefId="%AID%_UP-%TT%%CC%115" />
 
             </ParameterRefs>
 
@@ -610,12 +614,11 @@
                   <!-- Regen -->
                   <ParameterSeparator Id="%AID%_PS-" Text="Regenmenge" UIHint="Headline" />
                   <ParameterRefRef RefId="%AID%_UP-%TT%%CC%110_R-%TT%%CC%11001" />
-                  <choose ParamRefId="%AID%_UP-%TT%%CC%110_R-%TT%%CC%11001">
-                    <when test="1">
-                      <ParameterRefRef RefId="%AID%_UP-%TT%%CC%111_R-%TT%%CC%11101" />
-                    </when>
-                  </choose>
                   <ParameterRefRef RefId="%AID%_UP-%TT%%CC%112_R-%TT%%CC%11201" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%113_R-%TT%%CC%11301" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%114_R-%TT%%CC%11401" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%115_R-%TT%%CC%11501" />
+
                 </ParameterBlock>
                 
                 <!-- <Channel Id="%AID%_CH-10%CC%" Name="Sensor_%ZZ%" Number="%PREFIX%" Text="Wetterstation %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201"> -->
@@ -778,12 +781,38 @@
                   <ComObjectRefRef RefId="%AID%_O-%TT%%CC%054_R-%TT%%CC%05401" />
 
                   <!-- Rain -->
-                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%055_R-%TT%%CC%05501" />
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%115_R-%TT%%CC%11501">
+                    <when test="!=0">
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%055_R-%TT%%CC%05501" />   
+                    </when>
+                  </choose>
+
                   <ComObjectRefRef RefId="%AID%_O-%TT%%CC%056_R-%TT%%CC%05601" />
-                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%057_R-%TT%%CC%05701" />
+
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%113_R-%TT%%CC%11301">
+                    <when test="1">
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%057_R-%TT%%CC%05701" />
+                    </when>
+                  </choose>
+
                   <ComObjectRefRef RefId="%AID%_O-%TT%%CC%058_R-%TT%%CC%05801" />
-                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%059_R-%TT%%CC%05901" />
-                  <ComObjectRefRef RefId="%AID%_O-%TT%%CC%060_R-%TT%%CC%06001" />
+
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%114_R-%TT%%CC%11401">
+                    <when test="1">
+                      <ComObjectRefRef RefId="%AID%_O-%TT%%CC%059_R-%TT%%CC%05901" />
+                    </when>
+                  </choose>
+
+                  <choose ParamRefId="%AID%_UP-%TT%%CC%113_R-%TT%%CC%11301">
+                    <when test="1">
+                      <choose ParamRefId="%AID%_UP-%TT%%CC%114_R-%TT%%CC%11401">
+                        <when test="1">
+                          <ComObjectRefRef RefId="%AID%_O-%TT%%CC%060_R-%TT%%CC%06001" />
+                        </when>
+                      </choose>
+                    </when>
+                  </choose>
+
                   <ComObjectRefRef RefId="%AID%_O-%TT%%CC%061_R-%TT%%CC%06101" />
                   <ComObjectRefRef RefId="%AID%_O-%TT%%CC%062_R-%TT%%CC%06201" />
 

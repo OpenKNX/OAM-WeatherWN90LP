@@ -1,5 +1,5 @@
 ﻿------- Built with -------
-95ba5fc valueCompareTime lib/knx https://github.com/OpenKNX/knx.git
+49c1072 v1dev lib/knx https://github.com/OpenKNX/knx.git
 7b628ef v1 lib/OFM-BinaryInput https://github.com/OpenKNX/OFM-BinaryInput.git
 eca6977 v1 lib/OFM-ConfigTransfer https://github.com/OpenKNX/OFM-ConfigTransfer
 178f186 v1 lib/OFM-FileTransferModule https://github.com/OpenKNX/OFM-FileTransferModule.git
@@ -7,5 +7,5 @@ eca6977 v1 lib/OFM-ConfigTransfer https://github.com/OpenKNX/OFM-ConfigTransfer
 925f6e9 v1 lib/OFM-SensorModule https://github.com/OpenKNX/OFM-SensorModule
 034977c v1 lib/OFM-VirtualButton https://github.com/OpenKNX/OFM-VirtualButton.git
 86dc82b v1 lib/OGM-Common https://github.com/OpenKNX/OGM-Common.git
-2af139a v1 lib/OGM-HardwareConfig https://github.com/OpenKNX/OGM-HardwareConfig.git
+7b1a666 v1 lib/OGM-HardwareConfig https://github.com/OpenKNX/OGM-HardwareConfig.git
 369412c v1 lib/OGM-SensorDevices https://github.com/OpenKNX/OGM-SensorDevices.git

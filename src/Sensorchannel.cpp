@@ -887,7 +887,7 @@ void Sensorchannel::loop_rain(int32_t rain)
                 }
             }
         }
-        if(delayCheckMillis(m_rainflow_lastvalue_millis, 1000*60*5)) // if last value was stored over 5 min ago
+        if(delayCheckMillis(m_rainflow_lastvalue_millis, ParamW90_SensorRainTime_ * 60 * 1000))
         {
                 int32_t raindelta = rain - m_rainflow_lastvalue;
                 uint32_t delta = millis() - m_rain_last_recv_millis; // overflow of millis tbd !!
@@ -911,7 +911,7 @@ void Sensorchannel::loop_rain(int32_t rain)
             m_rain_last_recv_value = rain;
             m_rain_last_recv_millis = millis();
         }
-        else if(delayCheckMillis(m_rain_last_recv_millis, 5 * 60 * 1000)) // if there has bee no change in rain value since 5 min
+        else if(delayCheckMillis(m_rain_last_recv_millis, 10 * 60 * 1000)) // if there has bee no change in rain value since 10 min
         {
             KoW90_SensorRain_.valueCompareTime(false, RainBoolKODPT, m_rainbool_last_send_millis, 5 * 60 * 1000); // signal inactive rain
         }
@@ -930,16 +930,11 @@ void Sensorchannel::loop_rain(int32_t rain)
         }
         if (!sendnow)
         {
-            float SendTresh = ParamW90_SensorRainSendChangeAmount_;
-            if (SendTresh != 0)
+            int32_t current_rain_diff = rain - m_rain_last_send_value;
+            sendnow = current_rain_diff > 0;
+            if (sendnow)
             {
-                float current_rain_diff = rain - m_rain_last_send_value;
-                current_rain_diff = current_rain_diff * 0.01; // convert to mm
-                sendnow = current_rain_diff >= SendTresh;
-                if (sendnow)
-                {
-                    logDebugP("Send RainKO Diff: %f", current_rain_diff);
-                }
+                logDebugP("Send RainKO Diff: %f", current_rain_diff);
             }
         }
 

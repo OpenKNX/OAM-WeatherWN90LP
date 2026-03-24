@@ -16,14 +16,14 @@
 #define ETS_ModuleId_BI 5
 #define ETS_ModuleId_BTN 6
 #define ETS_ModuleId_SENS 7
-#define MAIN_FirmwareName "Wetterstation WN90LP (Dev)"
+#define MAIN_FirmwareName "Wetterstation WN90LP"
 #define MAIN_OpenKnxId 0xA1
-#define MAIN_ApplicationNumber 41
-#define MAIN_ApplicationVersion 14
+#define MAIN_ApplicationNumber 40
+#define MAIN_ApplicationVersion 3
 #define MAIN_ApplicationEncoding iso-8859-15
 #define MAIN_ParameterSize 6221
 #define MAIN_MaxKoNumber 305
-#define MAIN_OrderNumber "0xA129"
+#define MAIN_OrderNumber "0xA128"
 #define BASE_ModuleVersion 23
 #define UCT_ModuleVersion 5
 #define LOG_ModuleVersion 64
@@ -350,8 +350,14 @@
 #define W90_SensorRainSendChange_               159      // 1 Bit, Bit 7
 #define     W90_SensorRainSendChange_Mask 0x80
 #define     W90_SensorRainSendChange_Shift 7
-#define W90_SensorRainSendChangeAmount_         160      // float
 #define W90_SensorRainSendCycle_                164      // 8 Bits, Bit 7-0
+#define W90_SensorRainDPT14Ko_                  159      // 1 Bit, Bit 6
+#define     W90_SensorRainDPT14Ko_Mask 0x40
+#define     W90_SensorRainDPT14Ko_Shift 6
+#define W90_SensorRainSendRaw_                  159      // 1 Bit, Bit 5
+#define     W90_SensorRainSendRaw_Mask 0x20
+#define     W90_SensorRainSendRaw_Shift 5
+#define W90_SensorRainTime_                     163      // 8 Bits, Bit 7-0
 
 // I2C-Adresse
 #define ParamW90_Address_                            (knx.paramByte(W90_ParamCalcIndex(W90_Address_)))
@@ -513,10 +519,14 @@
 #define ParamW90_SensorWindDirAlign_                 (knx.paramByte(W90_ParamCalcIndex(W90_SensorWindDirAlign_)))
 // Senden bei Änderung
 #define ParamW90_SensorRainSendChange_               ((bool)(knx.paramByte(W90_ParamCalcIndex(W90_SensorRainSendChange_)) & W90_SensorRainSendChange_Mask))
-//      von mehr als
-#define ParamW90_SensorRainSendChangeAmount_         (knx.paramFloat(W90_ParamCalcIndex(W90_SensorRainSendChangeAmount_), Float_Enc_IEEE754Single))
 // Zyklisch senden alle
 #define ParamW90_SensorRainSendCycle_                (knx.paramByte(W90_ParamCalcIndex(W90_SensorRainSendCycle_)))
+// Zusätzliche DPT14 KOs für Regenmenge
+#define ParamW90_SensorRainDPT14Ko_                  ((bool)(knx.paramByte(W90_ParamCalcIndex(W90_SensorRainDPT14Ko_)) & W90_SensorRainDPT14Ko_Mask))
+// Rohwert Regenmenge senden
+#define ParamW90_SensorRainSendRaw_                  ((bool)(knx.paramByte(W90_ParamCalcIndex(W90_SensorRainSendRaw_)) & W90_SensorRainSendRaw_Mask))
+// Timeout Regenerkennung
+#define ParamW90_SensorRainTime_                     (knx.paramByte(W90_ParamCalcIndex(W90_SensorRainTime_)))
 
 // deprecated
 #define W90_KoOffset 20

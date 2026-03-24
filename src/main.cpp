@@ -9,21 +9,7 @@
 #include "VirtualButtonModule.h"
 
 /* ToDo
-- Reset Rain Counter
-
 - pause Rain Counter
-
-- IMPL - Set Rain Counter to value
-- IMPL - 4byte float raingauge ?
-- IMPL - Status für Station erreichbar
-- IMPL - höhenkorrektur luftdruck
-- RainFlow
-- IMPL - Rain
-- IMPL - RainGauge Overflow
-- DONE - StatusLED
-- DONE - fix UVI
-- DONE - 2MB Flashlayout
-- DONE - Common 1.7.2
 */
 
 void setup()
