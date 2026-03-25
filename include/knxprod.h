@@ -16,14 +16,14 @@
 #define ETS_ModuleId_BI 5
 #define ETS_ModuleId_BTN 6
 #define ETS_ModuleId_SENS 7
-#define MAIN_FirmwareName "Wetterstation WN90LP"
+#define MAIN_FirmwareName "Wetterstation WN90LP (Dev)"
 #define MAIN_OpenKnxId 0xA1
-#define MAIN_ApplicationNumber 40
-#define MAIN_ApplicationVersion 4
+#define MAIN_ApplicationNumber 41
+#define MAIN_ApplicationVersion 17
 #define MAIN_ApplicationEncoding iso-8859-15
 #define MAIN_ParameterSize 6221
 #define MAIN_MaxKoNumber 305
-#define MAIN_OrderNumber "0xA128"
+#define MAIN_OrderNumber "0xA129"
 #define BASE_ModuleVersion 23
 #define UCT_ModuleVersion 5
 #define LOG_ModuleVersion 64
