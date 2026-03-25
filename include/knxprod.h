@@ -16,14 +16,14 @@
 #define ETS_ModuleId_BI 5
 #define ETS_ModuleId_BTN 6
 #define ETS_ModuleId_SENS 7
-#define MAIN_FirmwareName "Wetterstation WN90LP (Dev)"
+#define MAIN_FirmwareName "Wetterstation WN90LP"
 #define MAIN_OpenKnxId 0xA1
-#define MAIN_ApplicationNumber 41
-#define MAIN_ApplicationVersion 16
+#define MAIN_ApplicationNumber 40
+#define MAIN_ApplicationVersion 4
 #define MAIN_ApplicationEncoding iso-8859-15
 #define MAIN_ParameterSize 6221
 #define MAIN_MaxKoNumber 305
-#define MAIN_OrderNumber "0xA129"
+#define MAIN_OrderNumber "0xA128"
 #define BASE_ModuleVersion 23
 #define UCT_ModuleVersion 5
 #define LOG_ModuleVersion 64
@@ -65,8 +65,8 @@
 #define     BASE_SummertimeKOShift 0
 #define BASE_TimezoneCustom                       5      // char*, 63 Byte
 #define     BASE_TimezoneCustomLength 63
-#define BASE_Latitude                            69      // float
-#define BASE_Longitude                           73      // float
+#define BASE_Latitude                            69      // float (4 Byte)
+#define BASE_Longitude                           73      // float (4 Byte)
 #define BASE_Diagnose                            78      // 1 Bit, Bit 7
 #define     BASE_DiagnoseMask 0x80
 #define     BASE_DiagnoseShift 7
@@ -216,28 +216,28 @@
 #define W90_SensorTemperatureSendChange_         1      // 1 Bit, Bit 7
 #define     W90_SensorTemperatureSendChange_Mask 0x80
 #define     W90_SensorTemperatureSendChange_Shift 7
-#define W90_SensorTemperatureSendChangeAmount_   2      // float
+#define W90_SensorTemperatureSendChangeAmount_   2      // float (4 Byte)
 #define W90_SensorTemperatureSendCycle_          6      // 8 Bits, Bit 7-0
-#define W90_SensorTemperatureAlign_              7      // float
+#define W90_SensorTemperatureAlign_              7      // float (4 Byte)
 #define W90_SensorTemperatureWarn_               1      // 1 Bit, Bit 6
 #define     W90_SensorTemperatureWarn_Mask 0x40
 #define     W90_SensorTemperatureWarn_Shift 6
-#define W90_SensorTemperatureWarnL_             11      // float
-#define W90_SensorTemperatureWarnH_             15      // float
+#define W90_SensorTemperatureWarnL_             11      // float (4 Byte)
+#define W90_SensorTemperatureWarnH_             15      // float (4 Byte)
 #define W90_SensorTemperatureMinMax_             1      // 1 Bit, Bit 5
 #define     W90_SensorTemperatureMinMax_Mask 0x20
 #define     W90_SensorTemperatureMinMax_Shift 5
 #define W90_SensorHumiditySendChange_           19      // 1 Bit, Bit 7
 #define     W90_SensorHumiditySendChange_Mask 0x80
 #define     W90_SensorHumiditySendChange_Shift 7
-#define W90_SensorHumiditySendChangeAmount_     20      // float
+#define W90_SensorHumiditySendChangeAmount_     20      // float (4 Byte)
 #define W90_SensorHumiditySendCycle_            24      // 8 Bits, Bit 7-0
-#define W90_SensorHumidityAlign_                25      // float
+#define W90_SensorHumidityAlign_                25      // float (4 Byte)
 #define W90_SensorHumidityWarn_                 19      // 1 Bit, Bit 6
 #define     W90_SensorHumidityWarn_Mask 0x40
 #define     W90_SensorHumidityWarn_Shift 6
-#define W90_SensorHumidityWarnL_                29      // float
-#define W90_SensorHumidityWarnH_                33      // float
+#define W90_SensorHumidityWarnL_                29      // float (4 Byte)
+#define W90_SensorHumidityWarnH_                33      // float (4 Byte)
 #define W90_SensorHumidityMinMax_               19      // 1 Bit, Bit 5
 #define     W90_SensorHumidityMinMax_Mask 0x20
 #define     W90_SensorHumidityMinMax_Shift 5
@@ -245,42 +245,42 @@
 #define W90_SensorAbsHumiditySendChange_        39      // 1 Bit, Bit 7
 #define     W90_SensorAbsHumiditySendChange_Mask 0x80
 #define     W90_SensorAbsHumiditySendChange_Shift 7
-#define W90_SensorAbsHumiditySendChangeAmount_  40      // float
+#define W90_SensorAbsHumiditySendChangeAmount_  40      // float (4 Byte)
 #define W90_SensorAbsHumiditySendCycle_         44      // 8 Bits, Bit 7-0
-#define W90_SensorAbsHumidityAlign_             45      // float
+#define W90_SensorAbsHumidityAlign_             45      // float (4 Byte)
 #define W90_SensorAbsHumidityWarn_              39      // 1 Bit, Bit 6
 #define     W90_SensorAbsHumidityWarn_Mask 0x40
 #define     W90_SensorAbsHumidityWarn_Shift 6
-#define W90_SensorAbsHumidityWarnL_             49      // float
-#define W90_SensorAbsHumidityWarnH_             53      // float
+#define W90_SensorAbsHumidityWarnL_             49      // float (4 Byte)
+#define W90_SensorAbsHumidityWarnH_             53      // float (4 Byte)
 #define W90_SensorAbsHumidityMinMax_            39      // 1 Bit, Bit 5
 #define     W90_SensorAbsHumidityMinMax_Mask 0x20
 #define     W90_SensorAbsHumidityMinMax_Shift 5
 #define W90_SensorDewPointSendChange_           57      // 1 Bit, Bit 7
 #define     W90_SensorDewPointSendChange_Mask 0x80
 #define     W90_SensorDewPointSendChange_Shift 7
-#define W90_SensorDewPointSendChangeAmount_     58      // float
+#define W90_SensorDewPointSendChangeAmount_     58      // float (4 Byte)
 #define W90_SensorDewPointSendCycle_            62      // 8 Bits, Bit 7-0
-#define W90_SensorDewPointAlign_                63      // float
+#define W90_SensorDewPointAlign_                63      // float (4 Byte)
 #define W90_SensorDewPointWarn_                 57      // 1 Bit, Bit 6
 #define     W90_SensorDewPointWarn_Mask 0x40
 #define     W90_SensorDewPointWarn_Shift 6
-#define W90_SensorDewPointWarnL_                67      // float
-#define W90_SensorDewPointWarnH_                71      // float
+#define W90_SensorDewPointWarnL_                67      // float (4 Byte)
+#define W90_SensorDewPointWarnH_                71      // float (4 Byte)
 #define W90_SensorDewPointMinMax_               57      // 1 Bit, Bit 5
 #define     W90_SensorDewPointMinMax_Mask 0x20
 #define     W90_SensorDewPointMinMax_Shift 5
 #define W90_SensorPressureSendChange_           75      // 1 Bit, Bit 7
 #define     W90_SensorPressureSendChange_Mask 0x80
 #define     W90_SensorPressureSendChange_Shift 7
-#define W90_SensorPressureSendChangeAmount_     76      // float
+#define W90_SensorPressureSendChangeAmount_     76      // float (4 Byte)
 #define W90_SensorPressureSendCycle_            80      // 8 Bits, Bit 7-0
-#define W90_SensorPressureAlign_                81      // float
+#define W90_SensorPressureAlign_                81      // float (4 Byte)
 #define W90_SensorPressureWarn_                 75      // 1 Bit, Bit 6
 #define     W90_SensorPressureWarn_Mask 0x40
 #define     W90_SensorPressureWarn_Shift 6
-#define W90_SensorPressureWarnL_                85      // float
-#define W90_SensorPressureWarnH_                89      // float
+#define W90_SensorPressureWarnL_                85      // float (4 Byte)
+#define W90_SensorPressureWarnH_                89      // float (4 Byte)
 #define W90_SensorPressureMinMax_               75      // 1 Bit, Bit 5
 #define     W90_SensorPressureMinMax_Mask 0x20
 #define     W90_SensorPressureMinMax_Shift 5
@@ -288,14 +288,14 @@
 #define W90_SensorLightSendChange_              95      // 1 Bit, Bit 7
 #define     W90_SensorLightSendChange_Mask 0x80
 #define     W90_SensorLightSendChange_Shift 7
-#define W90_SensorLightSendChangeAmount_        96      // float
+#define W90_SensorLightSendChangeAmount_        96      // float (4 Byte)
 #define W90_SensorLightSendCycle_               100      // 8 Bits, Bit 7-0
-#define W90_SensorLightAlign_                   101      // float
+#define W90_SensorLightAlign_                   101      // float (4 Byte)
 #define W90_SensorLightWarn_                    95      // 1 Bit, Bit 6
 #define     W90_SensorLightWarn_Mask 0x40
 #define     W90_SensorLightWarn_Shift 6
-#define W90_SensorLightWarnL_                   105      // float
-#define W90_SensorLightWarnH_                   109      // float
+#define W90_SensorLightWarnL_                   105      // float (4 Byte)
+#define W90_SensorLightWarnH_                   109      // float (4 Byte)
 #define W90_SensorLightMinMax_                  95      // 1 Bit, Bit 5
 #define     W90_SensorLightMinMax_Mask 0x20
 #define     W90_SensorLightMinMax_Shift 5
@@ -316,28 +316,28 @@
 #define W90_SensorWindSendChange_               119      // 1 Bit, Bit 7
 #define     W90_SensorWindSendChange_Mask 0x80
 #define     W90_SensorWindSendChange_Shift 7
-#define W90_SensorWindSendChangeAmount_         120      // float
+#define W90_SensorWindSendChangeAmount_         120      // float (4 Byte)
 #define W90_SensorWindSendCycle_                124      // 8 Bits, Bit 7-0
-#define W90_SensorWindAlign_                    125      // float
+#define W90_SensorWindAlign_                    125      // float (4 Byte)
 #define W90_SensorWindWarn_                     119      // 1 Bit, Bit 6
 #define     W90_SensorWindWarn_Mask 0x40
 #define     W90_SensorWindWarn_Shift 6
-#define W90_SensorWindWarnL_                    129      // float
-#define W90_SensorWindWarnH_                    133      // float
+#define W90_SensorWindWarnL_                    129      // float (4 Byte)
+#define W90_SensorWindWarnH_                    133      // float (4 Byte)
 #define W90_SensorWindMinMax_                   119      // 1 Bit, Bit 5
 #define     W90_SensorWindMinMax_Mask 0x20
 #define     W90_SensorWindMinMax_Shift 5
 #define W90_SensorGustSendChange_               137      // 1 Bit, Bit 7
 #define     W90_SensorGustSendChange_Mask 0x80
 #define     W90_SensorGustSendChange_Shift 7
-#define W90_SensorGustSendChangeAmount_         138      // float
+#define W90_SensorGustSendChangeAmount_         138      // float (4 Byte)
 #define W90_SensorGustSendCycle_                142      // 8 Bits, Bit 7-0
-#define W90_SensorGustAlign_                    143      // float
+#define W90_SensorGustAlign_                    143      // float (4 Byte)
 #define W90_SensorGustWarn_                     137      // 1 Bit, Bit 6
 #define     W90_SensorGustWarn_Mask 0x40
 #define     W90_SensorGustWarn_Shift 6
-#define W90_SensorGustWarnL_                    147      // float
-#define W90_SensorGustWarnH_                    151      // float
+#define W90_SensorGustWarnL_                    147      // float (4 Byte)
+#define W90_SensorGustWarnH_                    151      // float (4 Byte)
 #define W90_SensorGustMinMax_                   137      // 1 Bit, Bit 5
 #define     W90_SensorGustMinMax_Mask 0x20
 #define     W90_SensorGustMinMax_Shift 5
@@ -1337,10 +1337,10 @@
 #define     LOG_fE1UseOtherKOShift 4
 #define LOG_fE1LowDelta                         13      // int32_t
 #define LOG_fE1HighDelta                        17      // int32_t
-#define LOG_fE1LowDeltaFloat                    13      // float
-#define LOG_fE1HighDeltaFloat                   17      // float
-#define LOG_fE1LowDeltaDouble                   13      // float
-#define LOG_fE1HighDeltaDouble                  17      // float
+#define LOG_fE1LowDeltaFloat                    13      // float (4 Byte)
+#define LOG_fE1HighDeltaFloat                   17      // float (4 Byte)
+#define LOG_fE1LowDeltaDouble                   13      // float (4 Byte)
+#define LOG_fE1HighDeltaDouble                  17      // float (4 Byte)
 #define LOG_fE1Low0Valid                        20      // 1 Bit, Bit 7
 #define     LOG_fE1Low0ValidMask 0x80
 #define     LOG_fE1Low0ValidShift 7
@@ -1439,18 +1439,18 @@
 #define LOG_fE1Low1Dpt8In                       15      // int16_t
 #define LOG_fE1Low2Dpt8In                       17      // int16_t
 #define LOG_fE1LowDpt8Fix                       13      // int16_t
-#define LOG_fE1LowDpt9                          13      // float
-#define LOG_fE1HighDpt9                         17      // float
-#define LOG_fE1LowDpt9Fix                       13      // float
+#define LOG_fE1LowDpt9                          13      // float (4 Byte)
+#define LOG_fE1HighDpt9                         17      // float (4 Byte)
+#define LOG_fE1LowDpt9Fix                       13      // float (4 Byte)
 #define LOG_fE1LowDpt12                         13      // uint32_t
 #define LOG_fE1HighDpt12                        17      // uint32_t
 #define LOG_fE1LowDpt12Fix                      13      // uint32_t
 #define LOG_fE1LowDpt13                         13      // int32_t
 #define LOG_fE1HighDpt13                        17      // int32_t
 #define LOG_fE1LowDpt13Fix                      13      // int32_t
-#define LOG_fE1LowDpt14                         13      // float
-#define LOG_fE1HighDpt14                        17      // float
-#define LOG_fE1LowDpt14Fix                      13      // float
+#define LOG_fE1LowDpt14                         13      // float (4 Byte)
+#define LOG_fE1HighDpt14                        17      // float (4 Byte)
+#define LOG_fE1LowDpt14Fix                      13      // float (4 Byte)
 #define LOG_fE1Low0Dpt17                        13      // 8 Bits, Bit 7-0
 #define LOG_fE1Low1Dpt17                        14      // 8 Bits, Bit 7-0
 #define LOG_fE1Low2Dpt17                        15      // 8 Bits, Bit 7-0
@@ -1507,10 +1507,10 @@
 #define     LOG_fE2UseOtherKOShift 4
 #define LOG_fE2LowDelta                         28      // int32_t
 #define LOG_fE2HighDelta                        32      // int32_t
-#define LOG_fE2LowDeltaFloat                    28      // float
-#define LOG_fE2HighDeltaFloat                   32      // float
-#define LOG_fE2LowDeltaDouble                   28      // float
-#define LOG_fE2HighDeltaDouble                  32      // float
+#define LOG_fE2LowDeltaFloat                    28      // float (4 Byte)
+#define LOG_fE2HighDeltaFloat                   32      // float (4 Byte)
+#define LOG_fE2LowDeltaDouble                   28      // float (4 Byte)
+#define LOG_fE2HighDeltaDouble                  32      // float (4 Byte)
 #define LOG_fE2Low0Valid                        35      // 1 Bit, Bit 7
 #define     LOG_fE2Low0ValidMask 0x80
 #define     LOG_fE2Low0ValidShift 7
@@ -1609,18 +1609,18 @@
 #define LOG_fE2Low1Dpt8In                       30      // int16_t
 #define LOG_fE2Low2Dpt8In                       32      // int16_t
 #define LOG_fE2LowDpt8Fix                       28      // int16_t
-#define LOG_fE2LowDpt9                          28      // float
-#define LOG_fE2HighDpt9                         32      // float
-#define LOG_fE2LowDpt9Fix                       28      // float
+#define LOG_fE2LowDpt9                          28      // float (4 Byte)
+#define LOG_fE2HighDpt9                         32      // float (4 Byte)
+#define LOG_fE2LowDpt9Fix                       28      // float (4 Byte)
 #define LOG_fE2LowDpt12                         28      // uint32_t
 #define LOG_fE2HighDpt12                        32      // uint32_t
 #define LOG_fE2LowDpt12Fix                      28      // uint32_t
 #define LOG_fE2LowDpt13                         28      // int32_t
 #define LOG_fE2HighDpt13                        32      // int32_t
 #define LOG_fE2LowDpt13Fix                      28      // int32_t
-#define LOG_fE2LowDpt14                         28      // float
-#define LOG_fE2HighDpt14                        32      // float
-#define LOG_fE2LowDpt14Fix                      28      // float
+#define LOG_fE2LowDpt14                         28      // float (4 Byte)
+#define LOG_fE2HighDpt14                        32      // float (4 Byte)
+#define LOG_fE2LowDpt14Fix                      28      // float (4 Byte)
 #define LOG_fE2Low0Dpt17                        28      // 8 Bits, Bit 7-0
 #define LOG_fE2Low1Dpt17                        29      // 8 Bits, Bit 7-0
 #define LOG_fE2Low2Dpt17                        30      // 8 Bits, Bit 7-0
@@ -2071,10 +2071,10 @@
 #define LOG_fOOnDpt6                            58      // int8_t
 #define LOG_fOOnDpt7                            58      // uint16_t
 #define LOG_fOOnDpt8                            58      // int16_t
-#define LOG_fOOnDpt9                            58      // float
+#define LOG_fOOnDpt9                            58      // float (4 Byte)
 #define LOG_fOOnDpt12                           58      // uint32_t
 #define LOG_fOOnDpt13                           58      // int32_t
-#define LOG_fOOnDpt14                           58      // float
+#define LOG_fOOnDpt14                           58      // float (4 Byte)
 #define LOG_fOOnDpt16                           58      // char*, 14 Byte
 #define     LOG_fOOnDpt16Length 14
 #define LOG_fOOnDpt17                           58      // 8 Bits, Bit 7-0
@@ -2121,10 +2121,10 @@
 #define LOG_fOOffDpt6                           73      // int8_t
 #define LOG_fOOffDpt7                           73      // uint16_t
 #define LOG_fOOffDpt8                           73      // int16_t
-#define LOG_fOOffDpt9                           73      // float
+#define LOG_fOOffDpt9                           73      // float (4 Byte)
 #define LOG_fOOffDpt12                          73      // uint32_t
 #define LOG_fOOffDpt13                          73      // int32_t
-#define LOG_fOOffDpt14                          73      // float
+#define LOG_fOOffDpt14                          73      // float (4 Byte)
 #define LOG_fOOffDpt16                          73      // char*, 14 Byte
 #define     LOG_fOOffDpt16Length 14
 #define LOG_fOOffDpt17                          73      // 8 Bits, Bit 7-0
@@ -4227,6 +4227,10 @@
 #define BASE_KommentarModuleParamOffset 6221
 #define BASE_KommentarModuleCalcIndex(index, m1) (index + BASE_KommentarModuleParamOffset + _channelIndex * BASE_KommentarModuleCount * BASE_KommentarModuleParamSize + m1 * BASE_KommentarModuleParamSize)
 
+
+
+
+// enumeration types
 
 
 #ifdef MAIN_FirmwareRevision

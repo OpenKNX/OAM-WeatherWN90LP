@@ -878,7 +878,7 @@ void Sensorchannel::loop_rain(int32_t rain)
                 uint32_t delta = millis() - m_rainflow_lastvalue_millis; // overflow of millis tbd !!
                 if(delta > 30000)   // wait at least 30s
                 {
-                    float rainflow = (raindelta * 1000.0 * 60 * 60) / delta;
+                    float rainflow = (raindelta * 1000.0 * 60 * 60) / 100 / delta;
                     KoW90_SensorRainFlow_.value(rainflow, RainFlowKODPT);
                     logDebugP("rainflow send >30s: %f", rainflow);
                     m_rainflow_lastvalue = rain;
