@@ -8,7 +8,7 @@
           <Static>  
             <Parameters>
               <!-- common parameters-->
-              <Parameter Id="%AID%_P-%TT%%CC%001" Name="Address_%C%" ParameterType="%AID%_PT-ValueDpt5" Text="I2C-Adresse" Value="144">
+              <Parameter Id="%AID%_P-%TT%%CC%001" Name="Address_%C%" ParameterType="%AID%_PT-ValueDpt5" Text="Modbus-Adresse" Value="144">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%TT%%CC%002" Name="SensorText_%C%" ParameterType="%AID%_PT-Text40Byte" Text="Bezeichnung" Value="" />
@@ -48,8 +48,8 @@
                 <Parameter Id="%AID%_UP-%TT%%CC%032" Name="SensorAbsHumiditySendCycle_%C%" Offset="5" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
                 <Parameter Id="%AID%_UP-%TT%%CC%033" Name="SensorAbsHumidityAlign_%C%" Offset="6" BitOffset="0" ParameterType="%AID%_PT-AbsHumCalibration" Text="Messwert kalibrieren" SuffixText="g/m³" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%034" Name="SensorAbsHumidityWarn_%C%" Offset="0" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Alarme senden" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%%CC%035" Name="SensorAbsHumidityWarnL_%C%" Offset="10" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Unterschreiten von" SuffixText="g/m³" Value="30" />
-                <Parameter Id="%AID%_UP-%TT%%CC%036" Name="SensorAbsHumidityWarnH_%C%" Offset="14" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Überschreiten von" SuffixText="g/m³" Value="80" />
+                <Parameter Id="%AID%_UP-%TT%%CC%035" Name="SensorAbsHumidityWarnL_%C%" Offset="10" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Unterschreiten von" SuffixText="g/m³" Value="5" />
+                <Parameter Id="%AID%_UP-%TT%%CC%036" Name="SensorAbsHumidityWarnH_%C%" Offset="14" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Überschreiten von" SuffixText="g/m³" Value="15" />
                 <Parameter Id="%AID%_UP-%TT%%CC%037" Name="SensorAbsHumidityMinMax_%C%" Offset="0" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Min/Max Werte erfassen" Value="0" />
               </Union>
 
@@ -74,8 +74,8 @@
                 <Parameter Id="%AID%_UP-%TT%%CC%052" Name="SensorPressureSendCycle_%C%" Offset="5" BitOffset="0" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
                 <Parameter Id="%AID%_UP-%TT%%CC%053" Name="SensorPressureAlign_%C%" Offset="6" BitOffset="0" ParameterType="%AID%_PT-PressCalibration" Text="Messwert kalibrieren" SuffixText="Pa" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%054" Name="SensorPressureWarn_%C%" Offset="0" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Alarme senden" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%%CC%055" Name="SensorPressureWarnL_%C%" Offset="10" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Unterschreiten von" SuffixText="Pa" Value="5" />
-                <Parameter Id="%AID%_UP-%TT%%CC%056" Name="SensorPressureWarnH_%C%" Offset="14" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Überschreiten von" SuffixText="Pa" Value="30" />
+                <Parameter Id="%AID%_UP-%TT%%CC%055" Name="SensorPressureWarnL_%C%" Offset="10" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Unterschreiten von" SuffixText="Pa" Value="95000" />
+                <Parameter Id="%AID%_UP-%TT%%CC%056" Name="SensorPressureWarnH_%C%" Offset="14" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Überschreiten von" SuffixText="Pa" Value="105000" />
                 <Parameter Id="%AID%_UP-%TT%%CC%057" Name="SensorPressureMinMax_%C%" Offset="0" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Min/Max Werte erfassen" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%058" Name="SensorPressureHeightASL_%C%" Offset="18" BitOffset="0" ParameterType="%AID%_PT-ValueDpt8" Text="Höhenkorrektur [m über NN]" Value="0" />
               </Union>
@@ -544,6 +544,7 @@
                   <!-- UVI -->
                   <ParameterSeparator Id="%AID%_PS-" Text=" " />
                   <ParameterSeparator Id="%AID%_PS-" Text="UV-Index" UIHint="Headline" />
+                  <ParameterRefRef RefId="%AID%_UP-%TT%%CC%070_R-%TT%%CC%07001" />
                   <choose ParamRefId="%AID%_UP-%TT%%CC%070_R-%TT%%CC%07001">
                     <when test="1">
                       <ParameterRefRef RefId="%AID%_UP-%TT%%CC%071_R-%TT%%CC%07101" />

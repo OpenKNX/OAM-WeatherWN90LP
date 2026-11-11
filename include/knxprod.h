@@ -359,7 +359,7 @@
 #define     W90_SensorRainSendRaw_Shift 5
 #define W90_SensorRainTime_                     163      // 8 Bits, Bit 7-0
 
-// I2C-Adresse
+// Modbus-Adresse
 #define ParamW90_Address_                            (knx.paramByte(W90_ParamCalcIndex(W90_Address_)))
 // Senden bei Änderung
 #define ParamW90_SensorTemperatureSendChange_        ((bool)(knx.paramByte(W90_ParamCalcIndex(W90_SensorTemperatureSendChange_)) & W90_SensorTemperatureSendChange_Mask))

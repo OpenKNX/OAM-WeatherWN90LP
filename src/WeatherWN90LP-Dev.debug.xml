@@ -2280,7 +2280,7 @@
               <Parameter Id="M-00FA_A-A129-12-0000_P-9800501" Name="UCT_SwapChannelA" ParameterType="M-00FA_A-A129-12-0000_PT-ModuleChannel" Text="Kanal A" Value="1" />
               <Parameter Id="M-00FA_A-A129-12-0000_P-9800502" Name="UCT_SwapChannelB" ParameterType="M-00FA_A-A129-12-0000_PT-ModuleChannel" Text="Kanal B" Value="1" />
               <Parameter Id="M-00FA_A-A129-12-0000_P-9800503" Name="UCT_SwapUserLog" ParameterType="M-00FA_A-A129-12-0000_PT-Text32KiB" Text="Tausch-Resultat" Value="" />
-              <Parameter Id="M-00FA_A-A129-12-0000_P-2001001" Name="W90_Address_1" ParameterType="M-00FA_A-A129-12-0000_PT-ValueDpt5" Text="I2C-Adresse" Value="144">
+              <Parameter Id="M-00FA_A-A129-12-0000_P-2001001" Name="W90_Address_1" ParameterType="M-00FA_A-A129-12-0000_PT-ValueDpt5" Text="Modbus-Adresse" Value="144">
                 <Memory CodeSegment="M-00FA_A-A129-12-0000_RS-04-00000" Offset="114" BitOffset="0" />
               </Parameter>
               <Parameter Id="M-00FA_A-A129-12-0000_P-2001002" Name="W90_SensorText_1" ParameterType="M-00FA_A-A129-12-0000_PT-Text40Byte" Text="Bezeichnung" Value="" />
@@ -2317,8 +2317,8 @@
                 <Parameter Id="M-00FA_A-A129-12-0000_UP-2001032" Name="W90_SensorAbsHumiditySendCycle_1" Offset="5" BitOffset="0" ParameterType="M-00FA_A-A129-12-0000_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
                 <Parameter Id="M-00FA_A-A129-12-0000_UP-2001033" Name="W90_SensorAbsHumidityAlign_1" Offset="6" BitOffset="0" ParameterType="M-00FA_A-A129-12-0000_PT-AbsHumCalibration" Text="Messwert kalibrieren" SuffixText="g/m³" Value="0.000000000000000E+000" />
                 <Parameter Id="M-00FA_A-A129-12-0000_UP-2001034" Name="W90_SensorAbsHumidityWarn_1" Offset="0" BitOffset="1" ParameterType="M-00FA_A-A129-12-0000_PT-OnOffYesNo" Text="Alarme senden" Value="0" />
-                <Parameter Id="M-00FA_A-A129-12-0000_UP-2001035" Name="W90_SensorAbsHumidityWarnL_1" Offset="10" BitOffset="0" ParameterType="M-00FA_A-A129-12-0000_PT-ValueDpt9" Text="   bei Unterschreiten von" SuffixText="g/m³" Value="3.000000000000000E+001" />
-                <Parameter Id="M-00FA_A-A129-12-0000_UP-2001036" Name="W90_SensorAbsHumidityWarnH_1" Offset="14" BitOffset="0" ParameterType="M-00FA_A-A129-12-0000_PT-ValueDpt9" Text="   bei Überschreiten von" SuffixText="g/m³" Value="8.000000000000000E+001" />
+                <Parameter Id="M-00FA_A-A129-12-0000_UP-2001035" Name="W90_SensorAbsHumidityWarnL_1" Offset="10" BitOffset="0" ParameterType="M-00FA_A-A129-12-0000_PT-ValueDpt9" Text="   bei Unterschreiten von" SuffixText="g/m³" Value="5.000000000000000E+000" />
+                <Parameter Id="M-00FA_A-A129-12-0000_UP-2001036" Name="W90_SensorAbsHumidityWarnH_1" Offset="14" BitOffset="0" ParameterType="M-00FA_A-A129-12-0000_PT-ValueDpt9" Text="   bei Überschreiten von" SuffixText="g/m³" Value="1.500000000000000E+001" />
                 <Parameter Id="M-00FA_A-A129-12-0000_UP-2001037" Name="W90_SensorAbsHumidityMinMax_1" Offset="0" BitOffset="2" ParameterType="M-00FA_A-A129-12-0000_PT-OnOffYesNo" Text="Min/Max Werte erfassen" Value="0" />
               </Union>
               <Union SizeInBit="144">
@@ -2341,8 +2341,8 @@
                 <Parameter Id="M-00FA_A-A129-12-0000_UP-2001052" Name="W90_SensorPressureSendCycle_1" Offset="5" BitOffset="0" ParameterType="M-00FA_A-A129-12-0000_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" />
                 <Parameter Id="M-00FA_A-A129-12-0000_UP-2001053" Name="W90_SensorPressureAlign_1" Offset="6" BitOffset="0" ParameterType="M-00FA_A-A129-12-0000_PT-PressCalibration" Text="Messwert kalibrieren" SuffixText="Pa" Value="0.000000000000000E+000" />
                 <Parameter Id="M-00FA_A-A129-12-0000_UP-2001054" Name="W90_SensorPressureWarn_1" Offset="0" BitOffset="1" ParameterType="M-00FA_A-A129-12-0000_PT-OnOffYesNo" Text="Alarme senden" Value="0" />
-                <Parameter Id="M-00FA_A-A129-12-0000_UP-2001055" Name="W90_SensorPressureWarnL_1" Offset="10" BitOffset="0" ParameterType="M-00FA_A-A129-12-0000_PT-ValueDpt9" Text="   bei Unterschreiten von" SuffixText="Pa" Value="5.000000000000000E+000" />
-                <Parameter Id="M-00FA_A-A129-12-0000_UP-2001056" Name="W90_SensorPressureWarnH_1" Offset="14" BitOffset="0" ParameterType="M-00FA_A-A129-12-0000_PT-ValueDpt9" Text="   bei Überschreiten von" SuffixText="Pa" Value="3.000000000000000E+001" />
+                <Parameter Id="M-00FA_A-A129-12-0000_UP-2001055" Name="W90_SensorPressureWarnL_1" Offset="10" BitOffset="0" ParameterType="M-00FA_A-A129-12-0000_PT-ValueDpt9" Text="   bei Unterschreiten von" SuffixText="Pa" Value="9.500000000000000E+004" />
+                <Parameter Id="M-00FA_A-A129-12-0000_UP-2001056" Name="W90_SensorPressureWarnH_1" Offset="14" BitOffset="0" ParameterType="M-00FA_A-A129-12-0000_PT-ValueDpt9" Text="   bei Überschreiten von" SuffixText="Pa" Value="1.050000000000000E+005" />
                 <Parameter Id="M-00FA_A-A129-12-0000_UP-2001057" Name="W90_SensorPressureMinMax_1" Offset="0" BitOffset="2" ParameterType="M-00FA_A-A129-12-0000_PT-OnOffYesNo" Text="Min/Max Werte erfassen" Value="0" />
                 <Parameter Id="M-00FA_A-A129-12-0000_UP-2001058" Name="W90_SensorPressureHeightASL_1" Offset="18" BitOffset="0" ParameterType="M-00FA_A-A129-12-0000_PT-ValueDpt8" Text="Höhenkorrektur [m über NN]" Value="0" />
               </Union>
@@ -47703,7 +47703,7 @@ var uctChannelParams = {
     },
   "templ": {
     "names": ["Address_~","SensorText_~","SensorTemperatureSendChange_~","SensorTemperatureSendChangeAmount_~","SensorTemperatureSendCycle_~","SensorTemperatureAlign_~","SensorTemperatureWarn_~","SensorTemperatureWarnL_~","SensorTemperatureWarnH_~","SensorTemperatureMinMax_~","SensorHumiditySendChange_~","SensorHumiditySendChangeAmount_~","SensorHumiditySendCycle_~","SensorHumidityAlign_~","SensorHumidityWarn_~","SensorHumidityWarnL_~","SensorHumidityWarnH_~","SensorHumidityMinMax_~","SensorHumiditySend_~","SensorAbsHumiditySendChange_~","SensorAbsHumiditySendChangeAmount_~","SensorAbsHumiditySendCycle_~","SensorAbsHumidityAlign_~","SensorAbsHumidityWarn_~","SensorAbsHumidityWarnL_~","SensorAbsHumidityWarnH_~","SensorAbsHumidityMinMax_~","SensorDewPointSendChange_~","SensorDewPointSendChangeAmount_~","SensorDewPointSendCycle_~","SensorDewPointAlign_~","SensorDewPointWarn_~","SensorDewPointWarnL_~","SensorDewPointWarnH_~","SensorDewPointMinMax_~","SensorPressureSendChange_~","SensorPressureSendChangeAmount_~","SensorPressureSendCycle_~","SensorPressureAlign_~","SensorPressureWarn_~","SensorPressureWarnL_~","SensorPressureWarnH_~","SensorPressureMinMax_~","SensorPressureHeightASL_~","SensorLightSendChange_~","SensorLightSendChangeAmount_~","SensorLightSendCycle_~","SensorLightAlign_~","SensorLightWarn_~","SensorLightWarnL_~","SensorLightWarnH_~","SensorLightMinMax_~","SensorUVISendChange_~","SensorUVISendChangeAmount_~","SensorUVISendCycle_~","SensorUVIAlign_~","SensorUVIWarn_~","SensorUVIWarnL_~","SensorUVIWarnH_~","SensorUVIMinMax_~","SensorWindSendChange_~","SensorWindSendChangeAmount_~","SensorWindSendCycle_~","SensorWindAlign_~","SensorWindWarn_~","SensorWindWarnL_~","SensorWindWarnH_~","SensorWindMinMax_~","SensorGustSendChange_~","SensorGustSendChangeAmount_~","SensorGustSendCycle_~","SensorGustAlign_~","SensorGustWarn_~","SensorGustWarnL_~","SensorGustWarnH_~","SensorGustMinMax_~","SensorWindDirSendChange_~","SensorWindDirSendChangeAmount_~","SensorWindDirSendCycle_~","SensorWindDirAlign_~","SensorRainSendCycle_~","SensorRainDPT14Ko_~","SensorRainSendRaw_~","SensorRainTime_~"],
-    "defaults": [144,"",0,0.1,5,0,0,5,30,0,0,0.5,5,0,0,30,80,0,9,0,0.5,5,0,0,30,80,0,0,0.1,5,0,0,-10,15,0,0,5,5,0,0,5,30,0,0,0,5,5,0,0,5,30,0,0,0,5,0,0,2,8,0,0,1,5,0,0,0,0,0,0,1,5,0,0,0,0,0,0,5,5,0,5,0,0,10]
+    "defaults": [144,"",0,0.1,5,0,0,5,30,0,0,0.5,5,0,0,30,80,0,9,0,0.5,5,0,0,5,15,0,0,0.1,5,0,0,-10,15,0,0,5,5,0,0,95000,105000,0,0,0,5,5,0,0,5,30,0,0,0,5,0,0,2,8,0,0,1,5,0,0,0,0,0,0,1,5,0,0,0,0,0,0,5,5,0,5,0,0,10]
     }},
 "LOG": {
   "channels": 30,
@@ -49409,7 +49409,7 @@ function LOG_CalcRelFromAbs(input, output, context) {
                 <Channel Name="W90_MainChannel" Text="Wetterstationen" Number="W90" Id="M-00FA_A-A129-12-0000_CH-20" Icon="weather-partly-snowy-rainy" HelpContext="Empty">
                   <!-- ParameterBlock W90_SensorText_1 'Bezeichnung'-->
                   <ParameterBlock Id="M-00FA_A-A129-12-0000_PB-24" Name="W90_Sensor_A" Text="Wetterstation A: {{0:unbenannt}}" TextParameterRefId="M-00FA_A-A129-12-0000_P-2001002_R-200100201" ShowInComObjectTree="true">
-                    <!-- ParameterRefRef W90_Address_1 'I2C-Adresse'-->
+                    <!-- ParameterRefRef W90_Address_1 'Modbus-Adresse'-->
                     <ParameterRefRef RefId="M-00FA_A-A129-12-0000_P-2001001_R-200100101" />
                     <!-- ParameterRefRef W90_SensorText_1 'Bezeichnung'-->
                     <ParameterRefRef RefId="M-00FA_A-A129-12-0000_P-2001002_R-200100201" />
@@ -49594,6 +49594,8 @@ function LOG_CalcRelFromAbs(input, output, context) {
                       <!-- UVI -->
                       <ParameterSeparator Id="M-00FA_A-A129-12-0000_PS-95" Text=" " />
                       <ParameterSeparator Id="M-00FA_A-A129-12-0000_PS-96" Text="UV-Index" UIHint="Headline" />
+                      <!-- ParameterRefRef W90_SensorUVISendChange_1 'Senden bei Änderung'-->
+                      <ParameterRefRef RefId="M-00FA_A-A129-12-0000_UP-2001070_R-200107001" />
                       <!-- choose W90_SensorUVISendChange_1 'Senden bei Änderung'-->
                       <choose ParamRefId="M-00FA_A-A129-12-0000_UP-2001070_R-200107001">
                         <when test="1">
@@ -197514,13 +197516,13 @@ function LOG_CalcRelFromAbs(input, output, context) {
       </ApplicationPrograms>
       <Baggages>
         <Baggage TargetPath="A1\29\12" Name="ets.png" Id="M-00FA_BG-A1.5C29.5C12-ets.2Epng">
-          <FileInfo TimeInfo="2026-11-11T10:10:00.3201861Z" />
+          <FileInfo TimeInfo="2026-11-11T10:46:04.8456554Z" />
         </Baggage>
         <Baggage TargetPath="A1\29\12" Name="Help_de.zip" Id="M-00FA_BG-A1.5C29.5C12-Help.5Fde.2Ezip">
-          <FileInfo TimeInfo="2026-11-11T10:10:00.8194664Z" />
+          <FileInfo TimeInfo="2026-11-11T10:46:05.3912622Z" />
         </Baggage>
         <Baggage TargetPath="A1\29\12" Name="Icons.zip" Id="M-00FA_BG-A1.5C29.5C12-Icons.2Ezip">
-          <FileInfo TimeInfo="2026-11-11T10:10:00.8588032Z" />
+          <FileInfo TimeInfo="2026-11-11T10:46:05.4304340Z" />
         </Baggage>
       </Baggages>
       <Hardware>
