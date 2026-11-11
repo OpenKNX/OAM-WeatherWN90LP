@@ -42,7 +42,7 @@ class HWSensors
     float GetGust(uint8_t channel);
 
   public:
-    uint8_t GetWindDir(uint8_t channel);
+    uint16_t GetWindDir(uint8_t channel);
 
   public:
     int32_t GetRain(uint8_t channel);

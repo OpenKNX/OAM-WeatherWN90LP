@@ -70,7 +70,10 @@ void WN90LPModule::processInputKo(GroupObject &ko)
     // there are no global KO, so all ko belong to a channel
 
     uint16_t asap = ko.asap();
-    int16_t channelnumber = (asap - W90_KoOffset) / W90_KoBlockSize;
+    if (asap < W90_KoOffset || asap >= W90_KoOffset + W90_ChannelCount * W90_KoBlockSize)
+        return; // not a KO of this module
+
+    uint8_t channelnumber = (asap - W90_KoOffset) / W90_KoBlockSize;
     if (channelnumber < W90_ChannelCount)
         if (_Sensorchannels[channelnumber] != nullptr)
             _Sensorchannels[channelnumber]->processInputKo(ko);

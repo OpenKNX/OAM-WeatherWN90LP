@@ -5,6 +5,11 @@
 #include <Arduino.h>
 #include <pico/sync.h>
 
+// marker for "no valid wind direction" (valid range is 0..359 degrees)
+#define W90_WINDDIR_INVALID 0xFFFF
+// value the WN90LP reports in a register when the measurement is invalid
+#define W90_REGISTER_INVALID 0xFFFF
+
 class HWSensorchannel : public OpenKNX::Channel
 {
   public:
@@ -60,7 +65,7 @@ class HWSensorchannel : public OpenKNX::Channel
     uint32_t m_gust_last_poll_millis = 16000;
     uint32_t m_gust_last_success_millis = 0;
 
-    uint8_t m_winddir = 0xff;
+    uint16_t m_winddir = W90_WINDDIR_INVALID;
     uint32_t m_winddir_last_poll_millis = 16000;
     uint32_t m_winddir_last_success_millis = 0;
 
@@ -75,7 +80,7 @@ class HWSensorchannel : public OpenKNX::Channel
     uint8_t ReadUVI();
     float ReadWind();
     float ReadGust();
-    uint8_t ReadWindDir();
+    uint16_t ReadWindDir();
     int32_t ReadRain();
 
   public:
@@ -90,7 +95,7 @@ class HWSensorchannel : public OpenKNX::Channel
     uint8_t GetUVI();
     float GetWind();
     float GetGust();
-    uint8_t GetWindDir();
+    uint16_t GetWindDir();
     int32_t GetRain();
 
     void SetTemperature(float temperature);
@@ -101,7 +106,7 @@ class HWSensorchannel : public OpenKNX::Channel
     void SetUVI(uint8_t uvi);
     void SetWind(float wind);
     void SetGust(float gust);
-    void SetWindDir(uint8_t winddir);
+    void SetWindDir(uint16_t winddir);
     void SetRain(int32_t rain);
     SensorState GetState();
 

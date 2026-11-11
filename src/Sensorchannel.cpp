@@ -15,8 +15,9 @@ void Sensorchannel::Setup(uint8_t channel_number, HWSensors *HWSensors)
     // if save data are in flash, this will be overwritten
     KoW90_SensorTempMinValue_.valueNoSend((float)1000, TempKODPT);
     KoW90_SensorTempMaxValue_.valueNoSend((float)-1000, TempKODPT);
-    KoW90_SensorHumMinValue_.valueNoSend((float)1000, HumKODPT);
-    KoW90_SensorHumMaxValue_.valueNoSend((float)-1000, HumKODPT);
+    // humidity KO may be DPT 5.001, which only accepts 0..100
+    KoW90_SensorHumMinValue_.valueNoSend((float)100, HumKODPT);
+    KoW90_SensorHumMaxValue_.valueNoSend((float)0, HumKODPT);
     KoW90_SensorAbsHumMinValue_.valueNoSend((float)1000, AbsHumKODPT);
     KoW90_SensorAbsHumMaxValue_.valueNoSend((float)-1000, AbsHumKODPT);
     KoW90_SensorDewPointMinValue_.valueNoSend((float)1000, DewPointKODPT);
@@ -31,69 +32,6 @@ void Sensorchannel::Setup(uint8_t channel_number, HWSensors *HWSensors)
     KoW90_SensorWindMaxValue_.valueNoSend((float)-500000, WindKODPT);
     KoW90_SensorGustMinValue_.valueNoSend((float)500000, GustKODPT);
     KoW90_SensorGustMaxValue_.valueNoSend((float)-500000, GustKODPT);
-
-    /*
-    // Debug
-
-    logDebugP("Setup");
-    logDebugP("ParamW90_Sensortype_                       : %i", ParamW90_Address_                          );
-
-    logDebugP("Temperature Parameters:");
-    logDebugP("ParamW90_SensorTemperatureSendChangeAmount_: %f", ParamW90_SensorTemperatureSendChangeAmount_);
-    logDebugP("ParamW90_SensorTemperatureSendCycle_       : %i", ParamW90_SensorTemperatureSendCycle_       );
-    logDebugP("ParamW90_SensorTemperatureAlign_           : %f", ParamW90_SensorTemperatureAlign_           );
-    logDebugP("ParamW90_SensorTemperatureWarnL_           : %f", ParamW90_SensorTemperatureWarnL_           );
-    logDebugP("ParamW90_SensorTemperatureWarnH_           : %f", ParamW90_SensorTemperatureWarnH_           );
-    logDebugP("ParamW90_SensorTemperatureMinMax_          : %i", ParamW90_SensorTemperatureMinMax_          );
-    logDebugP("Humidity Parameters:");
-    logDebugP("ParamW90_SensorHumiditySendChangeAmount_   : %f", ParamW90_SensorHumiditySendChangeAmount_   );
-    logDebugP("ParamW90_SensorHumiditySendCycle_          : %i", ParamW90_SensorHumiditySendCycle_          );
-    logDebugP("ParamW90_SensorHumidityAlign_              : %f", ParamW90_SensorHumidityAlign_              );
-    logDebugP("ParamW90_SensorHumidityWarnL_              : %f", ParamW90_SensorHumidityWarnL_              );
-    logDebugP("ParamW90_SensorHumidityWarnH_              : %f", ParamW90_SensorHumidityWarnH_              );
-    logDebugP("ParamW90_SensorHumidityMinMax_             : %i", ParamW90_SensorHumidityMinMax_             );
-    logDebugP("ParamW90_SensorHumiditySend_               : %i", ParamW90_SensorHumiditySend_               );
-    logDebugP("Absolute Humidity Parameters:");
-    logDebugP("ParamW90_SensorAbsHumiditySendChangeAmount_: %f", ParamW90_SensorAbsHumiditySendChangeAmount_);
-    logDebugP("ParamW90_SensorAbsHumiditySendCycle_       : %i", ParamW90_SensorAbsHumiditySendCycle_       );
-    logDebugP("ParamW90_SensorAbsHumidityAlign_           : %f", ParamW90_SensorAbsHumidityAlign_           );
-    logDebugP("ParamW90_SensorAbsHumidityWarnL_           : %f", ParamW90_SensorAbsHumidityWarnL_           );
-    logDebugP("ParamW90_SensorAbsHumidityWarnH_           : %f", ParamW90_SensorAbsHumidityWarnH_           );
-    logDebugP("ParamW90_SensorAbsHumidityMinMax_          : %i", ParamW90_SensorAbsHumidityMinMax_          );
-    logDebugP("Dew Point Parameters:");
-    logDebugP("ParamW90_SensorDewPointSendChangeAmount_   : %f", ParamW90_SensorDewPointSendChangeAmount_   );
-    logDebugP("ParamW90_SensorDewPointSendCycle_          : %i", ParamW90_SensorDewPointSendCycle_          );
-    logDebugP("ParamW90_SensorDewPointAlign_              : %f", ParamW90_SensorDewPointAlign_              );
-    logDebugP("ParamW90_SensorDewPointWarnL_              : %f", ParamW90_SensorDewPointWarnL_              );
-    logDebugP("ParamW90_SensorDewPointWarnH_              : %f", ParamW90_SensorDewPointWarnH_              );
-    logDebugP("ParamW90_SensorDewPointMinMax_             : %i", ParamW90_SensorDewPointMinMax_             );
-    logDebugP("Pressure Parameters:");
-    logDebugP("ParamW90_SensorPressureSendChangeAmount_   : %f", ParamW90_SensorPressureSendChangeAmount_   );
-    logDebugP("ParamW90_SensorPressureSendCycle_          : %i", ParamW90_SensorPressureSendCycle_          );
-    logDebugP("ParamW90_SensorPressureAlign_              : %f", ParamW90_SensorPressureAlign_              );
-    logDebugP("ParamW90_SensorPressureWarnL_              : %f", ParamW90_SensorPressureWarnL_              );
-    logDebugP("ParamW90_SensorPressureWarnH_              : %f", ParamW90_SensorPressureWarnH_              );
-    logDebugP("ParamW90_SensorPressureMinMax_             : %i", ParamW90_SensorPressureMinMax_             );
-    logDebugP("Binary Input 0 Parameters:");
-    logDebugP("ParamW90_Input0DebounceTime_               : %i", ParamW90_Input0DebounceTime_               );
-    logDebugP("ParamW90_Input0ActionOpen_                 : %i", ParamW90_Input0ActionOpen_                 );
-    logDebugP("ParamW90_Input0ActionClosed_               : %i", ParamW90_Input0ActionClosed_               );
-    logDebugP("ParamW90_Input0SendCycle_                  : %i", ParamW90_Input0SendCycle_                  );
-    logDebugP("Binary Input 1 Parameters:");
-    logDebugP("ParamW90_Input1DebounceTime_               : %i", ParamW90_Input1DebounceTime_               );
-    logDebugP("ParamW90_Input1ActionOpen_                 : %i", ParamW90_Input1ActionOpen_                 );
-    logDebugP("ParamW90_Input1ActionClosed_               : %i", ParamW90_Input1ActionClosed_               );
-    logDebugP("ParamW90_Input1SendCycle_                  : %i", ParamW90_Input1SendCycle_                  );
-    logDebugP("Temperature2 Parameters:");
-    logDebugP("ParamW90_SensorTemperature2SendChangeAmount: %f", ParamW90_SensorTemperature2SendChangeAmount_);
-    logDebugP("ParamW90_SensorTemperature2SendCycle_      : %i", ParamW90_SensorTemperature2SendCycle_       );
-    logDebugP("ParamW90_SensorTemperature2Align_          : %f", ParamW90_SensorTemperature2Align_           );
-    logDebugP("ParamW90_SensorTemperature2WarnL_          : %f", ParamW90_SensorTemperature2WarnL_           );
-    logDebugP("ParamW90_SensorTemperature2WarnH_          : %f", ParamW90_SensorTemperature2WarnH_           );
-    logDebugP("ParamW90_SensorTemperature2MinMax_         : %i", ParamW90_SensorTemperature2MinMax_          );
-
-    logDebugP("-------------------------------------------");
-    */
 }
 
 void Sensorchannel::loop()
@@ -107,7 +45,7 @@ void Sensorchannel::loop()
     uint8_t uvi = m_hwSensors->GetUVI(_channelIndex);
     float wind = m_hwSensors->GetWind(_channelIndex);
     float gust = m_hwSensors->GetGust(_channelIndex);
-    uint8_t winddir = m_hwSensors->GetWindDir(_channelIndex);
+    uint16_t winddir = m_hwSensors->GetWindDir(_channelIndex);
     int32_t rain = m_hwSensors->GetRain(_channelIndex);
 
     loop_temperature(temperature);
@@ -169,837 +107,446 @@ void Sensorchannel::loop()
 
 }
 
+// Sends the value cyclic (sendMillis > 0) and/or on change (sendOnChange), otherwise only updates the KO.
+// changeAmount <= 0 means: send on every change.
+void Sensorchannel::processSend(GroupObject &ko, float value, const Dpt &dpt, uint32_t sendMillis, bool sendOnChange, float changeAmount, uint32_t &lastSendMillis, float &lastSendValue)
+{
+    bool sendnow = false;
+    if (sendMillis)
+    {
+        sendnow = lastSendMillis == 0 || millis() - lastSendMillis > sendMillis;
+    }
+    if (!sendnow && sendOnChange)
+    {
+        if (isnan(lastSendValue))
+            sendnow = true;
+        else if (changeAmount > 0)
+            sendnow = fabs(value - lastSendValue) >= changeAmount;
+        else
+            sendnow = value != lastSendValue;
+    }
+
+    if (sendnow)
+    {
+        ko.value(value, dpt);
+        lastSendMillis = millis();
+        lastSendValue = value;
+    }
+    else
+    {
+        ko.valueNoSend(value, dpt);
+    }
+}
+
+// value has to be the calibrated value
+void Sensorchannel::processMinMax(GroupObject &koMin, GroupObject &koMax, float value, const Dpt &dpt)
+{
+    if (value > (float)koMax.value(dpt))
+        koMax.valueNoSend(value, dpt);
+    if (value < (float)koMin.value(dpt))
+        koMin.valueNoSend(value, dpt);
+}
+
+// Sends the alarm on change. An active alarm is repeated with sendMillis (only if sendMillis > 0).
+void Sensorchannel::processAlarm(GroupObject &koAlarmL, GroupObject &koAlarmH, float value, float warnL, float warnH, uint32_t sendMillis, uint32_t &lastSendL, uint32_t &lastSendH)
+{
+    bool alarmH = value > warnH;
+    if ((bool)koAlarmH.value(AlarmKODPT) != alarmH ||                              // alarm value has changed
+        (alarmH && sendMillis > 0 && millis() - lastSendH > sendMillis)) // alarm is true and has not been sent for sendMillis
+    {
+        koAlarmH.value(alarmH, AlarmKODPT);
+        lastSendH = millis();
+    }
+
+    bool alarmL = value < warnL;
+    if ((bool)koAlarmL.value(AlarmKODPT) != alarmL ||                              // alarm value has changed
+        (alarmL && sendMillis > 0 && millis() - lastSendL > sendMillis)) // alarm is true and has not been sent for sendMillis
+    {
+        koAlarmL.value(alarmL, AlarmKODPT);
+        lastSendL = millis();
+    }
+}
+
+void Sensorchannel::resetMinMax(GroupObject &koValue, GroupObject &koMin, GroupObject &koMax, const Dpt &dpt)
+{
+    float value = koValue.value(dpt);
+    koMin.valueNoSend(value, dpt);
+    koMax.valueNoSend(value, dpt);
+}
+
 void Sensorchannel::loop_temperature(float temperature)
 {
-    if (!isnan(temperature))
-    {
-        uint8_t send_cycle = ParamW90_SensorTemperatureSendCycle_;
-        uint32_t send_millis = send_cycle * 60000;
-        bool sendnow = false;
-        if (send_cycle)
-        {
-            sendnow = millis() - m_temperature_last_send_millis > send_millis || m_temperature_last_send_millis == 0;
-        }
-        if (!sendnow)
-        {
-            float SendTresh = ParamW90_SensorTemperatureSendChangeAmount_;
-            if (SendTresh != 0)
-            {
-                float current_temp_diff = temperature - m_temperature_last_send_value;
-                sendnow = current_temp_diff >= SendTresh || 0 - current_temp_diff >= SendTresh;
-                if (sendnow)
-                {
-                    logDebugP("Send TempKO Diff: %f", current_temp_diff);
-                }
-            }
-        }
+    if (isnan(temperature))
+        return;
 
-        if (sendnow)
-        {
-            KoW90_SensorTemp_.value(temperature + ParamW90_SensorTemperatureAlign_, TempKODPT);
-            logDebugP("Send TempKO: %f", temperature + ParamW90_SensorTemperatureAlign_);
-            m_temperature_last_send_millis = millis();
-            m_temperature_last_send_value = temperature;
-        }
-        else
-        {
-            KoW90_SensorTemp_.valueNoSend(temperature + ParamW90_SensorTemperatureAlign_, TempKODPT);
-        }
+    float value = temperature + ParamW90_SensorTemperatureAlign_;
+    uint32_t send_millis = ParamW90_SensorTemperatureSendCycle_ * 60000;
 
-        if (ParamW90_SensorTemperatureMinMax_) // Min Max values enabled
-        {
-            if (temperature + ParamW90_SensorTemperatureAlign_ > (float)KoW90_SensorTempMaxValue_.value(TempKODPT))
-            {
-                KoW90_SensorTempMaxValue_.valueNoSend(temperature, TempKODPT);
-            }
-            if (temperature + ParamW90_SensorTemperatureAlign_ < (float)KoW90_SensorTempMinValue_.value(TempKODPT))
-            {
-                KoW90_SensorTempMinValue_.valueNoSend(temperature, TempKODPT);
-            }
-        }
+    processSend(KoW90_SensorTemp_, value, TempKODPT, send_millis, ParamW90_SensorTemperatureSendChange_, ParamW90_SensorTemperatureSendChangeAmount_, m_temperature_last_send_millis, m_temperature_last_send_value);
 
-        if (!(ParamW90_SensorTemperatureWarnL_ == 0 && ParamW90_SensorTemperatureWarnH_ == 0)) // not both are 0 (=> feature disabled)
-        {
-            bool AlarmH = temperature + ParamW90_SensorTemperatureAlign_ > ParamW90_SensorTemperatureWarnH_;
-            if ((bool)KoW90_SensorTempAlarmH_.value(Dpt(1, 5)) != AlarmH ||                 // alarm value has changed
-                (AlarmH && millis() - m_temperature_alarmH_last_send_millis > send_millis)) // alarm is true and has not been sent for send_millis
-            {
-                KoW90_SensorTempAlarmH_.value(AlarmH, Dpt(1, 5));
-                m_temperature_alarmH_last_send_millis = millis();
-            }
+    if (ParamW90_SensorTemperatureMinMax_)
+        processMinMax(KoW90_SensorTempMinValue_, KoW90_SensorTempMaxValue_, value, TempKODPT);
 
-            bool AlarmL = temperature + ParamW90_SensorTemperatureAlign_ < ParamW90_SensorTemperatureWarnL_;
-            if ((bool)KoW90_SensorTempAlarmL_.value(Dpt(1, 5)) != AlarmL ||                 // alarm value has changed
-                (AlarmL && millis() - m_temperature_alarmL_last_send_millis > send_millis)) // alarm is true and has not been sent for send_millis
-            {
-                KoW90_SensorTempAlarmL_.value(AlarmL, Dpt(1, 5));
-                m_temperature_alarmL_last_send_millis = millis();
-            }
-        }
-    }
+    if (ParamW90_SensorTemperatureWarn_)
+        processAlarm(KoW90_SensorTempAlarmL_, KoW90_SensorTempAlarmH_, value, ParamW90_SensorTemperatureWarnL_, ParamW90_SensorTemperatureWarnH_, send_millis, m_temperature_alarmL_last_send_millis, m_temperature_alarmH_last_send_millis);
 }
 
 void Sensorchannel::loop_humidity(float humidity)
 {
-    if (!isnan(humidity))
-    {
-        uint8_t send_cycle = ParamW90_SensorHumiditySendCycle_;
-        uint32_t send_millis = send_cycle * 60000;
-        bool sendnow = false;
-        if (send_cycle)
-        {
-            sendnow = millis() - m_humidity_last_send_millis > send_millis || m_humidity_last_send_millis == 0;
-        }
-        if (!sendnow)
-        {
-            float SendTresh = ParamW90_SensorHumiditySendChangeAmount_;
-            if (SendTresh != 0)
-            {
-                float current_diff = humidity - m_humidity_last_send_value;
-                sendnow = current_diff >= SendTresh || 0 - current_diff >= SendTresh;
-            }
-        }
+    if (isnan(humidity))
+        return;
 
-        if (sendnow)
-        {
-            KoW90_SensorHum_.value(humidity + ParamW90_SensorHumidityAlign_, HumKODPT);
-            m_humidity_last_send_millis = millis();
-            m_humidity_last_send_value = humidity;
-        }
-        else
-        {
-            KoW90_SensorHum_.valueNoSend(humidity + ParamW90_SensorHumidityAlign_, HumKODPT);
-        }
+    float value = constrain(humidity + ParamW90_SensorHumidityAlign_, 0.0f, 100.0f);
+    uint32_t send_millis = ParamW90_SensorHumiditySendCycle_ * 60000;
 
-        if (ParamW90_SensorHumidityMinMax_) // Min Max values enabled
-        {
-            if (humidity + ParamW90_SensorHumidityAlign_ > (float)KoW90_SensorHumMaxValue_.value(HumKODPT))
-            {
-                KoW90_SensorHumMaxValue_.valueNoSend(humidity, HumKODPT);
-            }
-            if (humidity + ParamW90_SensorHumidityAlign_ < (float)KoW90_SensorHumMinValue_.value(HumKODPT))
-            {
-                KoW90_SensorHumMinValue_.valueNoSend(humidity, HumKODPT);
-            }
-        }
+    processSend(KoW90_SensorHum_, value, HumKODPT, send_millis, ParamW90_SensorHumiditySendChange_, ParamW90_SensorHumiditySendChangeAmount_, m_humidity_last_send_millis, m_humidity_last_send_value);
 
-        if (!(ParamW90_SensorHumidityWarnL_ == 0 && ParamW90_SensorHumidityWarnH_ == 0)) // not both are 0 (=> feature disabled)
-        {
-            bool AlarmH = humidity + ParamW90_SensorHumidityAlign_ > ParamW90_SensorHumidityWarnH_;
-            if ((bool)KoW90_SensorHumAlarmH_.value(Dpt(1, 5)) != AlarmH ||               // alarm value has changed
-                (AlarmH && millis() - m_humidity_alarmH_last_send_millis > send_millis)) // alarm is true and has not been sent for send_millis
-            {
-                KoW90_SensorHumAlarmH_.value(AlarmH, Dpt(1, 5));
-                m_humidity_alarmH_last_send_millis = millis();
-            }
+    if (ParamW90_SensorHumidityMinMax_)
+        processMinMax(KoW90_SensorHumMinValue_, KoW90_SensorHumMaxValue_, value, HumKODPT);
 
-            bool AlarmL = humidity + ParamW90_SensorHumidityAlign_ < ParamW90_SensorHumidityWarnL_;
-            if ((bool)KoW90_SensorHumAlarmL_.value(Dpt(1, 5)) != AlarmL ||               // alarm value has changed
-                (AlarmL && millis() - m_humidity_alarmL_last_send_millis > send_millis)) // alarm is true and has not been sent for send_millis
-            {
-                KoW90_SensorHumAlarmL_.value(AlarmL, Dpt(1, 5));
-                m_humidity_alarmL_last_send_millis = millis();
-            }
-        }
-    }
+    if (ParamW90_SensorHumidityWarn_)
+        processAlarm(KoW90_SensorHumAlarmL_, KoW90_SensorHumAlarmH_, value, ParamW90_SensorHumidityWarnL_, ParamW90_SensorHumidityWarnH_, send_millis, m_humidity_alarmL_last_send_millis, m_humidity_alarmH_last_send_millis);
 }
 
 void Sensorchannel::loop_abshumidity(float abshumidity)
 {
-    if (!isnan(abshumidity))
-    {
-        uint8_t send_cycle = ParamW90_SensorAbsHumiditySendCycle_;
-        uint32_t send_millis = send_cycle * 60000;
-        bool sendnow = false;
-        if (send_cycle)
-        {
-            sendnow = millis() - m_abshumidity_last_send_millis > send_millis || m_abshumidity_last_send_millis == 0;
-        }
-        if (!sendnow)
-        {
-            float SendTresh = ParamW90_SensorAbsHumiditySendChangeAmount_;
-            if (SendTresh != 0)
-            {
-                float current_diff = abshumidity - m_abshumidity_last_send_value;
-                sendnow = current_diff >= SendTresh || 0 - current_diff >= SendTresh;
-            }
-        }
+    if (isnan(abshumidity))
+        return;
 
-        if (sendnow)
-        {
-            KoW90_SensorAbsHum_.value(abshumidity + ParamW90_SensorAbsHumidityAlign_, AbsHumKODPT);
-            m_abshumidity_last_send_millis = millis();
-            m_abshumidity_last_send_value = abshumidity;
-        }
-        else
-        {
-            KoW90_SensorAbsHum_.valueNoSend(abshumidity + ParamW90_SensorAbsHumidityAlign_, AbsHumKODPT);
-        }
+    float value = abshumidity + ParamW90_SensorAbsHumidityAlign_;
+    uint32_t send_millis = ParamW90_SensorAbsHumiditySendCycle_ * 60000;
 
-        if (ParamW90_SensorAbsHumidityMinMax_) // Min Max values enabled
-        {
-            if (abshumidity + ParamW90_SensorAbsHumidityAlign_ > (float)KoW90_SensorAbsHumMaxValue_.value(AbsHumKODPT))
-            {
-                KoW90_SensorAbsHumMaxValue_.valueNoSend(abshumidity, AbsHumKODPT);
-            }
-            if (abshumidity + ParamW90_SensorAbsHumidityAlign_ < (float)KoW90_SensorAbsHumMinValue_.value(AbsHumKODPT))
-            {
-                KoW90_SensorAbsHumMinValue_.valueNoSend(abshumidity, AbsHumKODPT);
-            }
-        }
+    processSend(KoW90_SensorAbsHum_, value, AbsHumKODPT, send_millis, ParamW90_SensorAbsHumiditySendChange_, ParamW90_SensorAbsHumiditySendChangeAmount_, m_abshumidity_last_send_millis, m_abshumidity_last_send_value);
 
-        if (!(ParamW90_SensorAbsHumidityWarnL_ == 0 && ParamW90_SensorAbsHumidityWarnH_ == 0)) // not both are 0 (=> feature disabled)
-        {
-            bool AlarmH = abshumidity + ParamW90_SensorAbsHumidityAlign_ > ParamW90_SensorAbsHumidityWarnH_;
-            if ((bool)KoW90_SensorAbsHumAlarmH_.value(Dpt(1, 5)) != AlarmH ||               // alarm value has changed
-                (AlarmH && millis() - m_abshumidity_alarmH_last_send_millis > send_millis)) // alarm is true and has not been sent for send_millis
-            {
-                KoW90_SensorAbsHumAlarmH_.value(AlarmH, Dpt(1, 5));
-                m_abshumidity_alarmH_last_send_millis = millis();
-            }
+    if (ParamW90_SensorAbsHumidityMinMax_)
+        processMinMax(KoW90_SensorAbsHumMinValue_, KoW90_SensorAbsHumMaxValue_, value, AbsHumKODPT);
 
-            bool AlarmL = abshumidity + ParamW90_SensorAbsHumidityAlign_ < ParamW90_SensorAbsHumidityWarnL_;
-            if ((bool)KoW90_SensorAbsHumAlarmL_.value(Dpt(1, 5)) != AlarmL ||               // alarm value has changed
-                (AlarmL && millis() - m_abshumidity_alarmL_last_send_millis > send_millis)) // alarm is true and has not been sent for send_millis
-            {
-                KoW90_SensorAbsHumAlarmL_.value(AlarmL, Dpt(1, 5));
-                m_abshumidity_alarmL_last_send_millis = millis();
-            }
-        }
-    }
+    if (ParamW90_SensorAbsHumidityWarn_)
+        processAlarm(KoW90_SensorAbsHumAlarmL_, KoW90_SensorAbsHumAlarmH_, value, ParamW90_SensorAbsHumidityWarnL_, ParamW90_SensorAbsHumidityWarnH_, send_millis, m_abshumidity_alarmL_last_send_millis, m_abshumidity_alarmH_last_send_millis);
 }
 
 void Sensorchannel::loop_dewpoint(float dewpoint)
 {
-    if (!isnan(dewpoint))
-    {
-        uint8_t send_cycle = ParamW90_SensorDewPointSendCycle_;
-        uint32_t send_millis = send_cycle * 60000;
-        bool sendnow = false;
-        if (send_cycle)
-        {
-            sendnow = millis() - m_dewpoint_last_send_millis > send_millis || m_dewpoint_last_send_millis == 0;
-        }
-        if (!sendnow)
-        {
-            float SendTresh = ParamW90_SensorDewPointSendChangeAmount_;
-            if (SendTresh != 0)
-            {
-                float current_diff = dewpoint - m_dewpoint_last_send_value;
-                sendnow = current_diff >= SendTresh || 0 - current_diff >= SendTresh;
-            }
-        }
+    if (isnan(dewpoint))
+        return;
 
-        if (sendnow)
-        {
-            KoW90_SensorDewPoint_.value(dewpoint + ParamW90_SensorDewPointAlign_, DewPointKODPT);
-            m_dewpoint_last_send_millis = millis();
-            m_dewpoint_last_send_value = dewpoint;
-        }
-        else
-        {
-            KoW90_SensorDewPoint_.valueNoSend(dewpoint + ParamW90_SensorDewPointAlign_, DewPointKODPT);
-        }
+    float value = dewpoint + ParamW90_SensorDewPointAlign_;
+    uint32_t send_millis = ParamW90_SensorDewPointSendCycle_ * 60000;
 
-        if (ParamW90_SensorDewPointMinMax_) // Min Max values enabled
-        {
-            if (dewpoint + ParamW90_SensorDewPointAlign_ > (float)KoW90_SensorDewPointMaxValue_.value(DewPointKODPT))
-            {
-                KoW90_SensorDewPointMaxValue_.valueNoSend(dewpoint, DewPointKODPT);
-            }
-            if (dewpoint + ParamW90_SensorDewPointAlign_ < (float)KoW90_SensorDewPointMinValue_.value(DewPointKODPT))
-            {
-                KoW90_SensorDewPointMinValue_.valueNoSend(dewpoint, DewPointKODPT);
-            }
-        }
+    processSend(KoW90_SensorDewPoint_, value, DewPointKODPT, send_millis, ParamW90_SensorDewPointSendChange_, ParamW90_SensorDewPointSendChangeAmount_, m_dewpoint_last_send_millis, m_dewpoint_last_send_value);
 
-        if (!(ParamW90_SensorDewPointWarnL_ == 0 && ParamW90_SensorDewPointWarnH_ == 0)) // not both are 0 (=> feature disabled)
-        {
-            bool AlarmH = dewpoint + ParamW90_SensorDewPointAlign_ > ParamW90_SensorDewPointWarnH_;
-            if ((bool)KoW90_SensorDewPointAlarmH_.value(Dpt(1, 5)) != AlarmH ||          // alarm value has changed
-                (AlarmH && millis() - m_dewpoint_alarmH_last_send_millis > send_millis)) // alarm is true and has not been sent for send_millis
-            {
-                KoW90_SensorDewPointAlarmH_.value(AlarmH, Dpt(1, 5));
-                m_dewpoint_alarmH_last_send_millis = millis();
-            }
+    if (ParamW90_SensorDewPointMinMax_)
+        processMinMax(KoW90_SensorDewPointMinValue_, KoW90_SensorDewPointMaxValue_, value, DewPointKODPT);
 
-            bool AlarmL = dewpoint + ParamW90_SensorDewPointAlign_ < ParamW90_SensorDewPointWarnL_;
-            if ((bool)KoW90_SensorDewPointAlarmL_.value(Dpt(1, 5)) != AlarmL ||          // alarm value has changed
-                (AlarmL && millis() - m_dewpoint_alarmL_last_send_millis > send_millis)) // alarm is true and has not been sent for send_millis
-            {
-                KoW90_SensorDewPointAlarmL_.value(AlarmL, Dpt(1, 5));
-                m_dewpoint_alarmL_last_send_millis = millis();
-            }
-        }
-    }
+    if (ParamW90_SensorDewPointWarn_)
+        processAlarm(KoW90_SensorDewPointAlarmL_, KoW90_SensorDewPointAlarmH_, value, ParamW90_SensorDewPointWarnL_, ParamW90_SensorDewPointWarnH_, send_millis, m_dewpoint_alarmL_last_send_millis, m_dewpoint_alarmH_last_send_millis);
 }
 
 void Sensorchannel::loop_pressure(float pressure)
 {
-    uint32_t send_cycle = ParamW90_SensorPressureSendCycle_;
-    uint32_t send_millis = send_cycle * 60000;
-    bool sendnow = false;
-    // logDebugP("loop_pressure");
-    if (!isnan(pressure))
+    if (isnan(pressure))
+        return;
+
+    if (ParamW90_SensorPressureHeightASL_ != 0) // under / above sea level height correction enabled
     {
-        if(ParamW90_SensorPressureHeightASL_ != 0) // under / above sea level height correction enabled
-        {
-            pressure = pressureToSeaLevel(pressure, ParamW90_SensorPressureHeightASL_);
-        }
-        // logDebugP("loop_pressure 2");
-        if (send_cycle)
-        {
-            sendnow = millis() - m_pressure_last_send_millis > send_millis || m_pressure_last_send_millis == 0;
-        }
-        if (!sendnow)
-        {
-            float SendTresh = ParamW90_SensorPressureSendChangeAmount_;
-            if (SendTresh != 0)
-            {
-                float current_diff = pressure - m_pressure_last_send_value;
-                sendnow = current_diff >= SendTresh || 0 - current_diff >= SendTresh;
-            }
-        }
-
-        if (sendnow)
-        {
-            logDebugP("loop_pressure %f ", pressure + ParamW90_SensorPressureAlign_);
-            KoW90_SensorPress_.value(pressure + ParamW90_SensorPressureAlign_, PressKODPT);
-            m_pressure_last_send_millis = millis();
-            m_pressure_last_send_value = pressure;
-        }
-        else
-        {
-            KoW90_SensorPress_.valueNoSend(pressure + ParamW90_SensorPressureAlign_, PressKODPT);
-        }
-
-        if (ParamW90_SensorPressureMinMax_) // Min Max values enabled
-        {
-            if (pressure + ParamW90_SensorPressureAlign_ > (float)KoW90_SensorPressMaxValue_.value(PressKODPT))
-            {
-                KoW90_SensorPressMaxValue_.valueNoSend(pressure, PressKODPT);
-            }
-            if (pressure + ParamW90_SensorPressureAlign_ < (float)KoW90_SensorPressMinValue_.value(PressKODPT))
-            {
-                KoW90_SensorPressMinValue_.valueNoSend(pressure, PressKODPT);
-            }
-        }
-
-        if (!(ParamW90_SensorPressureWarnL_ == 0 && ParamW90_SensorPressureWarnH_ == 0)) // not both are 0 (=> feature disabled)
-        {
-            bool AlarmH = pressure + ParamW90_SensorPressureAlign_ > ParamW90_SensorPressureWarnH_;
-            if ((bool)KoW90_SensorPressAlarmH_.value(Dpt(1, 5)) != AlarmH ||             // alarm value has changed
-                (AlarmH && millis() - m_pressure_alarmH_last_send_millis > send_millis)) // alarm is true and has not been sent for send_millis
-            {
-                KoW90_SensorPressAlarmH_.value(AlarmH, Dpt(1, 5));
-                m_pressure_alarmH_last_send_millis = millis();
-            }
-
-            bool AlarmL = pressure + ParamW90_SensorPressureAlign_ < ParamW90_SensorPressureWarnL_;
-            if ((bool)KoW90_SensorPressAlarmL_.value(Dpt(1, 5)) != AlarmL ||             // alarm value has changed
-                (AlarmL && millis() - m_pressure_alarmL_last_send_millis > send_millis)) // alarm is true and has not been sent for send_millis
-            {
-                KoW90_SensorPressAlarmL_.value(AlarmL, Dpt(1, 5));
-                m_pressure_alarmL_last_send_millis = millis();
-            }
-        }
+        pressure = pressureToSeaLevel(pressure, ParamW90_SensorPressureHeightASL_);
     }
+
+    // DPT 9.004/9.005/9.006 do not accept negative values
+    float value = max(0.0f, pressure + ParamW90_SensorPressureAlign_);
+    uint32_t send_millis = ParamW90_SensorPressureSendCycle_ * 60000;
+
+    processSend(KoW90_SensorPress_, value, PressKODPT, send_millis, ParamW90_SensorPressureSendChange_, ParamW90_SensorPressureSendChangeAmount_, m_pressure_last_send_millis, m_pressure_last_send_value);
+
+    if (ParamW90_SensorPressureMinMax_)
+        processMinMax(KoW90_SensorPressMinValue_, KoW90_SensorPressMaxValue_, value, PressKODPT);
+
+    if (ParamW90_SensorPressureWarn_)
+        processAlarm(KoW90_SensorPressAlarmL_, KoW90_SensorPressAlarmH_, value, ParamW90_SensorPressureWarnL_, ParamW90_SensorPressureWarnH_, send_millis, m_pressure_alarmL_last_send_millis, m_pressure_alarmH_last_send_millis);
 }
 
 void Sensorchannel::loop_light(float light)
 {
-    if (!isnan(light))
-    {
-        uint8_t send_cycle = ParamW90_SensorLightSendCycle_;
-        uint32_t send_millis = send_cycle * 60000;
-        bool sendnow = false;
-        if (send_cycle)
-        {
-            sendnow = millis() - m_light_last_send_millis > send_millis || m_light_last_send_millis == 0;
-        }
-        if (!sendnow)
-        {
-            float SendTresh = ParamW90_SensorLightSendChangeAmount_;
-            if (SendTresh != 0)
-            {
-                float current_light_diff = light - m_light_last_send_value;
-                sendnow = current_light_diff >= SendTresh || 0 - current_light_diff >= SendTresh;
-                if (sendnow)
-                {
-                    logDebugP("Send LightKO Diff: %f", current_light_diff);
-                }
-            }
-        }
+    if (isnan(light))
+        return;
 
-        if (sendnow)
-        {
-            KoW90_SensorLight_.value(light + ParamW90_SensorLightAlign_, LightKODPT);
-            logDebugP("Send LightKO: %f", light + ParamW90_SensorLightAlign_);
-            m_light_last_send_millis = millis();
-            m_light_last_send_value = light;
-        }
-        else
-        {
-            KoW90_SensorLight_.valueNoSend(light + ParamW90_SensorLightAlign_, LightKODPT);
-        }
+    float value = max(0.0f, light + ParamW90_SensorLightAlign_);
+    uint32_t send_millis = ParamW90_SensorLightSendCycle_ * 60000;
 
-        if (ParamW90_SensorLightMinMax_) // Min Max values enabled
-        {
-            if (light + ParamW90_SensorLightAlign_ > (float)KoW90_SensorLightMaxValue_.value(LightKODPT))
-            {
-                KoW90_SensorLightMaxValue_.valueNoSend(light, LightKODPT);
-            }
-            if (light + ParamW90_SensorLightAlign_ < (float)KoW90_SensorLightMinValue_.value(LightKODPT))
-            {
-                KoW90_SensorLightMinValue_.valueNoSend(light, LightKODPT);
-            }
-        }
+    processSend(KoW90_SensorLight_, value, LightKODPT, send_millis, ParamW90_SensorLightSendChange_, ParamW90_SensorLightSendChangeAmount_, m_light_last_send_millis, m_light_last_send_value);
 
-        if (!(ParamW90_SensorLightWarnL_ == 0 && ParamW90_SensorLightWarnH_ == 0)) // not both are 0 (=> feature disabled)
-        {
-            bool AlarmH = light + ParamW90_SensorLightAlign_ > ParamW90_SensorLightWarnH_;
-            if ((bool)KoW90_SensorLightAlarmH_.value(Dpt(1, 5)) != AlarmH ||          // alarm value has changed
-                (AlarmH && millis() - m_light_alarmH_last_send_millis > send_millis)) // alarm is true and has not been sent for send_millis
-            {
-                KoW90_SensorLightAlarmH_.value(AlarmH, Dpt(1, 5));
-                m_light_alarmH_last_send_millis = millis();
-            }
+    if (ParamW90_SensorLightMinMax_)
+        processMinMax(KoW90_SensorLightMinValue_, KoW90_SensorLightMaxValue_, value, LightKODPT);
 
-            bool AlarmL = light + ParamW90_SensorLightAlign_ < ParamW90_SensorLightWarnL_;
-            if ((bool)KoW90_SensorLightAlarmL_.value(Dpt(1, 5)) != AlarmL ||          // alarm value has changed
-                (AlarmL && millis() - m_light_alarmL_last_send_millis > send_millis)) // alarm is true and has not been sent for send_millis
-            {
-                KoW90_SensorLightAlarmL_.value(AlarmL, Dpt(1, 5));
-                m_light_alarmL_last_send_millis = millis();
-            }
-        }
-    }
+    if (ParamW90_SensorLightWarn_)
+        processAlarm(KoW90_SensorLightAlarmL_, KoW90_SensorLightAlarmH_, value, ParamW90_SensorLightWarnL_, ParamW90_SensorLightWarnH_, send_millis, m_light_alarmL_last_send_millis, m_light_alarmH_last_send_millis);
 }
 
 void Sensorchannel::loop_uvi(uint8_t uvi)
 {
-    if (uvi != 0xff)
-    {
-        uint8_t send_cycle = ParamW90_SensorUVISendCycle_;
-        uint32_t send_millis = send_cycle * 60000;
-        bool sendnow = false;
-        if (send_cycle)
-        {
-            sendnow = millis() - m_uvi_last_send_millis > send_millis || m_uvi_last_send_millis == 0;
-        }
-        if (!sendnow)
-        {
-            float SendTresh = ParamW90_SensorUVISendChangeAmount_;
-            if (SendTresh != 0)
-            {
-                float current_UVI_diff = uvi - m_uvi_last_send_value;
-                sendnow = current_UVI_diff >= SendTresh || 0 - current_UVI_diff >= SendTresh;
-                if (sendnow)
-                {
-                    logDebugP("Send UVIKO Diff: %d", current_UVI_diff);
-                }
-            }
-        }
+    if (uvi == 0xff)
+        return;
 
-        if (sendnow)
-        {
-            // KoW90_SensorUVI_.value(, UviKODPT);
-            KoW90_SensorUVI_.value((uint8_t)(uvi + ParamW90_SensorUVIAlign_), UviKODPT);
-            logDebugP("Send UVIKO: %d", uvi + ParamW90_SensorUVIAlign_);
-            m_uvi_last_send_millis = millis();
-            m_uvi_last_send_value = uvi;
-        }
-        else
-        {
-            KoW90_SensorUVI_.valueNoSend((uint8_t)(uvi + ParamW90_SensorUVIAlign_), UviKODPT);
-        }
+    float value = min(255.0f, (float)uvi + ParamW90_SensorUVIAlign_); // DPT 5.005: 0..255
+    uint32_t send_millis = ParamW90_SensorUVISendCycle_ * 60000;
 
-        if (ParamW90_SensorUVIMinMax_) // Min Max values enabled
-        {
-            if (uvi + ParamW90_SensorUVIAlign_ > (float)KoW90_SensorUVIMaxValue_.value(UviKODPT))
-            {
-                KoW90_SensorUVIMaxValue_.valueNoSend(uvi, UviKODPT);
-            }
-            if (uvi + ParamW90_SensorUVIAlign_ < (float)KoW90_SensorUVIMinValue_.value(UviKODPT))
-            {
-                KoW90_SensorUVIMinValue_.valueNoSend(uvi, UviKODPT);
-            }
-        }
+    processSend(KoW90_SensorUVI_, value, UviKODPT, send_millis, ParamW90_SensorUVISendChange_, ParamW90_SensorUVISendChangeAmount_, m_uvi_last_send_millis, m_uvi_last_send_value);
 
-        if (!(ParamW90_SensorUVIWarnL_ == 0 && ParamW90_SensorUVIWarnH_ == 0)) // not both are 0 (=> feature disabled)
-        {
-            bool AlarmH = uvi + ParamW90_SensorUVIAlign_ > ParamW90_SensorUVIWarnH_;
-            if ((bool)KoW90_SensorUVIAlarmH_.value(Dpt(1, 5)) != AlarmH ||          // alarm value has changed
-                (AlarmH && millis() - m_uvi_alarmH_last_send_millis > send_millis)) // alarm is true and has not been sent for send_millis
-            {
-                KoW90_SensorUVIAlarmH_.value(AlarmH, Dpt(1, 5));
-                m_uvi_alarmH_last_send_millis = millis();
-            }
+    if (ParamW90_SensorUVIMinMax_)
+        processMinMax(KoW90_SensorUVIMinValue_, KoW90_SensorUVIMaxValue_, value, UviKODPT);
 
-            bool AlarmL = uvi + ParamW90_SensorUVIAlign_ < ParamW90_SensorUVIWarnL_;
-            if ((bool)KoW90_SensorUVIAlarmL_.value(Dpt(1, 5)) != AlarmL ||          // alarm value has changed
-                (AlarmL && millis() - m_uvi_alarmL_last_send_millis > send_millis)) // alarm is true and has not been sent for send_millis
-            {
-                KoW90_SensorUVIAlarmL_.value(AlarmL, Dpt(1, 5));
-                m_uvi_alarmL_last_send_millis = millis();
-            }
-        }
-    }
+    if (ParamW90_SensorUVIWarn_)
+        processAlarm(KoW90_SensorUVIAlarmL_, KoW90_SensorUVIAlarmH_, value, ParamW90_SensorUVIWarnL_, ParamW90_SensorUVIWarnH_, send_millis, m_uvi_alarmL_last_send_millis, m_uvi_alarmH_last_send_millis);
 }
 
 void Sensorchannel::loop_wind(float wind)
 {
-    if (!isnan(wind))
-    {
-        uint8_t send_cycle = ParamW90_SensorWindSendCycle_;
-        uint32_t send_millis = send_cycle * 60000;
-        bool sendnow = false;
-        if (send_cycle)
-        {
-            sendnow = millis() - m_wind_last_send_millis > send_millis || m_wind_last_send_millis == 0;
-        }
-        if (!sendnow)
-        {
-            float SendTresh = ParamW90_SensorWindSendChangeAmount_;
-            if (SendTresh != 0)
-            {
-                float current_wind_diff = wind - m_wind_last_send_value;
-                sendnow = current_wind_diff >= SendTresh || 0 - current_wind_diff >= SendTresh;
-                if (sendnow)
-                {
-                    logDebugP("Send WindKO Diff: %f", current_wind_diff);
-                }
-            }
-        }
+    if (isnan(wind))
+        return;
 
-        if (sendnow)
-        {
-            KoW90_SensorWind_.value(wind + ParamW90_SensorWindAlign_, WindKODPT);
-            logDebugP("Send WindKO: %f", wind + ParamW90_SensorWindAlign_);
-            m_wind_last_send_millis = millis();
-            m_wind_last_send_value = wind;
-        }
-        else
-        {
-            KoW90_SensorWind_.valueNoSend(wind + ParamW90_SensorWindAlign_, WindKODPT);
-        }
+    float value = max(0.0f, wind + ParamW90_SensorWindAlign_);
+    uint32_t send_millis = ParamW90_SensorWindSendCycle_ * 60000;
 
-        if (ParamW90_SensorWindMinMax_) // Min Max values enabled
-        {
-            if (wind + ParamW90_SensorWindAlign_ > (float)KoW90_SensorWindMaxValue_.value(WindKODPT))
-            {
-                KoW90_SensorWindMaxValue_.valueNoSend(wind, WindKODPT);
-            }
-            if (wind + ParamW90_SensorWindAlign_ < (float)KoW90_SensorWindMinValue_.value(WindKODPT))
-            {
-                KoW90_SensorWindMinValue_.valueNoSend(wind, WindKODPT);
-            }
-        }
+    processSend(KoW90_SensorWind_, value, WindKODPT, send_millis, ParamW90_SensorWindSendChange_, ParamW90_SensorWindSendChangeAmount_, m_wind_last_send_millis, m_wind_last_send_value);
 
-        if (!(ParamW90_SensorWindWarnL_ == 0 && ParamW90_SensorWindWarnH_ == 0)) // not both are 0 (=> feature disabled)
-        {
-            bool AlarmH = wind + ParamW90_SensorWindAlign_ > ParamW90_SensorWindWarnH_;
-            if ((bool)KoW90_SensorWindAlarmH_.value(Dpt(1, 5)) != AlarmH ||          // alarm value has changed
-                (AlarmH && millis() - m_wind_alarmH_last_send_millis > send_millis)) // alarm is true and has not been sent for send_millis
-            {
-                KoW90_SensorWindAlarmH_.value(AlarmH, Dpt(1, 5));
-                m_wind_alarmH_last_send_millis = millis();
-            }
+    if (ParamW90_SensorWindMinMax_)
+        processMinMax(KoW90_SensorWindMinValue_, KoW90_SensorWindMaxValue_, value, WindKODPT);
 
-            bool AlarmL = wind + ParamW90_SensorWindAlign_ < ParamW90_SensorWindWarnL_;
-            if ((bool)KoW90_SensorWindAlarmL_.value(Dpt(1, 5)) != AlarmL ||          // alarm value has changed
-                (AlarmL && millis() - m_wind_alarmL_last_send_millis > send_millis)) // alarm is true and has not been sent for send_millis
-            {
-                KoW90_SensorWindAlarmL_.value(AlarmL, Dpt(1, 5));
-                m_wind_alarmL_last_send_millis = millis();
-            }
-        }
-    }
+    if (ParamW90_SensorWindWarn_)
+        processAlarm(KoW90_SensorWindAlarmL_, KoW90_SensorWindAlarmH_, value, ParamW90_SensorWindWarnL_, ParamW90_SensorWindWarnH_, send_millis, m_wind_alarmL_last_send_millis, m_wind_alarmH_last_send_millis);
 }
 
 void Sensorchannel::loop_gust(float gust)
 {
-    if (!isnan(gust))
-    {
-        uint8_t send_cycle = ParamW90_SensorGustSendCycle_;
-        uint32_t send_millis = send_cycle * 60000;
-        bool sendnow = false;
-        if (send_cycle)
-        {
-            sendnow = millis() - m_gust_last_send_millis > send_millis || m_gust_last_send_millis == 0;
-        }
-        if (!sendnow)
-        {
-            float SendTresh = ParamW90_SensorGustSendChangeAmount_;
-            if (SendTresh != 0)
-            {
-                float current_gust_diff = gust - m_gust_last_send_value;
-                sendnow = current_gust_diff >= SendTresh || 0 - current_gust_diff >= SendTresh;
-                if (sendnow)
-                {
-                    logDebugP("Send GustKO Diff: %f", current_gust_diff);
-                }
-            }
-        }
+    if (isnan(gust))
+        return;
 
-        if (sendnow)
-        {
-            KoW90_SensorGust_.value(gust + ParamW90_SensorGustAlign_, GustKODPT);
-            logDebugP("Send GustKO: %f", gust + ParamW90_SensorGustAlign_);
-            m_gust_last_send_millis = millis();
-            m_gust_last_send_value = gust;
-        }
-        else
-        {
-            KoW90_SensorGust_.valueNoSend(gust + ParamW90_SensorGustAlign_, GustKODPT);
-        }
+    float value = max(0.0f, gust + ParamW90_SensorGustAlign_);
+    uint32_t send_millis = ParamW90_SensorGustSendCycle_ * 60000;
 
-        if (ParamW90_SensorGustMinMax_) // Min Max values enabled
-        {
-            if (gust + ParamW90_SensorGustAlign_ > (float)KoW90_SensorGustMaxValue_.value(GustKODPT))
-            {
-                KoW90_SensorGustMaxValue_.valueNoSend(gust, GustKODPT);
-            }
-            if (gust + ParamW90_SensorGustAlign_ < (float)KoW90_SensorGustMinValue_.value(GustKODPT))
-            {
-                KoW90_SensorGustMinValue_.valueNoSend(gust, GustKODPT);
-            }
-        }
+    processSend(KoW90_SensorGust_, value, GustKODPT, send_millis, ParamW90_SensorGustSendChange_, ParamW90_SensorGustSendChangeAmount_, m_gust_last_send_millis, m_gust_last_send_value);
 
-        if (!(ParamW90_SensorGustWarnL_ == 0 && ParamW90_SensorGustWarnH_ == 0)) // not both are 0 (=> feature disabled)
-        {
-            bool AlarmH = gust + ParamW90_SensorGustAlign_ > ParamW90_SensorGustWarnH_;
-            if ((bool)KoW90_SensorGustAlarmH_.value(Dpt(1, 5)) != AlarmH ||          // alarm value has changed
-                (AlarmH && millis() - m_gust_alarmH_last_send_millis > send_millis)) // alarm is true and has not been sent for send_millis
-            {
-                KoW90_SensorGustAlarmH_.value(AlarmH, Dpt(1, 5));
-                m_gust_alarmH_last_send_millis = millis();
-            }
+    if (ParamW90_SensorGustMinMax_)
+        processMinMax(KoW90_SensorGustMinValue_, KoW90_SensorGustMaxValue_, value, GustKODPT);
 
-            bool AlarmL = gust + ParamW90_SensorGustAlign_ < ParamW90_SensorGustWarnL_;
-            if ((bool)KoW90_SensorGustAlarmL_.value(Dpt(1, 5)) != AlarmL ||          // alarm value has changed
-                (AlarmL && millis() - m_gust_alarmL_last_send_millis > send_millis)) // alarm is true and has not been sent for send_millis
-            {
-                KoW90_SensorGustAlarmL_.value(AlarmL, Dpt(1, 5));
-                m_gust_alarmL_last_send_millis = millis();
-            }
-        }
-    }
+    if (ParamW90_SensorGustWarn_)
+        processAlarm(KoW90_SensorGustAlarmL_, KoW90_SensorGustAlarmH_, value, ParamW90_SensorGustWarnL_, ParamW90_SensorGustWarnH_, send_millis, m_gust_alarmL_last_send_millis, m_gust_alarmH_last_send_millis);
 }
 
-void Sensorchannel::loop_winddir(uint8_t winddir)
+void Sensorchannel::loop_winddir(uint16_t winddir)
 {
-    if (winddir != 0xff)
-    {
-        uint8_t send_cycle = ParamW90_SensorWindDirSendCycle_;
-        uint32_t send_millis = send_cycle * 60000;
-        bool sendnow = false;
-        if (send_cycle)
-        {
-            sendnow = millis() - m_winddir_last_send_millis > send_millis || m_winddir_last_send_millis == 0;
-        }
-        if (!sendnow)
-        {
-            float SendTresh = ParamW90_SensorWindDirSendChangeAmount_;
-            if (SendTresh != 0)
-            {
-                float current_winddir_diff = winddir - m_winddir_last_send_value;
-                sendnow = current_winddir_diff >= SendTresh || 0 - current_winddir_diff >= SendTresh;
-                if (sendnow)
-                {
-                    logDebugP("Send winddirKO Diff: %d", current_winddir_diff);
-                }
-            }
-        }
+    if (winddir == W90_WINDDIR_INVALID)
+        return;
 
-        if (sendnow)
+    // 0..359 degrees, calibration rotates the direction
+    uint16_t value = (winddir + ParamW90_SensorWindDirAlign_) % 360;
+    uint32_t send_millis = ParamW90_SensorWindDirSendCycle_ * 60000;
+
+    bool sendnow = false;
+    if (send_millis)
+    {
+        sendnow = m_winddir_last_send_millis == 0 || millis() - m_winddir_last_send_millis > send_millis;
+    }
+    if (!sendnow && ParamW90_SensorWindDirSendChange_)
+    {
+        if (m_winddir_last_send_value == W90_WINDDIR_INVALID)
         {
-            // KoW90_Sensorwinddir_.value(, winddirKODPT);
-            KoW90_SensorWindDir_.value((uint8_t)(winddir + ParamW90_SensorWindDirAlign_), WindDirKODPT);
-            logDebugP("Send winddirKO: %d", winddir + ParamW90_SensorWindDirAlign_);
-            m_winddir_last_send_millis = millis();
-            m_winddir_last_send_value = winddir;
+            sendnow = true;
         }
         else
         {
-            KoW90_SensorWindDir_.valueNoSend((uint8_t)(winddir + ParamW90_SensorWindDirAlign_), WindDirKODPT);
+            // angular difference, e.g. 359° -> 1° is 2°
+            uint16_t diff = abs((int16_t)value - (int16_t)m_winddir_last_send_value);
+            if (diff > 180)
+                diff = 360 - diff;
+            uint8_t amount = ParamW90_SensorWindDirSendChangeAmount_;
+            sendnow = amount ? diff >= amount : diff != 0;
         }
+    }
+
+    // DPT 5.003 takes the angle in degrees (0..360) and scales it to 0..255
+    if (sendnow)
+    {
+        KoW90_SensorWindDir_.value((float)value, WindDirKODPT);
+        logDebugP("Send winddirKO: %d", value);
+        m_winddir_last_send_millis = millis();
+        m_winddir_last_send_value = value;
+    }
+    else
+    {
+        KoW90_SensorWindDir_.valueNoSend((float)value, WindDirKODPT);
     }
 }
 
 void Sensorchannel::loop_rain(int32_t rain)
 {
-    if (rain >= 0)
+    if (rain < 0)
+        return;
+
+    const bool firstValue = m_rain_last_recv_value < 0;
+    const bool changed = !firstValue && m_rain_last_recv_value != rain;
+
+    // detect counter overflow and resets of the station - otherwise the counter of the station never decreases
+    if (firstValue)
     {
-        // detect overflow and other special cases
-        if(rain < 100)
+        // first value after start of the knx device: if the counter is lower than the last known value,
+        // the station has been powered off as well (e.g. power outage) and restarted counting from 0
+        if (m_rain_last_recv_value_restored > 0 && rain < m_rain_last_recv_value_restored)
         {
-            if(m_rain_last_recv_value > 65400)
-            {
-                // value overflow detected. Value Range 0xffff 
-                m_rain_offset_value += 0x10000;
-                logDebugP("rain value overflow m_rain_offset_value += 0x10000");
-            }
-            else if(m_rain_last_recv_value > 100)
-            {
-                // rain gauge of station was reset (powercycle of station only)
-                m_rain_offset_value += m_rain_last_recv_value;
-                logDebugP("rain gauge of station was reset m_rain_offset_value += m_rain_last_recv_value %d", m_rain_last_recv_value);
-            }
-            else if(m_rain_last_recv_value < 0)
-            {
-                // here we detect the first received value when it below 1 => likly powercycle of station and knx device
-                // use the restored last recv value to add to the offset
-                if(m_rain_last_recv_value_restored > 0)
-                {
-                    m_rain_offset_value += m_rain_last_recv_value_restored;
-                    logDebugP("power outage m_rain_offset_value += m_rain_last_recv_value_restored; %d", m_rain_last_recv_value_restored);
-                }
-            }
+            m_rain_offset_value += m_rain_last_recv_value_restored;
+            logDebugP("rain gauge of station was reset during power outage, offset += %d", m_rain_last_recv_value_restored);
         }
-
-        // send the raw value (on change only)
-        KoW90_SensorRainGaugeRaw_.valueCompare(rain * 0.01, RainKODPT);
-        KoW90_SensorRainGaugeRaw2_.valueCompare(rain, Dpt(12,1));
-
-        if(m_rainflow_lastvalue < 0)
+    }
+    else if (rain < m_rain_last_recv_value)
+    {
+        if (m_rain_last_recv_value > 65400 && rain < 100)
         {
-            m_rainflow_lastvalue = rain;
-            m_rainflow_lastvalue_millis = millis();
-            logDebugP("rainflow debug: init %d %d", m_rainflow_lastvalue, m_rainflow_lastvalue_millis);
-        }
-        if(m_rain_last_recv_value != rain ) // the vaue changed THIS loop run
-        {
-            logDebugP("rainflow debug !=");
-            if(m_rainflow_lastvalue >= 0)
-            {
-                logDebugP("rainflow debug >= 0");
-                int32_t raindelta = rain - m_rainflow_lastvalue;
-                uint32_t delta = millis() - m_rainflow_lastvalue_millis; // overflow of millis tbd !!
-                if(delta > 30000)   // wait at least 30s
-                {
-                    float rainflow = (raindelta * 1000.0 * 60 * 60) / 100 / delta;
-                    KoW90_SensorRainFlow_.value(rainflow, RainFlowKODPT);
-                    logDebugP("rainflow send >30s: %f", rainflow);
-                    m_rainflow_lastvalue = rain;
-                    m_rainflow_lastvalue_millis = millis();
-                    logDebugP("rainflow send set %d %d", m_rainflow_lastvalue, m_rainflow_lastvalue_millis);
-                }
-            }
-        }
-        if(delayCheckMillis(m_rainflow_lastvalue_millis, ParamW90_SensorRainTime_ * 60 * 1000))
-        {
-                int32_t raindelta = rain - m_rainflow_lastvalue;
-                uint32_t delta = millis() - m_rain_last_recv_millis; // overflow of millis tbd !!
-
-                float rainflow = (raindelta * 1000.0 * 60 * 60) / 100 / delta;
-                KoW90_SensorRainFlow_.value(rainflow, RainFlowKODPT);
-                logDebugP("rainflow debug: rain %d m_rainflow_lastvalue %d, raindelta %d, delta %d, rainflow %f", rain, m_rainflow_lastvalue, raindelta, delta, rainflow);
-                m_rainflow_lastvalue = rain;
-                m_rainflow_lastvalue_millis = millis();
-                logDebugP("rainflow idle send set %d %d", m_rainflow_lastvalue, m_rainflow_lastvalue_millis);
-        }
-
-
-        if(m_rain_last_recv_value != rain ) // the vaue changed THIS loop run
-        {
-            if(m_rain_last_recv_value >= 0) // to see if it is really a new rain value, not the initalization from m_rain_last_recv_value
-            {
-               KoW90_SensorRain_.valueCompareTime(true, RainBoolKODPT, m_rainbool_last_send_millis, 5 * 60 * 1000);
-            }
-
-            m_rain_last_recv_value = rain;
-            m_rain_last_recv_millis = millis();
-        }
-        else if(delayCheckMillis(m_rain_last_recv_millis, 10 * 60 * 1000)) // if there has bee no change in rain value since 10 min
-        {
-            KoW90_SensorRain_.valueCompareTime(false, RainBoolKODPT, m_rainbool_last_send_millis, 5 * 60 * 1000); // signal inactive rain
-        }
-
-
-        // apply offset
-        rain += m_rain_offset_value;
-
-
-        uint8_t send_cycle = ParamW90_SensorRainSendCycle_;
-        uint32_t send_millis = send_cycle * 60000;
-        bool sendnow = false;
-        if (send_cycle)
-        {
-            sendnow = millis() - m_rain_last_send_millis > send_millis || m_rain_last_send_millis == 0;
-        }
-        if (!sendnow)
-        {
-            int32_t current_rain_diff = rain - m_rain_last_send_value;
-            sendnow = current_rain_diff > 0;
-            if (sendnow)
-            {
-                logDebugP("Send RainKO Diff: %f", current_rain_diff);
-            }
-        }
-
-        double rain_f = rain * 0.01;
-        if (sendnow)
-        {
-            KoW90_SensorRainGauge_.value(rain_f, RainKODPT);
-            KoW90_SensorRainGauge4_.value(rain_f, Dpt(14,0));
-            logDebugP("Send RainKO: %f", rain_f);
-            m_rain_last_send_millis = millis();
-            m_rain_last_send_value = rain;
+            // value overflow detected. Value Range 0xffff
+            m_rain_offset_value += 0x10000;
+            logDebugP("rain value overflow, offset += 0x10000");
         }
         else
         {
-            KoW90_SensorRainGauge_.valueNoSend(rain_f, RainKODPT);
-            KoW90_SensorRainGauge4_.valueNoSend(rain_f, Dpt(14,0));
+            // rain gauge of station was reset (powercycle of station only)
+            m_rain_offset_value += m_rain_last_recv_value;
+            logDebugP("rain gauge of station was reset, offset += %d", m_rain_last_recv_value);
         }
+    }
+
+    // send the raw value (on change only)
+    KoW90_SensorRainGaugeRaw_.valueCompare(rain * 0.01, RainKODPT);
+    KoW90_SensorRainGaugeRaw2_.valueCompare(rain, Dpt(12,1));
+
+    // continuous rain gauge in 0.01 mm, independent of overflow and resets of the station
+    const int32_t total = rain + m_rain_offset_value;
+    // timeout for rain detection, 0 = rain detection disabled
+    const uint32_t rainTimeout = ParamW90_SensorRainTime_ * 60000;
+
+    // rain flow (l/m² per hour = mm/h)
+    if (m_rainflow_lastvalue < 0)
+    {
+        m_rainflow_lastvalue = total;
+        m_rainflow_lastvalue_millis = millis();
+    }
+    else
+    {
+        uint32_t delta = millis() - m_rainflow_lastvalue_millis;
+        if ((total != m_rainflow_lastvalue && delta > 30000) || // new rain, calculate at most every 30s
+            (rainTimeout && delta >= rainTimeout))              // no (more) rain within the timeout
+        {
+            float rainflow = (total - m_rainflow_lastvalue) * 0.01f * 3600000.0f / delta;
+            KoW90_SensorRainFlow_.value(rainflow, RainFlowKODPT);
+            logDebugP("rainflow: raindelta %d, delta %d ms, rainflow %f", total - m_rainflow_lastvalue, delta, rainflow);
+            m_rainflow_lastvalue = total;
+            m_rainflow_lastvalue_millis = millis();
+        }
+    }
+
+    // rain detection (bool)
+    if (changed || firstValue)
+    {
+        m_rain_last_recv_millis = millis();
+    }
+    if (rainTimeout)
+    {
+        if (changed)
+        {
+            KoW90_SensorRain_.valueCompareTime(true, RainBoolKODPT, m_rainbool_last_send_millis, 5 * 60 * 1000);
+        }
+        else if (delayCheckMillis(m_rain_last_recv_millis, rainTimeout)) // no change of rain gauge within the timeout
+        {
+            KoW90_SensorRain_.valueCompareTime(false, RainBoolKODPT, m_rainbool_last_send_millis, 5 * 60 * 1000); // signal inactive rain
+        }
+    }
+    m_rain_last_recv_value = rain;
+
+    // rain gauge
+    uint32_t send_millis = ParamW90_SensorRainSendCycle_ * 60000;
+    bool sendnow = false;
+    if (send_millis)
+    {
+        sendnow = m_rain_last_send_millis == 0 || millis() - m_rain_last_send_millis > send_millis;
+    }
+    if (!sendnow)
+    {
+        sendnow = total != m_rain_last_send_value;
+    }
+
+    double rain_f = total * 0.01;
+    if (sendnow)
+    {
+        KoW90_SensorRainGauge_.value(rain_f, RainKODPT);
+        KoW90_SensorRainGauge4_.value(rain_f, Dpt(14,0));
+        logDebugP("Send RainKO: %f", rain_f);
+        m_rain_last_send_millis = millis();
+        m_rain_last_send_value = total;
+    }
+    else
+    {
+        KoW90_SensorRainGauge_.valueNoSend(rain_f, RainKODPT);
+        KoW90_SensorRainGauge4_.valueNoSend(rain_f, Dpt(14,0));
     }
 }
 
 void Sensorchannel::setRain(double setvalue)
 {
-    if(setvalue >= 0)
-    {
-        logDebugP("set RainGauge to %f , old offset %d", setvalue, m_rain_offset_value);
-        m_rain_offset_value = m_rain_offset_value - (((double)KoW90_SensorRainGauge4_.value(Dpt(14,0)) - setvalue )*100);
-        logDebugP("set RainGauge new offset %d", m_rain_offset_value);
-        loop_rain(m_hwSensors->GetRain(_channelIndex));
-        KoW90_SensorRainGauge_.objectWritten();
-        KoW90_SensorRainGauge4_.objectWritten();
-    }
+    if (isnan(setvalue) || setvalue < 0)
+        return;
+
+    // current continuous rain gauge in 0.01 mm
+    int32_t current;
+    if (m_rain_last_recv_value >= 0)
+        current = m_rain_last_recv_value + m_rain_offset_value;
+    else if (m_rain_last_recv_value_restored >= 0) // no value received since start, use the value from flash
+        current = m_rain_last_recv_value_restored + m_rain_offset_value;
+    else
+        current = round((double)KoW90_SensorRainGauge4_.value(Dpt(14,0)) * 100);
+
+    int32_t delta = (int32_t)round(setvalue * 100) - current;
+    logDebugP("set RainGauge to %f, old offset %d, new offset %d", setvalue, m_rain_offset_value, m_rain_offset_value + delta);
+    m_rain_offset_value += delta;
+
+    // keep the rain flow calculation consistent
+    if (m_rainflow_lastvalue >= 0)
+        m_rainflow_lastvalue += delta;
+
+    // force sending of the new value
+    m_rain_last_send_value = INT32_MIN;
+    loop_rain(m_hwSensors->GetRain(_channelIndex));
 }
 
 void Sensorchannel::processInputKo(GroupObject &ko)
 {
     logTraceP("processInputKo");
 
-    float setvalue = 0;
-
     switch (RelKO(ko.asap()))
     {
         case W90_KoSensorTempMinMaxReset_:
-            setvalue = KoW90_SensorTemp_.value(TempKODPT);
-            KoW90_SensorTempMaxValue_.valueNoSend(setvalue, TempKODPT);
-            KoW90_SensorTempMinValue_.valueNoSend(setvalue, TempKODPT);
+            resetMinMax(KoW90_SensorTemp_, KoW90_SensorTempMinValue_, KoW90_SensorTempMaxValue_, TempKODPT);
             break;
         case W90_KoSensorHumMinMaxReset_:
-            setvalue = knx.getGroupObject(AbsKO(W90_KoSensorHum_)).value(HumKODPT);
-            knx.getGroupObject(AbsKO(W90_KoSensorHumMinValue_)).valueNoSend(setvalue, HumKODPT);
-            knx.getGroupObject(AbsKO(W90_KoSensorHumMaxValue_)).valueNoSend(setvalue, HumKODPT);
+            resetMinMax(KoW90_SensorHum_, KoW90_SensorHumMinValue_, KoW90_SensorHumMaxValue_, HumKODPT);
             break;
         case W90_KoSensorAbsHumMinMaxReset_:
-            setvalue = knx.getGroupObject(AbsKO(W90_KoSensorAbsHum_)).value(AbsHumKODPT);
-            knx.getGroupObject(AbsKO(W90_KoSensorAbsHumMinValue_)).valueNoSend(setvalue, AbsHumKODPT);
-            knx.getGroupObject(AbsKO(W90_KoSensorAbsHumMaxValue_)).valueNoSend(setvalue, AbsHumKODPT);
+            resetMinMax(KoW90_SensorAbsHum_, KoW90_SensorAbsHumMinValue_, KoW90_SensorAbsHumMaxValue_, AbsHumKODPT);
             break;
         case W90_KoSensorDewPointMinMaxReset_:
-            setvalue = knx.getGroupObject(AbsKO(W90_KoSensorDewPoint_)).value(DewPointKODPT);
-            knx.getGroupObject(AbsKO(W90_KoSensorDewPointMinValue_)).valueNoSend(setvalue, DewPointKODPT);
-            knx.getGroupObject(AbsKO(W90_KoSensorDewPointMaxValue_)).valueNoSend(setvalue, DewPointKODPT);
+            resetMinMax(KoW90_SensorDewPoint_, KoW90_SensorDewPointMinValue_, KoW90_SensorDewPointMaxValue_, DewPointKODPT);
             break;
         case W90_KoSensorPressMinMaxReset_:
-            setvalue = knx.getGroupObject(AbsKO(W90_KoSensorPress_)).value(PressKODPT);
-            knx.getGroupObject(AbsKO(W90_KoSensorPressMinValue_)).valueNoSend(setvalue, PressKODPT);
-            knx.getGroupObject(AbsKO(W90_KoSensorPressMaxValue_)).valueNoSend(setvalue, PressKODPT);
+            resetMinMax(KoW90_SensorPress_, KoW90_SensorPressMinValue_, KoW90_SensorPressMaxValue_, PressKODPT);
+            break;
+        case W90_KoSensorLightMinMaxReset_:
+            resetMinMax(KoW90_SensorLight_, KoW90_SensorLightMinValue_, KoW90_SensorLightMaxValue_, LightKODPT);
+            break;
+        case W90_KoSensorUVIMinMaxReset_:
+            resetMinMax(KoW90_SensorUVI_, KoW90_SensorUVIMinValue_, KoW90_SensorUVIMaxValue_, UviKODPT);
+            break;
+        case W90_KoSensorWindMinMaxReset_:
+            resetMinMax(KoW90_SensorWind_, KoW90_SensorWindMinValue_, KoW90_SensorWindMaxValue_, WindKODPT);
+            break;
+        case W90_KoSensorGustMinMaxReset_:
+            resetMinMax(KoW90_SensorGust_, KoW90_SensorGustMinValue_, KoW90_SensorGustMaxValue_, GustKODPT);
             break;
         case W90_KoSensorSetRainGauge4_:
             setRain(ko.value(Dpt(14,0)));
@@ -1092,7 +639,8 @@ void Sensorchannel::save()
     openknx.flash.writeFloat((float)KoW90_SensorGustMinValue_.value(GustKODPT));
 
     openknx.flash.writeInt(m_rain_offset_value);
-    openknx.flash.writeInt(m_rain_last_recv_value);
+    // if no value was received since start, keep the restored one
+    openknx.flash.writeInt(m_rain_last_recv_value >= 0 ? m_rain_last_recv_value : m_rain_last_recv_value_restored);
 }
 
 void Sensorchannel::restore()
