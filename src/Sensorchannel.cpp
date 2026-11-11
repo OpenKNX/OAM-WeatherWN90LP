@@ -109,8 +109,17 @@ void Sensorchannel::loop()
 
 // Sends the value cyclic (sendMillis > 0) and/or on change (sendOnChange), otherwise only updates the KO.
 // changeAmount <= 0 means: send on every change.
+// The change is evaluated on the value as encoded in the KO (DPT resolution), so no telegrams
+// with an unchanged bus value are sent, e.g. DPT 9.006 has a resolution of ~82 Pa at 1000 hPa.
 void Sensorchannel::processSend(GroupObject &ko, float value, const Dpt &dpt, uint32_t sendMillis, bool sendOnChange, float changeAmount, uint32_t &lastSendMillis, float &lastSendValue)
 {
+    // update the KO in any case, so that reading the KO returns the current value
+    if (!ko.valueNoSend(value, dpt))
+        return; // value not representable in DPT, KO unchanged
+
+    // value as it is on the bus
+    float busValue = ko.value(dpt);
+
     bool sendnow = false;
     if (sendMillis)
     {
@@ -121,20 +130,16 @@ void Sensorchannel::processSend(GroupObject &ko, float value, const Dpt &dpt, ui
         if (isnan(lastSendValue))
             sendnow = true;
         else if (changeAmount > 0)
-            sendnow = fabs(value - lastSendValue) >= changeAmount;
+            sendnow = fabs(busValue - lastSendValue) >= changeAmount;
         else
-            sendnow = value != lastSendValue;
+            sendnow = busValue != lastSendValue;
     }
 
     if (sendnow)
     {
-        ko.value(value, dpt);
+        ko.objectWritten();
         lastSendMillis = millis();
-        lastSendValue = value;
-    }
-    else
-    {
-        ko.valueNoSend(value, dpt);
+        lastSendValue = busValue;
     }
 }
 
