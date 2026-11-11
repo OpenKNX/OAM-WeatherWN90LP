@@ -82,7 +82,7 @@ class Sensorchannel : public OpenKNX::Channel
     uint16_t m_winddir_last_send_value = W90_WINDDIR_INVALID;
 
     uint32_t m_rain_last_send_millis = 0;
-    int32_t m_rain_last_send_value = INT32_MIN;
+    int32_t m_rain_last_send_value = -1000;
     int32_t m_rain_last_recv_value = -1000;
     int32_t m_rain_last_recv_value_restored = -1000;
     uint32_t m_rain_last_recv_millis = 0;
