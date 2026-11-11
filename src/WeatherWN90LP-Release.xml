@@ -26,7 +26,7 @@
   <!-- KO 1 - 19 -->
   <op:define prefix="BASE" ModuleType="10"
     share="../lib/OGM-Common/src/Common.share.xml">
-    <op:verify File="../lib/OGM-Common/library.json" ModuleVersion="1.7" />
+    <op:verify File="../lib/OGM-Common/library.json" ModuleVersion="1.9" />
   </op:define>
 
   <op:define prefix="UCT"
@@ -48,7 +48,7 @@
     share="../lib/OFM-LogicModule/src/Logikmodul.share.xml"
     template="../lib/OFM-LogicModule/src/Logikmodul.templ.xml"
     NumChannels="30" KoOffset="100">
-    <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="4.0" /> 
+    <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="4.4" /> 
   </op:define>
 
     <!-- KO 200 - 203 -->
@@ -56,7 +56,7 @@
     share="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml"
     template="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml"
     NumChannels="4" KoOffset="200">
-    <op:verify File="../lib/OFM-BinaryInput/library.json" ModuleVersion="0.2" />
+    <op:verify File="../lib/OFM-BinaryInput/library.json" ModuleVersion="0.4" />
   </op:define>
 
   <!-- KO 205 - 252 -->
@@ -64,7 +64,7 @@
     share="../lib/OFM-VirtualButton/src/VirtualButton.share.xml"
     template="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml"
     NumChannels="4" KoOffset="205">
-    <op:verify File="../lib/OFM-VirtualButton/library.json" ModuleVersion="0.5" />
+    <op:verify File="../lib/OFM-VirtualButton/library.json" ModuleVersion="0.7" />
   </op:define>
 
   <!-- KO 260 - 305 -->

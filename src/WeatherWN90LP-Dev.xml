@@ -10,13 +10,13 @@
 
   <op:config name="%BASE_ExtendedSave%" value="1"></op:config>
   <op:config name="%BASE_PeriodicSave%" value="1"></op:config>
-  <op:minOpenKNXproducerVersion value="4.2.6" />
+  <op:minOpenKNXproducerVersion value="4.3.11" />
 
   <op:ETS
     OpenKnxId="0xA1"
     ApplicationNumber="41"
-    ApplicationVersion="1.1"
-    ReplacesVersions="1.0 0.15 0.14 0.13 0.12 0.11 0.10 0.9 0.8 0.7 0.6 0.5 0.4 0.3 0.2 0.1 0.0"
+    ApplicationVersion="1.2"
+    ReplacesVersions="1.1 1.0 0.15 0.14 0.13 0.12 0.11 0.10 0.9 0.8 0.7 0.6 0.5 0.4 0.3 0.2 0.1 0.0"
     ApplicationRevision="0"
     ProductName="Wetterstation WN90LP"
     ApplicationName="WeatherWN90LP"
@@ -27,7 +27,7 @@
   <!-- KO 1 - 19 -->
   <op:define prefix="BASE" ModuleType="10"
     share="../lib/OGM-Common/src/Common.share.xml">
-    <op:verify File="../lib/OGM-Common/library.json" ModuleVersion="1.7" />
+    <op:verify File="../lib/OGM-Common/library.json" ModuleVersion="1.9" />
   </op:define>
 
   <op:define prefix="UCT"
@@ -49,7 +49,7 @@
     share="../lib/OFM-LogicModule/src/Logikmodul.share.xml"
     template="../lib/OFM-LogicModule/src/Logikmodul.templ.xml"
     NumChannels="30" KoOffset="100">
-    <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="4.0" /> 
+    <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="4.4" /> 
   </op:define>
 
     <!-- KO 200 - 203 -->
@@ -57,7 +57,7 @@
     share="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml"
     template="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml"
     NumChannels="4" KoOffset="200">
-    <op:verify File="../lib/OFM-BinaryInput/library.json" ModuleVersion="0.2" />
+    <op:verify File="../lib/OFM-BinaryInput/library.json" ModuleVersion="0.4" />
   </op:define>
 
   <!-- KO 205 - 252 -->
@@ -65,7 +65,7 @@
     share="../lib/OFM-VirtualButton/src/VirtualButton.share.xml"
     template="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml"
     NumChannels="4" KoOffset="205">
-    <op:verify File="../lib/OFM-VirtualButton/library.json" ModuleVersion="0.5" />
+    <op:verify File="../lib/OFM-VirtualButton/library.json" ModuleVersion="0.7" />
   </op:define>
 
   <!-- KO 260 - 305 -->
