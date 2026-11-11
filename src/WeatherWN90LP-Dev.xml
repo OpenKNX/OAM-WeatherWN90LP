@@ -44,34 +44,34 @@
     NumChannels="1" KoOffset="20">
   </op:define>
   
-  <!-- KO 100 - 189 -->
+  <!-- KO 100 - 396 -->
   <op:define prefix="LOG" ModuleType="10"
     share="../lib/OFM-LogicModule/src/Logikmodul.share.xml"
     template="../lib/OFM-LogicModule/src/Logikmodul.templ.xml"
-    NumChannels="30" KoOffset="100">
+    NumChannels="99" KoOffset="100">
     <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="4.4" /> 
   </op:define>
 
-    <!-- KO 200 - 203 -->
+    <!-- KO 400 - 403 -->
     <op:define prefix="BI" ModuleType="30"
     share="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml"
     template="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml"
-    NumChannels="4" KoOffset="200">
+    NumChannels="4" KoOffset="400">
     <op:verify File="../lib/OFM-BinaryInput/library.json" ModuleVersion="0.4" />
   </op:define>
 
-  <!-- KO 205 - 252 -->
+  <!-- KO 405 - 452 -->
   <op:define prefix="BTN" ModuleType="40"
     share="../lib/OFM-VirtualButton/src/VirtualButton.share.xml"
     template="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml"
-    NumChannels="4" KoOffset="205">
+    NumChannels="4" KoOffset="405">
     <op:verify File="../lib/OFM-VirtualButton/library.json" ModuleVersion="0.7" />
   </op:define>
 
-  <!-- KO 260 - 305 -->
+  <!-- KO 460 - 505 -->
   <op:define prefix="SENS" ModuleType="50"
           share="../lib/OFM-SensorModule/src/Sensormodul.share.xml"
-          KoSingleOffset="260">
+          KoSingleOffset="460">
   <op:verify File="../lib/OFM-SensorModule/library.json" ModuleVersion="4.11" />
   </op:define>
 
