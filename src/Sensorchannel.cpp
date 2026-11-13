@@ -107,7 +107,7 @@ void Sensorchannel::loop()
     uint8_t uvi = m_hwSensors->GetUVI(_channelIndex);
     float wind = m_hwSensors->GetWind(_channelIndex);
     float gust = m_hwSensors->GetGust(_channelIndex);
-    uint8_t winddir = m_hwSensors->GetWindDir(_channelIndex);
+    uint16_t winddir = m_hwSensors->GetWindDir(_channelIndex);
     int32_t rain = m_hwSensors->GetRain(_channelIndex);
 
     loop_temperature(temperature);
@@ -787,10 +787,13 @@ void Sensorchannel::loop_gust(float gust)
     }
 }
 
-void Sensorchannel::loop_winddir(uint8_t winddir)
+void Sensorchannel::loop_winddir(uint16_t winddir)
 {
-    if (winddir != 0xff)
+    if (winddir <= WINDDIR_MAX) // WINDDIR_INVALID (0xFFFF) and anything out of range is ignored
     {
+        // apply alignment modulo 360 (0..359 deg)
+        uint16_t winddir_aligned = static_cast<uint16_t>((winddir + ParamW90_SensorWindDirAlign_) % 360);
+
         uint8_t send_cycle = ParamW90_SensorWindDirSendCycle_;
         uint32_t send_millis = send_cycle * 60000;
         bool sendnow = false;
@@ -803,8 +806,11 @@ void Sensorchannel::loop_winddir(uint8_t winddir)
             float SendTresh = ParamW90_SensorWindDirSendChangeAmount_;
             if (SendTresh != 0)
             {
-                float current_winddir_diff = winddir - m_winddir_last_send_value;
-                sendnow = current_winddir_diff >= SendTresh || 0 - current_winddir_diff >= SendTresh;
+                // shortest angular distance, so 359 -> 2 deg counts as 3 deg, not 357 deg
+                uint16_t current_winddir_diff = winddir > m_winddir_last_send_value ? winddir - m_winddir_last_send_value : m_winddir_last_send_value - winddir;
+                if (current_winddir_diff > 180)
+                    current_winddir_diff = 360 - current_winddir_diff;
+                sendnow = current_winddir_diff >= SendTresh;
                 if (sendnow)
                 {
                     logDebugP("Send winddirKO Diff: %d", current_winddir_diff);
@@ -815,14 +821,14 @@ void Sensorchannel::loop_winddir(uint8_t winddir)
         if (sendnow)
         {
             // KoW90_Sensorwinddir_.value(, winddirKODPT);
-            KoW90_SensorWindDir_.value((uint8_t)(winddir + ParamW90_SensorWindDirAlign_), WindDirKODPT);
-            logDebugP("Send winddirKO: %d", winddir + ParamW90_SensorWindDirAlign_);
+            KoW90_SensorWindDir_.value(winddir_aligned, WindDirKODPT);
+            logDebugP("Send winddirKO: %d", winddir_aligned);
             m_winddir_last_send_millis = millis();
             m_winddir_last_send_value = winddir;
         }
         else
         {
-            KoW90_SensorWindDir_.valueNoSend((uint8_t)(winddir + ParamW90_SensorWindDirAlign_), WindDirKODPT);
+            KoW90_SensorWindDir_.valueNoSend(winddir_aligned, WindDirKODPT);
         }
     }
 }
