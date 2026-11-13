@@ -78,7 +78,7 @@ class Sensorchannel : public OpenKNX::Channel
     uint32_t m_gust_alarmL_last_send_millis = 0;
 
     uint32_t m_winddir_last_send_millis = 0;
-    uint8_t m_winddir_last_send_value = 0;
+    uint16_t m_winddir_last_send_value = 0;
     uint32_t m_winddir_alarmH_last_send_millis = 0;
     uint32_t m_winddir_alarmL_last_send_millis = 0;
 
@@ -115,7 +115,7 @@ class Sensorchannel : public OpenKNX::Channel
     void loop_uvi(uint8_t uvi);
     void loop_wind(float wind);
     void loop_gust(float gust);
-    void loop_winddir(uint8_t winddir);
+    void loop_winddir(uint16_t winddir);
     void loop_rain(int32_t rain);
     void setRain(double setvalue);
 

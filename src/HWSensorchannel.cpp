@@ -303,7 +303,7 @@ float HWSensorchannel::ReadGust()
     return rawdata;
 }
 
-uint8_t HWSensorchannel::ReadWindDir()
+uint16_t HWSensorchannel::ReadWindDir()
 {
     /* 16B
     Value in hex
@@ -315,18 +315,20 @@ uint8_t HWSensorchannel::ReadWindDir()
     uint16_t data = 0xffff;
     result = m_modbus.readHoldingRegisters(0x016B, 0x0001);
     if (result != m_modbus.ku8MBSuccess)
-        return 0xff;
+        return WINDDIR_INVALID;
 
     data = m_modbus.getResponseBuffer(0);
 
-    if (data > 359)
-        return 0xff;
+    // only pass on validated degrees, never the raw register value
+    if (data > WINDDIR_MAX)
+        return WINDDIR_INVALID;
 
-    uint8_t rawdata = data;
-    logDebugP("Wind Dir: %d °", rawdata);
+    // keep the full 0..359 deg range (uint8_t would wrap 256..359 to 0..103)
+    const uint16_t winddir = data;
+    logDebugP("Wind Dir: %d °", winddir);
     m_activity = true;
     m_winddir_last_success_millis = millis();
-    return rawdata;
+    return winddir;
 }
 
 int32_t HWSensorchannel::ReadRain()
@@ -464,9 +466,9 @@ float HWSensorchannel::GetGust()
     }
 }
 
-uint8_t HWSensorchannel::GetWindDir()
+uint16_t HWSensorchannel::GetWindDir()
 {
-    uint8_t retval;
+    uint16_t retval;
     if (mutex_try_enter(&mx8, nullptr))
     {
         retval = m_winddir;
@@ -475,7 +477,7 @@ uint8_t HWSensorchannel::GetWindDir()
     }
     else
     {
-        return 0xff;
+        return WINDDIR_INVALID;
     }
 }
 
@@ -544,7 +546,7 @@ void HWSensorchannel::SetGust(float gust)
     mutex_exit(&mx7);
 }
 
-void HWSensorchannel::SetWindDir(uint8_t winddir)
+void HWSensorchannel::SetWindDir(uint16_t winddir)
 {
     mutex_enter_blocking(&mx8);
     m_winddir = winddir;
