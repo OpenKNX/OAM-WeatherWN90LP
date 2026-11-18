@@ -1,4 +1,4 @@
-# SEN-UP1-8xTH
-OpenKNX 8channel Temperature/Humidity Sensor
+# OAM-WeatherWN90LP
+OpenKNX Wetterstation WN90LP
 
-see https://github.com/OpenKNX/OpenKNX/wiki/SEN-UP1-8xTH
+see https://go.openknx.de/wetterstation
